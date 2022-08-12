@@ -49,16 +49,6 @@ function Finalbirthdayform() {
     setvalue(val);
   };
 
-  function organizeValues() {
-    // const checkBoxValues = {
-    //   musicvalue,
-    //   photovalue,
-    //   decorationvalue,
-    //   foodvalue,
-    //   invitationvalue
-    // }
-  }
-
   const options = [
     { label: "Folk", value: "Folk" },
     { label: "Indian", value: "Indian" },
@@ -167,11 +157,14 @@ function Finalbirthdayform() {
       dancevalue,
     };
     console.log(checkBoxValues);
-    axios.post("/api/wedding", {data, checkBoxValues}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .post("/api/wedding", { data, checkBoxValues })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // console.log(organizeValues.checkBoxValues);
   };
 
@@ -365,13 +358,7 @@ function Finalbirthdayform() {
                     <h3 class="mb-5 text-center fw-bold text-uppercase">
                       Personal Details
                     </h3>
-                    <form
-                      onSubmit={handleSubmit(
-                        (data) => handleSubmit2(data)
-                        // (data) => {
-                        // console.log(data);}
-                      )}
-                    >
+                    <form>
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-floating mb-3">
@@ -604,8 +591,8 @@ function Finalbirthdayform() {
                       <div class="row"></div>
 
                       <div class="d-flex justify-content-end pt-3">
-                        <button type="submit" class="btn btn-info btn-lg ms-2 ">
-                          Submit form
+                        <button type="button" class="btn btn-info btn-lg ms-2 ">
+                          save
                         </button>
                       </div>
                     </form>
@@ -619,7 +606,7 @@ function Finalbirthdayform() {
 
       <div class="container my-5">
         <div class="card">
-          <form>
+          <form onSubmit={handleSubmit((data) => handleSubmit2(data))}>
             <div class="card-header py-4 px-5 bg-light border-0">
               <h4 class="mb-0 fw-bold">Birthday Event Booking</h4>
             </div>
@@ -639,9 +626,8 @@ function Finalbirthdayform() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="games"
+                          for="games"
                           class="form-check-label"
-                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Games{" "}
@@ -658,9 +644,8 @@ function Finalbirthdayform() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="magic"
+                          for="magic"
                           class="form-check-label"
-                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Magic
@@ -677,8 +662,9 @@ function Finalbirthdayform() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="music"
+                          for="music"
                           class="form-check-label"
+                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Music{" "}
@@ -699,7 +685,7 @@ function Finalbirthdayform() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="dance"
+                          for="dance"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -739,19 +725,19 @@ function Finalbirthdayform() {
                       <div class="col-md-3">
                         <div class="mb-3">
                           <label
-                            HtmlFor="dj"
+                            for="dj"
                             class="form-check-label"
+                            value=""
                             style={{ marginRight: "15px" }}
                           >
-                            DJ{" "}
+                            DJ
                           </label>
                           <input
-                            {...register("musicType_DJ")}
+                            {...register("dj")}
                             type="checkbox"
                             class="form-check-input"
-                            // name="dj"
-                            value={"dj"}
                             id="dj"
+                            value={"dj"}
                           />
                         </div>
                       </div>
@@ -922,19 +908,18 @@ function Finalbirthdayform() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
-                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="Food"
-                            id="veg"
-                            value={"veg"}
+                            name="flexRadioDefault"
+                            id="flexRadioDefault"
                           />
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault"
+                            for="flexRadioDefault"
                           >
-                            Veg
+                            {" "}
+                            Veg{" "}
                           </label>
                         </div>
                       </div>
@@ -943,19 +928,17 @@ function Finalbirthdayform() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
-                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="Food"
-                            value={"Non-veg"}
-                            id="non-veg"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault1"
                           />
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault1"
+                            for="flexRadioDefault1"
                           >
-                            Non-Veg
+                            Non-Veg{" "}
                           </label>
                         </div>
                       </div>
@@ -964,19 +947,18 @@ function Finalbirthdayform() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
-                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            value={"Jain"}
-                            name="Food"
-                            id="jain"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault2"
                           />
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault2"
+                            for="flexRadioDefault2"
                           >
-                            Jain
+                            {" "}
+                            Jain{" "}
                           </label>
                         </div>
                       </div>
@@ -1342,12 +1324,6 @@ function Finalbirthdayform() {
             </div>
 
             <div class="card-footer text-end py-4 px-5 bg-light border-0">
-              <button
-                class="btn btn-link btn-rounded"
-                data-ripple-color="primary"
-              >
-                Cancel
-              </button>
               <button type="submit" class="btn btn-primary btn-rounded">
                 Submit
               </button>

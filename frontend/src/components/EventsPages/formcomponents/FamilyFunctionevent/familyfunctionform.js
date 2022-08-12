@@ -2,17 +2,47 @@ import React, { useState } from "react";
 // import "./birthdayform.css";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  type_Of_Function : yup.string().required("type of function must be required"),
+  name_Of_Function : yup.string().required("name of function must be required"),
+  no_Of_Days : yup.number().required("name of days must be required"),
+  // date: yup.string().required("Date must be required"),
+  fromDate: yup.string().required("From Time must be required"),
+  ToDate: yup.string().required("To Time must be required"),
+  No_Of_Guests : yup.string().required("No Of Guests must be required"),
+  Estimate_Budget_Maximum: yup
+    .string()
+    .required("Estimate Budget Maximum must be required"),
+  Estimate_Budget_Minimum: yup
+    .string()
+    .required("Estimate Budget Minimum must be required"),
+})
+
 
 function FamilyfunctionForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver : yupResolver(schema)});
+
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
     setvalue(val);
   };
+
+  console.log(errors);
+
   const options = [
     { label: "Folk", value: "Folk" },
     { label: "Indian", value: "Indian" },
     { label: "Western", value: "Western" },
   ];
+
+  const [dancevalue, setdancevalue] = useState("");
+  const handledancechange = (val) => {
+    setdancevalue(val);
+  };
   // dance option end
 
   // music options start
@@ -38,43 +68,43 @@ function FamilyfunctionForm() {
   ];
 
   //photography option end
-  //invitation start 
-   const [invitationvalue, setinvitationvalue] =useState("");
-   const handleinvitation = (val) =>{
-    setinvitationvalue(val)
-   }
-   const invitationtypes =[
+  //invitation start
+  const [invitationvalue, setinvitationvalue] = useState("");
+  const handleinvitation = (val) => {
+    setinvitationvalue(val);
+  };
+  const invitationtypes = [
     { label: "Physical", value: "Physical" },
     { label: "E-Photo", value: "E-Photo" },
     { label: "E-Video", value: "E-Video" },
     { label: "E-Card", value: "E-Card" },
-   ]
+  ];
 
   //invitation ends
 
-  //Beauty start 
-   const [checkedBeauty, setCheckedBeauty] =useState("");
-   const handleBeauty = (val)=>{
-    setCheckedBeauty(val)
-   };
-   const beautyoptions = [
+  //Beauty start
+  const [checkedBeauty, setCheckedBeauty] = useState("");
+  const handleBeauty = (val) => {
+    setCheckedBeauty(val);
+  };
+  const beautyoptions = [
     { label: "Bride", value: "Bride" },
     { label: "Groom", value: "Groom" },
     { label: "Family", value: "Family" },
-   ]
+  ];
 
   // Beauty ends
 
   // Mehandi starts
-  const [checkedMehandi, setCheckedMehandi] =useState("");
-  const handleMehandi = (val)=>{
-   setCheckedMehandi(val)
+  const [checkedMehandi, setCheckedMehandi] = useState("");
+  const handleMehandi = (val) => {
+    setCheckedMehandi(val);
   };
   const mehandioptions = [
-   { label: "Bride", value: "Bride" },
-   { label: "Groom", value: "Groom" },
-   { label: "Family", value: "Family" },
-  ]
+    { label: "Bride", value: "Bride" },
+    { label: "Groom", value: "Groom" },
+    { label: "Family", value: "Family" },
+  ];
   //mehandi ends
 
   //decoration start
@@ -122,9 +152,27 @@ function FamilyfunctionForm() {
   const [checkedDance, setCheckedDance] = useState(false);
   const [checkedVenue, setCheckedVenue] = useState(false);
   const [checkedDecoration, setCheckedDecoration] = useState(false);
-  const [checkedRegulardecoration, setcheckedRegulardecoration] = useState(false);
-  const [checkedInvitation, setCheckedInvitation] = useState(false)
-  const [checkedPhotography, setCheckedPhotography] = useState(false)
+  const [checkedRegulardecoration, setcheckedRegulardecoration] =
+    useState(false);
+  const [checkedInvitation, setCheckedInvitation] = useState(false);
+  const [checkedPhotography, setCheckedPhotography] = useState(false);
+
+
+  function handleSubmit2(data){
+    console.log(data);
+
+    const checkboxValue = {
+      musicvalue,
+      // foodtypes,
+      foodvalue,
+      decorationvalue,
+      invitationvalue,
+      dancevalue,
+      decorationvalue,
+      photovalue
+      // mehandioptions
+    }
+  }
 
   return (
     <section class="h-50">
@@ -317,183 +365,139 @@ function FamilyfunctionForm() {
                       Personal Details
                     </h3>
 
-                    <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <div class="form-floating mb-4">
-                          <label for="exampleInput5" class="form-label">Type of Function</label>
-                          <select
-                            id="exampleInput5"
-                            class="form-select mb-4"
-                            aria-label="Default select example"
-                          >
-                          <option value="0"></option>
-                            
-                            <option value="2">Festival</option>
-                            <option value="3">Non-Festival</option>
-                            
-                            
-                          </select>
-                        </div>
-                        </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                            Name of the Function
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Date"
-                          />
-                          <label for="floatingInput">No of days</label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">No of Guests</label>
-                        </div>
-                      </div>
-                    </div>
+                    <form>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-4">
+                            <label for="exampleInput5" class="form-label">
+                              Type of Function
+                            </label>
+                            <select
+                              id="exampleInput5"
+                              class="form-select mb-4"
+                              aria-label="Default select example"
+                            >
+                              <option value="none" disabled></option>
 
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="From"
-                          />
-                          <label for="floatingInput">From</label>
+                              <option
+                                {...register("type_Of_Function")}
+                                value="festival"
+                              >
+                                Festival
+                              </option>
+                              <option
+                                {...register("type_Of_Function")}
+                                value="non-Festival"
+                              >
+                                Non-Festival
+                              </option>
+                            </select>
+                            {errors.type_Of_Function && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.type_Of_Function?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("name_Of_Function")}
+                              type="text"
+                              class="form-control"
+                              id="floatingInput"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput">
+                              {" "}
+                              Name of the Function
+                            </label>
+                            {errors.name_Of_Function && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.name_Of_Function?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("no_Of_Days")}
+                              type="number"
+                              class="form-control"
+                              id="floatingInput"
+                              placeholder="Date"
+                            />
+                            <label for="floatingInput">No of days</label>
+                            {errors.no_Of_Days && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.no_Of_Days?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("No_Of_Guests")}
+                              type="number"
+                              class="form-control"
+                              id="floatingInput"
+                              placeholder="To"
+                            />
+                            <label for="floatingInput">No of Guests</label>
+                            {errors.No_Of_Guests && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.No_Of_Guests?.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">To</label>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("fromDate")}
+                              type="date"
+                              class="form-control"
+                              id="floatingInput"
+                              placeholder="From"
+                            />
+                            <label for="floatingInput">From</label>
+                            {errors.fromDate && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.fromDate?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("ToDate")}
+                              type="date"
+                              class="form-control"
+                              id="floatingInput"
+                              placeholder="To"
+                            />
+                            <label for="floatingInput">To</label>
+                            {errors.ToDate && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.ToDate?.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    {/* <div class="col-md-6 mb-4"> */}
-                    {/* <div class="form-floating mb-4">
-                      <input
-                        type="city"
-                        class="form-control"
-                        id="floatingInput"
-                        placeholder="address"
-                      />
-                      <label for="floatingInput">Name of the concern / Organisation</label>
-                    </div> */}
-                    
-                        
-                        {/* </div> */}
 
-                    {/* <div class="btn-group mb-4">
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option1"
-                        autocomplete="off"
-                        disabled
-                      />
-                      <label class="btn btn-warning" for="option1">
-                        Gender
-                      </label>
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option11"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option11">
-                        Male
-                      </label>
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option2"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option2">
-                        Female
-                      </label>
-
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option3"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option3">
-                        Others
-                      </label>
-                    </div> */}
-                    <div class="row">
-                      {/* <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">Age</label>
-                        </div>
-                      </div> */}
-                      {/* <div class="col-md-6 mb-4">
-                      <div class="form-floating mb-4">
-                          <label for="exampleInput5" class="form-label">Type of Function</label>
-                          <select
-                            id="exampleInput5"
-                            class="form-select mb-4"
-                            aria-label="Default select example"
-                          >
-                          <option value="0"></option>
-                            
-                            <option value="2">Festival</option>
-                            <option value="3">Non-Festival</option>
-                            
-                            
-                          </select>
-                        </div>
-                        </div> */}
-                      
-                       
-                    </div>
-                    <div class="row"></div>
-
-                    <div class="d-flex justify-content-end pt-3">
-                      <button type="button" class="btn btn-info btn-lg ms-2 ">
-                        Save
-                      </button>
-                    </div>
+                      <div class="d-flex justify-content-end pt-3">
+                        <button type="button" class="btn btn-info btn-lg ms-2 ">
+                          Save
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -504,7 +508,9 @@ function FamilyfunctionForm() {
 
       <div class="container my-5">
         <div class="card">
-          <form>
+          <form onSubmit={ handleSubmit((data) => {
+            handleSubmit2(data)
+          }) }>
             <div class="card-header py-4 px-5 bg-light border-0">
               <h4 class="mb-0 fw-bold">Family Function Booking</h4>
             </div>
@@ -512,7 +518,9 @@ function FamilyfunctionForm() {
             <div class="card-body px-5">
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Shows :</strong></h4>
+                  <h4>
+                    <strong>Shows :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -547,9 +555,11 @@ function FamilyfunctionForm() {
                           Sangeet Choreography{" "}
                         </label>
                         <input
+                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="Sangeetchoreography"
+                          value="Sangeetchoreography"
                         />
                       </div>
                     </div>
@@ -561,10 +571,12 @@ function FamilyfunctionForm() {
                           value=""
                           style={{ marginRight: "15px" }}
                         >
-                          Devotional Music{" "}
+                          Devotional Music
                         </label>
                         <input
+                        {...register("devotionalMusic")}
                           type="checkbox"
+                          value={"devotionalMusic"}
                           class="form-check-input"
                           id="DevotionalMusic"
                         />
@@ -578,15 +590,17 @@ function FamilyfunctionForm() {
                           value=""
                           style={{ marginRight: "15px" }}
                         >
-                          Devotional Play{" "}
+                          Devotional Play
                         </label>
                         <input
+                        {...register("devotionalPlay")}
                           type="checkbox"
+                          value={"devotionalPlay"}
                           class="form-check-input"
                           id="DevotionalPlay"
                         />
                       </div>
-                      </div>
+                    </div>
                     <div class="col-md-4">
                       <div class="mb-3">
                         <label
@@ -598,9 +612,11 @@ function FamilyfunctionForm() {
                           Music{" "}
                         </label>
                         <input
+                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="music"
+                          value="music"
                           checked={checkedMusic}
                           onChange={() => {
                             setCheckedMusic(!checkedMusic);
@@ -613,15 +629,16 @@ function FamilyfunctionForm() {
                         <label
                           for="dance"
                           class="form-check-label"
-                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Dance{" "}
                         </label>
                         <input
+                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="dance"
+                          value="dance"
                           checked={checkedDance}
                           onChange={() => {
                             setCheckedDance(!checkedDance);
@@ -657,6 +674,7 @@ function FamilyfunctionForm() {
                             DJ{" "}
                           </label>
                           <input
+                            {...register("dj")}
                             type="checkbox"
                             class="form-check-input"
                             id="dj"
@@ -676,7 +694,7 @@ function FamilyfunctionForm() {
                       </div>
 
                       <MultiSelect
-                        onChange={handleOnchange}
+                        onChange={handledancechange}
                         options={options}
                       />
                     </div>
@@ -690,7 +708,9 @@ function FamilyfunctionForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Decorations :</strong></h4>
+                  <h4>
+                    <strong>Decorations :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -699,7 +719,7 @@ function FamilyfunctionForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          for="regulardecoration"
+                          HtmlFor="regulardecoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -707,9 +727,11 @@ function FamilyfunctionForm() {
                           Regular Decoration{" "}
                         </label>
                         <input
+                          {...register("Decoration")}
                           type="checkbox"
                           class="form-check-input"
-                          id="regulardecoration"
+                          id="RegularDecoration"
+                          value={"Regular Decoration"}
                           checked={checkedRegulardecoration}
                           onChange={() => {
                             setcheckedRegulardecoration(
@@ -723,7 +745,7 @@ function FamilyfunctionForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          for="decoration"
+                          HtmlFor="decoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -731,9 +753,11 @@ function FamilyfunctionForm() {
                           Theme Decoration{" "}
                         </label>
                         <input
+                          {...register("Decoration")}
                           type="checkbox"
                           class="form-check-input"
                           id="decoration"
+                          value={"Theme Decoration"}
                           checked={checkedDecoration}
                           onChange={() => {
                             setCheckedDecoration(!checkedDecoration);
@@ -760,22 +784,43 @@ function FamilyfunctionForm() {
                     {checkedDecoration && (
                       <div class="col-md-6">
                         <div class="mb-3">
-                          <label for="exampleInput5" class="form-label"></label>
+                          <label
+                            HtmlFor="exampleInput5"
+                            class="form-label"
+                          ></label>
                           <select
                             id="exampleInput5"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
-                            <option selected value="1">
-                              Devotional Decoration
+                            <option
+                              selected
+                              value="1"
+                              {...register("DecorationType")}
+                            >
+                              Ballon Decoration
                             </option>
-                            <option value="2">Musical Decoration</option>
-                            <option value="3">Fairy Tale Decoration</option>
-                            <option value="4">Single Color Decoration</option>
-                            <option value="5">Multi Color Decoration</option>
-                            <option value="6">Traditional decoration</option>
-                            <option value="7">Retro decoration</option>
-                            
+                            <option
+                              {...register("DecorationType")}
+                              id="CandyDecoration"
+                              value="Candy Decoration"
+                            >
+                              Candy Decoration
+                            </option>
+                            <option
+                              {...register("DecorationType")}
+                              id="CartoonDecoration"
+                              value="Cartoon Decoration"
+                            >
+                              Cartoon Decoration
+                            </option>
+                            <option
+                              {...register("DecorationType")}
+                              id="Jungle Party Decoration"
+                              value="Jungle Party Decoration"
+                            >
+                              Jungle Party Decoration
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -792,7 +837,9 @@ function FamilyfunctionForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Catering :</strong></h4>
+                  <h4>
+                    <strong>Catering :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -881,7 +928,9 @@ function FamilyfunctionForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Other Services :</strong></h4>
+                  <h4>
+                    <strong>Other Services :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -897,9 +946,11 @@ function FamilyfunctionForm() {
                           Invitation{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
+                          value={"invitation"}
                           checked={checkedInvitation}
                           onChange={() => {
                             setCheckedInvitation(!checkedInvitation);
@@ -918,9 +969,11 @@ function FamilyfunctionForm() {
                           Pooja Pandit Ji{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
-                          id="beauty"
+                          id="pooja_pandit_ji"
+                          value={"pooja_pandit_ji"}
                         />
                       </div>
                     </div>
@@ -935,9 +988,11 @@ function FamilyfunctionForm() {
                           Venue{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="venue"
+                          value={"venue"}
                           checked={checkedVenue}
                           onChange={() => {
                             setCheckedVenue(!checkedVenue);
@@ -948,17 +1003,18 @@ function FamilyfunctionForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="photography"
+                          HtmlFor="photography"
                           class="form-check-label"
-                          value=" "
                           style={{ marginRight: "15px" }}
                         >
                           Photography{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="photography"
+                          value="photography"
                           checked={checkedPhotography}
                           onChange={() => {
                             setCheckedPhotography(!checkedPhotography);
@@ -969,21 +1025,19 @@ function FamilyfunctionForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="Beauty"
+                          HtmlFor="beauty"
                           class="form-check-label"
-                          value=" "
+                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Beauty{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
-                          id="Beauty"
-                          checked={checkedBeauty}
-                          onChange={() => {
-                            setCheckedBeauty(!checkedBeauty);
-                          }}
+                          id="beauty"
+                          value="beauty"
                         />
                       </div>
                     </div>
@@ -998,9 +1052,11 @@ function FamilyfunctionForm() {
                           Mehandi{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="Mehandi"
+                          value={"mehandi"}
                           checked={checkedMehandi}
                           onChange={() => {
                             setCheckedMehandi(!checkedMehandi);
@@ -1019,7 +1075,9 @@ function FamilyfunctionForm() {
                           Hosting{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
+                          value={"hosting"}
                           class="form-check-input"
                           id="hosting"
                         />
@@ -1028,9 +1086,8 @@ function FamilyfunctionForm() {
                   </div>
 
                   {/* venue options start */}
-                 { checkedInvitation && (
-                  
-                  <div>
+                  {checkedInvitation && (
+                    <div>
                       <div className="preview-values">
                         <h5>
                           <strong>Invitation</strong>{" "}
@@ -1043,45 +1100,58 @@ function FamilyfunctionForm() {
                         options={invitationtypes}
                       />
                     </div>
-                 )}
+                  )}
                   <br></br>
                   {checkedVenue && (
                     <div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
+                              {...register("Venue 1 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
                               style={{ maxWidth: "500px" }}
                             />
                           </div>
+                          {errors.venue_1_name && (
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors?.venue_1_name.message}
+                            </div>
+                          )}
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
+                              {...register("Venue 1 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
                               style={{ maxWidth: "500px" }}
                             />
                           </div>
+                          {errors.venue_1_place && (
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.venue_1_place?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
+                              {...register("Venue 2 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1091,10 +1161,11 @@ function FamilyfunctionForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
+                              {...register("Venue 2 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1106,10 +1177,11 @@ function FamilyfunctionForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
+                              {...register("Venue 3 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1119,10 +1191,11 @@ function FamilyfunctionForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
+                              {...register("Venue 3 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1135,57 +1208,23 @@ function FamilyfunctionForm() {
                   )}
 
                   {/* venue option end */}
-                  { checkedPhotography && (
-                  <div>
-                    <div className="preview-values">
-                      <h5>
-                        <strong>Photography</strong>
-                      </h5>
-                      {checkedBeauty}
-                    </div>
-
-                    <MultiSelect
-                      onChange={handlePhotoChange}
-                      options={PhotoOptions}
-                    />
-                  </div>
-                  )}
-                  { checkedBeauty && (
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label for="countofbeauty" class="form-label">
-                          No of Persons (beauty)
-                        </label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="countofbeauty"
-                        />
+                  {checkedPhotography && (
+                    <div>
+                      <div className="preview-values">
+                        <h5>
+                          <strong>Photography</strong>
+                        </h5>
+                        {photovalue}
                       </div>
-                    </div>
-                  )}
-                  { checkedMehandi && (
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label for="countmehandi" class="form-label">
-                          No of Persons (mehandi)
-                        </label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="countmehandi"
-                        />
-                      </div>
-                    </div>
-                  )}
 
-                  
+                      <MultiSelect
+                        onChange={handlePhotoChange}
+                        options={PhotoOptions}
+                      />
+                    </div>
+                  )}
                 </div>
-                
-                  
               </div>
-    
-             
 
               {/* other events end */}
 
@@ -1193,76 +1232,98 @@ function FamilyfunctionForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Estimate Budget :</strong> </h4>
+                  <h4>
+                    <strong>Estimate Budget :</strong>{" "}
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="exampleInput11" class="form-label">
+                        <label HtmlFor="exampleInput11" class="form-label">
                           Minimun
                         </label>
                         <input
+                          {...register("Estimate_Budget_Minimum")}
                           type="number"
                           class="form-control"
                           id="exampleInput11"
                         />
                       </div>
+                      {errors.Estimate_Budget_Minimum && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.Estimate_Budget_Minimum?.message}
+                        </div>
+                      )}
                     </div>
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="exampleInput12" class="form-label">
+                        <label HtmlFor="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
+                          {...register("Estimate_Budget_Maximum")}
                           type="number"
                           class="form-control"
-                          id="exampleInput12"
+                          id="Estimate Budget Maximum"
                         />
                       </div>
+                      {errors.Estimate_Budget_Maximum && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.Estimate_Budget_Maximum?.message}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
+
               <hr class="my-5" />
 
               <div class="row gx-xl-5">
                 <div class="col-md-4">
-                  <h4><strong>Special Service :</strong> </h4>
-                  <p>Any additional service you expect from us that may be mentioned here :</p>
-                  
-                  
+                  <h4>
+                    <strong>Special Service :</strong>{" "}
+                  </h4>
+                  <p>
+                    Any additional service you expect from us that may be
+                    mentioned here :
+                  </p>
                 </div>
 
                 <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label for="exampleInput11" class="form-label">
-                         
-                        </label>
+                        <label
+                          htmlFor="exampleInput11"
+                          class="form-label"
+                        ></label>
                         <textarea
+                          {...register("Special Service")}
                           type="number"
                           class="form-control"
-                          id="exampleInput11"
+                          id="special service"
                         />
                       </div>
                     </div>
-
-                   
                   </div>
                 </div>
               </div>
               {/* <hr class="my-2" /> */}
-                  <h3><strong>Note : </strong></h3>
-                  <h4><strong style={{color:"red"}}> Once the form is submitted now.Our customer 
-                  representative will contact you within 12-24 hours to discuss in more detail.
-                  </strong></h4>
-
+              <h3>
+                <strong>Note : </strong>
+              </h3>
+              <h4>
+                <strong style={{ color: "red" }}>
+                  {" "}
+                  Once the form is submitted now.Our customer representative
+                  will contact you within 12-24 hours to discuss in more detail.
+                </strong>
+              </h4>
             </div>
-           
 
             <div class="card-footer text-end py-4 px-5 bg-light border-0">
               <button

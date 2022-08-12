@@ -3,17 +3,55 @@ import { useState } from "react";
 // import "./birthdayform.css";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+
+const schema = yup.object().shape({
+  Client_Name: yup.string().required("Client name must be required"),
+  Bride_Name: yup.string().required("Bride name must be required"),
+  Groom_Name: yup.string().required("Groom name must be required"),
+  date: yup.string().required("Date must be required"),
+  fromDate: yup.string().required("From date must be required"),
+  ToDate: yup.string().required("To date must be required"),
+  city: yup.string().required("city name must be required"),
+  No_Of_Guests: yup
+    .number()
+    .typeError("No of Guests must be required")
+    .required("No of Guests must be required"),
+  Estimate_Budget_Maximum: yup
+    .string()
+    .required("Estimate Budget Maximum must be required"),
+  Estimate_Budget_Minimum: yup
+    .string()
+    .required("Estimate Budget Minimum must be required"),
+});
 
 function PostweddingForm() {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
     setvalue(val);
   };
   const options = [
-    
     { label: "Indian", value: "Indian" },
     { label: "Folk", value: "Folk" },
   ];
+
+  const [dancevalue, setdancevalue] = useState("");
+  const handledancechange = (val) => {
+    setdancevalue(val);
+  };
+
   // dance option end
 
   // music options start
@@ -22,7 +60,6 @@ function PostweddingForm() {
     setmusicvalue(val);
   };
   const optionsmusic = [
-    
     { label: "Indian", value: "Indian" },
     { label: "Western", value: "Western" },
   ];
@@ -43,17 +80,17 @@ function PostweddingForm() {
   ];
 
   //photography option end
-  //invitation start 
-   const [invitationvalue, setinvitationvalue] =useState("");
-   const handleinvitation = (val) =>{
-    setinvitationvalue(val)
-   }
-   const invitationtypes =[
+  //invitation start
+  const [invitationvalue, setinvitationvalue] = useState("");
+  const handleinvitation = (val) => {
+    setinvitationvalue(val);
+  };
+  const invitationtypes = [
     { label: "Physical", value: "Physical" },
     { label: "E-Photo", value: "E-Photo" },
     { label: "E-Video", value: "E-Video" },
     { label: "E-Card", value: "E-Card" },
-   ]
+  ];
 
   //invitation ends
   //decoration start
@@ -100,9 +137,27 @@ function PostweddingForm() {
   const [checkedDance, setCheckedDance] = useState(false);
   const [checkedVenue, setCheckedVenue] = useState(false);
   const [checkedDecoration, setCheckedDecoration] = useState(false);
-  const [checkedRegulardecoration, setcheckedRegulardecoration] = useState(false);
-  const [checkedInvitation, setCheckedInvitation] = useState(false)
-  const [checkedPhotography, setCheckedPhotography] = useState(false)
+  const [checkedRegulardecoration, setcheckedRegulardecoration] =
+    useState(false);
+  const [checkedInvitation, setCheckedInvitation] = useState(false);
+  const [checkedPhotography, setCheckedPhotography] = useState(false);
+
+  const handleSubmit2 = (data) => {
+    const checkBoxValues = {
+      musicvalue,
+      foodvalue,
+      dancevalue,
+    };
+    console.log(checkBoxValues);
+    // console.log(checkBoxValues.dancevalue);
+    console.log(data);
+    // axios.post("/api/wedding", {data, checkBoxValues}).then((res)=>{
+    //   console.log(res.data);
+    // }).catch((err)=>{
+    //   console.log(err);
+    // })
+  };
+
 
   return (
     <section class="h-50">
@@ -295,207 +350,156 @@ function PostweddingForm() {
                       Personal Details
                     </h3>
 
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                         Client Name
-                          </label>
+                    <form>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("Client_Name")}
+                              type="text"
+                              class="form-control"
+                              id="Client_Name"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput"> Client Name</label>
+                            {errors.Client_Name && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.Client_Name?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("Bride_Name")}
+                              type="text"
+                              class="form-control"
+                              id="Bride_Name"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput"> Bride Name</label>
+                            {errors.Bride_Name && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.Bride_Name?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("Groom_Name")}
+                              type="text"
+                              class="form-control"
+                              id="Groom_Name"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput"> Groom Name</label>
+                            {errors.Groom_Name && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.Groom_Name?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("date")}
+                              type="date"
+                              class="form-control"
+                              id="date"
+                              placeholder="Date"
+                            />
+                            <label for="floatingInput">Date</label>
+                            {errors.date && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.date?.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                         Bride Name
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                         Groom Name
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Date"
-                          />
-                          <label for="floatingInput">Date</label>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="From"
-                          />
-                          <label for="floatingInput">From</label>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("fromDate")}
+                              type="date"
+                              class="form-control"
+                              id="FromDate"
+                              placeholder="From"
+                            />
+                            <label for="floatingInput">From</label>
+                            {errors.fromDate && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.fromDate?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("ToDate")}
+                              type="date"
+                              class="form-control"
+                              id="ToDate"
+                              placeholder="To"
+                            />
+                            <label for="floatingInput">To</label>
+                            {errors.ToDate && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.ToDate?.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">To</label>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="form-floating mb-4">
-                      <input
-                        type="city"
-                        class="form-control"
-                        id="floatingInput"
-                        placeholder="address"
-                      />
-                      <label for="floatingInput">City</label>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-floating mb-3">
+                      <div class="form-floating mb-4">
                         <input
-                          type="number"
+                          {...register("city")}
+                          type="city"
                           class="form-control"
-                          id="floatingInput"
-                          placeholder="To"
+                          id="city"
+                          placeholder="address"
                         />
-                        <label for="floatingInput">No of Guests</label>
+                        <label for="floatingInput">City</label>
+                        {errors.city && (
+                          <div class="alert alert-danger mt-2" role="alert">
+                            {errors.city?.message}
+                          </div>
+                        )}
                       </div>
-                    </div>
+                      <div class="row">
+                        <div class="col-md-12 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("No_Of_Guests")}
+                              type="number"
+                              class="form-control"
+                              id="No_Of_Guests"
+                              placeholder="To"
+                            />
+                            {errors.No_Of_Guests && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.No_Of_Guests?.message}
+                              </div>
+                            )}
+                            <label for="floatingInput">No of Guests</label>
+                          </div>
+                        </div>
+                      </div>
 
-                    {/* <div class="btn-group mb-4">
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option1"
-                        autocomplete="off"
-                        disabled
-                      />
-                      <label class="btn btn-warning" for="option1">
-                        Person
-                      </label>
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option11"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option11">
-                        Groom
-                      </label>
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option2"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option2">
-                        Bride
-                      </label>
-
-                      {/* <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option3"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option3">
-                        Others
-                      </label> */}
-                    {/* </div>  */}
-                    {/* <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">Age</label>
-                        </div>
+                      <div class="d-flex justify-content-end pt-3">
+                        <button type="button" class="btn btn-info btn-lg ms-2 ">
+                          Save
+                        </button>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">No of Guests</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">Bachelors Party Date</label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">Shooting Date</label>
-                        </div>
-                      </div>
-                    </div> */}
-                    <div class="row"></div>
-
-                    <div class="d-flex justify-content-end pt-3">
-                      <button type="button" class="btn btn-info btn-lg ms-2 ">
-                        Save
-                      </button>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -506,15 +510,17 @@ function PostweddingForm() {
 
       <div class="container my-5">
         <div class="card">
-          <form>
+          <form onSubmit={handleSubmit((data) => handleSubmit2(data))}>
             <div class="card-header py-4 px-5 bg-light border-0">
               <h4 class="mb-0 fw-bold">Post Wedding Booking</h4>
             </div>
 
             <div class="card-body px-5">
-              <div class="row gx-xl-5">
+              <div class="row gx-xl-5 mb-5 mt-3">
                 <div class="col-md-3">
-                  <h4><strong>Muh dikhai :</strong></h4>
+                  <h4>
+                    <strong>Muh dikhai :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -524,59 +530,23 @@ function PostweddingForm() {
                     <div class="col-md-4">
                       <div class="mb-3">
                         <label
-                          for="Sangeet choregraphy"
+                          for="Sangeetchoreography"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
                         >
-                          Sangeet choregraphy{" "}
+                          Sangeet Choreography{" "}
                         </label>
                         <input
+                          {...register("muh_Dikhal")}
                           type="checkbox"
                           class="form-check-input"
-                          id="Sangeet choregraphy"
+                          id="Sangeetchoreography"
+                          value="Sangeetchoreography"
                         />
                       </div>
                     </div>
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="Catering"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Catering{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="Catering"
-                        />
-                      </div>
-                    </div> */}
                     <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="venue"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Venue{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="venue"
-                          checked={checkedVenue}
-                          onChange={() => {
-                            setCheckedVenue(!checkedVenue);
-                          }}
-                        />
-                      </div>
-                    </div>
-                    {/* <div class="col-md-3">
                       <div class="mb-3">
                         <label
                           for="music"
@@ -587,30 +557,33 @@ function PostweddingForm() {
                           Music{" "}
                         </label>
                         <input
+                          {...register("muh_Dikhal")}
                           type="checkbox"
                           class="form-check-input"
                           id="music"
+                          value="music"
                           checked={checkedMusic}
                           onChange={() => {
                             setCheckedMusic(!checkedMusic);
                           }}
                         />
                       </div>
-                    </div> */}
+                    </div>
                     <div class="col-md-4">
                       <div class="mb-3">
                         <label
                           for="dance"
                           class="form-check-label"
-                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Dance{" "}
                         </label>
                         <input
+                          {...register("muh_Dikhal")}
                           type="checkbox"
                           class="form-check-input"
                           id="dance"
+                          value="dance"
                           checked={checkedDance}
                           onChange={() => {
                             setCheckedDance(!checkedDance);
@@ -619,8 +592,7 @@ function PostweddingForm() {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* {checkedMusic && (
+                  {checkedMusic && (
                     <div class="row">
                       <div class="mb-3">
                         <div className="preview-values">
@@ -632,11 +604,11 @@ function PostweddingForm() {
 
                         <MultiSelect
                           onChange={handlemusicchange}
-                          options={optionsmusic}
+                          options={options}
                         />
-                      </div> */}
+                      </div>
 
-                      {/* <div class="col-md-3">
+                      <div class="col-md-3">
                         <div class="mb-3">
                           <label
                             for="dj"
@@ -647,14 +619,15 @@ function PostweddingForm() {
                             DJ{" "}
                           </label>
                           <input
+                            {...register("dj")}
                             type="checkbox"
                             class="form-check-input"
                             id="dj"
                           />
                         </div>
-                      </div> */}
-                    {/* </div>
-                  )} */}
+                      </div>
+                    </div>
+                  )}
 
                   {checkedDance && (
                     <div>
@@ -666,106 +639,19 @@ function PostweddingForm() {
                       </div>
 
                       <MultiSelect
-                        onChange={handleOnchange}
+                        onChange={handledancechange}
                         options={options}
                       />
                     </div>
                   )}
-                  <br></br>
-                  {checkedVenue && (
-                    <div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 1 Name</strong>{" "}
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 1 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 2 Name</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 2 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 3 Name</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 3 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}  
                 </div>
               </div>
-              <br></br>
-              <div class="row gx-xl-5">
+              <hr></hr>
+              <div class="row gx-xl-5 mt-5">
                 <div class="col-md-3">
-                  <h4><strong>Catering :</strong></h4>
+                  <h4>
+                    <strong>Catering :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -774,18 +660,19 @@ function PostweddingForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault"
+                            name="Food"
+                            id="veg"
+                            value={"veg"}
                           />
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            HtmlFor="flexRadioDefault"
                           >
-                            {" "}
-                            Veg{" "}
+                            Veg
                           </label>
                         </div>
                       </div>
@@ -794,17 +681,19 @@ function PostweddingForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
+                            name="Food"
+                            value={"Non-veg"}
+                            id="non-veg"
                           />
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault1"
+                            HtmlFor="flexRadioDefault1"
                           >
-                            Non-Veg{" "}
+                            Non-Veg
                           </label>
                         </div>
                       </div>
@@ -813,18 +702,19 @@ function PostweddingForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
+                            value={"Jain"}
+                            name="Food"
+                            id="jain"
                           />
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            HtmlFor="flexRadioDefault2"
                           >
-                            {" "}
-                            Jain{" "}
+                            Jain
                           </label>
                         </div>
                       </div>
@@ -847,121 +737,18 @@ function PostweddingForm() {
               </div>
               <hr class="my-5" />
 
-              {/* Decoration section */}
-
-              {/* <div class="row gx-xl-5">
-                <div class="col-md-3">
-                  <h4><strong>Shooting :</strong></h4>
-                </div> */}
-
-                {/* <div class="col-md-9">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <br />
-                        <label
-                          for="regulardecoration"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Regular Decoration{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="regulardecoration"
-                          checked={checkedRegulardecoration}
-                          onChange={() => {
-                            setcheckedRegulardecoration(
-                              !checkedRegulardecoration
-                            );
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <br />
-                        <label
-                          for="decoration"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Theme Decoration{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="decoration"
-                          checked={checkedDecoration}
-                          onChange={() => {
-                            setCheckedDecoration(!checkedDecoration);
-                          }}
-                        />
-                      </div>
-                    </div> */}
-{/* 
-                    {checkedRegulardecoration && (
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <div className="preview-values">
-                            <h5><strong>Decoration</strong></h5>
-                            {decorationvalue}
-                          </div>
-
-                          <MultiSelect
-                            onChange={handleOnchangedecoration}
-                            options={decorationoptions}
-                          />
-                        </div>
-                      </div>
-                    )} */}
-                    {/* {checkedDecoration && (
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="exampleInput5" class="form-label"></label>
-                          <select
-                            id="exampleInput5"
-                            class="form-select mb-3"
-                            aria-label="Default select example"
-                          >
-                            <option selected value="1">
-                              Ballon Decoration
-                            </option>
-                            <option value="2">Candy Decoration</option>
-                            <option value="3">Cartoon Decoration</option>
-                            <option value="4">Jungle Party Decoration</option>
-                          </select>
-                        </div>
-                      </div>
-                    )} */}
-                  {/* </div>
-                </div>
-              </div> */}
-
-              {/* Decoration section end  */}
-
-              {/* <hr class="my-5" /> */}
-
-              {/* catering start */}
-
-             
-
-              {/* catering ends  */}
-
-
               {/* other events start */}
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Subaarambh Yatra :</strong></h4>
+                  <h4>
+                    <strong>Subaarambh Yatra :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
                   <div class="row">
-                  <div class="col-md-3">
+                    <div class="col-md-3">
                       <div class="mb-3">
                         <label
                           for="decoratedcar"
@@ -972,8 +759,10 @@ function PostweddingForm() {
                           Decorated Car{" "}
                         </label>
                         <input
+                        {...register("subaarambh_Yatra")}
                           type="checkbox"
                           class="form-check-input"
+                          value={"decorated_Car"}
                           id="decoratedcar"
                         />
                       </div>
@@ -989,289 +778,18 @@ function PostweddingForm() {
                           Decorated Cart{" "}
                         </label>
                         <input
+                        {...register("subaarambh_Yatra")}
                           type="checkbox"
+                          value={"decorated_Cart"}
                           class="form-check-input"
                           id="decoratedcart"
                         />
                       </div>
                     </div>
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="indoor"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Indoor{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="indoor"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="outdoor"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Outdoor{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="outdoor"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="beauty"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Beauty{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="beauty"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="food"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                         Food arrangement during shooting{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="food"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="transport"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Transport during shooting{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="transport"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="accomodation"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                    Accomodation during shooting{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="accomodation"
-                        />
-                      </div>
-                    </div> */}
-                    
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="venue"
-                          class="form-check-label"
-                          value=" "
-                          style={{ marginRight: "15px" }}
-                        >
-                          Venue{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="venue"
-                          checked={checkedVenue}
-                          onChange={() => {
-                            setCheckedVenue(!checkedVenue);
-                          }}
-                        />
-                      </div>
-                    </div> */}
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="photography"
-                          class="form-check-label"
-                          value=" "
-                          style={{ marginRight: "15px" }}
-                        >
-                          Photography{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="photography"
-                          checked={checkedPhotography}
-                          onChange={() => {
-                            setCheckedPhotography(!checkedPhotography);
-                          }}
-                        />
-                      </div>
-                    </div> */}
                   </div>
 
-                  {/* venue options start */}
-                 {/* { checkedInvitation && (
-                  
-                  <div>
-                  
-                     
-                      <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Destination Places</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    
-                 )} */}
                   <br></br>
-                  {/* {checkedVenue && (
-                    <div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 1 Name</strong>{" "}
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 1 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 2 Name</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 2 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 3 Name</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 3 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )} */}
-
-                  {/* venue option end */}
-                  {/* { checkedPhotography && (
-                  <div>
-                    <div className="preview-values">
-                      <h5>
-                        <strong>Photography</strong>
-                      </h5>
-                      {photovalue}
-                    </div>
-
-                    <MultiSelect
-                      onChange={handlePhotoChange}
-                      options={PhotoOptions}
-                    />
-                  </div>
-                  )} */}
                 </div>
-                  
               </div>
               <hr class="my-5" />
 
@@ -1279,7 +797,9 @@ function PostweddingForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Honney Moon :</strong></h4>
+                  <h4>
+                    <strong>Honney Moon :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -1295,6 +815,7 @@ function PostweddingForm() {
                           Destination{" "}
                         </label>
                         <input
+                        {...register("honeyMoon")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
@@ -1306,335 +827,78 @@ function PostweddingForm() {
                       </div>
                     </div>
                     <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                            <h5><strong>Number of days Stay</strong></h5>
-                            </label>
-                            <input
-                              type="number"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                    {/* <div class="col-md-3">
                       <div class="mb-3">
-                        <label
-                          for="filmcity"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Film city{" "}
+                        <label for="exampleInput1" class="form-label">
+                          <h5>
+                            <strong>Number of days Stay</strong>
+                          </h5>
                         </label>
                         <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="filmcity"
+                        {...register("no_of_days_honeymoon")}
+                          type="number"
+                          class="form-control"
+                          id="exampleInput1"
+                          style={{ maxWidth: "500px" }}
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="indoor"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Indoor{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="indoor"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="outdoor"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Outdoor{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="outdoor"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="beauty"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Beauty{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="beauty"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="food"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                         Food arrangement during shooting{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="food"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="transport"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Transport during shooting{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="transport"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="accomodation"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                    Accomodation during shooting{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="accomodation"
-                        />
-                      </div>
-                    </div>
-                     */}
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="venue"
-                          class="form-check-label"
-                          value=" "
-                          style={{ marginRight: "15px" }}
-                        >
-                          Venue{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="venue"
-                          checked={checkedVenue}
-                          onChange={() => {
-                            setCheckedVenue(!checkedVenue);
-                          }}
-                        />
-                      </div>
-                    </div> */}
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="photography"
-                          class="form-check-label"
-                          value=" "
-                          style={{ marginRight: "15px" }}
-                        >
-                          Photography{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="photography"
-                          checked={checkedPhotography}
-                          onChange={() => {
-                            setCheckedPhotography(!checkedPhotography);
-                          }}
-                        />
-                      </div>
-                    </div> */}
                   </div>
 
                   {/* venue options start */}
-                 { checkedInvitation && (
-                  
-                  <div>
-                  
-                      {/* <div className="preview-values">
+                  {checkedInvitation && (
+                    <div>
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="india" class="form-label">
+                            <h5>
+                              <strong>India</strong>
+                            </h5>
+                          </label>
+                          <input
+                          {...register("destination_India")}
+                            type="text"
+                            class="form-control"
+                            id="india"
+                            style={{ maxWidth: "500px" }}
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="abroad" class="form-label">
+                            <h5>
+                              <strong>Abroad</strong>
+                            </h5>
+                          </label>
+                          <input
+                          {...register("destination_Abroad")}
+                            type="text"
+                            class="form-control"
+                            id="abroad"
+                            style={{ maxWidth: "500px" }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* venue option end */}
+                  {checkedPhotography && (
+                    <div>
+                      <div className="preview-values">
                         <h5>
-                          <strong>Invitation</strong>{" "}
+                          <strong>Photography</strong>
                         </h5>
-                        {invitationvalue}
+                        {photovalue}
                       </div>
 
                       <MultiSelect
-                        onChange={handleinvitation}
-                        options={invitationtypes}
-                      /> */}
-                      <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="india" class="form-label">
-                              <h5><strong>India</strong></h5>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="india"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="abroad" class="form-label">
-                            <h5><strong>Abroad</strong></h5>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="abroad"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    
-                 )}
-                  {/* <br></br>
-                  {checkedVenue && (
-                    <div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 1 Name</strong>{" "}
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 1 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 2 Name</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 2 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 3 Name</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
-                              <strong>Venue 3 place</strong>
-                            </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="exampleInput1"
-                              style={{ maxWidth: "500px" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
+                        onChange={handlePhotoChange}
+                        options={PhotoOptions}
+                      />
                     </div>
-                  )} */}
-
-                  {/* venue option end */}
-                  { checkedPhotography && (
-                  <div>
-                    <div className="preview-values">
-                      <h5>
-                        <strong>Photography</strong>
-                      </h5>
-                      {photovalue}
-                    </div>
-
-                    <MultiSelect
-                      onChange={handlePhotoChange}
-                      options={PhotoOptions}
-                    />
-                  </div>
                   )}
                 </div>
-                  
               </div>
 
               {/* other events end */}
@@ -1643,35 +907,49 @@ function PostweddingForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Estimate Budget :</strong> </h4>
+                  <h4>
+                    <strong>Estimate Budget :</strong>{" "}
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="exampleInput11" class="form-label">
+                        <label HtmlFor="exampleInput11" class="form-label">
                           Minimun
                         </label>
                         <input
+                          {...register("Estimate_Budget_Minimum")}
                           type="number"
                           class="form-control"
                           id="exampleInput11"
                         />
                       </div>
+                      {errors.Estimate_Budget_Minimum && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.Estimate_Budget_Minimum?.message}
+                        </div>
+                      )}
                     </div>
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="exampleInput12" class="form-label">
+                        <label HtmlFor="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
+                          {...register("Estimate_Budget_Maximum")}
                           type="number"
                           class="form-control"
-                          id="exampleInput12"
+                          id="Estimate Budget Maximum"
                         />
                       </div>
+                      {errors.Estimate_Budget_Maximum && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.Estimate_Budget_Maximum?.message}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1680,47 +958,47 @@ function PostweddingForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-4">
-                  <h4><strong>Special Service :</strong> </h4>
-                  <p>Any additional service you expect from us that may be mentioned here :</p>
-                  
-                  
+                  <h4>
+                    <strong>Special Service :</strong>{" "}
+                  </h4>
+                  <p>
+                    Any additional service you expect from us that may be
+                    mentioned here :
+                  </p>
                 </div>
 
                 <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label for="exampleInput11" class="form-label">
-                         
-                        </label>
+                        <label
+                          htmlFor="exampleInput11"
+                          class="form-label"
+                        ></label>
                         <textarea
+                          {...register("Special Service")}
                           type="number"
                           class="form-control"
-                          id="exampleInput11"
+                          id="special service"
                         />
                       </div>
                     </div>
-
-                   
                   </div>
                 </div>
               </div>
               {/* <hr class="my-2" /> */}
-                  <h3><strong>Note : </strong></h3>
-                  <h4><strong style={{color:"red"}}> Once the form is submitted now.Our customer 
-                  representative will contact you within 12-24 hours to discuss in more detail.
-                  </strong></h4>
-
+              <h3>
+                <strong>Note : </strong>
+              </h3>
+              <h4>
+                <strong style={{ color: "red" }}>
+                  Once the form is submitted now.Our customer representative
+                  will contact you within 12-24 hours to discuss in more detail.
+                </strong>
+              </h4>
             </div>
-           
 
             <div class="card-footer text-end py-4 px-5 bg-light border-0">
-              <button
-                class="btn btn-link btn-rounded"
-                data-ripple-color="primary"
-              >
-                Cancel
-              </button>
               <button type="submit" class="btn btn-primary btn-rounded">
                 Submit
               </button>

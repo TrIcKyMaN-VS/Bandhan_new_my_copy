@@ -2,8 +2,38 @@ import React, { useState } from "react";
 // import "./birthdayform.css";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  Client_Name: yup.string().required("Client name must be required"),
+  Bride_Name: yup.string().required("Bride name must be required"),
+  Groom_Name: yup.string().required("Groom name must be required"),
+  date: yup.string().required("Date must be required"),
+  fromDate: yup.string().required("From date must be required"),
+  ToDate: yup.string().required("To date must be required"),
+  city: yup.string().required("city name must be required"),
+  No_Of_Guests: yup
+    .number()
+    .typeError("No of Guests must be required")
+    .required("No of Guests must be required"),
+  Estimate_Budget_Maximum: yup
+    .string()
+    .required("Estimate Budget Maximum must be required"),
+  Estimate_Budget_Minimum: yup
+    .string()
+    .required("Estimate Budget Minimum must be required"),
+});
 
 function EngagementForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
     setvalue(val);
@@ -13,6 +43,12 @@ function EngagementForm() {
     { label: "Indian", value: "Indian" },
     { label: "Western", value: "Western" },
   ];
+
+  const [dancevalue, setdancevalue] = useState("");
+  const handledancechange = (val) => {
+    setdancevalue(val);
+  };
+
   // dance option end
 
   // music options start
@@ -38,43 +74,43 @@ function EngagementForm() {
   ];
 
   //photography option end
-  //invitation start 
-   const [invitationvalue, setinvitationvalue] =useState("");
-   const handleinvitation = (val) =>{
-    setinvitationvalue(val)
-   }
-   const invitationtypes =[
+  //invitation start
+  const [invitationvalue, setinvitationvalue] = useState("");
+  const handleinvitation = (val) => {
+    setinvitationvalue(val);
+  };
+  const invitationtypes = [
     { label: "Physical", value: "Physical" },
     { label: "E-Photo", value: "E-Photo" },
     { label: "E-Video", value: "E-Video" },
     { label: "E-Card", value: "E-Card" },
-   ]
+  ];
 
   //invitation ends
 
-  //Beauty start 
-   const [checkedBeauty, setCheckedBeauty] =useState("");
-   const handleBeauty = (val)=>{
-    setCheckedBeauty(val)
-   };
-   const beautyoptions = [
+  //Beauty start
+  const [checkedBeauty, setCheckedBeauty] = useState("");
+  const handleBeauty = (val) => {
+    setCheckedBeauty(val);
+  };
+  const beautyoptions = [
     { label: "Bride", value: "Bride" },
     { label: "Groom", value: "Groom" },
     { label: "Family", value: "Family" },
-   ]
+  ];
 
   // Beauty ends
 
   // Mehandi starts
-  const [checkedMehandi, setCheckedMehandi] =useState("");
-  const handleMehandi = (val)=>{
-   setCheckedMehandi(val)
+  const [checkedMehandi, setCheckedMehandi] = useState("");
+  const handleMehandi = (val) => {
+    setCheckedMehandi(val);
   };
   const mehandioptions = [
-   { label: "Bride", value: "Bride" },
-   { label: "Groom", value: "Groom" },
-   { label: "Family", value: "Family" },
-  ]
+    { label: "Bride", value: "Bride" },
+    { label: "Groom", value: "Groom" },
+    { label: "Family", value: "Family" },
+  ];
   //mehandi ends
 
   //decoration start
@@ -117,14 +153,32 @@ function EngagementForm() {
   ];
 
   //catering ends
-  
+
   const [checkedMusic, setCheckedMusic] = useState(false);
   const [checkedDance, setCheckedDance] = useState(false);
   const [checkedVenue, setCheckedVenue] = useState(false);
   const [checkedDecoration, setCheckedDecoration] = useState(false);
-  const [checkedRegulardecoration, setcheckedRegulardecoration] = useState(false);
-  const [checkedInvitation, setCheckedInvitation] = useState(false)
-  const [checkedPhotography, setCheckedPhotography] = useState(false)
+  const [checkedRegulardecoration, setcheckedRegulardecoration] =
+    useState(false);
+  const [checkedInvitation, setCheckedInvitation] = useState(false);
+  const [checkedPhotography, setCheckedPhotography] = useState(false);
+
+  const handleSubmit2 = (data) => {
+    const checkBoxValues = {
+      musicvalue,
+      foodvalue,
+      decorationvalue,
+      photovalue,
+      dancevalue,
+    };
+    console.log(checkBoxValues);
+    console.log(data);
+    // axios.post("/api/wedding", {data, checkBoxValues}).then((res)=>{
+    //   console.log(res.data);
+    // }).catch((err)=>{
+    //   console.log(err);
+    // })
+  };
 
   return (
     <section class="h-50">
@@ -317,172 +371,156 @@ function EngagementForm() {
                       Personal Details
                     </h3>
 
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                             Client Name
-                          </label>
+                    <form>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("Client_Name")}
+                              type="text"
+                              class="form-control"
+                              id="Client_Name"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput"> Client Name</label>
+                            {errors.Client_Name && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.Client_Name?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("Bride_Name")}
+                              type="text"
+                              class="form-control"
+                              id="Bride_Name"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput"> Bride Name</label>
+                            {errors.Bride_Name && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.Bride_Name?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("Groom_Name")}
+                              type="text"
+                              class="form-control"
+                              id="Groom_Name"
+                              placeholder="Name"
+                            />
+                            <label for="floatingInput"> Groom Name</label>
+                            {errors.Groom_Name && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.Groom_Name?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("date")}
+                              type="date"
+                              class="form-control"
+                              id="date"
+                              placeholder="Date"
+                            />
+                            <label for="floatingInput">Date</label>
+                            {errors.date && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.date?.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                             Bride Name
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Name"
-                          />
-                          <label for="floatingInput">
-                            {" "}
-                             Groom Name
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="Date"
-                          />
-                          <label for="floatingInput">Date</label>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="time"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="From"
-                          />
-                          <label for="floatingInput">From</label>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("fromDate")}
+                              type="date"
+                              class="form-control"
+                              id="FromDate"
+                              placeholder="From"
+                            />
+                            <label for="floatingInput">From</label>
+                            {errors.fromDate && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.fromDate?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("ToDate")}
+                              type="date"
+                              class="form-control"
+                              id="ToDate"
+                              placeholder="To"
+                            />
+                            <label for="floatingInput">To</label>
+                            {errors.ToDate && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.ToDate?.message}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="time"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">To</label>
+
+                      <div class="form-floating mb-4">
+                        <input
+                          {...register("city")}
+                          type="city"
+                          class="form-control"
+                          id="city"
+                          placeholder="address"
+                        />
+                        <label for="floatingInput">City</label>
+                        {errors.city && (
+                          <div class="alert alert-danger mt-2" role="alert">
+                            {errors.city?.message}
+                          </div>
+                        )}
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 mb-4">
+                          <div class="form-floating mb-3">
+                            <input
+                              {...register("No_Of_Guests")}
+                              type="number"
+                              class="form-control"
+                              id="No_Of_Guests"
+                              placeholder="To"
+                            />
+                            {errors.No_Of_Guests && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.No_Of_Guests?.message}
+                              </div>
+                            )}
+                            <label for="floatingInput">No of Guests</label>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div class="form-floating mb-4">
-                      <input
-                        type="city"
-                        class="form-control"
-                        id="floatingInput"
-                        placeholder="address"
-                      />
-                      <label for="floatingInput">City</label>
-                    </div>
-
-                    {/* <div class="btn-group mb-4">
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option1"
-                        autocomplete="off"
-                        disabled
-                      />
-                      <label class="btn btn-warning" for="option1">
-                        Gender
-                      </label>
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option11"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option11">
-                        Male
-                      </label>
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option2"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option2">
-                        Female
-                      </label>
-
-                      <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option3"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option3">
-                        Others
-                      </label>
-                    </div> */}
-                    <div class="row">
-                      {/* <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">Age</label>
-                        </div>
-                      </div> */}
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">No of Guests</label>
-                        </div>
+                      <div class="d-flex justify-content-end pt-3">
+                        <button type="button" class="btn btn-info btn-lg ms-2 ">
+                          Save
+                        </button>
                       </div>
-                    </div>
-                    <div class="row"></div>
-
-                    <div class="d-flex justify-content-end pt-3">
-                      <button type="button" class="btn btn-info btn-lg ms-2 ">
-                       Save
-                      </button>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -493,7 +531,11 @@ function EngagementForm() {
 
       <div class="container my-5">
         <div class="card">
-          <form>
+          <form
+            onSubmit={handleSubmit((data) => {
+              handleSubmit2(data);
+            })}
+          >
             <div class="card-header py-4 px-5 bg-light border-0">
               <h4 class="mb-0 fw-bold">Engagement Event Booking</h4>
             </div>
@@ -501,30 +543,15 @@ function EngagementForm() {
             <div class="card-body px-5">
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Shows :</strong></h4>
+                  <h4>
+                    <strong>Shows :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
                   <div class="row"></div>
 
                   <div class="row">
-                    {/* <div class="col-md-3">
-                      <div class="mb-3">
-                        <label
-                          for="games"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Games{" "}
-                        </label>
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="games"
-                        />
-                      </div>
-                    </div> */}
                     <div class="col-md-4">
                       <div class="mb-3">
                         <label
@@ -536,9 +563,11 @@ function EngagementForm() {
                           Sangeet Choreography{" "}
                         </label>
                         <input
+                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="Sangeetchoreography"
+                          value="Sangeetchoreography"
                         />
                       </div>
                     </div>
@@ -553,9 +582,11 @@ function EngagementForm() {
                           Music{" "}
                         </label>
                         <input
+                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="music"
+                          value="music"
                           checked={checkedMusic}
                           onChange={() => {
                             setCheckedMusic(!checkedMusic);
@@ -568,15 +599,16 @@ function EngagementForm() {
                         <label
                           for="dance"
                           class="form-check-label"
-                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Dance{" "}
                         </label>
                         <input
+                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="dance"
+                          value="dance"
                           checked={checkedDance}
                           onChange={() => {
                             setCheckedDance(!checkedDance);
@@ -612,6 +644,7 @@ function EngagementForm() {
                             DJ{" "}
                           </label>
                           <input
+                            {...register("dj")}
                             type="checkbox"
                             class="form-check-input"
                             id="dj"
@@ -631,7 +664,7 @@ function EngagementForm() {
                       </div>
 
                       <MultiSelect
-                        onChange={handleOnchange}
+                        onChange={handledancechange}
                         options={options}
                       />
                     </div>
@@ -645,7 +678,9 @@ function EngagementForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Decorations :</strong></h4>
+                  <h4>
+                    <strong>Decorations :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -662,6 +697,7 @@ function EngagementForm() {
                           Regular Decoration{" "}
                         </label>
                         <input
+                          {...register("RegularDecoration")}
                           type="checkbox"
                           class="form-check-input"
                           id="regulardecoration"
@@ -686,6 +722,7 @@ function EngagementForm() {
                           Theme Decoration{" "}
                         </label>
                         <input
+                          {...register("ThemeDecoration")}
                           type="checkbox"
                           class="form-check-input"
                           id="decoration"
@@ -721,15 +758,49 @@ function EngagementForm() {
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
-                            <option selected value="1">
+                            <option
+                              selected
+                              {...register("RomanticDecoration")}
+                              id={"Romantic Decoration"}
+                              value="Romantic Decoration"
+                            >
                               Romantic Decoration
                             </option>
-                            <option value="2">Musical Decoration</option>
-                            <option value="3">Retro Decoration</option>
-                            <option value="4">Single Color Decoration</option>
-                            <option value="5">Multi Color Decoration</option>
-                            <option value="6">Traditional decoration</option>
-                            
+                            <option
+                              {...register("RomanticDecoration")}
+                              id={"Musical Decoration"}
+                              value="Musical Decoration"
+                            >
+                              Musical Decoration
+                            </option>
+                            <option
+                              {...register("RomanticDecoration")}
+                              id={"Retro Decoration"}
+                              value="Retro Decoration"
+                            >
+                              Retro Decoration
+                            </option>
+                            <option
+                              {...register("RomanticDecoration")}
+                              id={"Single Color Decoration"}
+                              value="Single Color Decoration"
+                            >
+                              Single Color Decoration
+                            </option>
+                            <option
+                              {...register("RomanticDecoration")}
+                              id={"Multi Color Decoration"}
+                              value="Multi Color Decoration"
+                            >
+                              Multi Color Decoration
+                            </option>
+                            <option
+                              {...register("RomanticDecoration")}
+                              id={"Traditional decoration"}
+                              value="Traditional decoration"
+                            >
+                              Traditional decoration
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -746,7 +817,9 @@ function EngagementForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Catering :</strong></h4>
+                  <h4>
+                    <strong>Catering :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -755,18 +828,19 @@ function EngagementForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault"
+                            name="Food"
+                            id="veg"
+                            value={"veg"}
                           />
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            HtmlFor="flexRadioDefault"
                           >
-                            {" "}
-                            Veg{" "}
+                            Veg
                           </label>
                         </div>
                       </div>
@@ -775,17 +849,19 @@ function EngagementForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
+                            name="Food"
+                            value={"Non-veg"}
+                            id="non-veg"
                           />
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault1"
+                            HtmlFor="flexRadioDefault1"
                           >
-                            Non-Veg{" "}
+                            Non-Veg
                           </label>
                         </div>
                       </div>
@@ -794,18 +870,19 @@ function EngagementForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
+                            value={"Jain"}
+                            name="Food"
+                            id="jain"
                           />
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            HtmlFor="flexRadioDefault2"
                           >
-                            {" "}
-                            Jain{" "}
+                            Jain
                           </label>
                         </div>
                       </div>
@@ -835,7 +912,9 @@ function EngagementForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Other Services :</strong></h4>
+                  <h4>
+                    <strong>Other Services :</strong>
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
@@ -851,9 +930,11 @@ function EngagementForm() {
                           Invitation{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
+                          value={"invitation"}
                           checked={checkedInvitation}
                           onChange={() => {
                             setCheckedInvitation(!checkedInvitation);
@@ -872,9 +953,11 @@ function EngagementForm() {
                           Pooja Pandit Ji{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="beauty"
+                          value="beauty"
                         />
                       </div>
                     </div>
@@ -889,9 +972,11 @@ function EngagementForm() {
                           Venue{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="venue"
+                          value="venue"
                           checked={checkedVenue}
                           onChange={() => {
                             setCheckedVenue(!checkedVenue);
@@ -902,17 +987,18 @@ function EngagementForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="photography"
+                          HtmlFor="photography"
                           class="form-check-label"
-                          value=" "
                           style={{ marginRight: "15px" }}
                         >
                           Photography{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="photography"
+                          value="photography"
                           checked={checkedPhotography}
                           onChange={() => {
                             setCheckedPhotography(!checkedPhotography);
@@ -923,21 +1009,19 @@ function EngagementForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="Beauty"
+                          HtmlFor="beauty"
                           class="form-check-label"
-                          value=" "
+                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Beauty{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
-                          id="Beauty"
-                          checked={checkedBeauty}
-                          onChange={() => {
-                            setCheckedBeauty(!checkedBeauty);
-                          }}
+                          id="beauty"
+                          value="beauty"
                         />
                       </div>
                     </div>
@@ -952,9 +1036,11 @@ function EngagementForm() {
                           Mehandi{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="Mehandi"
+                          value={"mehandi"}
                           checked={checkedMehandi}
                           onChange={() => {
                             setCheckedMehandi(!checkedMehandi);
@@ -973,7 +1059,9 @@ function EngagementForm() {
                           Hosting{" "}
                         </label>
                         <input
+                          {...register("Other Services")}
                           type="checkbox"
+                          value={"hosting"}
                           class="form-check-input"
                           id="hosting"
                         />
@@ -982,9 +1070,8 @@ function EngagementForm() {
                   </div>
 
                   {/* venue options start */}
-                 { checkedInvitation && (
-                  
-                  <div>
+                  {checkedInvitation && (
+                    <div>
                       <div className="preview-values">
                         <h5>
                           <strong>Invitation</strong>{" "}
@@ -997,45 +1084,58 @@ function EngagementForm() {
                         options={invitationtypes}
                       />
                     </div>
-                 )}
+                  )}
                   <br></br>
                   {checkedVenue && (
                     <div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
+                              {...register("Venue 1 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
                               style={{ maxWidth: "500px" }}
                             />
                           </div>
+                          {errors.venue_1_name && (
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors?.venue_1_name.message}
+                            </div>
+                          )}
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
+                              {...register("Venue 1 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
                               style={{ maxWidth: "500px" }}
                             />
                           </div>
+                          {errors.venue_1_place && (
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.venue_1_place?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
+                              {...register("Venue 2 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1045,10 +1145,11 @@ function EngagementForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
+                              {...register("Venue 2 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1060,10 +1161,11 @@ function EngagementForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
+                              {...register("Venue 3 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1073,10 +1175,11 @@ function EngagementForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">
+                            <label HtmlFor="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
+                              {...register("Venue 3 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1089,59 +1192,53 @@ function EngagementForm() {
                   )}
 
                   {/* venue option end */}
-                  { checkedPhotography && (
-                  <div>
-                    <div className="preview-values">
-                      <h5>
-                        <strong>Photography</strong>
-                      </h5>
-                      {checkedBeauty}
+                  {checkedPhotography && (
+                    <div>
+                      <div className="preview-values">
+                        <h5>
+                          <strong>Photography</strong>
+                        </h5>
+                        {photovalue}
+                      </div>
+
+                      <MultiSelect
+                        onChange={handlePhotoChange}
+                        options={PhotoOptions}
+                      />
                     </div>
-
-                    <MultiSelect
-                      onChange={handlePhotoChange}
-                      options={PhotoOptions}
-                    />
-                  </div>
                   )}
-                  { checkedBeauty && (
-                  <div>
-                    <div className="preview-values">
-                      <h5>
-                        <strong>Beauty</strong>
-                      </h5>
-                      {}
+                  {checkedBeauty && (
+                    <div>
+                      <div className="preview-values">
+                        <h5>
+                          <strong>Beauty</strong>
+                        </h5>
+                        {}
+                      </div>
+
+                      <MultiSelect
+                        onChange={handleBeauty}
+                        options={beautyoptions}
+                      />
                     </div>
-
-                    <MultiSelect
-                      onChange={handleBeauty}
-                      options={beautyoptions}
-                    />
-                  </div>
                   )}
-                  { checkedMehandi && (
-                  <div>
-                    <div className="preview-values">
-                      <h5>
-                        <strong>Mehandi</strong>
-                      </h5>
-                      {}
+                  {checkedMehandi && (
+                    <div>
+                      <div className="preview-values">
+                        <h5>
+                          <strong>Mehandi</strong>
+                        </h5>
+                        {}
+                      </div>
+
+                      <MultiSelect
+                        onChange={handleMehandi}
+                        options={mehandioptions}
+                      />
                     </div>
-
-                    <MultiSelect
-                      onChange={handleMehandi}
-                      options={mehandioptions}
-                    />
-                  </div>
                   )}
-
-                  
                 </div>
-                
-                  
               </div>
-    
-             
 
               {/* other events end */}
 
@@ -1149,35 +1246,49 @@ function EngagementForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4><strong>Estimate Budget :</strong> </h4>
+                  <h4>
+                    <strong>Estimate Budget :</strong>{" "}
+                  </h4>
                 </div>
 
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="exampleInput11" class="form-label">
+                        <label HtmlFor="exampleInput11" class="form-label">
                           Minimun
                         </label>
                         <input
+                          {...register("Estimate_Budget_Minimum")}
                           type="number"
                           class="form-control"
                           id="exampleInput11"
                         />
                       </div>
+                      {errors.Estimate_Budget_Minimum && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.Estimate_Budget_Minimum?.message}
+                        </div>
+                      )}
                     </div>
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="exampleInput12" class="form-label">
+                        <label HtmlFor="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
+                          {...register("Estimate_Budget_Maximum")}
                           type="number"
                           class="form-control"
-                          id="exampleInput12"
+                          id="Estimate Budget Maximum"
                         />
                       </div>
+                      {errors.Estimate_Budget_Maximum && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.Estimate_Budget_Maximum?.message}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1186,47 +1297,48 @@ function EngagementForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-4">
-                  <h4><strong>Special Service :</strong> </h4>
-                  <p>Any additional service you expect from us that may be mentioned here :</p>
-                  
-                  
+                  <h4>
+                    <strong>Special Service :</strong>{" "}
+                  </h4>
+                  <p>
+                    Any additional service you expect from us that may be
+                    mentioned here :
+                  </p>
                 </div>
 
                 <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label for="exampleInput11" class="form-label">
-                         
-                        </label>
+                        <label
+                          htmlFor="exampleInput11"
+                          class="form-label"
+                        ></label>
                         <textarea
+                          {...register("Special Service")}
                           type="number"
                           class="form-control"
-                          id="exampleInput11"
+                          id="special service"
                         />
                       </div>
                     </div>
-
-                   
                   </div>
                 </div>
               </div>
               {/* <hr class="my-2" /> */}
-                  <h3><strong>Note : </strong></h3>
-                  <h4><strong style={{color:"red"}}> Once the form is submitted now.Our customer 
-                  representative will contact you within 12-24 hours to discuss in more detail.
-                  </strong></h4>
-
+              <h3>
+                <strong>Note : </strong>
+              </h3>
+              <h4>
+                <strong style={{ color: "red" }}>
+                  {" "}
+                  Once the form is submitted now.Our customer representative
+                  will contact you within 12-24 hours to discuss in more detail.
+                </strong>
+              </h4>
             </div>
-           
 
             <div class="card-footer text-end py-4 px-5 bg-light border-0">
-              <button
-                class="btn btn-link btn-rounded"
-                data-ripple-color="primary"
-              >
-                Cancel
-              </button>
               <button type="submit" class="btn btn-primary btn-rounded">
                 Submit
               </button>

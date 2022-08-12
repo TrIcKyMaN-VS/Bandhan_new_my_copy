@@ -2,61 +2,17 @@ import React, { useState } from "react";
 // import "./birthdayform.css";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-const schema = yup.object().shape({
-  type_Of_Function: yup
-    .string()
-    .required("Type of Function must be required"),
-  name_Of_Event: yup
-    .string()
-    .required("Name of the Event must be required"),
-  name_Of_Concern : yup
-    .string()
-    .required("Name of Concern must be required"),
-  date: yup.string().required("Date must be required"),
-  fromTime: yup.string().required("From Time must be required"),
-  ToTime: yup.string().required("To Time must be required"),
-  
-  No_Of_Guests: yup
-    .number()
-    .typeError("No of Guests must be required")
-    .required("No of Guests must be required"),
-  Estimate_Budget_Maximum: yup
-    .string()
-    .required("Estimate Budget Maximum must be required"),
-  Estimate_Budget_Minimum: yup
-    .string()
-    .required("Estimate Budget Minimum must be required"),
-  // venue_1_name : yup.string().required("required name")
-});
-
-function CorporateForm() {
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
+function EngagementForm() {
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
     setvalue(val);
   };
   const options = [
+    { label: "Folk", value: "Folk" },
     { label: "Indian", value: "Indian" },
     { label: "Western", value: "Western" },
   ];
-
-  const [dancevalue, setdancevalue] = useState("");
-  const handledancechange = (val) => {
-    setdancevalue(val);
-  };
-
   // dance option end
 
   // music options start
@@ -64,14 +20,9 @@ function CorporateForm() {
   const handlemusicchange = (val) => {
     setmusicvalue(val);
   };
-  const liveoptions = [
-    { label: "Indian", value: "Indian" },
-    { label: "Western", value: "Western" },
-  ];
 
   //music options end
 
-  //play end
   //photography option start
 
   const [photovalue, setphotovalue] = useState("");
@@ -87,43 +38,43 @@ function CorporateForm() {
   ];
 
   //photography option end
-  //invitation start
-  const [invitationvalue, setinvitationvalue] = useState("");
-  const handleinvitation = (val) => {
-    setinvitationvalue(val);
-  };
-  const invitationtypes = [
+  //invitation start 
+   const [invitationvalue, setinvitationvalue] =useState("");
+   const handleinvitation = (val) =>{
+    setinvitationvalue(val)
+   }
+   const invitationtypes =[
     { label: "Physical", value: "Physical" },
     { label: "E-Photo", value: "E-Photo" },
     { label: "E-Video", value: "E-Video" },
     { label: "E-Card", value: "E-Card" },
-  ];
+   ]
 
   //invitation ends
 
-  //Beauty start
-  const [checkedBeauty, setCheckedBeauty] = useState("");
-  const handleBeauty = (val) => {
-    setCheckedBeauty(val);
-  };
-  const beautyoptions = [
+  //Beauty start 
+   const [checkedBeauty, setCheckedBeauty] =useState("");
+   const handleBeauty = (val)=>{
+    setCheckedBeauty(val)
+   };
+   const beautyoptions = [
     { label: "Bride", value: "Bride" },
     { label: "Groom", value: "Groom" },
     { label: "Family", value: "Family" },
-  ];
+   ]
 
   // Beauty ends
 
   // Mehandi starts
-  const [checkedMehandi, setCheckedMehandi] = useState("");
-  const handleMehandi = (val) => {
-    setCheckedMehandi(val);
+  const [checkedMehandi, setCheckedMehandi] =useState("");
+  const handleMehandi = (val)=>{
+   setCheckedMehandi(val)
   };
   const mehandioptions = [
-    { label: "Bride", value: "Bride" },
-    { label: "Groom", value: "Groom" },
-    { label: "Family", value: "Family" },
-  ];
+   { label: "Bride", value: "Bride" },
+   { label: "Groom", value: "Groom" },
+   { label: "Family", value: "Family" },
+  ]
   //mehandi ends
 
   //decoration start
@@ -166,37 +117,14 @@ function CorporateForm() {
   ];
 
   //catering ends
-
+  
   const [checkedMusic, setCheckedMusic] = useState(false);
   const [checkedDance, setCheckedDance] = useState(false);
   const [checkedVenue, setCheckedVenue] = useState(false);
   const [checkedDecoration, setCheckedDecoration] = useState(false);
-  const [checkedRegulardecoration, setcheckedRegulardecoration] =
-    useState(false);
-  const [checkedInvitation, setCheckedInvitation] = useState(false);
-  const [checkedPhotography, setCheckedPhotography] = useState(false);
-  const [checkedPlay, setCheckedPlay] = useState(false);
-
-  console.log(errors);
-
-  function handleSubmit2(data){
-    console.log(data);
-
-    const checkboxValue = {
-      musicvalue,
-      // foodtypes,
-      foodvalue,
-      decorationvalue,
-      invitationvalue,
-      dancevalue,
-      decorationvalue,
-      photovalue,
-      
-      // mehandioptions
-    }
-    console.log(checkboxValue);
-  }
-
+  const [checkedRegulardecoration, setcheckedRegulardecoration] = useState(false);
+  const [checkedInvitation, setCheckedInvitation] = useState(false)
+  const [checkedPhotography, setCheckedPhotography] = useState(false)
 
   return (
     <section class="h-50">
@@ -391,108 +319,56 @@ function CorporateForm() {
 
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-4">
-                          <label for="exampleInput5" class="form-label">
-                            Type of Function
-                          </label>
-                          <select
-                            id="exampleInput5"
-                            class="form-select mb-4"
-                            aria-label="Default select example"
-                          >
-                            <option
-                              // {...register("type_Of_Function")}
-                              value=""
-                             ></option>
-                            <option value="school">school</option>
-
-                            <option
-                              {...register("type_Of_Function")}
-                              value="college"
-                            >
-                              college
-                            </option>
-                            <option
-                              {...register("type_Of_Function")}
-                              value="corporate"
-                            >
-                              corporate
-                            </option>
-                          </select>
-                          {errors.type_Of_Function && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.type_Of_Function?.message}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
                         <div class="form-floating mb-3">
                           <input
-                            {...register("name_Of_Event")}
                             type="text"
                             class="form-control"
                             id="floatingInput"
                             placeholder="Name"
                           />
-                          <label for="floatingInput"> Name of the Event</label>
-                          {errors.name_Of_Event && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.name_Of_Event?.message}
-                            </div>
-                          )}
+                          <label for="floatingInput">
+                            {" "}
+                             Client Name
+                          </label>
                         </div>
                       </div>
-                      <div class="form-floating mb-4">
-                        <input
-                          {...register("name_Of_Concern")}
-                          type="city"
-                          class="form-control"
-                          id="floatingInput"
-                          placeholder="address"
-                        />
-                        <label for="floatingInput">
-                          Name of the concern / Organisation
-                        </label>
-                        {errors.name_Of_Concern && (
-                          <div class="alert alert-danger mt-2" role="alert">
-                            {errors.name_Of_Concern?.message}
-                          </div>
-                        )}
-                      </div>
-
                       <div class="col-md-6 mb-4">
                         <div class="form-floating mb-3">
                           <input
-                            {...register("date")}
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="Name"
+                          />
+                          <label for="floatingInput">
+                            {" "}
+                             Bride Name
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="Name"
+                          />
+                          <label for="floatingInput">
+                            {" "}
+                             Groom Name
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                          <input
                             type="date"
                             class="form-control"
                             id="floatingInput"
-                            placeholder="From"
+                            placeholder="Date"
                           />
                           <label for="floatingInput">Date</label>
-                          {errors.date && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.date?.message}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <div class="form-floating mb-3">
-                          <input
-                            {...register("No_Of_Guests")}
-                            type="number"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="To"
-                          />
-                          <label for="floatingInput">No of Guests</label>
-                          {errors.No_Of_Guests && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.No_Of_Guests?.message}
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -501,35 +377,102 @@ function CorporateForm() {
                       <div class="col-md-6 mb-4">
                         <div class="form-floating mb-3">
                           <input
-                            {...register("fromTime")}
                             type="time"
                             class="form-control"
                             id="floatingInput"
                             placeholder="From"
                           />
                           <label for="floatingInput">From</label>
-                          {errors.ToTime && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.ToTime?.message}
-                            </div>
-                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
                         <div class="form-floating mb-3">
                           <input
-                            {...register("ToTime")}
                             type="time"
                             class="form-control"
                             id="floatingInput"
                             placeholder="To"
                           />
                           <label for="floatingInput">To</label>
-                          {errors.ToTime && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.ToTime?.message}
-                            </div>
-                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                      <input
+                        type="city"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="address"
+                      />
+                      <label for="floatingInput">City</label>
+                    </div>
+
+                    {/* <div class="btn-group mb-4">
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="options"
+                        id="option1"
+                        autocomplete="off"
+                        disabled
+                      />
+                      <label class="btn btn-warning" for="option1">
+                        Gender
+                      </label>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="options"
+                        id="option11"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-primary" for="option11">
+                        Male
+                      </label>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="options"
+                        id="option2"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-primary" for="option2">
+                        Female
+                      </label>
+
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="options"
+                        id="option3"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-primary" for="option3">
+                        Others
+                      </label>
+                    </div> */}
+                    <div class="row">
+                      {/* <div class="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="To"
+                          />
+                          <label for="floatingInput">Age</label>
+                        </div>
+                      </div> */}
+                      <div class="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="To"
+                          />
+                          <label for="floatingInput">No of Guests</label>
                         </div>
                       </div>
                     </div>
@@ -537,7 +480,7 @@ function CorporateForm() {
 
                     <div class="d-flex justify-content-end pt-3">
                       <button type="button" class="btn btn-info btn-lg ms-2 ">
-                        Save
+                       Save
                       </button>
                     </div>
                   </div>
@@ -550,26 +493,56 @@ function CorporateForm() {
 
       <div class="container my-5">
         <div class="card">
-          <form
-            onSubmit={handleSubmit((data) => {
-              handleSubmit2(data);
-            })}
-          >
+          <form>
             <div class="card-header py-4 px-5 bg-light border-0">
-              <h4 class="mb-0 fw-bold">Corporate Event Booking</h4>
+              <h4 class="mb-0 fw-bold">Engagement Event Booking</h4>
             </div>
 
             <div class="card-body px-5">
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4>
-                    <strong>Shows :</strong>
-                  </h4>
+                  <h4><strong>Shows :</strong></h4>
                 </div>
 
                 <div class="col-md-9">
+                  <div class="row"></div>
+
                   <div class="row">
-                    <div class="col-md-3">
+                    {/* <div class="col-md-3">
+                      <div class="mb-3">
+                        <label
+                          for="games"
+                          class="form-check-label"
+                          value=""
+                          style={{ marginRight: "15px" }}
+                        >
+                          Games{" "}
+                        </label>
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          id="games"
+                        />
+                      </div>
+                    </div> */}
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label
+                          for="Sangeetchoreography"
+                          class="form-check-label"
+                          value=""
+                          style={{ marginRight: "15px" }}
+                        >
+                          Sangeet Choreography{" "}
+                        </label>
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          id="Sangeetchoreography"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
                       <div class="mb-3">
                         <label
                           for="music"
@@ -580,11 +553,9 @@ function CorporateForm() {
                           Music{" "}
                         </label>
                         <input
-                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="music"
-                          value={"music"}
                           checked={checkedMusic}
                           onChange={() => {
                             setCheckedMusic(!checkedMusic);
@@ -592,8 +563,7 @@ function CorporateForm() {
                         />
                       </div>
                     </div>
-
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="mb-3">
                         <label
                           for="dance"
@@ -604,11 +574,9 @@ function CorporateForm() {
                           Dance{" "}
                         </label>
                         <input
-                          {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
                           id="dance"
-                          value={"dance"}
                           checked={checkedDance}
                           onChange={() => {
                             setCheckedDance(!checkedDance);
@@ -616,71 +584,7 @@ function CorporateForm() {
                         />
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="Play"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Play{" "}
-                        </label>
-                        <input
-                          {...register("shows")}
-                          type="checkbox"
-                          class="form-check-input"
-                          id="Play"
-                          value="Play"
-                          checked={checkedPlay}
-                          onChange={() => {
-                            setCheckedPlay(!checkedPlay);
-                          }}
-                        />
-                      </div>
-                    </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="Stand-upComedy"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Stand-up Comedy{" "}
-                        </label>
-                        <input
-                          {...register("shows")}
-                          type="checkbox"
-                          class="form-check-input"
-                          id="Stand-upComedy"
-                          value="Stand_upComedy"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label
-                          for="Motivational Speech"
-                          class="form-check-label"
-                          value=""
-                          style={{ marginRight: "15px" }}
-                        >
-                          Motivational Speech{" "}
-                        </label>
-                        <input
-                          {...register("shows")}
-                          type="checkbox"
-                          class="form-check-input"
-                          id="Motivational_Speech"
-                          value="Motivational_Speech"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
                   {checkedMusic && (
                     <div class="row">
                       <div class="mb-3">
@@ -693,11 +597,11 @@ function CorporateForm() {
 
                         <MultiSelect
                           onChange={handlemusicchange}
-                          options={liveoptions}
+                          options={options}
                         />
                       </div>
 
-                      {/* <div class="col-md-3">
+                      <div class="col-md-3">
                         <div class="mb-3">
                           <label
                             for="dj"
@@ -713,7 +617,7 @@ function CorporateForm() {
                             id="dj"
                           />
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                   )}
 
@@ -727,29 +631,9 @@ function CorporateForm() {
                       </div>
 
                       <MultiSelect
-                        onChange={handledancechange}
+                        onChange={handleOnchange}
                         options={options}
                       />
-                    </div>
-                  )}
-                  <br></br>
-                  {checkedPlay && (
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <label for="plays" class="form-label">
-                          <strong>Play</strong>
-                        </label>
-                        <select
-                          id="plays"
-                          class="form-select mb-3"
-                          aria-label="Default select example"
-                        >
-                          <option selected {...register('play')} value="corporate">
-                            Corporate
-                          </option>
-                          <option {...register('play')} value="street_play">Street Play</option>
-                        </select>
-                      </div>
                     </div>
                   )}
                 </div>
@@ -761,9 +645,7 @@ function CorporateForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4>
-                    <strong>Decorations :</strong>
-                  </h4>
+                  <h4><strong>Decorations :</strong></h4>
                 </div>
 
                 <div class="col-md-9">
@@ -772,7 +654,7 @@ function CorporateForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          HtmlFor="regulardecoration"
+                          for="regulardecoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -780,11 +662,9 @@ function CorporateForm() {
                           Regular Decoration{" "}
                         </label>
                         <input
-                          {...register("Decoration")}
                           type="checkbox"
                           class="form-check-input"
-                          id="RegularDecoration"
-                          value={"Regular Decoration"}
+                          id="regulardecoration"
                           checked={checkedRegulardecoration}
                           onChange={() => {
                             setcheckedRegulardecoration(
@@ -798,7 +678,7 @@ function CorporateForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          HtmlFor="decoration"
+                          for="decoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -806,11 +686,9 @@ function CorporateForm() {
                           Theme Decoration{" "}
                         </label>
                         <input
-                          {...register("Decoration")}
                           type="checkbox"
                           class="form-check-input"
                           id="decoration"
-                          value={"Theme Decoration"}
                           checked={checkedDecoration}
                           onChange={() => {
                             setCheckedDecoration(!checkedDecoration);
@@ -837,43 +715,21 @@ function CorporateForm() {
                     {checkedDecoration && (
                       <div class="col-md-6">
                         <div class="mb-3">
-                          <label
-                            HtmlFor="exampleInput5"
-                            class="form-label"
-                          ></label>
+                          <label for="exampleInput5" class="form-label"></label>
                           <select
                             id="exampleInput5"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
-                            <option
-                              selected
-                              value="1"
-                              {...register("DecorationType")}
-                            >
-                              Ballon Decoration
+                            <option selected value="1">
+                              Romantic Decoration
                             </option>
-                            <option
-                              {...register("DecorationType")}
-                              id="CandyDecoration"
-                              value="Candy Decoration"
-                            >
-                              Candy Decoration
-                            </option>
-                            <option
-                              {...register("DecorationType")}
-                              id="CartoonDecoration"
-                              value="Cartoon Decoration"
-                            >
-                              Cartoon Decoration
-                            </option>
-                            <option
-                              {...register("DecorationType")}
-                              id="Jungle Party Decoration"
-                              value="Jungle Party Decoration"
-                            >
-                              Jungle Party Decoration
-                            </option>
+                            <option value="2">Musical Decoration</option>
+                            <option value="3">Retro Decoration</option>
+                            <option value="4">Single Color Decoration</option>
+                            <option value="5">Multi Color Decoration</option>
+                            <option value="6">Traditional decoration</option>
+                            
                           </select>
                         </div>
                       </div>
@@ -890,9 +746,7 @@ function CorporateForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4>
-                    <strong>Catering :</strong>
-                  </h4>
+                  <h4><strong>Catering :</strong></h4>
                 </div>
 
                 <div class="col-md-9">
@@ -981,9 +835,7 @@ function CorporateForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4>
-                    <strong>Other Services :</strong>
-                  </h4>
+                  <h4><strong>Other Services :</strong></h4>
                 </div>
 
                 <div class="col-md-9">
@@ -991,7 +843,7 @@ function CorporateForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="invitation"
+                          for="invitation"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -999,11 +851,9 @@ function CorporateForm() {
                           Invitation{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
-                          value="invitation"
                           checked={checkedInvitation}
                           onChange={() => {
                             setCheckedInvitation(!checkedInvitation);
@@ -1011,7 +861,7 @@ function CorporateForm() {
                         />
                       </div>
                     </div>
-                    {/* <div class="col-md-3">
+                    <div class="col-md-3">
                       <div class="mb-3">
                         <label
                           for="beauty"
@@ -1027,11 +877,11 @@ function CorporateForm() {
                           id="beauty"
                         />
                       </div>
-                    </div> */}
+                    </div>
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="venue"
+                          for="venue"
                           class="form-check-label"
                           value=" "
                           style={{ marginRight: "15px" }}
@@ -1039,11 +889,9 @@ function CorporateForm() {
                           Venue{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="venue"
-                          value="venue"
                           checked={checkedVenue}
                           onChange={() => {
                             setCheckedVenue(!checkedVenue);
@@ -1051,22 +899,20 @@ function CorporateForm() {
                         />
                       </div>
                     </div>
-
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="photography"
+                          for="photography"
                           class="form-check-label"
+                          value=" "
                           style={{ marginRight: "15px" }}
                         >
                           Photography{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="photography"
-                          value="photography"
                           checked={checkedPhotography}
                           onChange={() => {
                             setCheckedPhotography(!checkedPhotography);
@@ -1074,7 +920,7 @@ function CorporateForm() {
                         />
                       </div>
                     </div>
-                    {/* <div class="col-md-3">
+                    <div class="col-md-3">
                       <div class="mb-3">
                         <label
                           for="Beauty"
@@ -1094,8 +940,8 @@ function CorporateForm() {
                           }}
                         />
                       </div>
-                    </div> */}
-                    {/* <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
                       <div class="mb-3">
                         <label
                           for="Mehandi"
@@ -1115,7 +961,7 @@ function CorporateForm() {
                           }}
                         />
                       </div>
-                    </div> */}
+                    </div>
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
@@ -1127,19 +973,18 @@ function CorporateForm() {
                           Hosting{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
                           type="checkbox"
                           class="form-check-input"
                           id="hosting"
-                          value="hosting"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* venue options start */}
-                  {checkedInvitation && (
-                    <div>
+                 { checkedInvitation && (
+                  
+                  <div>
                       <div className="preview-values">
                         <h5>
                           <strong>Invitation</strong>{" "}
@@ -1152,58 +997,45 @@ function CorporateForm() {
                         options={invitationtypes}
                       />
                     </div>
-                  )}
+                 )}
                   <br></br>
                   {checkedVenue && (
                     <div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
-                              {...register("Venue 1 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
                               style={{ maxWidth: "500px" }}
                             />
                           </div>
-                          {errors.venue_1_name && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors?.venue_1_name.message}
-                            </div>
-                          )}
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
-                              {...register("Venue 1 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
                               style={{ maxWidth: "500px" }}
                             />
                           </div>
-                          {errors.venue_1_place && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.venue_1_place?.message}
-                            </div>
-                          )}
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1213,11 +1045,10 @@ function CorporateForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1229,11 +1060,10 @@ function CorporateForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1243,11 +1073,10 @@ function CorporateForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1260,53 +1089,59 @@ function CorporateForm() {
                   )}
 
                   {/* venue option end */}
-                  {checkedPhotography && (
-                    <div>
-                      <div className="preview-values">
-                        <h5>
-                          <strong>Photography</strong>
-                        </h5>
-                        {checkedBeauty}
-                      </div>
-
-                      <MultiSelect
-                        onChange={handlePhotoChange}
-                        options={PhotoOptions}
-                      />
+                  { checkedPhotography && (
+                  <div>
+                    <div className="preview-values">
+                      <h5>
+                        <strong>Photography</strong>
+                      </h5>
+                      {checkedBeauty}
                     </div>
-                  )}
-                  {checkedBeauty && (
-                    <div>
-                      <div className="preview-values">
-                        <h5>
-                          <strong>Beauty</strong>
-                        </h5>
-                        {}
-                      </div>
 
-                      <MultiSelect
-                        onChange={handleBeauty}
-                        options={beautyoptions}
-                      />
-                    </div>
+                    <MultiSelect
+                      onChange={handlePhotoChange}
+                      options={PhotoOptions}
+                    />
+                  </div>
                   )}
-                  {checkedMehandi && (
-                    <div>
-                      <div className="preview-values">
-                        <h5>
-                          <strong>Mehandi</strong>
-                        </h5>
-                        {}
-                      </div>
+                  { checkedBeauty && (
+                  <div>
+                    <div className="preview-values">
+                      <h5>
+                        <strong>Beauty</strong>
+                      </h5>
+                      {}
+                    </div>
 
-                      <MultiSelect
-                        onChange={handleMehandi}
-                        options={mehandioptions}
-                      />
-                    </div>
+                    <MultiSelect
+                      onChange={handleBeauty}
+                      options={beautyoptions}
+                    />
+                  </div>
                   )}
+                  { checkedMehandi && (
+                  <div>
+                    <div className="preview-values">
+                      <h5>
+                        <strong>Mehandi</strong>
+                      </h5>
+                      {}
+                    </div>
+
+                    <MultiSelect
+                      onChange={handleMehandi}
+                      options={mehandioptions}
+                    />
+                  </div>
+                  )}
+
+                  
                 </div>
+                
+                  
               </div>
+    
+             
 
               {/* other events end */}
 
@@ -1314,49 +1149,35 @@ function CorporateForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-3">
-                  <h4>
-                    <strong>Estimate Budget :</strong>{" "}
-                  </h4>
+                  <h4><strong>Estimate Budget :</strong> </h4>
                 </div>
 
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput11" class="form-label">
+                        <label for="exampleInput11" class="form-label">
                           Minimun
                         </label>
                         <input
-                          {...register("Estimate_Budget_Minimum")}
                           type="number"
                           class="form-control"
                           id="exampleInput11"
                         />
                       </div>
-                      {errors.Estimate_Budget_Minimum && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.Estimate_Budget_Minimum?.message}
-                        </div>
-                      )}
                     </div>
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput12" class="form-label">
+                        <label for="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
-                          {...register("Estimate_Budget_Maximum")}
                           type="number"
                           class="form-control"
-                          id="Estimate Budget Maximum"
+                          id="exampleInput12"
                         />
                       </div>
-                      {errors.Estimate_Budget_Maximum && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.Estimate_Budget_Maximum?.message}
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -1365,46 +1186,39 @@ function CorporateForm() {
 
               <div class="row gx-xl-5">
                 <div class="col-md-4">
-                  <h4>
-                    <strong>Special Service :</strong>{" "}
-                  </h4>
-                  <p>
-                    Any additional service you expect from us that may be
-                    mentioned here :
-                  </p>
+                  <h4><strong>Special Service :</strong> </h4>
+                  <p>Any additional service you expect from us that may be mentioned here :</p>
+                  
+                  
                 </div>
 
                 <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label
-                          htmlFor="exampleInput11"
-                          class="form-label"
-                        ></label>
+                        <label for="exampleInput11" class="form-label">
+                         
+                        </label>
                         <textarea
-                          {...register("Special Service")}
                           type="number"
                           class="form-control"
-                          id="special service"
+                          id="exampleInput11"
                         />
                       </div>
                     </div>
+
+                   
                   </div>
                 </div>
               </div>
               {/* <hr class="my-2" /> */}
-              <h3>
-                <strong>Note : </strong>
-              </h3>
-              <h4>
-                <strong style={{ color: "red" }}>
-                  {" "}
-                  Once the form is submitted now.Our customer representative
-                  will contact you within 12-24 hours to discuss in more detail.
-                </strong>
-              </h4>
+                  <h3><strong>Note : </strong></h3>
+                  <h4><strong style={{color:"red"}}> Once the form is submitted now.Our customer 
+                  representative will contact you within 12-24 hours to discuss in more detail.
+                  </strong></h4>
+
             </div>
+           
 
             <div class="card-footer text-end py-4 px-5 bg-light border-0">
               <button
@@ -1424,4 +1238,4 @@ function CorporateForm() {
   );
 }
 
-export default CorporateForm;
+export default EngagementForm;
