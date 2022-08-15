@@ -5,6 +5,10 @@ import * as yup from "yup";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+
 
 const schema = yup.object().shape({
   Client_Name: yup.string().required("Client name must be required"),
@@ -137,13 +141,46 @@ function PreweddingForm() {
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
   function handleSubmit2(data) {
+
+     // premium notification
+     const userDate = data.date
+     const changeFormat = new Date(userDate)    
+     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
+     var userday = changeFormat.getUTCDate();
+     var useryear = changeFormat.getUTCFullYear();
+     const UserSelectDate = useryear + "/" + usermonth + "/" + userday;
+ 
+     var dateObj = new Date();
+     var month = dateObj.getUTCMonth() + 1; //months from 1-12
+     var day = dateObj.getUTCDate();
+     var year = dateObj.getUTCFullYear();
+     const currentDate = year + "/" + month + "/" + day;
+ 
+     const date1 = new Date(UserSelectDate);
+     const date2 = new Date(currentDate);
+     const diffTime = Math.abs(date2 - date1);
+     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+     console.log(diffTime + " milliseconds");
+     console.log(diffDays + " days");
+ 
+     if(diffDays <10){
+       toast.success("you are under premium booking!!!", {
+         position: toast.POSITION.TOP_CENTER
+       });
+     }
+
     console.log(data);
 
-    const checkBoxValue = {
+    const checkBoxValues = {
       musicvalue,
       dancevalue,
       foodvalue,
     }
+    axios.post("/api/prewedding", {data, checkBoxValues}).then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   return (
@@ -474,23 +511,25 @@ function PreweddingForm() {
                         Person
                       </label>
                       <input
+                        {...register("Person")}
                         type="radio"
                         class="btn-check"
-                        name="options"
-                        id="option11"
-                        autocomplete="off"
+                        name="option"
+                        id="groom"
+                        value ="Groom"
                       />
-                      <label class="btn btn-primary" for="option11">
+                      <label class="btn btn-primary" for="groom">
                         Groom
                       </label>
                       <input
+                        {...register("Person")}
                         type="radio"
                         class="btn-check"
-                        name="options"
-                        id="option2"
-                        autocomplete="off"
+                        name="option"
+                        id="bride"
+                        value="Bride"
                       />
-                      <label class="btn btn-primary" for="option2">
+                      <label class="btn btn-primary" for="bride">
                         Bride
                       </label>
 
@@ -691,6 +730,7 @@ function PreweddingForm() {
                     <div class="col-md-4 ">
                       <div class="form-floating mb-3">
                         <input
+                          {...register("No_Of_Guests")}
                           type="number"
                           class="form-control"
                           id="floatingInput"
@@ -762,11 +802,11 @@ function PreweddingForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
-                              {...register("Venue 1 Name")}
+                              {...register("Venue_1_Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -781,11 +821,11 @@ function PreweddingForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
-                              {...register("Venue 1 Place")}
+                              {...register("Venue_1_Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -802,11 +842,11 @@ function PreweddingForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Name")}
+                              {...register("Venue_2_Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -816,11 +856,11 @@ function PreweddingForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Place")}
+                              {...register("Venue_2_Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -832,11 +872,11 @@ function PreweddingForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Name")}
+                              {...register("Venue_3_Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -846,11 +886,11 @@ function PreweddingForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Place")}
+                              {...register("Venue_3_Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -887,7 +927,7 @@ function PreweddingForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault"
+                            for="flexRadioDefault"
                           >
                             Veg
                           </label>
@@ -908,7 +948,7 @@ function PreweddingForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault1"
+                            for="flexRadioDefault1"
                           >
                             Non-Veg
                           </label>
@@ -929,7 +969,7 @@ function PreweddingForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault2"
+                            for="flexRadioDefault2"
                           >
                             Jain
                           </label>
@@ -1040,7 +1080,7 @@ function PreweddingForm() {
                           Outdoor{" "}
                         </label>
                         <input
-                          {...register("outdoor")}
+                          {...register("shooting")}
                           type="checkbox"
                           class="form-check-input"
                           id="outdoor"
@@ -1058,7 +1098,7 @@ function PreweddingForm() {
                           Beauty{" "}
                         </label>
                         <input
-                          {...register("beauty")}
+                          {...register("shooting")}
                           type="checkbox"
                           value={"beauty"}
                           class="form-check-input"
@@ -1081,7 +1121,7 @@ function PreweddingForm() {
                           type="checkbox"
                           class="form-check-input"
                           id="food"
-                          value={"food_accomodation_during_shooting"}
+                          value={"food_arrangement_during_shooting"}
                         />
                       </div>
                     </div>
@@ -1322,7 +1362,7 @@ function PreweddingForm() {
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput11" class="form-label">
+                        <label for="exampleInput11" class="form-label">
                           Minimum
                         </label>
                         <input
@@ -1341,7 +1381,7 @@ function PreweddingForm() {
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput12" class="form-label">
+                        <label for="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
@@ -1378,11 +1418,11 @@ function PreweddingForm() {
                     <div class="col-md-12">
                       <div class="mb-3">
                         <label
-                          htmlFor="exampleInput11"
+                          for="exampleInput11"
                           class="form-label"
                         ></label>
                         <textarea
-                          {...register("Special Service")}
+                          {...register("SpecialService")}
                           type="number"
                           class="form-control"
                           id="special service"

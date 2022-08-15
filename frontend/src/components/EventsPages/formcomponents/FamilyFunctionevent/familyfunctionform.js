@@ -5,6 +5,11 @@ import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+
+
 
 const schema = yup.object().shape({
   type_Of_Function : yup.string().required("type of function must be required"),
@@ -172,6 +177,36 @@ function FamilyfunctionForm() {
       photovalue
       // mehandioptions
     }
+    const userDate = data.date
+    const changeFormat = new Date(userDate)    
+    var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
+    var userday = changeFormat.getUTCDate();
+    var useryear = changeFormat.getUTCFullYear();
+    const UserSelectDate = useryear + "/" + usermonth + "/" + userday;
+
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    const currentDate = year + "/" + month + "/" + day;
+
+    const date1 = new Date(UserSelectDate);
+    const date2 = new Date(currentDate);
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    console.log(diffTime + " milliseconds");
+    console.log(diffDays + " days");
+
+    if(diffDays <10){
+      toast.success("you are under premium booking!!!", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+    axios.post("/api/wedding", {data, checkboxValue}).then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   return (

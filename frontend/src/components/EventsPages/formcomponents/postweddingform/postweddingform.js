@@ -7,7 +7,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = yup.object().shape({
   Client_Name: yup.string().required("Client name must be required"),
@@ -148,14 +149,39 @@ function PostweddingForm() {
       foodvalue,
       dancevalue,
     };
+    const userDate = data.date
+    const changeFormat = new Date(userDate)    
+    var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
+    var userday = changeFormat.getUTCDate();
+    var useryear = changeFormat.getUTCFullYear();
+    const UserSelectDate = useryear + "/" + usermonth + "/" + userday;
+
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    const currentDate = year + "/" + month + "/" + day;
+
+    const date1 = new Date(UserSelectDate);
+    const date2 = new Date(currentDate);
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    console.log(diffTime + " milliseconds");
+    console.log(diffDays + " days");
+
+    if(diffDays <10){
+      toast.success("you are under premium booking!!!", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
     console.log(checkBoxValues);
     // console.log(checkBoxValues.dancevalue);
     console.log(data);
-    // axios.post("/api/wedding", {data, checkBoxValues}).then((res)=>{
-    //   console.log(res.data);
-    // }).catch((err)=>{
-    //   console.log(err);
-    // })
+    axios.post("/api/postwedding", {data, checkBoxValues}).then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
   };
 
 
@@ -670,7 +696,7 @@ function PostweddingForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault"
+                            for="flexRadioDefault"
                           >
                             Veg
                           </label>
@@ -691,7 +717,7 @@ function PostweddingForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault1"
+                            for="flexRadioDefault1"
                           >
                             Non-Veg
                           </label>
@@ -712,7 +738,7 @@ function PostweddingForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault2"
+                            for="flexRadioDefault2"
                           >
                             Jain
                           </label>
@@ -916,7 +942,7 @@ function PostweddingForm() {
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput11" class="form-label">
+                        <label for="exampleInput11" class="form-label">
                           Minimun
                         </label>
                         <input
@@ -935,7 +961,7 @@ function PostweddingForm() {
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput12" class="form-label">
+                        <label for="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
@@ -972,11 +998,11 @@ function PostweddingForm() {
                     <div class="col-md-12">
                       <div class="mb-3">
                         <label
-                          htmlFor="exampleInput11"
+                          for="exampleInput11"
                           class="form-label"
                         ></label>
                         <textarea
-                          {...register("Special Service")}
+                          {...register("SpecialService")}
                           type="number"
                           class="form-control"
                           id="special service"

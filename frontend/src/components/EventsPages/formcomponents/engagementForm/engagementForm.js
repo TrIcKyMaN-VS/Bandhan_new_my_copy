@@ -6,6 +6,10 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const schema = yup.object().shape({
   Client_Name: yup.string().required("Client name must be required"),
@@ -170,14 +174,43 @@ function EngagementForm() {
       decorationvalue,
       photovalue,
       dancevalue,
+      invitationvalue,
+      checkedMehandi
+
     };
+     // premium notification
+     const userDate = data.date
+     const changeFormat = new Date(userDate)    
+     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
+     var userday = changeFormat.getUTCDate();
+     var useryear = changeFormat.getUTCFullYear();
+     const UserSelectDate = useryear + "/" + usermonth + "/" + userday;
+ 
+     var dateObj = new Date();
+     var month = dateObj.getUTCMonth() + 1; //months from 1-12
+     var day = dateObj.getUTCDate();
+     var year = dateObj.getUTCFullYear();
+     const currentDate = year + "/" + month + "/" + day;
+ 
+     const date1 = new Date(UserSelectDate);
+     const date2 = new Date(currentDate);
+     const diffTime = Math.abs(date2 - date1);
+     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+     console.log(diffTime + " milliseconds");
+     console.log(diffDays + " days");
+ 
+     if(diffDays <10){
+       toast.success("you are under premium booking!!!", {
+         position: toast.POSITION.TOP_CENTER
+       });
+     }
     console.log(checkBoxValues);
     console.log(data);
-    // axios.post("/api/wedding", {data, checkBoxValues}).then((res)=>{
-    //   console.log(res.data);
-    // }).catch((err)=>{
-    //   console.log(err);
-    // })
+    axios.post("/api/engagement", {data, checkBoxValues}).then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
   };
 
   return (
@@ -638,16 +671,17 @@ function EngagementForm() {
                           <label
                             for="dj"
                             class="form-check-label"
-                            value=""
+                            // value=""
                             style={{ marginRight: "15px" }}
                           >
                             DJ{" "}
                           </label>
                           <input
-                            {...register("dj")}
+                            {...register("Dj")}
                             type="checkbox"
                             class="form-check-input"
                             id="dj"
+                            value="dj"
                           />
                         </div>
                       </div>
@@ -716,7 +750,7 @@ function EngagementForm() {
                         <label
                           for="decoration"
                           class="form-check-label"
-                          value=""
+                          // value=""
                           style={{ marginRight: "15px" }}
                         >
                           Theme Decoration{" "}
@@ -726,6 +760,7 @@ function EngagementForm() {
                           type="checkbox"
                           class="form-check-input"
                           id="decoration"
+                          value="Theme Decoration"
                           checked={checkedDecoration}
                           onChange={() => {
                             setCheckedDecoration(!checkedDecoration);
@@ -759,43 +794,42 @@ function EngagementForm() {
                             aria-label="Default select example"
                           >
                             <option
-                              selected
-                              {...register("RomanticDecoration")}
+                              {...register("ThemeDecoration")}
                               id={"Romantic Decoration"}
                               value="Romantic Decoration"
                             >
                               Romantic Decoration
                             </option>
                             <option
-                              {...register("RomanticDecoration")}
+                              {...register("ThemeDecoration")}
                               id={"Musical Decoration"}
                               value="Musical Decoration"
                             >
                               Musical Decoration
                             </option>
                             <option
-                              {...register("RomanticDecoration")}
+                              {...register("ThemeDecoration")}
                               id={"Retro Decoration"}
                               value="Retro Decoration"
                             >
                               Retro Decoration
                             </option>
                             <option
-                              {...register("RomanticDecoration")}
+                              {...register("ThemeDecoration")}
                               id={"Single Color Decoration"}
                               value="Single Color Decoration"
                             >
                               Single Color Decoration
                             </option>
                             <option
-                              {...register("RomanticDecoration")}
+                              {...register("ThemeDecoration")}
                               id={"Multi Color Decoration"}
                               value="Multi Color Decoration"
                             >
                               Multi Color Decoration
                             </option>
                             <option
-                              {...register("RomanticDecoration")}
+                              {...register("ThemeDecoration")}
                               id={"Traditional decoration"}
                               value="Traditional decoration"
                             >
@@ -838,7 +872,7 @@ function EngagementForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault"
+                            for="flexRadioDefault"
                           >
                             Veg
                           </label>
@@ -859,7 +893,7 @@ function EngagementForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault1"
+                            for="flexRadioDefault1"
                           >
                             Non-Veg
                           </label>
@@ -880,7 +914,7 @@ function EngagementForm() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault2"
+                            for="flexRadioDefault2"
                           >
                             Jain
                           </label>
@@ -930,11 +964,11 @@ function EngagementForm() {
                           Invitation{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
-                          value={"invitation"}
+                          value="invitation"
                           checked={checkedInvitation}
                           onChange={() => {
                             setCheckedInvitation(!checkedInvitation);
@@ -953,11 +987,11 @@ function EngagementForm() {
                           Pooja Pandit Ji{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="beauty"
-                          value="beauty"
+                          value="Pooja Pandit"
                         />
                       </div>
                     </div>
@@ -965,14 +999,14 @@ function EngagementForm() {
                       <div class="mb-3">
                         <label
                           for="venue"
-                          class="form-check-label"
+                          class="form-checkPhotography-label"
                           value=" "
                           style={{ marginRight: "15px" }}
                         >
                           Venue{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="venue"
@@ -987,14 +1021,14 @@ function EngagementForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="photography"
+                          for="photography"
                           class="form-check-label"
                           style={{ marginRight: "15px" }}
                         >
                           Photography{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="photography"
@@ -1009,7 +1043,7 @@ function EngagementForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="beauty"
+                          for="beauty"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -1017,7 +1051,7 @@ function EngagementForm() {
                           Beauty{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="beauty"
@@ -1036,7 +1070,7 @@ function EngagementForm() {
                           Mehandi{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="Mehandi"
@@ -1059,7 +1093,7 @@ function EngagementForm() {
                           Hosting{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           value={"hosting"}
                           class="form-check-input"
@@ -1091,11 +1125,11 @@ function EngagementForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
-                              {...register("Venue 1 Name")}
+                              {...register("Venue_1_Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1110,11 +1144,11 @@ function EngagementForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
-                              {...register("Venue 1 Place")}
+                              {...register("Venue_1_Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1131,11 +1165,11 @@ function EngagementForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Name")}
+                              {...register("Venue_2_Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1145,11 +1179,11 @@ function EngagementForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Place")}
+                              {...register("Venue_2_Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1161,11 +1195,11 @@ function EngagementForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Name")}
+                              {...register("Venue_3_Name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1175,11 +1209,11 @@ function EngagementForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Place")}
+                              {...register("Venue_3_Place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1255,7 +1289,7 @@ function EngagementForm() {
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput11" class="form-label">
+                        <label for="exampleInput11" class="form-label">
                           Minimun
                         </label>
                         <input
@@ -1274,7 +1308,7 @@ function EngagementForm() {
 
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label HtmlFor="exampleInput12" class="form-label">
+                        <label for="exampleInput12" class="form-label">
                           Maximum
                         </label>
                         <input
@@ -1311,11 +1345,11 @@ function EngagementForm() {
                     <div class="col-md-12">
                       <div class="mb-3">
                         <label
-                          htmlFor="exampleInput11"
+                          for="exampleInput11"
                           class="form-label"
                         ></label>
                         <textarea
-                          {...register("Special Service")}
+                          {...register("SpecialService")}
                           type="number"
                           class="form-control"
                           id="special service"
