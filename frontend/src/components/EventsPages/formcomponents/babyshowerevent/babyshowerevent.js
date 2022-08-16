@@ -740,7 +740,7 @@ function BabyShowerForm() {
                         <label
                           for="regulardecoration"
                           class="form-check-label"
-                          value=""
+                          // value=""
                           style={{ marginRight: "15px" }}
                         >
                           Regular Decoration{" "}

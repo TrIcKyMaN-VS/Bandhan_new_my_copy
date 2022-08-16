@@ -1,5 +1,6 @@
 import React from "react";
 import Todo from '../todo';
+import Payment from "../payment"
 
 import "./account.css";
 export default function Engagement() {
@@ -20,7 +21,7 @@ export default function Engagement() {
             <span className=" fw-bolder">Event</span>
           </a>
         </li>
-        <li class="nav-item fw-bolder" role="presentation">
+        {/* <li class="nav-item fw-bolder" role="presentation">
           <a
             class="nav-link active"
             id="ex2-tab-1"
@@ -32,7 +33,7 @@ export default function Engagement() {
           >
             <span className="fw-bold">Profile</span>
           </a>
-        </li>
+        </li> */}
         <li class="nav-item fw-bolder" role="presentation">
           <a
             class="nav-link"
@@ -140,7 +141,7 @@ export default function Engagement() {
           role="tabpanel"
           aria-labelledby="ex2-tab-3"
         >
-          payment 
+          <Payment/> 
         </div>
         <div
           class="tab-pane fade"
