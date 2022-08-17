@@ -1,82 +1,89 @@
-const { string } = require('joi')
-const mongoose = require('mongoose')
+const { string } = require("joi");
+const mongoose = require("mongoose");
 
-const postweddingSchema = new mongoose.Schema({
-    ClientName:{
-        type:String
+const postweddingSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
     },
-    BrideName:{
-        type:String
+    ClientName: {
+      type: String,
     },
-    GroomName:{
-        type:String
-    },    
-    date :{
-        type : String,
+    BrideName: {
+      type: String,
     },
-    FromDate:{
-        type : String,
-      },
-    ToData:{
-        type : String,
-      },
+    GroomName: {
+      type: String,
+    },
+    date: {
+      type: String,
+    },
+    FromDate: {
+      type: String,
+    },
+    ToData: {
+      type: String,
+    },
     MinBudget: {
-        type : String,
-    required : true,
+      type: String,
+      required: true,
     },
     MaxBudget: {
-        type : String,
-        required : true,
+      type: String,
+      required: true,
     },
-    City:{
-        type : String,
-       },
-    SpecialService:{
-        type : String
+    City: {
+      type: String,
     },
-    NoOfGuests:{
-        type:Number
+    SpecialService: {
+      type: String,
     },
-    muhDikhal:[{
-        type:String
-    }],
-    muhDikhalvalue:{
-        musicvalues:{
-            type:String
-        },
-        dancevalues:{
-            type:String
-        }
+    NoOfGuests: {
+      type: Number,
     },
-    SubaarambhYatra:[{
-        type:String
-    }],
-    Honneymoon :{
-        DestinationIndia:{
-            type:String
-        },
-        DestinationAbroad:{
-            type:String
-        },
-        HonneymoonDays:{
-            type:String
-        }
+    muhDikhal: [
+      {
+        type: String,
+      },
+    ],
+    muhDikhalvalue: {
+      musicvalues: {
+        type: String,
+      },
+      dancevalues: {
+        type: String,
+      },
     },
-    Food :{
-        Foodtype:{
-            type:String
-        },
-        items:{
-            type:String
-        }
-    }
+    SubaarambhYatra: [
+      {
+        type: String,
+      },
+    ],
+    Honneymoon: {
+      DestinationIndia: {
+        type: String,
+      },
+      DestinationAbroad: {
+        type: String,
+      },
+      HonneymoonDays: {
+        type: String,
+      },
+    },
+    Food: {
+      Foodtype: {
+        type: String,
+      },
+      items: {
+        type: String,
+      },
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-},{
-    timestamps:true
-    
-})
+const PostWeddingForm = mongoose.model("PostWeddingForm", postweddingSchema);
 
-
-const PostWeddingForm = mongoose.model('PostWeddingForm',postweddingSchema)
-
-exports.PostWeddingForm = PostWeddingForm
+exports.PostWeddingForm = PostWeddingForm;

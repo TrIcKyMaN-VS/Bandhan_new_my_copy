@@ -8,11 +8,13 @@ app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const { PostWeddingForm } = require("../model/postweddingmodel");
+const auth = require('../middleware/auth')
 
-router.post("/",async(req,res) => {
+router.post("/",auth,async(req,res) => {
     const data = req.body.data
     const checkBoxValues = req.body.checkBoxValues
 
+    const userId = req.id
     const ClientName = data.Client_Name
     const BrideName = data.Bride_Name
     const GroomName = data.Groom_Name
@@ -44,6 +46,7 @@ router.post("/",async(req,res) => {
         items : checkBoxValues.foodvalue
     }
     const newPostWeddingForm = PostWeddingForm({
+        userId,
         ClientName,
         BrideName,
         GroomName,

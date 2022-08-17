@@ -8,13 +8,15 @@ app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const { EngagementForm } = require("../model/engagementmodel");
+const auth = require('../middleware/auth')
 
 
 //routes
-router.post("/",async(req,res) => {
+router.post("/",auth,async(req,res) => {
     const data = req.body.data
     const checkBoxValues = req.body.checkBoxValues
 
+    const userId = req.id
     const ClientName = data.Client_Name
     const BrideName = data.Bride_Name
     const GroomName = data.Groom_Name
@@ -64,6 +66,7 @@ router.post("/",async(req,res) => {
     }
 
     const newEngagementForm = EngagementForm({
+        userId,
         ClientName,
         BrideName,
         GroomName,

@@ -6,30 +6,36 @@ import * as yup from "yup";
 import axios from "axios";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { authActions } from "../../../../store";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-  Mom_Name : yup.string().required("Mom's Name must be required"),
-  Dad_Name : yup.string().required("Dad's Name must be required"),
+  Mom_Name: yup.string().required("Mom's Name must be required"),
+  Dad_Name: yup.string().required("Dad's Name must be required"),
   date: yup.string().required("Date must be required"),
   fromTime: yup.string().required("From Time must be required"),
   ToTime: yup.string().required("To Time must be required"),
-  No_Of_Guests : yup.string().required("No Of Guests must be required"),
+  No_Of_Guests: yup.string().required("No Of Guests must be required"),
   Estimate_Budget_Maximum: yup
     .string()
     .required("Estimate Budget Maximum must be required"),
   Estimate_Budget_Minimum: yup
     .string()
     .required("Estimate Budget Minimum must be required"),
-})
+});
 
 function BabyShowerForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver : yupResolver(schema)});
+  } = useForm({ resolver: yupResolver(schema) });
 
   console.log(errors);
   const [value, setvalue] = useState("");
@@ -42,7 +48,6 @@ function BabyShowerForm() {
     { label: "Western", value: "Western" },
   ];
 
-  
   const [dancevalue, setdancevalue] = useState("");
   const handledancechange = (val) => {
     setdancevalue(val);
@@ -134,7 +139,7 @@ function BabyShowerForm() {
   const [checkedInvitation, setCheckedInvitation] = useState(false);
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
-  function handleSubmit2(data){
+  function handleSubmit2(data) {
     console.log(data);
     const checkBoxValues = {
       invitationvalue,
@@ -142,10 +147,10 @@ function BabyShowerForm() {
       foodvalue,
       decorationvalue,
       musicvalue,
-      dancevalue
-    }
-    const userDate = data.date
-    const changeFormat = new Date(userDate)    
+      dancevalue,
+    };
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
     var userday = changeFormat.getUTCDate();
     var useryear = changeFormat.getUTCFullYear();
@@ -160,20 +165,33 @@ function BabyShowerForm() {
     const date1 = new Date(UserSelectDate);
     const date2 = new Date(currentDate);
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if(diffDays <10){
+    if (diffDays < 10) {
       toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
-    axios.post("/api/babyshower", {data, checkBoxValues}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .post("/api/babyshower", { data, checkBoxValues })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          console.log(err);
+        }
+      });
     console.log(checkBoxValues);
   }
 
@@ -380,10 +398,10 @@ function BabyShowerForm() {
                           />
                           <label for="floatingInput">Mom Name</label>
                           {errors.Mom_Name && (
-                              <div class="alert alert-danger mt-2" role="alert">
-                                {errors.Mom_Name?.message}
-                              </div>
-                            )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.Mom_Name?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -397,10 +415,10 @@ function BabyShowerForm() {
                           />
                           <label for="floatingInput">Dad Name</label>
                           {errors.Dad_Name && (
-                              <div class="alert alert-danger mt-2" role="alert">
-                                {errors.Dad_Name?.message}
-                              </div>
-                            )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.Dad_Name?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -415,10 +433,10 @@ function BabyShowerForm() {
                           />
                           <label for="floatingInput">Date</label>
                           {errors.date && (
-                              <div class="alert alert-danger mt-2" role="alert">
-                                {errors.date?.message}
-                              </div>
-                            )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.date?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -435,10 +453,10 @@ function BabyShowerForm() {
                           />
                           <label for="floatingInput">From</label>
                           {errors.fromTime && (
-                              <div class="alert alert-danger mt-2" role="alert">
-                                {errors.fromTime?.message}
-                              </div>
-                            )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.fromTime?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -452,10 +470,10 @@ function BabyShowerForm() {
                           />
                           <label for="floatingInput">To</label>
                           {errors.ToTime && (
-                              <div class="alert alert-danger mt-2" role="alert">
-                                {errors.ToTime?.message}
-                              </div>
-                            )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.ToTime?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -537,10 +555,10 @@ function BabyShowerForm() {
                           />
                           <label for="floatingInput">No of Guests</label>
                           {errors.No_Of_Guests && (
-                              <div class="alert alert-danger mt-2" role="alert">
-                                {errors.No_Of_Guests?.message}
-                              </div>
-                            )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.No_Of_Guests?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -740,7 +758,7 @@ function BabyShowerForm() {
                         <label
                           for="regulardecoration"
                           class="form-check-label"
-                          // value=""
+                          value=""
                           style={{ marginRight: "15px" }}
                         >
                           Regular Decoration{" "}
@@ -804,49 +822,43 @@ function BabyShowerForm() {
                         <div class="mb-3">
                           <label for="exampleInput5" class="form-label"></label>
                           <select
+                            {...register("ThemeDecoration")}
                             id="exampleInput5"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Romantic Decoration"}
                               value="Romantic Decoration"
                             >
                               Romantic Decoration
                             </option>
                             <option
-                          
-                              {...register("ThemeDecoration")}
                               id={"Musical Decoration"}
                               value="Musical Decoration"
                             >
                               Musical Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Retro Decoration"}
                               value="Retro Decoration"
                             >
                               Retro Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Single Color Decoration"}
                               value="Single Color Decoration"
                             >
                               Single Color Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Multi Color Decoration"}
                               value="Multi Color Decoration"
                             >
                               Multi Color Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
-                              id="Traditional decoration"
+                              id={"Traditional decoration"}
                               value="Traditional decoration"
                             >
                               Traditional decoration
@@ -1330,10 +1342,7 @@ function BabyShowerForm() {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label
-                          for="exampleInput11"
-                          class="form-label"
-                        ></label>
+                        <label for="exampleInput11" class="form-label"></label>
                         <textarea
                           {...register("SpecialService")}
                           type="number"

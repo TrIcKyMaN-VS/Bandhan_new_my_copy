@@ -5,10 +5,12 @@ import * as yup from "yup";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-
+import { authActions } from "../../../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
   Client_Name: yup.string().required("Client name must be required"),
@@ -18,7 +20,9 @@ const schema = yup.object().shape({
   fromDate: yup.string().required("From date must be required"),
   ToDate: yup.string().required("To date must be required"),
   ShootingDate: yup.string().required("Shooting date must be required"),
-  BachelorPartyDate: yup.string().required("Bachelor's Party Date must be required"),
+  BachelorPartyDate: yup
+    .string()
+    .required("Bachelor's Party Date must be required"),
   city: yup.string().required("city name must be required"),
   No_Of_Guests: yup
     .number()
@@ -32,13 +36,14 @@ const schema = yup.object().shape({
     .required("Estimate Budget Minimum must be required"),
 });
 
-
 function PreweddingForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema)});
+  } = useForm({ resolver: yupResolver(schema) });
 
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
@@ -141,33 +146,32 @@ function PreweddingForm() {
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
   function handleSubmit2(data) {
+    // premium notification
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
+    var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
+    var userday = changeFormat.getUTCDate();
+    var useryear = changeFormat.getUTCFullYear();
+    const UserSelectDate = useryear + "/" + usermonth + "/" + userday;
 
-     // premium notification
-     const userDate = data.date
-     const changeFormat = new Date(userDate)    
-     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
-     var userday = changeFormat.getUTCDate();
-     var useryear = changeFormat.getUTCFullYear();
-     const UserSelectDate = useryear + "/" + usermonth + "/" + userday;
- 
-     var dateObj = new Date();
-     var month = dateObj.getUTCMonth() + 1; //months from 1-12
-     var day = dateObj.getUTCDate();
-     var year = dateObj.getUTCFullYear();
-     const currentDate = year + "/" + month + "/" + day;
- 
-     const date1 = new Date(UserSelectDate);
-     const date2 = new Date(currentDate);
-     const diffTime = Math.abs(date2 - date1);
-     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-     console.log(diffTime + " milliseconds");
-     console.log(diffDays + " days");
- 
-     if(diffDays <10){
-       toast.success("you are under premium booking!!!", {
-         position: toast.POSITION.TOP_CENTER
-       });
-     }
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    const currentDate = year + "/" + month + "/" + day;
+
+    const date1 = new Date(UserSelectDate);
+    const date2 = new Date(currentDate);
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    console.log(diffTime + " milliseconds");
+    console.log(diffDays + " days");
+
+    if (diffDays < 10) {
+      toast.success("you are under premium booking!!!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
 
     console.log(data);
 
@@ -175,12 +179,25 @@ function PreweddingForm() {
       musicvalue,
       dancevalue,
       foodvalue,
-    }
-    axios.post("/api/prewedding", {data, checkBoxValues}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    };
+    axios
+      .post("/api/prewedding", { data, checkBoxValues })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          console.log(err);
+        }
+      });
   }
 
   return (
@@ -386,10 +403,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput"> Client Name</label>
                           {errors.Client_Name && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.Client_Name?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.Client_Name?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -403,10 +420,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput"> Bride Name</label>
                           {errors.Bride_Name && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.Bride_Name?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.Bride_Name?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -420,10 +437,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput">Groom Name</label>
                           {errors.Groom_Name && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.Groom_Name?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.Groom_Name?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -437,10 +454,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput">Date</label>
                           {errors.date && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.date?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.date?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -457,10 +474,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput">From</label>
                           {errors.fromDate && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.fromDate?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.fromDate?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -474,10 +491,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput">To</label>
                           {errors.ToDate && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.ToDate?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.ToDate?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -516,7 +533,7 @@ function PreweddingForm() {
                         class="btn-check"
                         name="option"
                         id="groom"
-                        value ="Groom"
+                        value="Groom"
                       />
                       <label class="btn btn-primary" for="groom">
                         Groom
@@ -582,10 +599,10 @@ function PreweddingForm() {
                             Bachelors Party Date
                           </label>
                           {errors.BachelorPartyDate && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.BachelorPartyDate?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.BachelorPartyDate?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-6 mb-4">
@@ -599,10 +616,10 @@ function PreweddingForm() {
                           />
                           <label for="floatingInput">Shooting Date</label>
                           {errors.ShootingDate && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.ShootingDate?.message}
-                        </div>
-                      )}
+                            <div class="alert alert-danger mt-2" role="alert">
+                              {errors.ShootingDate?.message}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -738,10 +755,10 @@ function PreweddingForm() {
                         />
                         <label for="floatingInput">No of Guests</label>
                         {errors.No_Of_Guests && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.No_Of_Guests?.message}
-                        </div>
-                      )}
+                          <div class="alert alert-danger mt-2" role="alert">
+                            {errors.No_Of_Guests?.message}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1417,10 +1434,7 @@ function PreweddingForm() {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label
-                          for="exampleInput11"
-                          class="form-label"
-                        ></label>
+                        <label for="exampleInput11" class="form-label"></label>
                         <textarea
                           {...register("SpecialService")}
                           type="number"

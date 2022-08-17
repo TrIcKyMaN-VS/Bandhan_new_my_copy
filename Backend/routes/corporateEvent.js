@@ -7,31 +7,35 @@ app.use(cors());
 // app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const { CorporateEventForm } = require("../model/corporateEvent");
 const auth = require('../middleware/auth')
-const { BabyShowerForm } = require("../model/babyshowermodel");
+
 
 router.post("/",auth,async(req,res) => {
     const data = req.body.data
-    const checkBoxValues = req.body.checkBoxValues
+    const checkBoxValues = req.body.checkboxValue
+
     const userId = req.id
-    const MomName = data.Mom_Name
-    const DadName = data.Dad_Name
-    const date = data.date
-    const FromDate = data.fromDate
-    const ToData = data.ToDate
+    const TypeOfFunction = data.type_Of_Function
+    const NameOfEvent = data.name_Of_Event
+    const NameOfConcern = data.name_Of_Concern
+    const Date = data.date
+    const FromTime = data.fromTime
+    const ToTime = data.ToTime
     const MinBudget = data.Estimate_Budget_Minimum
     const MaxBudget = data.Estimate_Budget_Maximum
     const NoOfGuests = data.No_Of_Guests
 
-    const Shows = {
+    const Shows = data.shows
+    const ShowsValue = {
         show:data.shows,
         musicvalues : checkBoxValues.musicvalue,
         dancevalues : checkBoxValues.dancevalue,
-        dj : data.dj
+        dj : data.dj,
     }
     const Decoration = {
         RegularDecoration : checkBoxValues.decorationvalue,
-        ThemeDecoration : data.ThemeDecoration
+        ThemeDecoration : data.DecorationType
     }   
     const SpecialService = data.SpecialService
    
@@ -58,27 +62,29 @@ router.post("/",auth,async(req,res) => {
                 }
             }
         }
-    const newBabyShowerForm = BabyShowerForm({
+    const newCorporateEventForm = CorporateEventForm({
         userId,
-        MomName,
-        DadName,
-        FromDate,
-        ToData,
-        date,
+        TypeOfFunction,
+        NameOfEvent,
+        NameOfConcern,
+        Date,
+        FromTime,
+        ToTime,
         NoOfGuests,
         MinBudget,
         MaxBudget,
         SpecialService,
         Shows,
+        ShowsValue,
         Decoration,
         OtherServices,
         OtherServiceValues,
         Food
 
     })
-    newBabyShowerForm
+    newCorporateEventForm
     .save()
-    .then(() => res.status(200).send("BabyShower form saved successfully...!"));
+    .then(() => res.status(200).send("Family Function form saved successfully...!"));
     console.log( "completed!! saved");
 
     console.log(req.body);

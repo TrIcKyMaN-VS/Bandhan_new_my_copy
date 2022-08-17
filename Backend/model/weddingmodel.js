@@ -1,201 +1,209 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const weddingSchema = new mongoose.Schema({
-    ClientName:{
-        type:String
+const weddingSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
     },
-    BrideName:{
-        type:String
+    ClientName: {
+      type: String,
     },
-    GroomName:{
-        type:String
-    },    
-    date :{
-        type : String,
+    BrideName: {
+      type: String,
     },
-    FromDate:{
-        type : String,
-      },
-    ToData:{
-        type : String,
-      },
-    NoOfGuests:{
-        type : Number,
+    GroomName: {
+      type: String,
+    },
+    date: {
+      type: String,
+    },
+    FromDate: {
+      type: String,
+    },
+    ToData: {
+      type: String,
+    },
+    NoOfGuests: {
+      type: Number,
     },
     MinBudget: {
-        type : String,
-    required : true,
+      type: String,
+      required: true,
     },
     MaxBudget: {
-        type : String,
-        required : true,
+      type: String,
+      required: true,
     },
-    City:{
-        type : String,
-       },
-    Services:[{
-        type : String,
-       }],
+    City: {
+      type: String,
+    },
+    Services: [
+      {
+        type: String,
+      },
+    ],
 
-    Servicevalue :{
-        Mehandi:{
-            DateMehandiShow:{
-                type:String
-            },
-            TimeMehandiShow:{
-                type:String
-            }
+    Servicevalue: {
+      Mehandi: {
+        DateMehandiShow: {
+          type: String,
         },
-        Reception:{
-            DateReception:{
-                type:String
-            },
-            TimeReception:{
-                type:String
-            }
+        TimeMehandiShow: {
+          type: String,
         },
-        Phera:{
-            DateMehandiShow:{
-                type:String
-            },
-            TimeMehandiShow:{
-                type:String
-            }
+      },
+      Reception: {
+        DateReception: {
+          type: String,
         },
-        Sangeet:{
-            DateSangeet:{
-                type:String
-            },
-            TimeSangeet:{
-                type:String
-            }
+        TimeReception: {
+          type: String,
         },
-        Pooja:{
-            DatePooja:{
-                type:String
-            },
-            TimePooja:{
-                type:String
-            }
+      },
+      Phera: {
+        DateMehandiShow: {
+          type: String,
         },
-        Baraat:{
-            DateBaraat:{
-                type:String
-            },
-            TimeBaraat:{
-                type:String
-            }
+        TimeMehandiShow: {
+          type: String,
         },
-        Baraat:{
-            DateBaraat:{
-                type:String
-            },
-            TimeBaraat:{
-                type:String
-            }
+      },
+      Sangeet: {
+        DateSangeet: {
+          type: String,
         },
-        Haldi:{
-            DateHaldi:{
-                type:String
-            },
-            TimeHaldi:{
-                type:String
-            }
+        TimeSangeet: {
+          type: String,
         },
-        Tilak:{
-            dateTilak:{
-                type:String
-            },
-            TimeTilak:{
-                type:String
-            }
+      },
+      Pooja: {
+        DatePooja: {
+          type: String,
         },
+        TimePooja: {
+          type: String,
+        },
+      },
+      Baraat: {
+        DateBaraat: {
+          type: String,
+        },
+        TimeBaraat: {
+          type: String,
+        },
+      },
+      Baraat: {
+        DateBaraat: {
+          type: String,
+        },
+        TimeBaraat: {
+          type: String,
+        },
+      },
+      Haldi: {
+        DateHaldi: {
+          type: String,
+        },
+        TimeHaldi: {
+          type: String,
+        },
+      },
+      Tilak: {
+        dateTilak: {
+          type: String,
+        },
+        TimeTilak: {
+          type: String,
+        },
+      },
     },
-    Shows:{
-        show:[{
-            type : String,
-        }],
-        musicvalues :{
-            type : String,
+    Shows: {
+      show: [
+        {
+          type: String,
         },
-        dancevalues :{
-            type : String,
+      ],
+      musicvalues: {
+        type: String,
+      },
+      dancevalues: {
+        type: String,
+      },
+      dj: {
+        type: String,
+      },
+    },
+    ConceptWedding: {
+      type: String,
+    },
+    ThemeWedding: {
+      type: String,
+    },
+    Decoration: {
+      RegularDecoration: {
+        type: String,
+      },
+      ThemeDecoration: {
+        type: String,
+      },
+    },
+    SpecialService: {
+      type: String,
+    },
+    OtherServices: [
+      {
+        type: String,
+      },
+    ],
+    OtherServiceValues: {
+      invitation: {
+        type: String,
+      },
+      Photography: {
+        type: Object,
+      },
+      venues: {
+        venue1: {
+          name: {
+            type: String,
+          },
+          place: {
+            type: String,
+          },
         },
-        dj:{
-            type : String,
-        }
+        venue2: {
+          name: {
+            type: String,
+          },
+          place: {
+            type: String,
+          },
+        },
+        venue3: {
+          name: {
+            type: String,
+          },
+          place: {
+            type: String,
+          },
+        },
+      },
+    },
 
+    Food: {
+      Foodtype: {
+        type: String,
+      },
+      items: {
+        type: String,
+      },
     },
-    ConceptWedding:{
-        type : String
-    },
-    ThemeWedding:{
-        type : String
-    },
-    Decoration:{
-        RegularDecoration:{
-            type : String,
-        },
-        ThemeDecoration:{
-            type : String
-        }
-    },
-    SpecialService:{
-        type : String
-    },
-    OtherServices :[{
-        type : String
-    }],
-    OtherServiceValues:{
-        invitation :{
-            type:String
-        },
-        Photography:{
-            type:Object
-        },
-        venues:{
-            venue1:{
-                name:{
-                    type:String
-                },
-                place:{
-                    type:String
-                }
-            },
-            venue2:{
-                name:{
-                    type:String
-                },
-                place:{
-                    type:String
-                }
-            },
-            venue3:{
-                name:{
-                    type:String
-                },
-                place:{
-                    type:String
-                }
-            }
-        }
-    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-    Food :{
-        Foodtype:{
-            type:String
-        },
-        items:{
-            type:String
-        }
-    }
+const WeddingForm = mongoose.model("WeddingForm", weddingSchema);
 
-},{
-    timestamps:true
-    
-})
-
-
-const WeddingForm = mongoose.model('WeddingForm',weddingSchema)
-
-exports.WeddingForm = WeddingForm
+exports.WeddingForm = WeddingForm;

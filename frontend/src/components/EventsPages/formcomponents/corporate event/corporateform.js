@@ -5,24 +5,21 @@ import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { authActions } from "../../../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
-  type_Of_Function: yup
-    .string()
-    .required("Type of Function must be required"),
-  name_Of_Event: yup
-    .string()
-    .required("Name of the Event must be required"),
-  name_Of_Concern : yup
-    .string()
-    .required("Name of Concern must be required"),
+  type_Of_Function: yup.string().required("Type of Function must be required"),
+  name_Of_Event: yup.string().required("Name of the Event must be required"),
+  name_Of_Concern: yup.string().required("Name of Concern must be required"),
   date: yup.string().required("Date must be required"),
   fromTime: yup.string().required("From Time must be required"),
   ToTime: yup.string().required("To Time must be required"),
-  
+
   No_Of_Guests: yup
     .number()
     .typeError("No of Guests must be required")
@@ -37,7 +34,8 @@ const schema = yup.object().shape({
 });
 
 function CorporateForm() {
-
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -182,7 +180,7 @@ function CorporateForm() {
 
   console.log(errors);
 
-  function handleSubmit2(data){
+  function handleSubmit2(data) {
     console.log(data);
 
     const checkboxValue = {
@@ -194,11 +192,11 @@ function CorporateForm() {
       dancevalue,
       decorationvalue,
       photovalue,
-      
+
       // mehandioptions
-    }
-    const userDate = data.date
-    const changeFormat = new Date(userDate)    
+    };
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
     var userday = changeFormat.getUTCDate();
     var useryear = changeFormat.getUTCFullYear();
@@ -213,23 +211,35 @@ function CorporateForm() {
     const date1 = new Date(UserSelectDate);
     const date2 = new Date(currentDate);
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if(diffDays <10){
+    if (diffDays < 10) {
       toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
-    axios.post("/api/wedding", {data, checkboxValue}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .post("/api/corporateEvent", { data, checkboxValue })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          console.log(err);
+        }
+      });
     console.log(checkboxValue);
   }
-
 
   return (
     <section class="h-50">
@@ -425,30 +435,27 @@ function CorporateForm() {
                     <div class="row">
                       <div class="col-md-6 mb-4">
                         <div class="form-floating mb-4">
-                          <label for="exampleInput5" class="form-label">
+                          <label for="typeOfFunction" class="form-label">
                             Type of Function
                           </label>
                           <select
-                            id="exampleInput5"
+                            {...register("type_Of_Function")}
+                            id="typeOfFunction"
                             class="form-select mb-4"
                             aria-label="Default select example"
                           >
                             <option
                               // {...register("type_Of_Function")}
                               value=""
-                             ></option>
-                            <option value="school">school</option>
+                            ></option>
+                            <option id="school" value="school">
+                              school
+                            </option>
 
-                            <option
-                              {...register("type_Of_Function")}
-                              value="college"
-                            >
+                            <option value="college" id="college">
                               college
                             </option>
-                            <option
-                              {...register("type_Of_Function")}
-                              value="corporate"
-                            >
+                            <option value="corporate" id="corporate">
                               corporate
                             </option>
                           </select>
@@ -773,14 +780,17 @@ function CorporateForm() {
                           <strong>Play</strong>
                         </label>
                         <select
+                          {...register("play")}
                           id="plays"
                           class="form-select mb-3"
                           aria-label="Default select example"
                         >
-                          <option selected {...register('play')} value="corporate">
+                          <option value="corporate" id="corporate">
                             Corporate
                           </option>
-                          <option {...register('play')} value="street_play">Street Play</option>
+                          <option value="street_play" id="street_play">
+                            Street Play
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -871,37 +881,34 @@ function CorporateForm() {
                       <div class="col-md-6">
                         <div class="mb-3">
                           <label
-                            HtmlFor="exampleInput5"
+                            HtmlFor="ThemeDecoration"
                             class="form-label"
                           ></label>
                           <select
-                            id="exampleInput5"
+                            {...register("DecorationType")}
+                            id="ThemeDecoration"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
                             <option
-                              selected
-                              value="1"
-                              {...register("DecorationType")}
+                              value="Baloon Decoration"
+                              id="Baloon Decoration"
                             >
                               Ballon Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="CandyDecoration"
                               value="Candy Decoration"
                             >
                               Candy Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="CartoonDecoration"
                               value="Cartoon Decoration"
                             >
                               Cartoon Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="Jungle Party Decoration"
                               value="Jungle Party Decoration"
                             >
@@ -934,18 +941,19 @@ function CorporateForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault"
+                            name="Food"
+                            id="veg"
+                            value={"veg"}
                           />
 
                           <label
                             class="form-check-label"
                             for="flexRadioDefault"
                           >
-                            {" "}
-                            Veg{" "}
+                            Veg
                           </label>
                         </div>
                       </div>
@@ -954,17 +962,19 @@ function CorporateForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
+                            name="Food"
+                            value={"Non-veg"}
+                            id="non-veg"
                           />
 
                           <label
                             class="form-check-label"
                             for="flexRadioDefault1"
                           >
-                            Non-Veg{" "}
+                            Non-Veg
                           </label>
                         </div>
                       </div>
@@ -973,18 +983,19 @@ function CorporateForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
+                            value={"Jain"}
+                            name="Food"
+                            id="jain"
                           />
 
                           <label
                             class="form-check-label"
                             for="flexRadioDefault2"
                           >
-                            {" "}
-                            Jain{" "}
+                            Jain
                           </label>
                         </div>
                       </div>
@@ -1032,7 +1043,7 @@ function CorporateForm() {
                           Invitation{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
@@ -1072,7 +1083,7 @@ function CorporateForm() {
                           Venue{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="venue"
@@ -1095,7 +1106,7 @@ function CorporateForm() {
                           Photography{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="photography"
@@ -1160,7 +1171,7 @@ function CorporateForm() {
                           Hosting{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="hosting"
@@ -1192,11 +1203,11 @@ function CorporateForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
-                              {...register("Venue 1 Name")}
+                              {...register("venue_1_name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1211,11 +1222,11 @@ function CorporateForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
-                              {...register("Venue 1 Place")}
+                              {...register("venue_1_place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1232,11 +1243,11 @@ function CorporateForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Name")}
+                              {...register("venue_2_name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1246,11 +1257,11 @@ function CorporateForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Place")}
+                              {...register("venue_2_place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1262,11 +1273,11 @@ function CorporateForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Name")}
+                              {...register("venue_3_name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1276,11 +1287,11 @@ function CorporateForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Place")}
+                              {...register("venue_3_place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"

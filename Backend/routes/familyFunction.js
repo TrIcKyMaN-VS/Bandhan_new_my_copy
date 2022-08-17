@@ -7,16 +7,17 @@ app.use(cors());
 // app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const { FamilyFunctionForm } = require("../model/familyFunction");
 const auth = require('../middleware/auth')
-const { BabyShowerForm } = require("../model/babyshowermodel");
 
 router.post("/",auth,async(req,res) => {
     const data = req.body.data
     const checkBoxValues = req.body.checkBoxValues
+
     const userId = req.id
-    const MomName = data.Mom_Name
-    const DadName = data.Dad_Name
-    const date = data.date
+    const TypeOfFunction = data.type_Of_Function
+    const NameOfFunction = data.name_Of_Function
+    const NoOfDays = data.no_Of_Days
     const FromDate = data.fromDate
     const ToData = data.ToDate
     const MinBudget = data.Estimate_Budget_Minimum
@@ -31,7 +32,7 @@ router.post("/",auth,async(req,res) => {
     }
     const Decoration = {
         RegularDecoration : checkBoxValues.decorationvalue,
-        ThemeDecoration : data.ThemeDecoration
+        ThemeDecoration : data.DecorationType
     }   
     const SpecialService = data.SpecialService
    
@@ -58,13 +59,13 @@ router.post("/",auth,async(req,res) => {
                 }
             }
         }
-    const newBabyShowerForm = BabyShowerForm({
+    const newFamilyFunctionForm = FamilyFunctionForm({
         userId,
-        MomName,
-        DadName,
+        TypeOfFunction,
+        NameOfFunction,
         FromDate,
         ToData,
-        date,
+        NoOfDays,
         NoOfGuests,
         MinBudget,
         MaxBudget,
@@ -76,9 +77,9 @@ router.post("/",auth,async(req,res) => {
         Food
 
     })
-    newBabyShowerForm
+    newFamilyFunctionForm
     .save()
-    .then(() => res.status(200).send("BabyShower form saved successfully...!"));
+    .then(() => res.status(200).send("Family Function form saved successfully...!"));
     console.log( "completed!! saved");
 
     console.log(req.body);

@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 
 const babyshowerSchema = new mongoose.Schema({
-
+           userId : {
+            type : String
+           },
            DadName : {
             type : String,
             required : true,
@@ -105,7 +107,6 @@ const babyshowerSchema = new mongoose.Schema({
             }
 },{
     timestamps:true
-    
 })
 
 const BabyShowerForm = mongoose.model('BabyShowerForm',babyshowerSchema)

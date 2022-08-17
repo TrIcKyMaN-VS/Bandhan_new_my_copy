@@ -6,8 +6,11 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { authActions } from "../../../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 //schema
 
 const schema = yup.object().shape({
@@ -37,6 +40,8 @@ const schema = yup.object().shape({
 });
 
 function Finalbirthdayform() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -147,10 +152,9 @@ function Finalbirthdayform() {
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
   const handleSubmit2 = (data) => {
-
     // premium notification
-    const userDate = data.date
-    const changeFormat = new Date(userDate)    
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
     var userday = changeFormat.getUTCDate();
     var useryear = changeFormat.getUTCFullYear();
@@ -165,13 +169,13 @@ function Finalbirthdayform() {
     const date1 = new Date(UserSelectDate);
     const date2 = new Date(currentDate);
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if(diffDays <10){
+    if (diffDays < 10) {
       toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
     console.log(data);
@@ -191,14 +195,24 @@ function Finalbirthdayform() {
         console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          console.log(err);
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          console.log(err);
+        }
       });
     // console.log(organizeValues.checkBoxValues);
   };
 
   return (
     <section class="h-50">
-  
       <div class="container py-5 h-50">
         <div class="row d-flex justify-content-center align-items-center h-50">
           <div class="col-md-11">
@@ -408,7 +422,7 @@ function Finalbirthdayform() {
                             )}
                           </div>
                         </div>
-  
+
                         <div class="col-md-6 mb-4">
                           <div class="form-floating mb-3">
                             <input
@@ -417,8 +431,6 @@ function Finalbirthdayform() {
                               class="form-control"
                               id="floatingInput"
                               placeholder="Date"
-                             
-                             
                             />
                             <label for="floatingInput">Date</label>
                           </div>
@@ -594,7 +606,7 @@ function Finalbirthdayform() {
                               id="age"
                               placeholder="To"
                             />
-                  
+
                             <label for="floatingInput">Age</label>
                           </div>
                           {errors.age && (
@@ -878,37 +890,34 @@ function Finalbirthdayform() {
                       <div class="col-md-6">
                         <div class="mb-3">
                           <label
-                            for="exampleInput5"
+                            HtmlFor="exampleInput343"
                             class="form-label"
                           ></label>
                           <select
-                            id="exampleInput5"
+                            {...register("DecorationType")}
+                            id="exampleInput343"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
                             <option
-                              id="Ballon Decoration"
-                              value="Ballon Decoration"
-                              {...register("DecorationType")}
+                              value="Ballon_Decoration"
+                              id="Ballon_Decoration"
                             >
                               Ballon Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="CandyDecoration"
                               value="Candy Decoration"
                             >
                               Candy Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="CartoonDecoration"
                               value="Cartoon Decoration"
                             >
                               Cartoon Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="Jungle Party Decoration"
                               value="Jungle Party Decoration"
                             >
@@ -1016,7 +1025,6 @@ function Finalbirthdayform() {
                   </div>
                 </div>
               </div>
-
 
               {/* catering ends  */}
 
@@ -1333,10 +1341,7 @@ function Finalbirthdayform() {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label
-                          for="exampleInput11"
-                          class="form-label"
-                        ></label>
+                        <label for="exampleInput11" class="form-label"></label>
                         <textarea
                           {...register("SpecialService")}
                           type="number"

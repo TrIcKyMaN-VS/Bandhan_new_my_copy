@@ -5,31 +5,37 @@ import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-
-
+import { authActions } from "../../../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
-  type_Of_Function : yup.string().required("type of function must be required"),
-  name_Of_Function : yup.string().required("name of function must be required"),
-  no_Of_Days : yup.number().required("name of days must be required"),
+  type_Of_Function: yup.string().required("type of function must be required"),
+  name_Of_Function: yup.string().required("name of function must be required"),
+  no_Of_Days: yup.number().required("name of days must be required"),
   // date: yup.string().required("Date must be required"),
   fromDate: yup.string().required("From Time must be required"),
   ToDate: yup.string().required("To Time must be required"),
-  No_Of_Guests : yup.string().required("No Of Guests must be required"),
+  No_Of_Guests: yup.string().required("No Of Guests must be required"),
   Estimate_Budget_Maximum: yup
     .string()
     .required("Estimate Budget Maximum must be required"),
   Estimate_Budget_Minimum: yup
     .string()
     .required("Estimate Budget Minimum must be required"),
-})
-
+});
 
 function FamilyfunctionForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver : yupResolver(schema)});
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
@@ -162,11 +168,10 @@ function FamilyfunctionForm() {
   const [checkedInvitation, setCheckedInvitation] = useState(false);
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
-
-  function handleSubmit2(data){
+  function handleSubmit2(data) {
     console.log(data);
 
-    const checkboxValue = {
+    const checkBoxValues = {
       musicvalue,
       // foodtypes,
       foodvalue,
@@ -174,11 +179,13 @@ function FamilyfunctionForm() {
       invitationvalue,
       dancevalue,
       decorationvalue,
-      photovalue
+      photovalue,
+
       // mehandioptions
-    }
-    const userDate = data.date
-    const changeFormat = new Date(userDate)    
+    };
+    console.log(checkBoxValues);
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
     var userday = changeFormat.getUTCDate();
     var useryear = changeFormat.getUTCFullYear();
@@ -193,20 +200,33 @@ function FamilyfunctionForm() {
     const date1 = new Date(UserSelectDate);
     const date2 = new Date(currentDate);
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    console.log(diffTime + " milliseconds");
-    console.log(diffDays + " days");
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    // console.log(diffTime + " milliseconds");
+    // console.log(diffDays + " days");
 
-    if(diffDays <10){
+    if (diffDays < 10) {
       toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
-    axios.post("/api/wedding", {data, checkboxValue}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .post("/api/familyfunction", { data, checkBoxValues })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          console.log(err);
+        }
+      });
   }
 
   return (
@@ -404,27 +424,31 @@ function FamilyfunctionForm() {
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-floating mb-4">
-                            <label for="exampleInput5" class="form-label">
+                            <label for="exampleInput555" class="form-label">
                               Type of Function
                             </label>
                             <select
-                              id="exampleInput5"
+                              id="exampleInput555"
                               class="form-select mb-4"
                               aria-label="Default select example"
                             >
-                              <option value="none" disabled></option>
+                              <option value={null}>
+                                <b>Select any one</b>
+                              </option>
 
                               <option
                                 {...register("type_Of_Function")}
-                                value="festival"
+                                value="non-Festival"
+                                id="non-Festival"
                               >
-                                Festival
+                                Non-Festival
                               </option>
                               <option
                                 {...register("type_Of_Function")}
-                                value="non-Festival"
+                                value="festival"
+                                id="festival"
                               >
-                                Non-Festival
+                                Festival
                               </option>
                             </select>
                             {errors.type_Of_Function && (
@@ -543,9 +567,11 @@ function FamilyfunctionForm() {
 
       <div class="container my-5">
         <div class="card">
-          <form onSubmit={ handleSubmit((data) => {
-            handleSubmit2(data)
-          }) }>
+          <form
+            onSubmit={handleSubmit((data) => {
+              handleSubmit2(data);
+            })}
+          >
             <div class="card-header py-4 px-5 bg-light border-0">
               <h4 class="mb-0 fw-bold">Family Function Booking</h4>
             </div>
@@ -609,7 +635,7 @@ function FamilyfunctionForm() {
                           Devotional Music
                         </label>
                         <input
-                        {...register("devotionalMusic")}
+                          {...register("devotionalMusic")}
                           type="checkbox"
                           value={"devotionalMusic"}
                           class="form-check-input"
@@ -628,7 +654,7 @@ function FamilyfunctionForm() {
                           Devotional Play
                         </label>
                         <input
-                        {...register("devotionalPlay")}
+                          {...register("devotionalPlay")}
                           type="checkbox"
                           value={"devotionalPlay"}
                           class="form-check-input"
@@ -820,37 +846,34 @@ function FamilyfunctionForm() {
                       <div class="col-md-6">
                         <div class="mb-3">
                           <label
-                            HtmlFor="exampleInput5"
+                            HtmlFor="exampleInput343"
                             class="form-label"
                           ></label>
                           <select
-                            id="exampleInput5"
+                            {...register("DecorationType")}
+                            id="exampleInput343"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
                             <option
-                              selected
-                              value="1"
-                              {...register("DecorationType")}
+                              value="Ballon_Decoration"
+                              id="Ballon_Decoration"
                             >
                               Ballon Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="CandyDecoration"
                               value="Candy Decoration"
                             >
                               Candy Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="CartoonDecoration"
                               value="Cartoon Decoration"
                             >
                               Cartoon Decoration
                             </option>
                             <option
-                              {...register("DecorationType")}
                               id="Jungle Party Decoration"
                               value="Jungle Party Decoration"
                             >
@@ -981,7 +1004,7 @@ function FamilyfunctionForm() {
                           Invitation{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
@@ -1004,7 +1027,7 @@ function FamilyfunctionForm() {
                           Pooja Pandit Ji{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="pooja_pandit_ji"
@@ -1023,7 +1046,7 @@ function FamilyfunctionForm() {
                           Venue{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="venue"
@@ -1045,7 +1068,7 @@ function FamilyfunctionForm() {
                           Photography{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="photography"
@@ -1068,7 +1091,7 @@ function FamilyfunctionForm() {
                           Beauty{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="beauty"
@@ -1087,7 +1110,7 @@ function FamilyfunctionForm() {
                           Mehandi{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
                           id="Mehandi"
@@ -1110,7 +1133,7 @@ function FamilyfunctionForm() {
                           Hosting{" "}
                         </label>
                         <input
-                          {...register("Other Services")}
+                          {...register("OtherServices")}
                           type="checkbox"
                           value={"hosting"}
                           class="form-check-input"
@@ -1142,11 +1165,11 @@ function FamilyfunctionForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 Name</strong>{" "}
                             </label>
                             <input
-                              {...register("Venue 1 Name")}
+                              {...register("venue_1_name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1161,11 +1184,11 @@ function FamilyfunctionForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 1 place</strong>
                             </label>
                             <input
-                              {...register("Venue 1 Place")}
+                              {...register("venue_1_place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1182,11 +1205,11 @@ function FamilyfunctionForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Name")}
+                              {...register("venue_2_name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1196,11 +1219,11 @@ function FamilyfunctionForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 2 place</strong>
                             </label>
                             <input
-                              {...register("Venue 2 Place")}
+                              {...register("venue_2_place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1212,11 +1235,11 @@ function FamilyfunctionForm() {
                       <div class="row">
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 Name</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Name")}
+                              {...register("venue_3_name")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"
@@ -1226,11 +1249,11 @@ function FamilyfunctionForm() {
                         </div>
                         <div class="col-md-6">
                           <div class="mb-3">
-                            <label HtmlFor="exampleInput1" class="form-label">
+                            <label for="exampleInput1" class="form-label">
                               <strong>Venue 3 place</strong>
                             </label>
                             <input
-                              {...register("Venue 3 Place")}
+                              {...register("venue_3_place")}
                               type="text"
                               class="form-control"
                               id="exampleInput1"

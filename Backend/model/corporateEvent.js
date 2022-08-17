@@ -1,27 +1,31 @@
 const mongoose = require("mongoose");
 
-const preweddingSchema = new mongoose.Schema(
+const CorporateEventSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
     },
-    ClientName: {
+    TypeOfFunction: {
+      type: String,
+      required: true,
+    },
+    NameOfEvent: {
       type: String,
     },
-    BrideName: {
-      type: String,
-    },
-    GroomName: {
+    NameOfConcern: {
       type: String,
     },
     date: {
+      type: Number,
+    },
+    FromTime: {
       type: String,
     },
-    FromDate: {
+    ToTime: {
       type: String,
     },
-    ToData: {
-      type: String,
+    NoOfGuests: {
+      type: Number,
     },
     MinBudget: {
       type: String,
@@ -31,40 +35,44 @@ const preweddingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    BachelorsPartyDate: {
-      type: String,
-    },
-    ShootingDate: {
-      type: String,
-    },
-    Person: {
-      type: String,
-    },
-    City: {
-      type: String,
-    },
-    SpecialService: {
-      type: String,
-    },
-    Shooting: {
-      Shooting: [
+    Shows: {
+      show: [
         {
           type: String,
         },
       ],
-      Destination: {
-        type: String,
-      },
-    },
-    BachelorsParty: {
       musicvalues: {
         type: String,
       },
       dancevalues: {
-        type: Object,
+        type: String,
       },
-      noofguests: {
-        type: Number,
+      dj: {
+        type: String,
+      },
+    },
+    Decoration: {
+      RegularDecoration: {
+        type: String,
+      },
+      ThemeDecoration: {
+        type: String,
+      },
+    },
+    SpecialService: {
+      type: String,
+    },
+    OtherServices: [
+      {
+        type: String,
+      },
+    ],
+    OtherServiceValues: {
+      invitation: {
+        type: String,
+      },
+      Photography: {
+        type: Object,
       },
       venues: {
         venue1: {
@@ -93,7 +101,6 @@ const preweddingSchema = new mongoose.Schema(
         },
       },
     },
-
     Food: {
       Foodtype: {
         type: String,
@@ -108,6 +115,9 @@ const preweddingSchema = new mongoose.Schema(
   }
 );
 
-const PreWeddingForm = mongoose.model("PreWeddingForm", preweddingSchema);
+const CorporateEventForm = mongoose.model(
+  "CorporateEventForm",
+  CorporateEventSchema
+);
 
-exports.PreWeddingForm = PreWeddingForm;
+exports.CorporateEventForm = CorporateEventForm;

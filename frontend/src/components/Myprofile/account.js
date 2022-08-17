@@ -3,6 +3,7 @@ import Todo from '../todo';
 import Payment from "../payment"
 
 import "./account.css";
+import EventInfo from "../EventsPages/eventInfo/eventInfo";
 export default function Engagement() {
   return (
     <div>
@@ -125,7 +126,7 @@ export default function Engagement() {
           role="tabpanel"
           aria-labelledby="ex2-tab-3"
         >
-          Event Info
+        <EventInfo />
         </div>
         <div
           class="tab-pane fade"

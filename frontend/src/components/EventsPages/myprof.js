@@ -2,6 +2,7 @@ import React from "react";
 import Todo from "../todo";
 
 import "./engag.css";
+import EventInfo from "./eventInfo/eventInfo";
 export default function Engagement() {
   return (
     <div>
@@ -124,7 +125,7 @@ export default function Engagement() {
           role="tabpanel"
           aria-labelledby="ex2-tab-3"
         >
-          Event Info
+          <EventInfo />
         </div>
         <div
           class="tab-pane fade"

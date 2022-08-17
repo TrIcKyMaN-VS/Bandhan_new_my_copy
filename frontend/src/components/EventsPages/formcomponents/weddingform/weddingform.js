@@ -6,8 +6,11 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { authActions } from "../../../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
   Client_Name: yup.string().required("Client name must be required"),
@@ -30,6 +33,8 @@ const schema = yup.object().shape({
 });
 
 function Weddingform() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -254,10 +259,10 @@ function Weddingform() {
       photovalue,
       dancevalue,
       invitationvalue,
-      checkedMehandi
+      checkedMehandi,
     };
-    const userDate = data.date
-    const changeFormat = new Date(userDate)    
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
     var userday = changeFormat.getUTCDate();
     var useryear = changeFormat.getUTCFullYear();
@@ -272,22 +277,35 @@ function Weddingform() {
     const date1 = new Date(UserSelectDate);
     const date2 = new Date(currentDate);
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if(diffDays <10){
+    if (diffDays < 10) {
       toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
     console.log(checkBoxValues);
     console.log(data);
-    axios.post("/api/wedding", {data, checkBoxValues}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .post("/api/wedding", { data, checkBoxValues })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          console.log(err);
+        }
+      });
   };
   // function handleSubmit2(data) {
   //   console.log(data);
@@ -1421,47 +1439,42 @@ function Weddingform() {
                         <div class="mb-3">
                           <label for="exampleInput5" class="form-label"></label>
                           <select
+                            {...register("ThemeDecoration")}
                             id="exampleInput5"
                             class="form-select mb-3"
                             aria-label="Default select example"
                           >
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Romantic Decoration"}
                               value="Romantic Decoration"
                             >
                               Romantic Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Musical Decoration"}
                               value="Musical Decoration"
                             >
                               Musical Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Retro Decoration"}
                               value="Retro Decoration"
                             >
                               Retro Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Single Color Decoration"}
                               value="Single Color Decoration"
                             >
                               Single Color Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Multi Color Decoration"}
                               value="Multi Color Decoration"
                             >
                               Multi Color Decoration
                             </option>
                             <option
-                              {...register("ThemeDecoration")}
                               id={"Traditional decoration"}
                               value="Traditional decoration"
                             >
@@ -1976,10 +1989,7 @@ function Weddingform() {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label
-                          for="exampleInput11"
-                          class="form-label"
-                        ></label>
+                        <label for="exampleInput11" class="form-label"></label>
                         <textarea
                           {...register("SpecialService")}
                           type="number"

@@ -8,11 +8,12 @@ app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const { BirthdayForm } = require("../model/birthdaymodel");
-
+const auth = require('../middleware/auth')
 
 //routes
-router.post("/",async(req,res) => {
-    
+router.post("/",auth,async(req,res) => {
+
+        const userId = req.id
         const BirthdayPersonName = req.body.data.Birthday_Person_name
         const Age = req.body.data.Age
         const Gender = req.body.data.Gender
@@ -56,6 +57,7 @@ router.post("/",async(req,res) => {
         // const Photography = {
         //     photography : req.body.checkBoxValues.photovalue
         // }
+        // console.log(photography);
         const Food ={
             Foodtype:req.body.data.Food,
             items : req.body.checkBoxValues.foodvalue
@@ -64,6 +66,7 @@ router.post("/",async(req,res) => {
        console.log(req.body);
 
         const newbirthdayform = BirthdayForm({
+            userId,
             BirthdayPersonName,
             Age,
             Gender,
@@ -79,14 +82,14 @@ router.post("/",async(req,res) => {
             SpecialService,
             OtherServices,
             OtherServiceValues,
-            Photography,
+            // Photography,
             Food
 
         })
         newbirthdayform
         .save()
         .then(() => res.status(200).send("birthday form saved successfully...!"));
-        console.log( );
+        // console.log( );
 
     
 })

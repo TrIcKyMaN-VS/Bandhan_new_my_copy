@@ -7,8 +7,11 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { authActions } from "../../../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
   Client_Name: yup.string().required("Client name must be required"),
@@ -31,13 +34,13 @@ const schema = yup.object().shape({
 });
 
 function PostweddingForm() {
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch()  
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-
 
   const [value, setvalue] = useState("");
   const handleOnchange = (val) => {
@@ -149,8 +152,8 @@ function PostweddingForm() {
       foodvalue,
       dancevalue,
     };
-    const userDate = data.date
-    const changeFormat = new Date(userDate)    
+    const userDate = data.date;
+    const changeFormat = new Date(userDate);
     var usermonth = changeFormat.getUTCMonth() + 1; //months from 1-12
     var userday = changeFormat.getUTCDate();
     var useryear = changeFormat.getUTCFullYear();
@@ -165,25 +168,47 @@ function PostweddingForm() {
     const date1 = new Date(UserSelectDate);
     const date2 = new Date(currentDate);
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if(diffDays <10){
+    if (diffDays < 10) {
       toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
     }
     console.log(checkBoxValues);
     // console.log(checkBoxValues.dancevalue);
     console.log(data);
-    axios.post("/api/postwedding", {data, checkBoxValues}).then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .post("/api/postwedding", { data, checkBoxValues })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data == "Accesss Denied. No Token Provided" ||
+          "Invalid Token"
+        ) {
+          localStorage.clear("bandhanUserToken");
+          dispatch(authActions.logout());
+          navigate("/login");
+          console.log("Succesfully logged out");
+        } else {
+          if (
+            err.response.data == "Accesss Denied. No Token Provided" ||
+            "Invalid Token"
+          ) {
+            localStorage.clear("bandhanUserToken");
+            dispatch(authActions.logout());
+            navigate("/login");
+            console.log("Succesfully logged out");
+          } else {
+            console.log(err);
+          }
+        }
+      });
   };
-
 
   return (
     <section class="h-50">
@@ -785,7 +810,7 @@ function PostweddingForm() {
                           Decorated Car{" "}
                         </label>
                         <input
-                        {...register("subaarambh_Yatra")}
+                          {...register("subaarambh_Yatra")}
                           type="checkbox"
                           class="form-check-input"
                           value={"decorated_Car"}
@@ -804,7 +829,7 @@ function PostweddingForm() {
                           Decorated Cart{" "}
                         </label>
                         <input
-                        {...register("subaarambh_Yatra")}
+                          {...register("subaarambh_Yatra")}
                           type="checkbox"
                           value={"decorated_Cart"}
                           class="form-check-input"
@@ -841,7 +866,7 @@ function PostweddingForm() {
                           Destination{" "}
                         </label>
                         <input
-                        {...register("honeyMoon")}
+                          {...register("honeyMoon")}
                           type="checkbox"
                           class="form-check-input"
                           id="invitation"
@@ -860,7 +885,7 @@ function PostweddingForm() {
                           </h5>
                         </label>
                         <input
-                        {...register("no_of_days_honeymoon")}
+                          {...register("no_of_days_honeymoon")}
                           type="number"
                           class="form-control"
                           id="exampleInput1"
@@ -881,7 +906,7 @@ function PostweddingForm() {
                             </h5>
                           </label>
                           <input
-                          {...register("destination_India")}
+                            {...register("destination_India")}
                             type="text"
                             class="form-control"
                             id="india"
@@ -897,7 +922,7 @@ function PostweddingForm() {
                             </h5>
                           </label>
                           <input
-                          {...register("destination_Abroad")}
+                            {...register("destination_Abroad")}
                             type="text"
                             class="form-control"
                             id="abroad"
@@ -997,10 +1022,7 @@ function PostweddingForm() {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="mb-3">
-                        <label
-                          for="exampleInput11"
-                          class="form-label"
-                        ></label>
+                        <label for="exampleInput11" class="form-label"></label>
                         <textarea
                           {...register("SpecialService")}
                           type="number"

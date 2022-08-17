@@ -1,126 +1,132 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const engagementSchema = new mongoose.Schema({
-    ClientName:{
-        type:String
+const engagementSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
     },
-    BrideName:{
-        type:String
+    ClientName: {
+      type: String,
     },
-    GroomName:{
-        type:String
-    },    
-    date :{
-        type : String,
+    BrideName: {
+      type: String,
     },
-    FromDate:{
-        type : String,
-      },
-      ToData:{
-        type : String,
-      },
-    NoOfGuests:{
-        type : Number,
+    GroomName: {
+      type: String,
+    },
+    date: {
+      type: String,
+    },
+    FromDate: {
+      type: String,
+    },
+    ToData: {
+      type: String,
+    },
+    NoOfGuests: {
+      type: Number,
     },
     MinBudget: {
-        type : String,
-    required : true,
+      type: String,
+      required: true,
     },
     MaxBudget: {
-        type : String,
-        required : true,
+      type: String,
+      required: true,
     },
-    Age :{
-        type : Number
-       },
-      Gender:{
-        type : String,
-       },
-      City:{
-        type : String,
-       },
-       Shows:{
-        show:[{
-            type : String,
-        }],
-        musicvalues :{
-            type : String,
-        },
-        dancevalues :{
-            type : String,
-        },
-        dj:{
-            type : String,
-        }
-
+    Age: {
+      type: Number,
     },
-    Decoration:{
-        RegularDecoration:{
-            type : String,
-        },
-        ThemeDecoration:{
-            type : String
-        }
+    Gender: {
+      type: String,
     },
-    SpecialService:{
-        type : String
+    City: {
+      type: String,
     },
-    OtherServices :[{
-        type : String
-    }],
-    OtherServiceValues:{
-        invitation :{
-            type:String
+    Shows: {
+      show: [
+        {
+          type: String,
         },
-        Photography:{
-            type:Object
+      ],
+      musicvalues: {
+        type: String,
+      },
+      dancevalues: {
+        type: String,
+      },
+      dj: {
+        type: String,
+      },
+    },
+    Decoration: {
+      RegularDecoration: {
+        type: String,
+      },
+      ThemeDecoration: {
+        type: String,
+      },
+    },
+    SpecialService: {
+      type: String,
+    },
+    OtherServices: [
+      {
+        type: String,
+      },
+    ],
+    OtherServiceValues: {
+      invitation: {
+        type: String,
+      },
+      Photography: {
+        type: Object,
+      },
+      mehandi: {
+        type: Object,
+      },
+      venues: {
+        venue1: {
+          name: {
+            type: String,
+          },
+          place: {
+            type: String,
+          },
         },
-        mehandi:{
-            type:Object
+        venue2: {
+          name: {
+            type: String,
+          },
+          place: {
+            type: String,
+          },
         },
-        venues:{
-            venue1:{
-                name:{
-                    type:String
-                },
-                place:{
-                    type:String
-                }
-            },
-            venue2:{
-                name:{
-                    type:String
-                },
-                place:{
-                    type:String
-                }
-            },
-            venue3:{
-                name:{
-                    type:String
-                },
-                place:{
-                    type:String
-                }
-            }
-        }
+        venue3: {
+          name: {
+            type: String,
+          },
+          place: {
+            type: String,
+          },
+        },
+      },
     },
 
-    Food :{
-        Foodtype:{
-            type:String
-        },
-        items:{
-            type:String
-        }
-    }
+    Food: {
+      Foodtype: {
+        type: String,
+      },
+      items: {
+        type: String,
+      },
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-},{
-    timestamps:true
-    
-})
+const EngagementForm = mongoose.model("EngagementForm", engagementSchema);
 
-
-const EngagementForm = mongoose.model('EngagementForm',engagementSchema)
-
-exports.EngagementForm = EngagementForm
+exports.EngagementForm = EngagementForm;
