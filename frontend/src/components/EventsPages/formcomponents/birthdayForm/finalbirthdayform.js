@@ -41,7 +41,7 @@ const schema = yup.object().shape({
 
 function Finalbirthdayform() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -151,6 +151,15 @@ function Finalbirthdayform() {
   const [checkedInvitation, setCheckedInvitation] = useState(false);
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
+  //do logout
+
+  function doLogout() {
+    localStorage.clear("bandhanUserToken");
+    dispatch(authActions.logout());
+    navigate("/login");
+    console.log("Succesfully logged out");
+  }
+
   const handleSubmit2 = (data) => {
     // premium notification
     const userDate = data.date;
@@ -195,16 +204,14 @@ function Finalbirthdayform() {
         console.log(res.data);
       })
       .catch((err) => {
-        if (
-          err.response.data == "Accesss Denied. No Token Provided" ||
-          "Invalid Token"
-        ) {
-          console.log(err);
-          localStorage.clear("bandhanUserToken");
-          dispatch(authActions.logout());
-          navigate("/login");
-          console.log("Succesfully logged out");
+        if (err.response.data === "Accesss Denied. No Token Provided") {
+          console.log(err.response.data);
+          doLogout();
         } else {
+          if (err.response.data === "Invalid Token") {
+            console.log(err);
+            doLogout();
+          }
           console.log(err);
         }
       });

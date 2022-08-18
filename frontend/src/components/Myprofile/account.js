@@ -11,7 +11,7 @@ export default function Engagement() {
       <ul class="nav nav-pills nav-fill mb-3" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
           <a
-            class="nav-link"
+            class="nav-link active"
             id="ex2-tab-3"
             data-mdb-toggle="tab"
             href="#ex2-tabs-3"
@@ -80,7 +80,7 @@ export default function Engagement() {
 
       {/* <!-- Tabs content --> */}
       <div class="tab-content" id="ex2-content">
-        <div
+        {/* <div
           class="tab-pane fade show active"
           id="ex2-tabs-1"
           role="tabpanel"
@@ -104,16 +104,15 @@ export default function Engagement() {
                         Bay Area, San Francisco, CA
                       </p>
                       <button class="btn btn-primary mt-1x">Follow</button>
-                      {/* <button class="btn btn-outline-primary">Message</button> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div
-          class="tab-pane fade"
+          class="tab-pane fade "
           id="ex2-tabs-2"
           role="tabpanel"
           aria-labelledby="ex2-tab-2"
@@ -121,7 +120,7 @@ export default function Engagement() {
           <Todo />
         </div>
         <div
-          class="tab-pane fade"
+          class="tab-pane fade show active"
           id="ex2-tabs-3"
           role="tabpanel"
           aria-labelledby="ex2-tab-3"

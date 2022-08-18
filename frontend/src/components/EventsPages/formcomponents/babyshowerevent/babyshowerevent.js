@@ -139,6 +139,15 @@ function BabyShowerForm() {
   const [checkedInvitation, setCheckedInvitation] = useState(false);
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
+  //do logout
+
+  function doLogout() {
+    localStorage.clear("bandhanUserToken");
+    dispatch(authActions.logout());
+    navigate("/login");
+    console.log("Succesfully logged out");
+  }
+
   function handleSubmit2(data) {
     console.log(data);
     const checkBoxValues = {
@@ -180,15 +189,14 @@ function BabyShowerForm() {
         console.log(res.data);
       })
       .catch((err) => {
-        if (
-          err.response.data == "Accesss Denied. No Token Provided" ||
-          "Invalid Token"
-        ) {
-          localStorage.clear("bandhanUserToken");
-          dispatch(authActions.logout());
-          navigate("/login");
-          console.log("Succesfully logged out");
+        if (err.response.data === "Accesss Denied. No Token Provided") {
+          console.log(err.response.data);
+          doLogout();
         } else {
+          if (err.response.data === "Invalid Token") {
+            console.log(err);
+            doLogout();
+          }
           console.log(err);
         }
       });

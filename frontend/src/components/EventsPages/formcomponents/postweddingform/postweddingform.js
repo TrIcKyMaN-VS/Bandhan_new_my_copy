@@ -35,7 +35,7 @@ const schema = yup.object().shape({
 
 function PostweddingForm() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()  
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -146,6 +146,15 @@ function PostweddingForm() {
   const [checkedInvitation, setCheckedInvitation] = useState(false);
   const [checkedPhotography, setCheckedPhotography] = useState(false);
 
+  //do logout
+
+  function doLogout() {
+    localStorage.clear("bandhanUserToken");
+    dispatch(authActions.logout());
+    navigate("/login");
+    console.log("Succesfully logged out");
+  }
+
   const handleSubmit2 = (data) => {
     const checkBoxValues = {
       musicvalue,
@@ -186,26 +195,15 @@ function PostweddingForm() {
         console.log(res.data);
       })
       .catch((err) => {
-        if (
-          err.response.data == "Accesss Denied. No Token Provided" ||
-          "Invalid Token"
-        ) {
-          localStorage.clear("bandhanUserToken");
-          dispatch(authActions.logout());
-          navigate("/login");
-          console.log("Succesfully logged out");
+        if (err.response.data === "Accesss Denied. No Token Provided") {
+          console.log(err.response.data);
+          doLogout();
         } else {
-          if (
-            err.response.data == "Accesss Denied. No Token Provided" ||
-            "Invalid Token"
-          ) {
-            localStorage.clear("bandhanUserToken");
-            dispatch(authActions.logout());
-            navigate("/login");
-            console.log("Succesfully logged out");
-          } else {
+          if (err.response.data === "Invalid Token") {
             console.log(err);
+            doLogout();
           }
+          console.log(err);
         }
       });
   };

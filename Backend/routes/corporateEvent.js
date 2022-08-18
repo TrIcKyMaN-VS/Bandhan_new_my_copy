@@ -7,7 +7,7 @@ app.use(cors());
 // app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { CorporateEventForm } = require("../model/corporateEvent");
+const { EventForm } = require("../model/eventModel");
 const auth = require('../middleware/auth')
 
 
@@ -62,7 +62,7 @@ router.post("/",auth,async(req,res) => {
                 }
             }
         }
-    const newCorporateEventForm = CorporateEventForm({
+    const newEventForm = EventForm({
         userId,
         TypeOfFunction,
         NameOfEvent,
@@ -82,7 +82,7 @@ router.post("/",auth,async(req,res) => {
         Food
 
     })
-    newCorporateEventForm
+    newEventForm
     .save()
     .then(() => res.status(200).send("Family Function form saved successfully...!"));
     console.log( "completed!! saved");

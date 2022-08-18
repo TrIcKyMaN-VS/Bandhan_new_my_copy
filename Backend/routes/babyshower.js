@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const auth = require('../middleware/auth')
-const { BabyShowerForm } = require("../model/babyshowermodel");
+const { EventForm } = require("../model/eventModel");
 
 router.post("/",auth,async(req,res) => {
     const data = req.body.data
@@ -58,7 +58,7 @@ router.post("/",auth,async(req,res) => {
                 }
             }
         }
-    const newBabyShowerForm = BabyShowerForm({
+    const newEventForm = EventForm({
         userId,
         MomName,
         DadName,
@@ -76,7 +76,7 @@ router.post("/",auth,async(req,res) => {
         Food
 
     })
-    newBabyShowerForm
+    newEventForm
     .save()
     .then(() => res.status(200).send("BabyShower form saved successfully...!"));
     console.log( "completed!! saved");

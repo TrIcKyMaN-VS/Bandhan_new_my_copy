@@ -34,8 +34,8 @@ const schema = yup.object().shape({
 });
 
 function CorporateForm() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -178,7 +178,16 @@ function CorporateForm() {
   const [checkedPhotography, setCheckedPhotography] = useState(false);
   const [checkedPlay, setCheckedPlay] = useState(false);
 
-  console.log(errors);
+  // console.log(errors);
+
+  //do logout
+
+  function doLogout() {
+    localStorage.clear("bandhanUserToken");
+    dispatch(authActions.logout());
+    navigate("/login");
+    console.log("Succesfully logged out");
+  }
 
   function handleSubmit2(data) {
     console.log(data);
@@ -226,15 +235,14 @@ function CorporateForm() {
         console.log(res.data);
       })
       .catch((err) => {
-        if (
-          err.response.data == "Accesss Denied. No Token Provided" ||
-          "Invalid Token"
-        ) {
-          localStorage.clear("bandhanUserToken");
-          dispatch(authActions.logout());
-          navigate("/login");
-          console.log("Succesfully logged out");
+        if (err.response.data === "Accesss Denied. No Token Provided") {
+          console.log(err.response.data);
+          doLogout();
         } else {
+          if (err.response.data === "Invalid Token") {
+            console.log(err);
+            doLogout();
+          }
           console.log(err);
         }
       });

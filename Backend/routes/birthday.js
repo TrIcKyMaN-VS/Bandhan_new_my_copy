@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { BirthdayForm } = require("../model/birthdaymodel");
+const { EventForm } = require("../model/eventModel");
 const auth = require('../middleware/auth')
 
 //routes
@@ -16,7 +16,7 @@ router.post("/",auth,async(req,res) => {
         const userId = req.id
         const BirthdayPersonName = req.body.data.Birthday_Person_name
         const Age = req.body.data.Age
-        const Gender = req.body.data.Gender
+        const Gender = req.body.data.gender
         const City = req.body.data.city
         const FromTime = req.body.data.FromTime
         const ToTime = req.body.data.ToTime
@@ -63,9 +63,9 @@ router.post("/",auth,async(req,res) => {
             items : req.body.checkBoxValues.foodvalue
         }
 
-       console.log(req.body);
+    //    console.log(req.body);
 
-        const newbirthdayform = BirthdayForm({
+        const newEventForm = EventForm({
             userId,
             BirthdayPersonName,
             Age,
@@ -86,9 +86,11 @@ router.post("/",auth,async(req,res) => {
             Food
 
         })
-        newbirthdayform
+        newEventForm
         .save()
-        .then(() => res.status(200).send("birthday form saved successfully...!"));
+        .then(() => {res.status(200).send("birthday form saved successfully...!")
+        console.log(newEventForm);
+    })
         // console.log( );
 
     

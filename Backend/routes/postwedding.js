@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { PostWeddingForm } = require("../model/postweddingmodel");
+const { EventForm } = require("../model/eventModel");
 const auth = require('../middleware/auth')
 
 router.post("/",auth,async(req,res) => {
@@ -45,7 +45,7 @@ router.post("/",auth,async(req,res) => {
         Foodtype:data.Food,
         items : checkBoxValues.foodvalue
     }
-    const newPostWeddingForm = PostWeddingForm({
+    const newEventForm = EventForm({
         userId,
         ClientName,
         BrideName,
@@ -65,7 +65,7 @@ router.post("/",auth,async(req,res) => {
         Food
 
     })
-    newPostWeddingForm
+    newEventForm
     .save()
     .then(() => res.status(200).send("Postwedding form saved successfully...!"));
     console.log( "completed!! saved");
