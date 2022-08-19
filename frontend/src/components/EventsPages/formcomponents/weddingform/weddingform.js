@@ -257,9 +257,12 @@ function Weddingform() {
     console.log("Succesfully logged out");
   }
 
+  const name_Of_The_Event = "weddingforms";
+
   const handleSubmit2 = (data) => {
     console.log(data);
     const checkBoxValues = {
+      name_Of_The_Event,
       musicvalue,
       foodvalue,
       decorationvalue,

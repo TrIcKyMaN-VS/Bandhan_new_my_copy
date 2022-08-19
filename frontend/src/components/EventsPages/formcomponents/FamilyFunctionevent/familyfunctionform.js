@@ -180,7 +180,9 @@ function FamilyfunctionForm() {
   function handleSubmit2(data) {
     console.log(data);
 
+    const name_Of_The_Event = "familyfunctionforms";
     const checkBoxValues = {
+      name_Of_The_Event,
       musicvalue,
       // foodtypes,
       foodvalue,

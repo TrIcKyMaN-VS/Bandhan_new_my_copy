@@ -7,8 +7,9 @@ app.use(cors());
 app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { EventForm } = require("../model/eventModel");
+const { PreWeddingForm } = require("../model/preweddingmodel");
 const auth = require("../middleware/auth");
+const { EventName } = require("../model/eventName");
 
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
@@ -58,7 +59,7 @@ router.post("/", auth, async (req, res) => {
     Foodtype: data.Food,
     items: checkBoxValues.foodvalue,
   };
-  const newEventForm = EventForm({
+  const newPreWeddingForm = PreWeddingForm({
     userId,
     ClientName,
     BrideName,
@@ -77,9 +78,23 @@ router.post("/", auth, async (req, res) => {
     Shooting,
     Food,
   });
-  newEventForm.save().then(() => {
+
+  console.log("def", req.body.name_Of_The_Event);
+
+  // const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
+  const name_Of_The_Event = req.body.name_Of_The_Event
+  console.log(name_Of_The_Event);
+
+  const newEventName = EventName({
+    userId,
+    name_Of_The_Event,
+  });
+
+  newEventName.save().then(() => console.log("successfully event name saved"));
+
+  newPreWeddingForm.save().then(() => {
     res.status(200).send("Prewedding form saved successfully...!");
-    console.log(newEventForm);
+    console.log(newPreWeddingForm);
   });
   console.log("completed!! saved");
 

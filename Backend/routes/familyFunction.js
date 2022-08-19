@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
 const auth = require("../middleware/auth");
+const { EventName } = require("../model/eventName");
 
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
@@ -76,6 +77,16 @@ router.post("/", auth, async (req, res) => {
     OtherServiceValues,
     Food,
   });
+
+  const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
+
+  const newEventName = EventName({
+    userId,
+    name_Of_The_Event,
+  });
+
+  newEventName.save().then(() => console.log("successfully event name saved"));
+
   newEventForm.save().then(() => {
     res.status(200).send("Family Function form saved successfully...!");
     console.log(newEventForm);

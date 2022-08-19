@@ -155,8 +155,11 @@ function PostweddingForm() {
     console.log("Succesfully logged out");
   }
 
+  const name_Of_The_Event = "postweddingforms";
+
   const handleSubmit2 = (data) => {
     const checkBoxValues = {
+      name_Of_The_Event,
       musicvalue,
       foodvalue,
       dancevalue,

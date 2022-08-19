@@ -150,7 +150,9 @@ function BabyShowerForm() {
 
   function handleSubmit2(data) {
     console.log(data);
+    const name_Of_The_Event = "babyshowerforms";
     const checkBoxValues = {
+      name_Of_The_Event,
       invitationvalue,
       photovalue,
       foodvalue,

@@ -179,8 +179,11 @@ function EngagementForm() {
     console.log("Succesfully logged out");
   }
 
+  const name_Of_The_Event = "engagementforms";
+
   const handleSubmit2 = (data) => {
     const checkBoxValues = {
+      name_Of_The_Event,
       musicvalue,
       foodvalue,
       decorationvalue,

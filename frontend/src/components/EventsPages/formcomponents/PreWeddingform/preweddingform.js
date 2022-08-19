@@ -154,6 +154,8 @@ function PreweddingForm() {
     console.log("Succesfully logged out");
   }
 
+  const name_Of_The_Event = "preWeddingForm";
+
   function handleSubmit2(data) {
     // premium notification
     const userDate = data.date;
@@ -190,7 +192,7 @@ function PreweddingForm() {
       foodvalue,
     };
     axios
-      .post("/api/prewedding", { data, checkBoxValues })
+      .post("/api/prewedding", { data, checkBoxValues,name_Of_The_Event, })
       .then((res) => {
         console.log(res.data);
       })

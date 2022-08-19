@@ -212,10 +212,11 @@ const eventSchema = new mongoose.Schema(
           type: String,
         },
       ],
-      OtherServiceValues: {
-        invitation: {
+      invitation: {
           type: String,
         },
+      OtherServiceValues: {
+        
         Photography: {
           type: Object,
         },

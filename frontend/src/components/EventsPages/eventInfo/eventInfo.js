@@ -2,15 +2,24 @@ import axios from "axios";
 import React, { useEffect } from "react";
 
 function EventInfo() {
-
-    useEffect(() => {
-        axios.get('api/eventInfo').then((res) => {
-            console.log(res);
-        }).catch((err) => {
-            console.log(err);
-        })
-    },[])
-
+  useEffect(() => {
+    axios
+      .get("api/eventInfo")
+      .then((res) => {
+        console.log(res.data);
+        const doc = res.data;
+        doc.map((item) => {
+          for (const iteme in item) {
+            if (iteme != "") {
+              console.log(iteme);
+            }
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className=" mt-5 mb-5 ps-5 pe-5 ms-3 me-3 pb-5 pt-3">
@@ -68,7 +77,7 @@ function EventInfo() {
               <p class="text-muted mb-0">UI/UX</p>
             </td>
             <td>
-            <span class="badge badge-warning rounded-pill d-inline">
+              <span class="badge badge-warning rounded-pill d-inline">
                 pending
               </span>
             </td>
