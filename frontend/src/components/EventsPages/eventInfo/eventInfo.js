@@ -1,26 +1,109 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function EventInfo() {
+  const [datas ,setdata] = useState([])
   useEffect(() => {
     axios
-      .get("api/eventInfo")
+      // .get("api/eventInfo/prewedding")
+      // .then((res) => {
+      //   console.log(res.data);
+      //   const doc = res.data;
+      //   doc.map((item) => {
+      //     for (const iteme in item) {
+      //       if (iteme != "") {
+      //         console.log(iteme);
+      //       }
+      //     }
+      //   });
+      // })
+      .get("api/eventInfo/prewedding")
       .then((res) => {
-        console.log(res.data);
-        const doc = res.data;
-        doc.map((item) => {
-          for (const iteme in item) {
-            if (iteme != "") {
-              console.log(iteme);
-            }
-          }
-        });
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+      axios.get("api/eventInfo/babyshower")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios.get("api/eventInfo/wedding")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
 
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios.get("api/eventInfo/engagement")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+      
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios.get("api/eventInfo/birthday")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios.get("api/eventInfo/corporate")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios.get("api/eventInfo/familyfunction")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios.get("api/eventInfo/wedding")
+      .then((res) => {
+        const ll = res.data
+        if(ll.length > 0){
+          setdata(data => [...data, res.data])
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  , []);
+  console.log(datas);
+ 
   return (
     <div className=" mt-5 mb-5 ps-5 pe-5 ms-3 me-3 pb-5 pt-3">
       <table class="table align-middle mb-0 bg-white">

@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
 const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
-
+const {EngagementForm} = require("../model/engagementmodel")
 //routes
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
@@ -65,7 +65,7 @@ router.post("/", auth, async (req, res) => {
     items: checkBoxValues.foodvalue,
   };
 
-  const newEventForm = EventForm({
+  const newEngagementForm = EngagementForm({
     userId,
     ClientName,
     BrideName,
@@ -96,9 +96,8 @@ router.post("/", auth, async (req, res) => {
 
   newEventName.save().then(() => console.log("successfully event name saved"));
 
-  newEventForm.save().then(() => {
+  newEngagementForm.save().then(() => {
     res.status(200).send("Engagement form saved successfully...!");
-    console.log(newEventForm);
   });
   console.log("completed!! saved");
 

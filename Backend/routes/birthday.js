@@ -8,6 +8,7 @@ app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
+const {BirthdayForm} = require("../model/birthdaymodel")
 const auth = require('../middleware/auth')
 
 //routes
@@ -65,7 +66,7 @@ router.post("/",auth,async(req,res) => {
 
     //    console.log(req.body);
 
-        const newEventForm = EventForm({
+        const newBirthdayForm = BirthdayForm({
             userId,
             BirthdayPersonName,
             Age,
@@ -86,10 +87,9 @@ router.post("/",auth,async(req,res) => {
             Food
 
         })
-        newEventForm
+        newBirthdayForm
         .save()
         .then(() => {res.status(200).send("birthday form saved successfully...!")
-        console.log(newEventForm);
     })
         // console.log( );
 

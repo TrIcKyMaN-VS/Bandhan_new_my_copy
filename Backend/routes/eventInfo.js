@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const config = require("config");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,11 +17,16 @@ const { CorporateEventForm } = require("../model/corporateEvent");
 const { FamilyFunctionForm } = require("../model/familyFunction");
 const { WeddingForm } = require("../model/weddingmodel");
 const { EventName } = require("../model/eventName");
+const db = config.get("db");
 
-router.get("/", auth, (req, res) => {
+
+router.get("/", auth, async (req, res) => {
   console.log("req rec eventinfo");
 
   const functions23 = ["preWeddingForm", "postWeddingForm"];
+
+  const newArr = []
+  let newVar = false
 
   EventName.find({ userId: req.id }, (err, doc) => {
     if (err) {
@@ -33,16 +39,71 @@ router.get("/", auth, (req, res) => {
       });
       // console.log(modelName);
 
+      async function pushFunc(cv){
+         newArr.push(cv[0])
+      }
+
+      async function getData(docs){
+        // async function(err, doc){
+          if (docs) {
+            //   console.log(doc);
+            // datas.push(doc);
+            console.log("doc");
+            await newArr.push("docs")
+             newVar = true
+            
+            
+          }else{
+            // await newArr.push("doc")
+            console.log("dogtgc");
+
+          }
+        // }
+      }
+
+      async function forthFunc(item) {
+        let newrt 
+        let queryById = { userId: req.id }
+        let xcv = PreWeddingForm.find(queryById, async function (err,docs)  {
+          newVar = true
+        // newrt =  await newArr.push("dertyu")
+        await getData(docs)
+        // return docs
+      })
+      // console.log(xcv);
+        // newrt = await xcv
+        // console.log("newrt: ",newrt);
+
+        // let xcv = PreWeddingForm.findOne({userId: req.id})
+          // (err,doc)=>{
+          // console.log("dfd",xcv);
+          // newArr.push(xcv)
+          console.log("4th func");
+          // if(!err){
+            // console.log("doc");
+          // }
+        // })
+        //  async(err,doc) => {
+        //   console.log("forth func ins");
+        //   if (doc) {
+        //     console.log("doc");
+        //     // datas1.push(doc);
+        //     return doc;
+        //   }
+        // });
+        // let derp = await pushFunc(cv) 
+        // console.log("fr",cv);
+        // console.log(derp);
+      }
+
       const datas = [];
 
-      modelName.map((item) => {
+      async function thirdFunc(item) {
+        // {
         if ("preWeddingForm" === item) {
-          PreWeddingForm.find({ userId: req.id }, (err, doc) => {
-            if (doc) {
-              console.log(doc);
-              datas.push(doc);
-            }
-          });
+          console.log("3rd func");
+          await forthFunc(item);
+          // console.log("res33",res33);
         } else if ("EngagementForm" === item) {
           EngagementForm.find({ userId: req.id }, (err, doc) => {
             if (doc) {
@@ -94,8 +155,28 @@ router.get("/", auth, (req, res) => {
             }
           });
         }
-      });
-      console.log(datas);
+        // })
+      }
+
+      async function secondFunc() {
+        let datas1 = [];
+        let res1 = await modelName.map((item) => {
+          thirdFunc(item);
+        });
+      }
+
+      const firstFunc = async () => {
+        const result = await secondFunc();
+        console.log("res",result);
+        if(newVar){
+
+          console.log("ddd",newArr);
+        }
+      };
+
+      firstFunc();
+
+      // console.log(awsait datas);
       // for (const item of functions) {
       //     for (const item1 of modelName) {
       //         if(item == item1){
@@ -116,6 +197,10 @@ router.get("/", auth, (req, res) => {
       //   console.log(datas);
       // res.send("got it")
     }
+    if(newVar){
+
+      console.log("ddd",newArr);
+    }
   });
 
   // EventForm.find({userId : req.id}, (err,doc) => {
@@ -127,6 +212,10 @@ router.get("/", auth, (req, res) => {
   //         res.send("got it")
   //     }
   // })
+  if(newVar){
+
+    console.log("ddd",newArr);
+  }
 });
 
 module.exports = router;

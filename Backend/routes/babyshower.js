@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const auth = require("../middleware/auth");
 const { EventForm } = require("../model/eventModel");
 const { EventName } = require("../model/eventName");
+const {BabyShowerForm} = require("../model/babyshowermodel")
 
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
@@ -59,7 +60,7 @@ router.post("/", auth, async (req, res) => {
       },
     },
   };
-  const newEventForm = EventForm({
+  const newBabyShowerForm = BabyShowerForm({
     userId,
     MomName,
     DadName,
@@ -86,9 +87,9 @@ router.post("/", auth, async (req, res) => {
 
   newEventName.save().then(() => console.log("successfully event name saved"));
 
-  newEventForm.save().then(() => {
+  newBabyShowerForm.save().then(() => {
     res.status(200).send("BabyShower form saved successfully...!");
-    console.log(newEventForm);
+    console.log(newBabyShowerForm);
   });
   console.log("completed!! saved");
 

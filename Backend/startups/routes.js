@@ -9,7 +9,7 @@ const engagement = require("../routes/engagement")
 const prewedding = require("../routes/prewedding")
 const postwedding = require("../routes/postwedding")
 const babyshower = require("../routes/babyshower")
-const eventInfo = require("../routes/eventInfo")
+const eventsinfos = require("../routes/eventsinfos")
 const home = require("../routes/home");
 const todo = require("../routes/todo");
 const newPassword = require("./../routes/newPassword");
@@ -38,6 +38,6 @@ module.exports = function (app) {
   app.use("/api/wedding", wedding)
   app.use("/api/familyFunction", familyFunction)
   app.use("/api/corporateEvent", corporateEvent)
-  app.use("/api/eventInfo",eventInfo )
+  app.use("/api/eventInfo",eventsinfos )
 };
 
