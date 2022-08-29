@@ -25,7 +25,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store";
 import Footer from "./components/Footer/footer";
 import Navbar from "./components/Navbar/navbar";
-
+import Admin from './components/admin/adminlogin';
+import Admindashboard from './components/admin/admindashboard';
 function App() {
   const dispatch = useDispatch()
     if(localStorage.bandhanUserToken){
@@ -83,6 +84,8 @@ function App() {
         <Route path="/passwordReset" element={<Passwordreset />}></Route>
         <Route path="/newPassword/:resetTok" element={<NewPassword />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admindashboard" element={<Admindashboard />}></Route>
         {/* <Route path="/birthday" element={<Birthday />}></Route>
         <Route path="/babyshower" element={<Babyshower />}></Route>
         <Route path="/corporateevent" element={<Corporateevent />}></Route>

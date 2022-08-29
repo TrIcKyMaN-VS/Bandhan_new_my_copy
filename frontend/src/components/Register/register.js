@@ -20,6 +20,7 @@ const initialState = {
   username: "",
   email: "",
   password: "",
+  phonenumber: "",
   // isLoading: false,
   // error: "",
   // isLoggedIn: false
@@ -73,11 +74,11 @@ export default function Register() {
 
   function handleReg(e) {
     // console.log("Register");
-    let { username, password, email } = state;
-
+    let { username, password, email ,phonenumber} = state;
+    // console.log(phonenumber);
     e.preventDefault();
     axios
-      .post("api/register", { username, email, password })
+      .post("api/register", { username, email, password ,phonenumber})
       .then((res) => {
         // console.log(res.data);
         if (res.status == 200) {
@@ -185,6 +186,16 @@ export default function Register() {
               onChange={handleChange}
               className="form-control mt-1"
               placeholder="Password"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>PhoneNumber</label>
+            <input
+              type="text"
+              name="phonenumber"
+              onChange={handleChange}
+              className="form-control mt-1"
+              placeholder="Phonenumber"
             />
           </div>
           <div className="d-grid gap-2 mt-3">

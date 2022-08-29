@@ -909,25 +909,26 @@ function FamilyfunctionForm() {
                     <strong>Catering :</strong>
                   </h4>
                 </div>
-
+                
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault"
+                            name="Food"
+                            id="veg"
+                            value={"veg"}
                           />
 
                           <label
                             class="form-check-label"
                             for="flexRadioDefault"
                           >
-                            {" "}
-                            Veg{" "}
+                            Veg
                           </label>
                         </div>
                       </div>
@@ -936,17 +937,19 @@ function FamilyfunctionForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
+                            name="Food"
+                            value={"Non-veg"}
+                            id="non-veg"
                           />
 
                           <label
                             class="form-check-label"
                             for="flexRadioDefault1"
                           >
-                            Non-Veg{" "}
+                            Non-Veg
                           </label>
                         </div>
                       </div>
@@ -955,18 +958,19 @@ function FamilyfunctionForm() {
                       <div class="mb-3">
                         <div class="form-check">
                           <input
+                            {...register("Food")}
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
+                            value={"Jain"}
+                            name="Food"
+                            id="jain"
                           />
 
                           <label
                             class="form-check-label"
                             for="flexRadioDefault2"
                           >
-                            {" "}
-                            Jain{" "}
+                            Jain
                           </label>
                         </div>
                       </div>
