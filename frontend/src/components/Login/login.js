@@ -1,52 +1,32 @@
-import React, { useReducer } from "react";
+import React from "react";
 import axios from "axios";
-import "./login.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { authActions } from "../../store";
 
-import { useDispatch } from "react-redux";
-function LoginReducer(state, action) {
-  switch (action.type) {
-    case "field": {
-      return {
-        ...state,
-        [action.fieldName]: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-}
-
-const initialState = {
-  username: "",
-  email: "",
-  password: "",
-};
+const schema = yup.object().shape({
+  email: yup.string().required("Email must be required"),
+  password: yup.string().required("password must be required"),
+});
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   const disspatch = useDispatch();
-  const navigate = useNavigate();
-  const [state, dispatch] = useReducer(LoginReducer, initialState);
-  const { username, email, password } = state;
 
-  const handleChange = (e) => {
-    dispatch({
-      type: "field",
-      fieldName: e.target.name,
-      payload: e.target.value,
-    });
-  };
+  const navigate = useNavigate();
+
   axios.defaults.withCredentials = true;
 
-  function handleLogin(e) {
-    e.preventDefault();
-    let { password, email } = state;
-
-    e.preventDefault();
-
+  function handleSubmit2(data) {
     axios
-      .post("api/login", { email, password })
+      .post("api/login", { data })
       .then((res) => {
         const lctTok = res.data.jsonToken;
         console.log(res);
@@ -61,58 +41,94 @@ export default function Login() {
       });
   }
 
-  function handleReq(e) {
-    e.preventDefault();
-
-    axios
-      .get("api/login")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   return (
-    <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign Up</h3>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              className="form-control mt-1"
-              placeholder="Email Address"
-            />
+    <div className="App">
+      <section
+        class="vh-100 bg-image"
+        style={{
+          backgroundImage:
+            "url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')",
+        }}
+      >
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+          <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style={{ borderRadius: "15px" }}>
+                  <div class="card-body p-5">
+                    <h2 class="text-uppercase text-center mb-5 fw-bold">
+                      Login To Account
+                    </h2>
+
+                    <form
+                      onSubmit={handleSubmit((data) => {
+                        handleSubmit2(data);
+                      })}
+                    >
+                      <div class="form-outline border-bottom mb-4">
+                        <input
+                          {...register("email")}
+                          name="email"
+                          type="email"
+                          id="form3Example3cg"
+                          class="form-control form-control-lg"
+                        />
+                        <label
+                          class="form-label fw-bold text-muted"
+                          for="form3Example3cg"
+                        >
+                          Email
+                        </label>
+                      </div>
+                      {errors.email && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.email?.message}
+                        </div>
+                      )}
+
+                      <div class="form-outline border-bottom mb-4">
+                        <input
+                          {...register("password")}
+                          name="password"
+                          type="password"
+                          id="form3Example4cg"
+                          class="form-control form-control-lg"
+                        />
+                        <label
+                          class="form-label fw-bold text-muted"
+                          for="form3Example4cg"
+                        >
+                          Password
+                        </label>
+                      </div>
+                      {errors.password && (
+                        <div class="alert alert-danger mt-2" role="alert">
+                          {errors.password?.message}
+                        </div>
+                      )}
+                      <div class="d-flex justify-content-center mt-5">
+                        <button
+                          type="submit"
+                          class="btn btn-success btn-block btn-lg gradient-custom-4 fw-bold text-body"
+                        >
+                          Login <i class="fa-solid fa-unlock ps-2"></i>
+                        </button>
+                      </div>
+
+                      <p class="text-center text-muted mt-5 mb-0">
+                        Not have an account ?
+                        <Link class="fw-bold text-body" to={"./register"}>
+                          <u> Register here</u>
+                        </Link>
+                      </p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              className="form-control mt-1"
-              placeholder="Password"
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button
-              type="submit"
-              className="btn btn-success"
-              onClick={handleLogin}
-            >
-              Submit
-            </button>
-          </div>
-          <p className="forgot-password text-right mt-2">
-            Forgot <NavLink to="/passwordReset">Password</NavLink>
-          </p>
         </div>
-      </form>
+      </section>
     </div>
   );
 }

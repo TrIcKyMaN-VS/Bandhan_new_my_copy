@@ -11,6 +11,8 @@ import Account from "./components/Myprofile/account";
 // import Account from "./components/EventsPages/myprof";
 import Events from "./components/Event/events";
 import Becomevendor from "./components/BecomeVendor/becomevendor";
+import Admin from './components/admin/adminlogin'
+import Admindashboard from './components/admin/admindashboard'
 import Birthday from "./components/EventsPages/birthday";
 import Babyshower from "./components/EventsPages/babyshower";
 import Corporateevent from "./components/EventsPages/corporateevent";
@@ -25,8 +27,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store";
 import Footer from "./components/Footer/footer";
 import Navbar from "./components/Navbar/navbar";
-import Admin from './components/admin/adminlogin';
-import Admindashboard from './components/admin/admindashboard';
+import Emergency from "./components/emergencyform/emergencyform"
+import Chat from './components/chatbot/chat';
 function App() {
   const dispatch = useDispatch()
     if(localStorage.bandhanUserToken){
@@ -34,6 +36,7 @@ function App() {
     }
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   // console.log(isLoggedIn);
+  
 
 
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -71,6 +74,9 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/events" element={<Events />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
+        <Route path="/emergencyform" element={<Emergency />}></Route>
+        <Route path="/admin" element={<Admin /> }></Route>
+      <Route path="admindashboard" element={<Admindashboard /> }></Route>
         <Route path="*" element={<Events />}></Route>
       </Routes>
     );
@@ -84,16 +90,9 @@ function App() {
         <Route path="/passwordReset" element={<Passwordreset />}></Route>
         <Route path="/newPassword/:resetTok" element={<NewPassword />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
-        <Route path="/admindashboard" element={<Admindashboard />}></Route>
-        {/* <Route path="/birthday" element={<Birthday />}></Route>
-        <Route path="/babyshower" element={<Babyshower />}></Route>
-        <Route path="/corporateevent" element={<Corporateevent />}></Route>
-        <Route path="/engagement" element={<Engagement />}></Route>
-        <Route path="/familyfunction" element={<Familyfunction />}></Route>
-        <Route path="/postwedding" element={<Postwedding />}></Route>
-        <Route path="/prewedding" element={<Prewedding />}></Route>
-      <Route path="/wedding" element={<Wedding />}></Route> */}
+        
+      <Route path="/admin" element={<Admin /> }></Route>
+      <Route path="admindashboard" element={<Admindashboard /> }></Route>
       <Route path="/*" element={<Login />}></Route>
       </Routes>
     );
@@ -105,6 +104,7 @@ function App() {
         <ToastContainer/>
         <Navbar />
         <main>{loginRoutes}</main>
+        <Chat/>
         <Footer />
       </div>
     </Router>

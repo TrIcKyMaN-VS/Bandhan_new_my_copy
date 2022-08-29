@@ -1,6 +1,10 @@
 import React, { useReducer, useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import "./register.css";
 
 function LoginReducer(state, action) {
   switch (action.type) {
@@ -16,72 +20,58 @@ function LoginReducer(state, action) {
   }
 }
 
-const initialState = {
-  username: "",
-  email: "",
-  password: "",
-  phonenumber: "",
-  // isLoading: false,
-  // error: "",
-  // isLoggedIn: false
-};
+const schema = yup.object().shape({
+  username: yup.string().required("Username must be required"),
+  email: yup.string().required("Email must be required"),
+  phone: yup
+    .string()
+    .required("Phone Number must be required")
+    .min(10, "Must be exactly 10 digits")
+    .max(10, "Must be exactly 10 digits"),
+  password: yup
+    .string()
+    .min(8, "Password must be atleast 8 characters")
+    .required("password must be required"),
+  repeatPass: yup
+    .string()
+    .min(8, "Password must be atleast 8 characters")
+    .oneOf([yup.ref("password"), null], "Does not match with Password")
+    .required("password must be required"),
+});
 
 // export default function (props) {
 export default function Register() {
-  const [state, dispatch] = useReducer(LoginReducer, initialState);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
   const navigate = useNavigate();
-  const { username, email, password } = state;
 
-  const handleChange = (e) => {
-    dispatch({
-      type: "field",
-      fieldName: e.target.name,
-      payload: e.target.value,
-    });
-    // console.log(e.target.name + " : " + e.target.value);
-  };
   axios.defaults.withCredentials = true;
-
-  function handleLogin(e) {
-    e.preventDefault();
-    // console.log(username);
-    let { password, email } = state;
-
-    e.preventDefault();
-    axios
-      .post("api/login", { email, password })
-      .then((res) => {
-        console.log(res.data);
-        // console.log("goy it..!");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   function handleReq(e) {
     e.preventDefault();
 
-    axios
-      .get("api/login")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   axios
+    //     .get("api/login")
+    //     .then((res) => {
+    //       console.log(res.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   }
 
-  function handleReg(e) {
-    // console.log("Register");
-    let { username, password, email ,phonenumber} = state;
-    // console.log(phonenumber);
-    e.preventDefault();
+  function handleSubmit2(data) {
+    // let { username, password, email } = state;
+
     axios
-      .post("api/register", { username, email, password ,phonenumber})
+      .post("api/register", { data })
       .then((res) => {
-        // console.log(res.data);
-        if (res.status == 200) {
+        console.log(res.data);
+        if (res.status === 200) {
           console.log("user registered successfully");
           navigate("/login");
         }
@@ -91,127 +81,169 @@ export default function Register() {
       });
   }
 
-  let [authMode, setAuthMode] = useState("signin");
-
-  const changeAuthMode = () => {
-    setAuthMode(authMode === "signin" ? "signup" : "signin");
-  };
-
-  if (authMode != "signin") {
-    return (
-      <div className="Auth-form-container">
-        <form className="Auth-form">
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign Up</h3>
-            <div className="text-center">
-              Not registered yet?{" "}
-              <span className="link-primary" onClick={changeAuthMode}>
-                Sign Up
-              </span>
-            </div>
-            <div className="form-group mt-3">
-              <label>Email address</label>
-              <input
-                type="email"
-                name="email"
-                onChange={handleChange}
-                className="form-control mt-1"
-                placeholder="Email Address"
-              />
-            </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                className="form-control mt-1"
-                placeholder="Password"
-              />
-            </div>
-            <div className="d-grid gap-2 mt-3">
-              <button
-                type="submit"
-                className="btn btn-success"
-                onClick={handleLogin}
-              >
-                Login
-              </button>
-            </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
-          </div>
-        </form>
-      </div>
-    );
-  }
-
   return (
-    <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign Up</h3>
-          <div className="text-center">
-            Already registered?{" "}
-            <span className="link-primary" onClick={changeAuthMode}>
-              Sign In
-            </span>
+    <div className="">
+      <section
+        style={{
+          backgroundImage:
+            "url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')",
+        }}
+      >
+        <div className="gradient-custom-3">
+          <div className=" row justify-content-center">
+            <div className=" col-12 col-md-7 col-lg-5 col-xl-5 pt-5 pb-5">
+              <div className="card" style={{ borderRadius: "15px" }}>
+                <div className="card-body p-5">
+                  <h2 class="text-uppercase text-center mb-5 fw-bold">
+                    Create an account
+                  </h2>
+                  <form
+                    onSubmit={handleSubmit((data) => {
+                      handleSubmit2(data);
+                    })}
+                  >
+                    <div class="form-outline border-bottom  mb-4">
+                      <input
+                        {...register("username")}
+                        name="username"
+                        type="text"
+                        id="form3Example1cg"
+                        class="form-control form-control-lg"
+                      />
+                      <label
+                        class="form-label fw-bold text-muted"
+                        for="form3Example1cg"
+                      >
+                        Username
+                      </label>
+                    </div>
+                    {errors.username && (
+                      <div class="alert alert-danger mt-2" role="alert">
+                        {errors.username?.message}
+                      </div>
+                    )}
+
+                    <div class="form-outline border-bottom mb-4">
+                      <input
+                        {...register("email")}
+                        name="email"
+                        type="email"
+                        id="form3Example3cg"
+                        class="form-control form-control-lg"
+                      />
+                      <label
+                        class="form-label fw-bold text-muted"
+                        for="form3Example3cg"
+                      >
+                        Email
+                      </label>
+                    </div>
+                    {errors.email && (
+                      <div class="alert alert-danger mt-2" role="alert">
+                        {errors.email?.message}
+                      </div>
+                    )}
+                    <div class="form-outline border-bottom mb-4">
+                      <input
+                        {...register("phone")}
+                        name="phone"
+                        type="number"
+                        id="form3Example345cg"
+                        class="form-control form-control-lg"
+                      />
+                      <label
+                        class="form-label fw-bold text-muted"
+                        for="form345Example3cg"
+                      >
+                        Number
+                      </label>
+                    </div>
+                    {errors.phone && (
+                      <div class="alert alert-danger mt-2" role="alert">
+                        {errors.phone?.message}
+                      </div>
+                    )}
+
+                    <div class="form-outline border-bottom mb-4">
+                      <input
+                        {...register("password")}
+                        name="password"
+                        type="password"
+                        id="form3Example4cg"
+                        class="form-control form-control-lg"
+                      />
+                      <label
+                        class="form-label fw-bold text-muted"
+                        for="form3Example4cg"
+                      >
+                        Password
+                      </label>
+                    </div>
+                    {errors.password && (
+                      <div class="alert alert-danger mt-2" role="alert">
+                        {errors.password?.message}
+                      </div>
+                    )}
+
+                    <div class="form-outline border-bottom mb-4">
+                      <input
+                        {...register("repeatPass")}
+                        name="repeatPass"
+                        type="password"
+                        id="form3Example4cdg"
+                        class="form-control form-control-lg"
+                      />
+                      <label
+                        class="form-label fw-bold text-muted"
+                        for="form3Example4cdg"
+                      >
+                        Confirm password
+                      </label>
+                    </div>
+                    {errors.repeatPass && (
+                      <div class="alert alert-danger mt-2" role="alert">
+                        {errors.repeatPass?.message}
+                      </div>
+                    )}
+
+                    {/* <div class="form-check d-flex justify-content-center mb-5">
+                      <input
+                        class="form-check-input me-2"
+                        type="checkbox"
+                        value=""
+                        id="form2Example3cg"
+                      />
+                      <label class="form-check-label" for="form2Example3g">
+                        I agree all statements in{" "}
+                        <a href="#!" class="text-body">
+                          <u>Terms of service</u>
+                        </a>
+                      </label>
+                    </div> */}
+
+                    <div class="d-flex justify-content-center mt-5">
+                      <button
+                        type="submit"
+                        class="btn btn-success btn-block btn-lg gradient-custom-4 fw-bold text-body text-black"
+                      >
+                        Register
+                        <i class="fa-solid fa-arrow-right-to-bracket ps-2"></i>
+                      </button>
+                    </div>
+
+                    <p class="text-center text-muted mt-5 mb-0">
+                      Have already an account ?{" "}
+                      <Link class="fw-bold text-body" to={"./login"}>
+                        <u>Login here</u>
+                      </Link>
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="form-group mt-3">
-            <label>UserName</label>
-            <input
-              type="text"
-              name="username"
-              onChange={handleChange}
-              className="form-control mt-1"
-              placeholder="e.g Jane Doe"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              className="form-control mt-1"
-              placeholder="Email Address"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              className="form-control mt-1"
-              placeholder="Password"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>PhoneNumber</label>
-            <input
-              type="text"
-              name="phonenumber"
-              onChange={handleChange}
-              className="form-control mt-1"
-              placeholder="Phonenumber"
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button
-              type="submit"
-              className="btn btn-success"
-              onClick={handleReg}
-            >
-              Register
-            </button>
-          </div>
-          <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
-          </p>
         </div>
-      </form>
+      </section>
     </div>
   );
 }

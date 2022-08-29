@@ -1,49 +1,55 @@
 import axios from "axios";
-// import './home.css'
+// import "./home.css";
 
 import React, { useEffect, useState } from "react";
+import Slide from "./coverFlowSwipe/slide";
 
 export default function Home() {
   return (
     <div>
-      <section class="home" id="home">
-        <div class="content">
-          <h3>
-            It is time to celebrate -<span> "The Best Event organiser" </span>
+      <section className="home mb-5 pt-5" id="home">
+        <div className="content">
+          <h3 className=" text-black fw-bolder fs-2 text-uppercase text-center">
+            It is time to celebrate -
+            <h3 className="fw-bolder fs-2" style={{ color: "#1ec408" }}>
+              {" "}
+              "The Best Event organiser"{" "}
+            </h3>
           </h3>
         </div>
+        <Slide />
 
-        <div class="swiper-container home-slider">
+        {/* <div class="swiper-container home-slider">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="images/pic1.JPG" alt="" />
+              <img src="https://bit.ly/3T7zFQn" alt="" />
             </div>
             <div class="swiper-slide">
-              <img src="images/pic12.JPG" alt="" />
+              <img src="https://bit.ly/3T7zFQn" alt="" />
             </div>
             <div class="swiper-slide">
-              <img src="images/pic7.jpg" alt="" />
+              <img src="https://bit.ly/3T7zFQn" alt="" />
             </div>
             <div class="swiper-slide">
-              <img src="images/pic4.jpeg" alt="" />
-            </div>
-
-            <div class="swiper-slide">
-              <img src="images/pic15.jpeg" alt="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="images/pic13.JPG" alt="" />
+              <img src="https://bit.ly/3T7zFQn" alt="" />
             </div>
 
             <div class="swiper-slide">
-              <img src="images/pic8.jpeg" alt="" />
+              <img src="https://bit.ly/3T7zFQn" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="https://bit.ly/3T7zFQn" alt="" />
             </div>
 
             <div class="swiper-slide">
-              <img src="images/pic11.jpg" alt="" />
+              <img src="https://bit.ly/3T7zFQn" alt="" />
+            </div>
+
+            <div class="swiper-slide">
+              <img src="https://bit.ly/3T7zFQn" alt="" />
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* <!-- home section ends --> */}
@@ -51,56 +57,156 @@ export default function Home() {
       {/* <!-- service section starts  --> */}
 
       <section class="service" id="service">
-        <h1 class="heading">
-          {" "}
-          Dhamaka <span>services</span>{" "}
-        </h1>
+        <h2
+          class=" fw-bold text-center fs-2 mb-4"
+          style={{ color: "#1ec408" }}
+        >
+          DHAMAKA
+          <span
+            className="fw-bold fs-2 ps-2"
+            style={{ fontSize: "27px", color: "black" }}
+          >
+            SERVICES
+          </span>
+        </h2>
 
         <div class="box-container">
-          <div class="box">
-            <i class="fas fa-video"></i>
-            <h3>Photography</h3>
-            <p>Capturing is must because time passes, not memories.</p>
-            <a href="#" class="btn">
-              Know More
-            </a>
+          <div className="row justify-content-between ms-5 me-5">
+            <div className=" col-md-4">
+              <div className="card shadow-8 -strong bg-dark rounded-5 ">
+                <div className="card-body text-center ">
+                  <div className=" text-center">
+                    <div
+                      className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                      style={{ width: "60px", height: "60px" }}
+                    >
+                      <i
+                        class="fas fa-video pt-2"
+                        style={{ fontSize: "25px" }}
+                      ></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Photography
+                  </h3>
+                  <p className="mb-3 text-white text-muted">
+                    Capturing is must because time passes, not memories.
+                  </p>
+                  <button href="#" className="btn btn-light text-dark">
+                    Know More
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className=" col-md-4">
+              <div className="card shadow-5-strong bg-dark rounded-5 ">
+                <div className="card-body text-center ">
+                  <div className=" text-center">
+                    <div
+                      className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                      style={{ width: "60px", height: "60px" }}
+                    >
+                      <i
+                        class="fas fa-om pt-2"
+                        style={{ fontSize: "25px" }}
+                      ></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Pooja
+                  </h3>
+                  <p className="mb-3 text-white text-muted">
+                    Each and Every work starts with almighty’s blessings.
+                  </p>
+                  <button href="#" className="btn btn-light text-dark">
+                    Know More
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className=" col-md-4">
+              <div className="card shadow-5-strong bg-dark rounded-5 ">
+                <div className="card-body text-center ">
+                  <div className=" text-center">
+                    <div
+                      className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                      style={{ width: "60px", height: "60px" }}
+                    >
+                      <i
+                        class="fas fa-atom pt-2"
+                        style={{ fontSize: "25px" }}
+                      ></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center fw-bold mb-2 mt-2 text-white">
+                    decoration
+                  </h3>
+                  <p className="mb-1 text-white text-muted">
+                    It Helps to Bright your future.
+                  </p>
+                  <button
+                    href="#"
+                    className="btn btn-light text-dark mb-1 mt-3"
+                  >
+                    Know More
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div class="box">
-            <i class="fas fa-om"></i>
-            <h3>Pooja</h3>
-            <p>Each and Every work starts with almighty’s blessings </p>
-            <a href="#" class="btn">
-              Know More
-            </a>
-          </div>
-
-          <div class="box">
-            <i class="fas fa-atom"></i>
-            <h3>decoration</h3>
-            <p>It Helps to Bright your future.</p>
-            <a href="#" class="btn">
-              Know More
-            </a>
-          </div>
-
-          <div class="box">
-            <i class="fas fa-palette"></i>
-            <h3>Beauty</h3>
-            <p>Shine Forever.</p>
-            <a href="#" class="btn">
-              Know More
-            </a>
-          </div>
-
-          <div class="box">
-            <i class="fas fa-utensils"></i>
-
-            <h3>catering</h3>
-            <p>Food is the secret of energy.</p>
-            <a href="#" class="btn">
-              Know More
-            </a>
+        </div>
+        <div class="box-container" style={{ marginBottom: "70px" }}>
+          <div className="row justify-content-center ms-5 mt-4 mb-4 me-5">
+            <div className=" col-md-4">
+              <div className="card shadow-8 -strong bg-dark rounded-5 ">
+                <div className="card-body text-center ">
+                  <div className=" text-center">
+                    <div
+                      className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                      style={{ width: "60px", height: "60px" }}
+                    >
+                      <i
+                        class="fas fa-palette mt-2"
+                        style={{ fontSize: "25px" }}
+                      ></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Beauty
+                  </h3>
+                  <p className="mb-3 text-white text-muted">Shine Forever.</p>
+                  <button href="#" className="btn btn-light text-dark">
+                    Know More
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className=" col-md-4">
+              <div className="card shadow-5-strong bg-dark rounded-5 ">
+                <div className="card-body text-center ">
+                  <div className=" text-center">
+                    <div
+                      className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                      style={{ width: "60px", height: "60px" }}
+                    >
+                      <i
+                        class="fas fa-utensils pt-2"
+                        style={{ fontSize: "25px" }}
+                      ></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center fw-bold mb-3 mt-2 text-white">
+                    catering
+                  </h3>
+                  <p className="mb-3 text-white text-muted">
+                    Food is the secret of energy.
+                  </p>
+                  <button href="#" className="btn btn-light text-dark">
+                    Know More
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -109,292 +215,324 @@ export default function Home() {
 
       {/* <!-- about section starts  --> */}
 
-      <section class="about" id="about">
-        <h1 class="heading">
-          <span>about</span> us{" "}
-        </h1>
+      <section
+        className="about mt-2"
+        style={{ marginBottom: "100px" }}
+        id="about"
+      >
+        <h2
+          class="heading fw-bold text-center fs-2 mb-4"
+          style={{ color: "black" }}
+        >
+          ABOUT
+          <span
+            className="fw-bold fs-2 ps-2"
+            style={{ fontSize: "27px", color: "#1ec408" }}
+          >
+            US
+          </span>
+        </h2>
 
-        <div class="row">
-          <div class="image">
-            <img src="images/newlogo.jpg" alt="" />
+        <div class="row justify-content-center mb-5">
+          <div className="col-md-5">
+            <div class="image hover-zoom">
+              <img
+                className=" rounded shadow-5-strong"
+                src="https://bit.ly/3dOEBcx"
+                width={"500px"}
+                height={"300px"}
+                alt="dhoom"
+              />
+            </div>
           </div>
-
-          <div class="content">
-            <h3>Our best services just for you</h3>
-            <p>
-              Dhoom Dhamaka is an online service provider platform which makes
-              your occasion grand, royal and memorable. We all run after any
-              function to see how the preparations are going, instead of
-              enjoying it. So, we can relate to your problem and are here to
-              assist you in one click and take all your responsibility. Because,
-              it's time to celebrate now!!!
-              <a href="./Terms of Service/index.html" class="btn">
+          <div className="col-md-6 ps-0 ms-0">
+            <div class="content mt-5">
+              <h3 className=" text-black fw-bold mb-3 fs-3">
+                Our Best Services Just For You
+              </h3>
+              <p>
+                Dhoom Dhamaka is an online service provider platform which makes
+                your occasion grand, royal and memorable. We all run after any
+                function to see how the preparations are going, instead of
+                enjoying it. So, we can relate to your problem and are here to
+                assist you in one click and take all your responsibility.
+                Because, it's time to celebrate now!!!
+              </p>
+              <button
+                href="./Terms of Service/index.html"
+                className="btn btn-black mt-4"
+              >
                 Terms and condition
-              </a>
-            </p>
+              </button>
+            </div>
           </div>
         </div>
       </section>
-      <section class="service" id="service">
+      <section className="service m-5" id="service">
+        <h2
+          class="heading fw-bold text-center mb-5"
+          style={{ color: "#1ec408" }}
+        >
+          ENJOY THE
+          <span
+            className="fw-bold fs-2 text-black ps-3"
+            style={{ fontSize: "27px" }}
+          >
+            DHAMAKA SAFELY
+          </span>
+        </h2>
 
-    <h1 class="heading"> Enjoy the  <span>Dhamaka safely</span> </h1>
-
-    <div class="box-container">
-
-        <div class="box">
-            <i class="fas fa-briefcase-medical"></i>
-            <h3>
-                Protective Gears</h3>
-            <p>Regular use of masks, gloves and sanitizers is ensured by professionals during working hours. The team of Dhoom Dhamaka is asking for proof by cross checking the temperature.All safety measures are being taken care of during the event.</p>
-           
-        </div>
-
-        <div class="box">
-            <i class="fas fa-hand-holding-medical"></i>
-            <h3>
-                Staff Screening</h3>
-            <p>Temperature checks are done daily for the entire team. Temperature readings are confirmed by Dhoom Dhamaka security staff. We are allowing professionals to work on the spot only after the proof is verified. </p>
-           
-        </div>
-
-        <div class="box">
-            <i class="fas fa-heart"></i>
-            <h3>Arogya Setu App Check</h3>
-            <p>Each professional uses the app and undergoes self-assessment tests on a regular basis. The Dhoom Dhamaka team ensures to check it from time to time through image processing.</p>  
-           
-        </div>
-
-        <div class="box">
-            <i class="fas fa-shield-virus"></i>
-            <h3>Sanitization Services</h3>
-            <p>Venues, beauty salons and studios are taking several initiatives to disinfect their surfaces frequently. WHO guidelines for safety reference have also been shared with professionals by the Dhoom Dhamaka team.</p>
-           
-        </div>
-
-       
-
-        
-    </div>
-
-</section>
-{/* <!--saftey section ends--> */}
-
-
-
-
-{/* <!-- review section starts  --> */}
-
-<section class="reivew" id="review"> 
-    
-    <h1 class="heading">client's <span>review</span></h1>
-
-    <div class="review-slider swiper-container">
-
-        <div class="swiper-wrapper">
-
-            <div class="swiper-slide box">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/naveen.JPG" alt=""/>
-                   
-                    <div class="user-info">
-                        <h3>Vengat</h3>
-                        <span>happy clients</span>
-                    </div>
+        <div className="row justify-content-between ms-2 me-2">
+          <div className="col-md-3">
+            <div className="card bg-black shadow-5-strong rounded-4">
+              <div className="card-body mb-2">
+                <div className=" text-center">
+                  <div
+                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas fa-briefcase-medical pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h3 className="text-center fw-bold mb-4 mt-2 text-white">
+                    Protective Gears
+                  </h3>
+                  <p className="mb-3 text-white text-muted">
+                    Regular use of masks, gloves and sanitizers is ensured by
+                    professionals during working hours. The team of Dhoom
+                    Dhamaka is asking for proof by cross checking the
+                    temperature.All safety measures are being taken care of
+                    during the event.
+                  </p>
                 </div>
-                <p>Yeah very good company and people at this group are amazing .</p>
+              </div>
             </div>
-
-            
-
-            <div class="swiper-slide box">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/mohamed.jpg" alt=""/>
-                    <div class="user-info">
-                        <h3>jerry</h3>
-                        <span>happy clients</span>
-                    </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card bg-black shadow-5-strong rounded-4">
+              <div className="card-body mb-3">
+                <div className=" text-center">
+                  <div
+                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn mb-2 mt-2"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas  fa-hand-holding-medical pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h3 className="text-center fw-bold mb-4 mt-2 text-white">
+                    Staff Screening
+                  </h3>
+                  <p className="mb-3 text-white text-muted">
+                    Temperature checks are done daily for the entire team.
+                    Temperature readings are confirmed by Dhoom Dhamaka security
+                    staff. We are allowing professionals to work on the spot
+                    only after the proof is verified.
+                  </p>
                 </div>
-                <p>GOOD SERVICE I AM HAPPY.</p>
+              </div>
             </div>
-
-            <div class="swiper-slide box">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/sandy.JPG" alt=""/>
-                    <div class="user-info">
-                        <h3>Mohammed</h3>
-                        <span>happy clients</span>
-                    </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card bg-black shadow-5-strong rounded-4">
+              <div className="card-body mb-3">
+                <div className=" text-center">
+                  <div
+                    className="btn btn-floating btn-lg btn-success mb-2 fs-6 text-center logoBtn"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas fa-heart pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h3 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Arogya Setu App Check
+                  </h3>
+                  <p className="mb-4 text-white text-muted">
+                    Each professional uses the app and undergoes self-assessment
+                    tests on a regular basis. The Dhoom Dhamaka team ensures to
+                    check it from time to time through image processing.
+                  </p>
                 </div>
-                <p>.One of the best and fastets growing group.All the best for your future work.</p>
+              </div>
             </div>
-
+          </div>
+          <div className="col-md-3">
+            <div className="card bg-black shadow-5-strong rounded-4">
+              <div className="card-body">
+                <div className=" text-center">
+                  <div
+                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas fa-shield-virus pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h3 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Sanitization Services
+                  </h3>
+                  <p className="mb-1 text-white text-muted">
+                    Venues, beauty salons and studios are taking several
+                    initiatives to disinfect their surfaces frequently. WHO
+                    guidelines for safety reference have also been shared with
+                    professionals by the Dhoom Dhamaka team.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+      {/* <!--saftey section ends--> */}
 
-    </div>
+      {/* <!-- contact section starts  --> */}
 
-</section>
+      <section className="contact m-5">
+        <h2
+          class="heading fw-bold text-center fs-2 mb-5"
+          style={{ color: "black" }}
+        >
+          BOOKING
+          <span
+            className="fw-bold fs-2 ps-2"
+            style={{ fontSize: "27px", color: "#1ec408" }}
+          >
+            INFO
+          </span>
+        </h2>
+        <div className="row justify-content-center">
+          <div className="col-md-3 me-2 mt-5">
+            <div className="card bg-black mt-2 shadow-5-strong rounded-4">
+              <div className="card-body mb-1">
+                <div className=" text-center mt-3">
+                  <div
+                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn mb-3"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas fa-check pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Event Booking -{" "}
+                    <span style={{ color: "#31e319" }}> [GENERAL]</span>
+                  </h4>
 
-{/* <!-- review section ends --> */}
-
-{/* <!-- contact section starts  --> */}
-
-<section class="contact" id="contact">
-
-    <h1 class="heading"> <span>BOOKING</span> Info </h1>
-    
-    
-         
-    <div class="box-container">
-
-        <div class="box">
-            <i class="fas fa-check"></i>
-            <ul class="a">
-                    <li>
-                     <h3> Event Booking - <span> [GENERAL]</span> </h3>
+                  <ul className="mb-4">
+                    <li
+                      className=" text-muted text-start"
+                      style={{
+                        listStyle: "none",
+                        marginLeft: "27px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <p className="mb-1">Birthday: 10 days or Prior</p>
+                      <p className="mb-1">Engagement: 10 days or Prior</p>
+                      <p className="mb-1">Pre wedding : 12 days or Prior</p>
+                      <p className="mb-1">Post wedding:12 days or Prior </p>
+                      <p className="mb-1">Wedding: 15 days or Prior</p>
+                      <p className="mb-1">Destination Event : 20 days or Prior</p>
+                      <p className="mb-1"> Wedding: 20 days or Prior</p>
                     </li>
-                <li >
-                    <p>Birthday: 10 days or Prior</p>
-                    <p>Engagement: 10 days or Prior</p>
-                    <p>Pre wedding : 12 days or Prior</p>
-                    <p>Post wedding:12 days or Prior </p>
-                    <p>Wedding: 15 days or Prior</p>
-                    <p>Destination Event : 20 days or Prior</p>
-                    <p> Wedding: 20 days or Prior</p>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3 me-2">
+            <div
+              className="card shadow-5-strong rounded-4"
+              style={{ backgroundColor: "#0e0f0d" }}
+            >
+              <div className="card-body mb-1">
+                <div className=" text-center mt-3">
+                  <div
+                    className="btn btn-floating btn-lg btn-warning fs-6 text-center logoBtn mb-3"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas fa-crown pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                    Event Booking -{" "}
+                    <span style={{ color: "#31e319" }}> [PREMIUM]</span>
+                  </h4>
 
-                </li>
-               
-            </ul>
-            
-           
-        </div>
-
-        <div class="box">
-            <i class="fas fa-check-double"></i>
-            <ul class="a">
-                    <li>
-                     <h3> Event Booking -<span> [PREMIUM]</span> </h3>
+                  <ul className="mb-3">
+                    <li
+                      className=" text-muted text-start"
+                      style={{
+                        listStyle: "none",
+                        marginLeft: "27px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <p>Birthday: 5 days or Prior</p>
+                      <p>Engagement: 5 days or Prior</p>
+                      <p>Pre wedding : 5 days or Prior</p>
+                      <p>Post wedding:5 days or Prior </p>
+                      <p>Wedding: 7 days or Prior</p>
+                      <p>Destination Event : 10 days or Prior</p>
+                      <p> Wedding: 10 days or Prior</p>
                     </li>
-                <li>
-                    <p>Birthday: 5 days or Prior</p>
-                    <p>Engagement: 5 days or Prior</p>
-                    <p>Pre wedding : 5 days or Prior</p>
-                    <p>Post wedding:5 days or Prior </p>
-                    <p>Wedding: 7 days or Prior</p>
-                    <p>Destination Event : 10 days or Prior</p>
-                    <p> Wedding: 10 days or Prior</p>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3 me-2 mt-5">
+            <div className="card mt-2 bg-black shadow-5-strong rounded-4">
+              <div className="card-body">
+                <div className=" text-center mt-3">
+                  <div
+                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn mb-3"
+                    style={{ width: "60px", height: "60px" }}
+                  >
+                    <i
+                      class="fas fa-bullhorn pt-2"
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </div>
+                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                    DHAMAKA -{" "}
+                    <span style={{ color: "#31e319" }}> [SPECIAL SERVICE]</span>
+                  </h4>
+                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                    EMERGENCY SERVICE{" "}
+                    <p style={{ color: "#31e319", fontSize: "15px" }}>
+                      {" "}
+                      [ 24 - 48 Hours ]
+                    </p>
+                  </h4>
+                  <p className=" text-muted">
+                    If any additionl service required before the event start.
+                  </p>
 
-                </li>
-               
-            </ul>
-            
-           
+                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                    SPOT SERVICE -{" "}
+                    <span style={{ color: "#31e319" }}> AT THE MOMENT</span>
+                  </h4>
+                  <p className=" text-muted">
+                    If any additionl service required during the event.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-       
-
-        <div class="box">
-            <i class="fas fa-bullhorn"></i>
-            <ul class="a">
-                    <li>
-                     <h3> DHAMAKA - <span> [SPECIAL SERVICE]</span> </h3>
-                    </li>
-                   
-                 <h3>EMERGENCY SERVICE <span>24 to 48 hours</span></h3>
-               <p>If any additionl service required before the event start.</p>
-               <h3>SPOT SERVICE <span>AT the Moment</span></h3>
-               <p>If any additionl service required during the event.</p>
-            </ul>
-            
-           
-        </div>
-
-        
-            
-           
-            
-    </div>
-
-</section>
-
-{/* <!-- contact section ends --> */}
-
-{/* <!-- footer section starts  --> */}
-
-<section class="footer">
-
-    <div class="box-container">
-
-    
-
-        <div class="box">
-            <h3>contact info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-            <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
-            <a href="#"> <i class="fas fa-envelope"></i> anasshaikh@gmail.com </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
-        </div>
-
-        <div class="box">
-            <h3>follow us</h3>
-            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
-            <a href="#"> <i class="fab fa-whatsapp"></i> whatsapp</a>
-            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-            <a href="#"> <i class="fab fa-youtube"></i> youtube </a>
-        </div>
-
-    </div>
-
-    <div class="credit"> created by <span>Team:Fabolous Four</span> | all rights reserved </div>
-    <div class="grid-container">
-      <div class="box">
-        <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-        <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-        
-       </div>
-       <div class="box">
-        <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-        <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-      
-       </div>
-    
-</div>
-   
-    <div class="credit"> OUR <span><a href="./Terms of Service/index.html " target="blank"> TERMS AND CONDITION</a></span> </div>
-
-</section>
-
-{/* <!-- footer section ends --> */}
-
-{/* <!-- theme toggler  --> */}
-
-<div class="theme-toggler">
-
-    <div class="toggle-btn">
-        <i class="fas fa-cog"></i>
-    </div>
-
-    <h3>choose color</h3>
-
-    <div class="buttons">
-        
-        <div class="theme-btn" style={{"background" : "#f7b731"}}></div>
-        <div class="theme-btn" style={{"background" : "#ff0033"}}></div>
-        <div class="theme-btn" style={{"background" : "#6abf20"}}></div>
-        <div class="theme-btn" style={{"background": "#fff11c"}}></div>
-        <div class="theme-btn" style={{"background": "#881da9"}}></div>
-        <div class="theme-btn" style={{"background": "#1c6749"}}></div>
-        <div class="theme-btn" style={{"background": "#02bceb"}}></div>
-       
-        <div class="theme-btn" style={{"background": "#e72e77"}}></div>
-       
-    </div>
-
-</div>
+      {/* <!-- contact section ends --> */}
     </div>
   );
 }

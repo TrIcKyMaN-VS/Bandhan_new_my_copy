@@ -50,24 +50,6 @@ function Payment() {
             <tbody>
               <tr>
                 <td className=" text-center">
-                  <p class="fw-normal mb-1">Software engineer</p>
-                  <p class="text-muted mb-0">IT department</p>
-                </td>
-                <td className=" text-center">₹10,0000</td>
-              </tr>
-              <tr>
-                <td className=" text-center">
-                  <p class="fw-normal mb-1">Consultant</p>
-                  <p class="text-muted mb-0">Finance</p>
-                </td>
-                {/* <span class="badge badge-primary rounded-pill d-inline">
-                Onboarding
-              </span> */}
-
-                <td className=" text-center">₹10,0000</td>
-              </tr>
-              <tr>
-                <td className=" text-center">
                   <p class="fw-normal mb-1">Designer</p>
                   <p class="text-muted mb-0">UI/UX</p>
                 </td>

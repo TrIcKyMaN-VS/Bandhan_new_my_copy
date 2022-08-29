@@ -1,6 +1,7 @@
 import React from "react";
-import Todo from '../todo';
-import Payment from "../payment"
+import Todo from "../todo";
+import Payment from "../payment";
+import Points from "./../pointsandvouchers";
 
 import "./account.css";
 import EventInfo from "../EventsPages/eventInfo/eventInfo";
@@ -9,7 +10,7 @@ export default function Engagement() {
     <div>
       {/* <!-- Tabs navs --> */}
       <ul class="nav nav-pills nav-fill mb-3" id="ex1" role="tablist">
-      <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation">
           <a
             class="nav-link active"
             id="ex2-tab-3"
@@ -125,7 +126,7 @@ export default function Engagement() {
           role="tabpanel"
           aria-labelledby="ex2-tab-3"
         >
-        <EventInfo />
+          <EventInfo />
         </div>
         <div
           class="tab-pane fade"
@@ -133,7 +134,7 @@ export default function Engagement() {
           role="tabpanel"
           aria-labelledby="ex2-tab-3"
         >
-          Points 
+          <Points />
         </div>
         <div
           class="tab-pane fade"
@@ -141,7 +142,7 @@ export default function Engagement() {
           role="tabpanel"
           aria-labelledby="ex2-tab-3"
         >
-          <Payment/> 
+          <Payment />
         </div>
         <div
           class="tab-pane fade"

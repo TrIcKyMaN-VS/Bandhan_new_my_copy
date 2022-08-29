@@ -408,105 +408,109 @@ function Finalbirthdayform() {
                   {/* <!-- Gallery --> */}
                 </div>
                 <div class="col-xl-6">
-                  <div class="card-body bg-indigo p-md-5 text-dark fw-bolder rounded">
-                    <h3 class="mb-5 text-center fw-bold text-uppercase">
-                      Personal Details
-                    </h3>
-                    <form>
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-floating mb-3">
-                            <input
-                              type="text"
-                              {...register("Birthday_Person_name")}
-                              class="form-control"
-                              id="floatingInput"
-                              placeholder="Name"
-                            />
-                            <label for="floatingInput">
-                              Birthday person name
-                            </label>
-                            {errors.Birthday_Person_name && (
+                  <div className="card bg-light">
+                    <div class="card-body bg-indigo p-md-5 text-dark fw-bolder rounded">
+                      <h3 class="mb-5 text-center fw-bold" style={{"fontVariant":"small-caps"}}>
+                        Personal Details
+                      </h3>
+                      <form>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-floating mb-3">
+                              <input
+                                type="text"
+                                {...register("Birthday_Person_name")}
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="Name"
+                              />
+                              <label for="floatingInput">
+                                Birthday person name
+                              </label>
+                              {errors.Birthday_Person_name && (
+                                <div
+                                  class="alert alert-danger mt-2"
+                                  role="alert"
+                                >
+                                  {errors.Birthday_Person_name?.message}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 mb-4">
+                            <div class="form-floating mb-3">
+                              <input
+                                {...register("date")}
+                                type="date"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="Date"
+                              />
+                              <label for="floatingInput">Date</label>
+                            </div>
+                            {errors.date && (
                               <div class="alert alert-danger mt-2" role="alert">
-                                {errors.Birthday_Person_name?.message}
+                                {errors.date?.message}
                               </div>
                             )}
                           </div>
                         </div>
 
-                        <div class="col-md-6 mb-4">
-                          <div class="form-floating mb-3">
-                            <input
-                              {...register("date")}
-                              type="date"
-                              class="form-control"
-                              id="floatingInput"
-                              placeholder="Date"
-                            />
-                            <label for="floatingInput">Date</label>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-floating mb-3">
+                              <input
+                                {...register("fromTime")}
+                                type="time"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="From"
+                              />
+                              <label for="floatingInput">From</label>
+                            </div>
+                            {errors.fromTime && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.fromTime?.message}
+                              </div>
+                            )}
                           </div>
-                          {errors.date && (
+                          <div class="col-md-6 mb-4">
+                            <div class="form-floating mb-3">
+                              <input
+                                {...register("ToTime")}
+                                type="time"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="To"
+                              />
+                              <label for="floatingInput">To</label>
+                            </div>
+                            {errors.ToTime && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.ToTime?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                          <input
+                            {...register("city")}
+                            type="city"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="address"
+                          />
+                          <label for="floatingInput">City</label>
+                          {errors.city && (
                             <div class="alert alert-danger mt-2" role="alert">
-                              {errors.date?.message}
+                              {errors.city?.message}
                             </div>
                           )}
                         </div>
-                      </div>
 
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-floating mb-3">
-                            <input
-                              {...register("fromTime")}
-                              type="time"
-                              class="form-control"
-                              id="floatingInput"
-                              placeholder="From"
-                            />
-                            <label for="floatingInput">From</label>
-                          </div>
-                          {errors.fromTime && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.fromTime?.message}
-                            </div>
-                          )}
-                        </div>
-                        <div class="col-md-6 mb-4">
-                          <div class="form-floating mb-3">
-                            <input
-                              {...register("ToTime")}
-                              type="time"
-                              class="form-control"
-                              id="floatingInput"
-                              placeholder="To"
-                            />
-                            <label for="floatingInput">To</label>
-                          </div>
-                          {errors.ToTime && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.ToTime?.message}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div class="form-floating mb-4">
-                        <input
-                          {...register("city")}
-                          type="city"
-                          class="form-control"
-                          id="floatingInput"
-                          placeholder="address"
-                        />
-                        <label for="floatingInput">City</label>
-                        {errors.city && (
-                          <div class="alert alert-danger mt-2" role="alert">
-                            {errors.city?.message}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* <div class="btn-group mb-4">
+                        {/* <div class="btn-group mb-4">
                         <input
                           type="radio"
                           class="btn-check"
@@ -553,105 +557,109 @@ function Finalbirthdayform() {
                           Others
                         </label>
                       </div> */}
-                      <div class="btn-group mb-4">
-                        <input
-                          type="radio"
-                          class="btn-check"
-                          name="options"
-                          id="option1"
-                          autocomplete="off"
-                          disabled
-                        />
-                        <label class="btn btn-warning" for="option1">
-                          Gender
-                        </label>
-                        <input
-                          {...register("gender")}
-                          type="radio"
-                          class="btn-check"
-                          name="gender"
-                          id="male"
-                          value={"Male"}
-                          autocomplete="off"
-                        />
-                        <label class="btn btn-primary" for="male">
-                          Male
-                        </label>
-                        <input
-                          {...register("gender")}
-                          type="radio"
-                          class="btn-check"
-                          name="gender"
-                          value={"Female"}
-                          id="female"
-                        />
-                        <label class="btn btn-primary" for="female">
-                          Female
-                        </label>
+                        <div class="btn-group mb-4">
+                          <input
+                            type="radio"
+                            class="btn-check"
+                            name="options"
+                            id="option1"
+                            autocomplete="off"
+                            disabled
+                          />
+                          <label class="btn btn-warning" for="option1">
+                            Gender
+                          </label>
+                          <input
+                            {...register("gender")}
+                            type="radio"
+                            class="btn-check"
+                            name="gender"
+                            id="male"
+                            value={"Male"}
+                            autocomplete="off"
+                          />
+                          <label class="btn btn-primary" for="male">
+                            Male
+                          </label>
+                          <input
+                            {...register("gender")}
+                            type="radio"
+                            class="btn-check"
+                            name="gender"
+                            value={"Female"}
+                            id="female"
+                          />
+                          <label class="btn btn-primary" for="female">
+                            Female
+                          </label>
 
-                        <input
-                          {...register("gender")}
-                          type="radio"
-                          class="btn-check"
-                          name="gender"
-                          value={"Others"}
-                          id="others"
-                        />
-                        <label class="btn btn-primary" for="others">
-                          Others
-                        </label>
-                      </div>
-                      {errors.gender && (
-                        <div class="alert alert-danger mt-2" role="alert">
-                          {errors.gender?.message}
+                          <input
+                            {...register("gender")}
+                            type="radio"
+                            class="btn-check"
+                            name="gender"
+                            value={"Others"}
+                            id="others"
+                          />
+                          <label class="btn btn-primary" for="others">
+                            Others
+                          </label>
                         </div>
-                      )}
-
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-floating mb-3">
-                            <input
-                              {...register("age")}
-                              type="number"
-                              class="form-control"
-                              id="age"
-                              placeholder="To"
-                            />
-
-                            <label for="floatingInput">Age</label>
+                        {errors.gender && (
+                          <div class="alert alert-danger mt-2" role="alert">
+                            {errors.gender?.message}
                           </div>
-                          {errors.age && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.age?.message}
-                            </div>
-                          )}
-                        </div>
-                        <div class="col-md-6 mb-4">
-                          <div class="form-floating mb-3">
-                            <input
-                              {...register("No_Of_Guests")}
-                              type="number"
-                              class="form-control"
-                              id="noofguest"
-                              placeholder="To"
-                            />
-                            <label for="floatingInput">No of Guests</label>
-                          </div>
-                          {errors.No_Of_Guests && (
-                            <div class="alert alert-danger mt-2" role="alert">
-                              {errors.No_Of_Guests?.message}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div class="row"></div>
+                        )}
 
-                      <div class="d-flex justify-content-end pt-3">
-                        <button type="button" class="btn btn-info btn-lg ms-2 ">
-                          save
-                        </button>
-                      </div>
-                    </form>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-floating mb-3">
+                              <input
+                                {...register("age")}
+                                type="number"
+                                class="form-control"
+                                id="age"
+                                placeholder="To"
+                              />
+
+                              <label for="floatingInput">Age</label>
+                            </div>
+                            {errors.age && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.age?.message}
+                              </div>
+                            )}
+                          </div>
+                          <div class="col-md-6 mb-4">
+                            <div class="form-floating mb-3">
+                              <input
+                                {...register("No_Of_Guests")}
+                                type="number"
+                                class="form-control"
+                                id="noofguest"
+                                placeholder="To"
+                              />
+                              <label for="floatingInput">No of Guests</label>
+                            </div>
+                            {errors.No_Of_Guests && (
+                              <div class="alert alert-danger mt-2" role="alert">
+                                {errors.No_Of_Guests?.message}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div class="row"></div>
+
+                        <div class="d-flex justify-content-end pt-3">
+                          <button
+                            type="button"
+                            class="btn btn-info btn-lg ms-2 "
+                          >
+                            save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -661,10 +669,10 @@ function Finalbirthdayform() {
       </div>
 
       <div class="container my-5">
-        <div class="card">
+        <div class="card bg-light">
           <form onSubmit={handleSubmit((data) => handleSubmit2(data))}>
-            <div class="card-header py-4 px-5 bg-light border-0">
-              <h4 class="mb-0 fw-bold">Birthday Event Booking</h4>
+            <div class="card-header mb-4 bg-light border-0">
+              <h3 class="mb-0 fw-bold" style={{"fontVariant":"small-caps"}}>Birthday Event Booking</h3>
             </div>
 
             <div class="card-body px-5">

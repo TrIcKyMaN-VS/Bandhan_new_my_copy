@@ -10,7 +10,7 @@ function Todo() {
 
   useEffect(() => {
     axios.get("api/todo").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       // console.log(res.data);
       setItemTodo(res.data);
     });

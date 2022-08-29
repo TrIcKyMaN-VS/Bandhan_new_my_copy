@@ -10,12 +10,12 @@ function Footer() {
   {/* <!-- Footer --> */}
   <footer
           class="text-center text-lg-start text-white"
-          style={{backgroundColor: "#1c2331"}}
+          style={{backgroundColor: "black"}}
           >
     {/* <!-- Section: Social media --> */}
     <section
              class="d-flex justify-content-between p-4"
-             style={{backgroundColor: "#6351ce"}}
+             style={{backgroundColor: "#50e645"}}
              >
       {/* <!-- Left --> */}
       <div class="me-5">
