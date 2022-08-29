@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-
+import Orderslist from '../orderslist';
 function BirthdayDetails(props) {
+   const [birthdayids , setbirthdayids] = useState([])
+   const [formdata, setformdata] = useState([])
+   const [now, setnow] = useState(false)
+  async function viewDetails(orderId){
+    axios.get(`api/adminuserlist/birthdayorder/orderId/${orderId}`).then((res) => {
+      setformdata(res.data);
+      console.log("mm",res.data);
+      setnow(true)
+    });
+    
+  }
 //   var datas = props.users;
 //   console.log("bb",datas);
 //  const [users , setusers] = useState([])
-const [birthdayids , setbirthdayids] = useState([])
  useEffect(() => {
           axios.get("api/adminuserlist/birthdayorder").then((res) => {
             setbirthdayids(res.data);
@@ -13,7 +23,8 @@ const [birthdayids , setbirthdayids] = useState([])
           });
         }, [0]);
   return (        
-
+  <>
+    {!now && 
     <div className="row my-5">
       <h3 className="fs-4 mb-3">Birthday Orders</h3>
       <div className="col">
@@ -44,7 +55,7 @@ const [birthdayids , setbirthdayids] = useState([])
             {birthdayids.map((user, i) => {
               console.log(user);
               return (
-                <tr key={i}>
+                <tr key={i} style={{cursor:"pointer"}} onClick={()=>{viewDetails(user[1])}}>
                   <th scope="row">{i + 1}</th>
                   <td>{user[0].username}</td>
                   <td>{user[0].email}</td>
@@ -54,22 +65,16 @@ const [birthdayids , setbirthdayids] = useState([])
                 </tr>
               );
             })}
-             
-                {/* <tr >
-                  <th scope="row">1</th>
-                  <td>jj</td>
-                  <td>hhh</td>
-                  <td>hhhg</td>
-                </tr> */}
-              
           </tbody>
         </table>
       </div>
-    </div>
+    </div>     
 
-            
-
-         
+  }
+  {now &&
+     <Orderslist formdata={formdata}/>
+  }
+  </>      
     
   )
 }

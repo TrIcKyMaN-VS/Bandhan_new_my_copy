@@ -109,6 +109,14 @@ const users = await User.aggregate([
 })
 
 
+router.get("/birthdayorder/orderId/:orderId", async (req, res) => {
+  const formdata = await BirthdayForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+
 
 
 

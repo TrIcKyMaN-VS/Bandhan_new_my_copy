@@ -20,7 +20,7 @@ export class Chat extends Component {
   }
 
   render() {
-    return <div>chat bot testing...!</div>;
+    return <div></div>;
   }
 }
 
