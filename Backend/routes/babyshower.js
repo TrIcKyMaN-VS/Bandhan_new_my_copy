@@ -16,10 +16,10 @@ router.post("/", auth, async (req, res) => {
   const eventName = "BabyShower Event";
   const orderId = uuidv4().slice(0,6)
   const data = req.body.data;
-  const checkBoxValues = req.body.checkBoxValues;
+  const checkBoxValues = req.body.checkBoxValues?req.body.checkBoxValues:"null";
   const userId = req.id;
-  const MomName = data.Mom_Name;
-  const DadName = data.Dad_Name;
+  const MomName = data.Mom_Name?data.Mom_Name:"null";
+  const DadName = data.Dad_Name?data.Dad_Name:"null";
   const date = data.date;
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
@@ -28,37 +28,37 @@ router.post("/", auth, async (req, res) => {
   const NoOfGuests = data.No_Of_Guests;
 
   const Shows = {
-    show: data.shows,
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
-    dj: data.dj,
+    show: data.shows?data.shows:"null",
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
+    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
+    dj: data.dj?data.dj:"null",
   };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue,
-    ThemeDecoration: data.ThemeDecoration,
+    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
+    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:"null",
   };
-  const SpecialService = data.SpecialService;
+  const SpecialService = data.SpecialService?data.SpecialService:"null";
 
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food?data.Food:"null",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
   };
-  const OtherServices = data.OtherServices;
+  const OtherServices = data.OtherServices?data.OtherServices:"null";
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue,
-    photography: checkBoxValues.photovalue,
+    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"null",
+    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"null",
     venues: {
       venue1: {
-        name: data.venue_1_name,
-        place: data.venue_1_name,
+        name: data.venue_1_name?data.venue_1_name:"null",
+        place: data.venue_1_place?data.venue_1_place:"null",
       },
       venue2: {
-        name: data.venue_2_name,
-        place: data.venue_2_name,
+        name: data.venue_2_name?data.venue_2_name:"null",
+        place: data.venue_2_place?data.venue_2_place:"null",
       },
       venue3: {
-        name: data.venue_3_name,
-        place: data.venue_3_name,
+        name: data.venue_3_name?data.venue_3_name:"null",
+        place: data.venue_3_place?data.venue_3_place:"null",
       },
     },
   };

@@ -30,23 +30,23 @@ router.post("/", auth, async (req, res) => {
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = req.body.data.No_Of_Guests;
 
-  const muhDikhal = data.muh_Dikhal;
+  const muhDikhal = data.muh_Dikhal? data.muh_Dikhal:"null";
   const muhDikhalvalue = {
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
+    dancevalues: checkBoxValues.dancevalue? checkBoxValues.dancevalue:"null",
   };
-  const SubaarambhYatra = data.subaarambh_Yatra;
+  const SubaarambhYatra = data.subaarambh_Yatra?data.subaarambh_Yatra:"null";
   const Honneymoon = {
-    DestinationIndia: data.destination_India,
-    DestinationAbroad: data.destination_Abroad,
-    HonneymoonDays: data.no_of_days_honneymoon,
+    DestinationIndia: data.destination_India?data.destination_India:"null",
+    DestinationAbroad: data.destination_Abroad?data.destination_Abroad:"null",
+    HonneymoonDays: data.no_of_days_honneymoon?data.no_of_days_honneymoon:"null",
   };
 
-  const SpecialService = data.SpecialService;
+  const SpecialService = data.SpecialService?data.SpecialService:"null";
 
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food?data.Food:"null",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
   };
 
   // var venueStatus = "pending"

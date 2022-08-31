@@ -108,6 +108,7 @@ const users = await User.aggregate([
 
 })
 
+//lists
 
 router.get("/birthdayorder/orderId/:orderId", async (req, res) => {
   const formdata = await BirthdayForm.find({orderId:req.params.orderId})
@@ -115,6 +116,61 @@ router.get("/birthdayorder/orderId/:orderId", async (req, res) => {
   console.log(formdata);
     
 })
+
+router.get("/engagementorder/orderId/:orderId", async (req, res) => {
+  const formdata = await EngagementForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log("engagement",formdata);
+    
+})
+
+router.get("/preweddingorder/orderId/:orderId", async (req, res) => {
+  const formdata = await PreWeddingForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+router.get("/postweddingorder/orderId/:orderId", async (req, res) => {
+  const formdata = await PostWeddingForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+router.get("/weddingorder/orderId/:orderId", async (req, res) => {
+  const formdata = await WeddingForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+router.get("/babyshowerorder/orderId/:orderId", async (req, res) => {
+  const formdata = await BabyShowerForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+router.get("/corporateorder/orderId/:orderId", async (req, res) => {
+  const formdata = await CorporateEventForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+router.get("/familyfunctionorder/orderId/:orderId", async (req, res) => {
+  const formdata = await FamilyFunctionForm.find({orderId:req.params.orderId})
+  res.status(200).send(formdata)
+  console.log(formdata);
+    
+})
+
+
+
+
+
+
 
 
 

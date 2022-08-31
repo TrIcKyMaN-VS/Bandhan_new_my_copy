@@ -53,9 +53,9 @@ const CorporateEventSchema = new mongoose.Schema(
       dancevalues: {
         type: String,
       },
-      dj: {
-        type: String,
-      },
+      play:{
+        type:String
+      }
     },
     Decoration: {
       RegularDecoration: {

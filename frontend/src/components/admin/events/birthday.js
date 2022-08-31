@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import Orderslist from '../orderslist';
+import Orderslist from '../birthdayorderslist';
 function BirthdayDetails(props) {
    const [birthdayids , setbirthdayids] = useState([])
    const [formdata, setformdata] = useState([])
@@ -11,7 +11,6 @@ function BirthdayDetails(props) {
       console.log("mm",res.data);
       setnow(true)
     });
-    
   }
 //   var datas = props.users;
 //   console.log("bb",datas);

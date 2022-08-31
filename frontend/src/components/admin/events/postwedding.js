@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import Orderslist from '../postweddingorderlist';
 
 function PostweddingDetails(props) {
 //   var datas = props.users;
 //   console.log("bb",datas);
 //  const [users , setusers] = useState([])
 const [postweddingids , setpostweddingids] = useState([])
+const [formdata, setformdata] = useState([])
+const [now, setnow] = useState(false)
+
+async function viewDetails(orderId){
+  axios.get(`api/adminuserlist/postweddingorder/orderId/${orderId}`).then((res) => {
+    setformdata(res.data);
+    console.log("mm",res.data);
+    setnow(true)
+  });
+}
  useEffect(() => {
           axios.get("api/adminuserlist/postweddingorder").then((res) => {
             setpostweddingids(res.data);
@@ -13,7 +24,8 @@ const [postweddingids , setpostweddingids] = useState([])
           });
         }, [0]);
   return (        
-
+    <>
+    {!now && 
     <div className="row my-5">
       <h3 className="fs-4 mb-3">Postwedding Orders</h3>
       <div className="col">
@@ -44,7 +56,7 @@ const [postweddingids , setpostweddingids] = useState([])
             {postweddingids.map((user, i) => {
               console.log(user);
               return (
-                <tr key={i}>
+                <tr key={i} style={{cursor:"pointer"}} onClick={()=>{viewDetails(user[1])}}>
                   <th scope="row">{i + 1}</th>
                   <td>{user[0].username}</td>
                   <td>{user[0].email}</td>
@@ -55,19 +67,16 @@ const [postweddingids , setpostweddingids] = useState([])
               );
             })}
              
-                {/* <tr >
-                  <th scope="row">1</th>
-                  <td>jj</td>
-                  <td>hhh</td>
-                  <td>hhhg</td>
-                </tr> */}
-              
           </tbody>
         </table>
       </div>
     </div>
 
-            
+  }
+  {now &&
+     <Orderslist formdata={formdata}/>
+  }
+  </>           
 
          
     

@@ -33,39 +33,39 @@ router.post("/", auth, async (req, res) => {
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const Shows = {
-    show: data.shows,
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
+    show: data.shows?data.shows:"null",
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
+    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
     dj: data.Dj,
   };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue,
-    ThemeDecoration: data.ThemeDecoration,
+    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
+    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:"null",
   };
-  const SpecialService = data.SpecialService;
-  const OtherServices = data.OtherServices;
+  const SpecialService = data.SpecialService?data.SpecialService:"null";
+  const OtherServices = data.OtherServices?data.OtherServices:"null";
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue,
-    photography: checkBoxValues.photovalue,
-    mehandi: checkBoxValues.checkedMehandi,
+    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"null",
+    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"null",
+    mehandi: checkBoxValues.checkedMehandi?checkBoxValues.checkedMehandi:"null",
     venues: {
       venue1: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_1_name?data.Venue_1_name:"null",
+        place: data.Venue_1_place?data.Venue_1_place:"null",
       },
       venue2: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_2_name?data.Venue_2_name:"null",
+        place: data.Venue_2_place?data.Venue_2_place:"null",
       },
       venue3: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_3_name?data.Venue_3_name:"null",
+        place: data.Venue_3_place?data.Venue_3_place:"null",
       },
     },
   };
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food? data.Food:"null",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
   };
 
   var venueStatus = "pending"

@@ -28,32 +28,32 @@ router.post("/", auth, async (req, res) => {
   const MinBudget = req.body.data.Estimate_Budget_Minimum;
   const MaxBudget = req.body.data.Estimate_Budget_Maximum;
   const Shows = {
-    show: req.body.data.shows,
-    musicvalues: req.body.checkBoxValues.musicvalue,
-    dancevalues: req.body.checkBoxValues.dancevalue,
-    dj: req.body.data.dj,
+    show: req.body.data.shows?req.body.data.shows:"null",
+    musicvalues: req.body.checkBoxValues.musicvalue?req.body.checkBoxValues.musicvalue:"null",
+    dancevalues: req.body.checkBoxValues.dancevalue? req.body.checkBoxValues.dancevalue:"null",
+    dj: req.body.data.dj?req.body.data.dj:"null",
   };
   const Decoration = {
-    RegularDecoration: req.body.checkBoxValues.decorationvalue,
-    ThemeDecoration: req.body.data.DecorationType,
+    RegularDecoration: req.body.checkBoxValues.decorationvalue?req.body.checkBoxValues.decorationvalue:"null",
+    ThemeDecoration: req.body.data.DecorationType?req.body.data.DecorationType:"null",
   };
-  const SpecialService = req.body.data.SpecialService;
-  const OtherServices = req.body.data.OtherServices;
+  const SpecialService = req.body.data.SpecialService?req.body.data.SpecialService:"null";
+  const OtherServices = req.body.data.OtherServices?req.body.data.OtherServices:"null";
   const OtherServiceValues = {
-    invitation: req.body.checkBoxValues.invitationvalue,
-    photography: req.body.checkBoxValues.photovalue,
+    invitation: req.body.checkBoxValues.invitationvalue?req.body.checkBoxValues.invitationvalue:"null",
+    photography: req.body.checkBoxValues.photovalue?req.body.checkBoxValues.photovalue:"null",
     venues: {
       venue1: {
-        name: req.body.data.venue_1_name,
-        place: req.body.data.venue_1_name,
+        name: req.body.data.venue_1_name?req.body.data.venue_1_name:"null",
+        place: req.body.data.venue_1_place?req.body.data.venue_1_place:"null",
       },
       venue2: {
-        name: req.body.data.venue_2_name,
-        place: req.body.data.venue_2_name,
+        name: req.body.data.venue_2_name?req.body.data.venue_2_name:"null",
+        place: req.body.data.venue_2_place?req.body.data.venue_2_place:"null",
       },
       venue3: {
-        name: req.body.data.venue_3_name,
-        place: req.body.data.venue_3_name,
+        name: req.body.data.venue_3_name?req.body.data.venue_3_name:"null",
+        place: req.body.data.venue_3_place?req.body.data.venue_3_place:"null",
       },
     },
   };
@@ -62,8 +62,8 @@ router.post("/", auth, async (req, res) => {
   // }
   // console.log(photography);
   const Food = {
-    Foodtype: req.body.data.Food,
-    items: req.body.checkBoxValues.foodvalue,
+    Foodtype: req.body.data.Food?req.body.data.Food:"null",
+    items: req.body.checkBoxValues.foodvalue?req.body.checkBoxValues.foodvalue:"null",
   };
 
   var venueStatus = "pending"

@@ -12,14 +12,14 @@ const {EmergencyForm} = require("../model/emergencyform")
 //routes
 
 router.post("/", auth, async (req, res) => {
-  const data = req.body.data;
-  const username = data.username;
-  const nameoftheservice = data.nameoftheservice;
-  const previousorderId = data.previousorderId;
-  const phone = data.phone;
-  const userId = req.id
-  const date = data.date;
-  const email = data.email;
+  const data = req.body.data?req.body.data:"null";
+  const username = data.username?data.username:"null";
+  const nameoftheservice = data.nameoftheservice?data.nameoftheservice:"null";
+  const previousorderId = data.previousorderId?data.previousorderId:"null";
+  const phone = data.phone?data.phone:"null";
+  const userId = req.id?req.id:"null"
+  const date = data.date?data.date:"null";
+  const email = data.email?data.email:"null";
 
 
   const newEmergencyForm = EmergencyForm({

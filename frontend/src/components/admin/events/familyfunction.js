@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import Orderslist from '../familyfunctionorderslist';
 
 function FamilyfunctionDetails(props) {
-//   var datas = props.users;
-//   console.log("bb",datas);
-//  const [users , setusers] = useState([])
 const [familyfunctionids , setfamilyfunctionids] = useState([])
+const [formdata, setformdata] = useState([])
+const [now, setnow] = useState(false)
+
+async function viewDetails(orderId){
+  axios.get(`api/adminuserlist/familyfunctionorder/orderId/${orderId}`).then((res) => {
+    setformdata(res.data);
+    console.log("fam",res.data);
+    setnow(true)
+  });
+}
  useEffect(() => {
           axios.get("api/adminuserlist/familyfunctionorder").then((res) => {
             setfamilyfunctionids(res.data);
@@ -13,7 +21,8 @@ const [familyfunctionids , setfamilyfunctionids] = useState([])
           });
         }, [0]);
   return (        
-
+<>
+    {!now && 
     <div className="row my-5">
       <h3 className="fs-4 mb-3">Familyfunction Orders</h3>
       <div className="col">
@@ -44,7 +53,7 @@ const [familyfunctionids , setfamilyfunctionids] = useState([])
             {familyfunctionids.map((user, i) => {
               console.log(user);
               return (
-                <tr key={i}>
+                <tr key={i} style={{cursor:"pointer"}} onClick={()=>{viewDetails(user[1])}}>
                   <th scope="row">{i + 1}</th>
                   <td>{user[0].username}</td>
                   <td>{user[0].email}</td>
@@ -61,6 +70,11 @@ const [familyfunctionids , setfamilyfunctionids] = useState([])
     </div>
 
  
+  }
+  {now &&
+     <Orderslist formdata={formdata}/>
+  }
+  </>  
     
   )
 }

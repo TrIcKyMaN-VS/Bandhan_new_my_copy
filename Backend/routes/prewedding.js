@@ -27,40 +27,40 @@ router.post("/", auth, async (req, res) => {
   const City = data.City;
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
-  const BachelorsPartyDate = data.BachelorPartyDate;
-  const ShootingDate = data.ShootingDate;
+  const BachelorsPartyDate = data.BachelorPartyDate?data.BachelorPartyDate:"null";
+  const ShootingDate = data.ShootingDate?data.ShootingDate:"null";
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
 
   const BachelorsParty = {
     venues: {
       venue1: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_1_Name?data.Venue_1_Name:"null",
+        place: data.Venue_1_Place?data.Venue_1_Place:"null",
       },
       venue2: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_2_Name?data.Venue_2_Name:"null",
+        place: data.Venue_2_Place?data.Venue_2_Place:"null",
       },
       venue3: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_3_Name?data.Venue_3_Name:"null",
+        place: data.Venue_3_Place?data.Venue_3_Place:"null",
       },
     },
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
-    noofguests: data.No_Of_Guests,
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
+    dancevalues: checkBoxValues.dancevalue? checkBoxValues.dancevalue:"null",
+    noofguests: data.No_Of_Guests?data.No_Of_Guests:"null",
   };
   const Shooting = {
-    Shooting: data.shooting,
-    Destination: data.destination_Place,
+    Shooting: data.shooting?data.shooting:"null",
+    Destination: data.destination_Place?data.destination_Place:"null",
   };
 
-  const SpecialService = data.SpecialService;
+  const SpecialService = data.SpecialService?data.SpecialService:"null";
 
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food?data.Food:"null",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
   };
 
   var venueStatus = "pending"

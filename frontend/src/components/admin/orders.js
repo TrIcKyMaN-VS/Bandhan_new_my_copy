@@ -132,7 +132,7 @@ function Orders(props) {
             }
             {clickvalues=== "wedding" &&
              <div className="row my-5">
-                <WeddingDetails preweddingids={weddingids}/>
+                <WeddingDetails weddingids={weddingids}/>
             </div>
             }
             {clickvalues=== "babyshower" &&
@@ -148,11 +148,6 @@ function Orders(props) {
             {clickvalues=== "corporate" &&
              <div className="row my-5">
                 <CorporateDetails corporateids={corporateids}/>
-            </div>
-            }
-            {clickvalues=== "prewedding" &&
-             <div className="row my-5">
-                <WeddingDetails weddingids={weddingids}/>
             </div>
             }
            
