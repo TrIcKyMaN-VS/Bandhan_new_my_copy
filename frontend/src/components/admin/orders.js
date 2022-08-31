@@ -38,7 +38,7 @@ function Orders(props) {
                   <h3 className="fs-2">{birthdayids.length}</h3>
                   <p className="fs-5">Birthday</p>
                 </div>
-                <i className="fas fa-cake fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-cake fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
 
@@ -48,7 +48,7 @@ function Orders(props) {
                   <h3 className="fs-2">{babyshowerids.length}</h3>
                   <p className="fs-5">Baby Showering</p>
                 </div>
-                <i className="fas fa-person-pregnant fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-baby fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
 
@@ -58,7 +58,7 @@ function Orders(props) {
                   <h3 className="fs-2">{preweddingids.length }</h3>
                   <p className="fs-5">Pre - Wedding</p>
                 </div>
-                <i className="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-ring fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
 
@@ -68,7 +68,7 @@ function Orders(props) {
                   <h3 className="fs-2">{postweddingids.length }</h3>
                   <p className="fs-5">Post - Wedding</p>
                 </div>
-                <i className="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-ring fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
             <div className="col-md-3" style={{cursor:"pointer"}}  onClick={(val)=>{clicks("wedding")}}>
@@ -77,7 +77,7 @@ function Orders(props) {
                   <h3 className="fs-2">{weddingids.length}</h3>
                   <p className="fs-5">Wedding</p>
                 </div>
-                <i className="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-ring fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
             <div className="col-md-3" style={{cursor:"pointer"}}  onClick={(val)=>{clicks("corporate")}}>
@@ -86,7 +86,7 @@ function Orders(props) {
                   <h3 className="fs-2">{corporateids.length}</h3>
                   <p className="fs-5">Corporate Events</p>
                 </div>
-                <i className="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-building fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
             <div className="col-md-3" style={{cursor:"pointer"}}  onClick={(val)=>{clicks("engagement")}}>
@@ -95,7 +95,7 @@ function Orders(props) {
                   <h3 className="fs-2">{engagementids.length}</h3>
                   <p className="fs-5">Engagement</p>
                 </div>
-                <i className="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-ring fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
             <div className="col-md-3" style={{cursor:"pointer"}}  onClick={(val)=>{clicks("familyfunction")}}>
@@ -104,7 +104,7 @@ function Orders(props) {
                   <h3 className="fs-2">{familyfunctionids.length}</h3>
                   <p className="fs-5">Family Function</p>
                 </div>
-                <i className="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                <i className="fas fa-chart-line fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
           </div>

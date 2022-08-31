@@ -275,59 +275,16 @@ function Finalbirthdayform() {
                         />
                       </div>
                     </div>
-                    {/* <div class="row">
-                      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-
-                        <img
-                          src="https://bit.ly/3z90bkq"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Wintry Mountain Landscape"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Mountains in the Clouds"
-                        />
-
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3PgTfar"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Waves at Sea"
-                        />
-
-                        <img
-                          src="https://bit.ly/3ceNueN"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Yosemite National Park"
-                        />
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3CCuOAW"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
 
                         <img
-                          src="https://bit.ly/3z90bkq"
+                          src="https://bit.ly/3cCATTb"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Wintry Mountain Landscape"
                         />
@@ -335,16 +292,16 @@ function Finalbirthdayform() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
+                          src="https://bit.ly/3qeCj9X"
+                          class="w-100 shadow-4-strong rounded mt-4"
                           alt="Mountains in the Clouds"
                         />
 
-                        <img
+                        {/* <img
                           src="https://bit.ly/3o6TYiy"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
-                        />
+                        /> */}
                       </div>
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
@@ -355,50 +312,7 @@ function Finalbirthdayform() {
                         />
 
                         <img
-                          src="https://bit.ly/3ceNueN"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Yosemite National Park"
-                        />
-                      </div>
-                    </div> */}
-                    <div class="row">
-                      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-
-                        <img
-                          src="https://bit.ly/3z90bkq"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Wintry Mountain Landscape"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Mountains in the Clouds"
-                        />
-
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3PgTfar"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Waves at Sea"
-                        />
-
-                        <img
-                          src="https://bit.ly/3ceNueN"
+                          src="https://bit.ly/3PWakWF"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Yosemite National Park"
                         />
@@ -650,14 +564,14 @@ function Finalbirthdayform() {
                         </div>
                         <div class="row"></div>
 
-                        <div class="d-flex justify-content-end pt-3">
+                        {/* <div class="d-flex justify-content-end pt-3">
                           <button
                             type="button"
                             class="btn btn-info btn-lg ms-2 "
                           >
                             save
                           </button>
-                        </div>
+                        </div> */}
                       </form>
                     </div>
                   </div>
@@ -669,10 +583,10 @@ function Finalbirthdayform() {
       </div>
 
       <div class="container my-5">
-        <div class="card bg-light">
+        <div class="card">
           <form onSubmit={handleSubmit((data) => handleSubmit2(data))}>
             <div class="card-header mb-4 bg-light border-0">
-              <h3 class="mb-0 fw-bold" style={{"fontVariant":"small-caps"}}>Birthday Event Booking</h3>
+              <h3 class="mb-0 fw-bolder fs-3 text-center" style={{"fontVariant":"small-caps"}}>Birthday Event Booking</h3>
             </div>
 
             <div class="card-body px-5">

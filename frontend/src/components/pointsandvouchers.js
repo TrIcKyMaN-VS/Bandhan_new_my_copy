@@ -4,7 +4,11 @@ import axios from 'axios'
 function Points() {
     // const datavalue = axios.get("/api/adminuserlist")
     // const final = datavalue.data.points
-
+useEffect(()=>{
+    axios.get("api/adminuserlist/postweddingpoints").then((res) => {
+        console.log(res.data);
+      });
+})
   return (
     <div class="container mt-5">
     <div class="row d-flex justify-content-center">
@@ -18,7 +22,7 @@ function Points() {
 
                 <div class="d-flex justify-content-center px-2">
                     <div class="d-flex flex-row">
-                        <h1 class="mt-0 off">{"final"}</h1> <sup class="mt-2 text-primary star">*</sup>
+                        <h1 class="mt-0 off">{}</h1> <sup class="mt-2 text-primary star">*</sup>
                     </div>
                 </div>
                 <div class="line">

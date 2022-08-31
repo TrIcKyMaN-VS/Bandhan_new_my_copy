@@ -157,7 +157,7 @@ const schema = yup.object().shape({
                             class="form-label fw-bold text-muted"
                             for="form3Example5cdg"
                           >
-                            Previous OrderId
+                            Previous Order Id
                           </label>
                         </div>
                         {errors.previousorderId && (
@@ -191,7 +191,7 @@ const schema = yup.object().shape({
                             type="submit"
                             class="btn btn-success btn-block btn-lg gradient-custom-4 fw-bold text-body text-black"
                           >
-                            Register
+                            Submit
                             <i class="fa-solid fa-arrow-right-to-bracket ps-2"></i>
                           </button>
                         </div>

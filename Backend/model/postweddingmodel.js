@@ -12,6 +12,9 @@ const postweddingSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     ClientName: {
       type: String,
     },

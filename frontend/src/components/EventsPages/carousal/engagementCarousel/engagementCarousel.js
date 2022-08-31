@@ -14,9 +14,7 @@ function EngagementCarousel() {
           <img
             alt="First slide"
             class="d-block w-100"
-            // src="https://i.postimg.cc/Jn0X0pDS/1.jpg"
             src="https://bit.ly/3PkZQkc"
-            // style={{maxWidth:"100%", maxHeight:"100%"}}
           />
           <div
             class="mask"
@@ -25,48 +23,19 @@ function EngagementCarousel() {
           <a href="#!" className=" w-100"></a>
           <div class="carousel-caption  d-md-block">
             <h5
-              class="animated bounceInRight  d-none d-md-block"
+              class="animated fw-bold bounceInRight  d-none d-md-block"
               style={{ animationDelay: "1s", overflowY: "hidden" }}
             >
-              Keeper
+              Dhoom Dhamaka
             </h5>
-            <h6
-              class="animated bounceInRight d-sm-block d-md-none"
-              style={{ animationDelay: "1s", overflowY: "hidden" }}
-            >
-              Keeper
-            </h6>
             {/* <!-- lge dve  --> */}
             <p
               class="animated bounceInLeft d-none d-md-block"
               style={{ animationDelay: "2s" }}
             >
-              Explore the World with us
+              Celebrate EveryMoment with us
             </p>
-            <p
-              class="animated bounceInRight d-none d-md-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-            {/* <!-- sm dve  --> */}
-            <p
-              class="animated bounceInLeft  d-md-none d-block desp"
-              style={{ animationDelay: "2s" }}
-            >
-              Explore the World with us
-            </p>
-            <p
-              class="animated bounceInRight d-md-none d-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-          </div>
+            </div>
         </div>
         {/* <!-- second item  --> */}
         <div class="carousel-item">
@@ -81,106 +50,47 @@ function EngagementCarousel() {
           ></div>
           <div class="carousel-caption  d-md-block">
             <h5
-              class="animated slideInDown d-none d-md-block"
+              class="animated fw-bold slideInDown d-none d-md-block"
               style={{ animationDelay: "1s", overflowY: "hidden" }}
             >
-              Keeper
+              Dhoom Dhamaka
             </h5>
-            <h6
-              class="animated slideInDown d-md-none d-block"
-              style={{ animationDelay: "1s", overflowY: "hidden" }}
-            >
-              Keeper
-            </h6>
             {/* <!-- large device  --> */}
             <p
               class="animated fadeInUp d-none d-md-block"
               style={{ animationDelay: "2s" }}
             >
-              Note EveryThing You Want
+              Celebrate EveryMoment with us{" "}
             </p>
-            <p
-              class="animated zoomIn d-none d-md-block"
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-            {/* <!-- sm dce  --> */}
-            <p
-              class="animated fadeInUp d-md-none d-block desp"
-              style={{ animationDelay: "2s" }}
-            >
-              Your gateway to improve your Knowledge
-            </p>
-            <p
-              class="animated zoomIn d-md-none d-block"
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-          </div>
+            </div>
         </div>
         {/* <!-- third item  --> */}
         <div class="carousel-item">
-          
-             <img
+          <img
             alt="Third slide"
             class="d-block w-100"
             src="https://bit.ly/3aPTE4K"
           />
-            <div
-              class="mask"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-            ></div>
-        
+          <div
+            class="mask"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+          ></div>
+
           <div class="carousel-caption  d-md-block">
             <h5
-              class="animated zoomIn d-none d-md-block"
+              class="animated fw-bold zoomIn d-none d-md-block"
               style={{ animationDelay: "1s", overflowY: "hidden" }}
             >
-              Keeper
+              Dhoom Dhamaka
             </h5>
-            <h6
-              class="animated zoomIn d-md-none d-block"
-              style={{ animationDelay: "1s", overflowY: "hidden" }}
-            >
-              Keeper
-            </h6>
             {/* <!-- lg dve  --> */}
             <p
               class="animated fadeInLeft d-none d-md-block"
               style={{ animationDelay: "2s" }}
             >
-              Notes App
+              Celebrate EveryMoment with us{" "}
             </p>
-            <p
-              class="animated zoomIn d-none d-md-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class="btn btn-outline-dark desb p-2">
-                More Info
-              </Link>
-            </p>
-            {/* <!-- sm dve  --> */}
-            <p
-              class="animated fadeInLeft d-md-none d-block desp"
-              style={{ animationDelay: "2s" }}
-            >
-              Notes App
-            </p>
-            <p
-              class="animated zoomIn d-md-none d-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-          </div>
+            </div>
         </div>
       </div>
       <button

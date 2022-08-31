@@ -53,10 +53,10 @@ function Todo() {
         className="row justify-content-center"
         style={{ fontFamily: "helvetica neue" }}
       >
-        <div className="col-md-10 mb-9">
+        <div className="col-md-10 mb-9 ">
           <div className="row justify-content-center">
-            <div className="col-md-4">
-              <div className="card justify-content-center rounded-3 shadow-5-strong bg-secondary text-white">
+            <div className="col-md-4 mt-5 mb-3">
+              <div className="mt-5 mb-7 card justify-content-center rounded-3 shadow-5-strong bg-secondary text-white">
                 <div className=" card-header text-center">
                   <h3 className="fw-bold">ToDo</h3>
                 </div>

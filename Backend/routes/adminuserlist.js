@@ -388,10 +388,27 @@ router.post("/postweddingchangehonneymoon/:orderId", async (req, res) => {
  })
 //
 
+//points
 
-
-
-
+router.post("/postweddingpoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(req.params.orderId);
+  await PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {points: point}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+ })
+ router.get("/postweddingpoints", async (req, res) => {
+ const value = await PostWeddingForm.aggregate([
+    // {$group:{userId:req.id}},
+    {$project:{userId:1}}
+  ])
+  res.status(200).send(value)
+  console.log(value);
+  console.log(req.id);
+  console.log("successfully completed!!!");
+    
+ })
 
 
 

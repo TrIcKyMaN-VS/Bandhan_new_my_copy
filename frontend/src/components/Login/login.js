@@ -121,6 +121,12 @@ export default function Login() {
                           <u> Register here</u>
                         </Link>
                       </p>
+                      <p class="text-center text-muted mt-2 mb-0">
+                        Forgot Password ?
+                        <Link class="fw-bold text-body" to={"./passwordReset"}>
+                          <u> Reset here</u>
+                        </Link>
+                      </p>
                     </form>
                   </div>
                 </div>

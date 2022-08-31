@@ -47,12 +47,13 @@ function EventTable(props) {
   return (
     <div>
       <h3 className=" text-center fw-bold mb-3" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName}</h3>
-      <table class="table align-middle mb-0 bg-white mb-8">
+      <div className="row justify-content-center">
+        <div className="col-md-6 text-center">
+        <table class="table align-middle mb-0 bg-white mb-8">
         <thead class="bg-light">
           <tr>
             <th>Name of Service</th>
             <th>Status</th>
-            <th>Details</th>
           </tr>
         </thead>
         <tbody>
@@ -75,12 +76,14 @@ function EventTable(props) {
                     </span>
                   )}
                 </td>
-                <td>None</td>
+               
               </tr>
             );
           })}
         </tbody>
       </table>
+        </div>
+      </div>
     </div>
   );
 }

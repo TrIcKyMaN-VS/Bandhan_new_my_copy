@@ -218,13 +218,13 @@ function BabyShowerForm() {
                     <div class="row">
                       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3B0uA5t"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
 
                         <img
-                          src="https://bit.ly/3z90bkq"
+                          src="https://bit.ly/3CLbKR1"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Wintry Mountain Landscape"
                         />
@@ -232,13 +232,13 @@ function BabyShowerForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3ob4tkS"
+                          src="https://bit.ly/3wHweWW"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Mountains in the Clouds"
                         />
 
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3AzbrpG"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
@@ -246,56 +246,13 @@ function BabyShowerForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3PgTfar"
+                          src="https://bit.ly/3R6bVdU"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Waves at Sea"
                         />
 
                         <img
-                          src="https://bit.ly/3ceNueN"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Yosemite National Park"
-                        />
-                      </div>
-                    </div>
-                    {/* <div class="row">
-                      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-
-                        <img
-                          src="https://bit.ly/3z90bkq"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Wintry Mountain Landscape"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Mountains in the Clouds"
-                        />
-
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3PgTfar"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Waves at Sea"
-                        />
-
-                        <img
-                          src="https://bit.ly/3ceNueN"
+                          src="https://bit.ly/3wIvRvv"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Yosemite National Park"
                         />
@@ -304,7 +261,7 @@ function BabyShowerForm() {
                     <div class="row">
                       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3R97L55"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
@@ -318,13 +275,13 @@ function BabyShowerForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3ob4tkS"
+                          src="https://bit.ly/3Q3KPCT"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Mountains in the Clouds"
                         />
 
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3KBVmV2"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
@@ -332,56 +289,13 @@ function BabyShowerForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3PgTfar"
+                          src="https://bit.ly/3PWJnSU"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Waves at Sea"
                         />
 
                         <img
-                          src="https://bit.ly/3ceNueN"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Yosemite National Park"
-                        />
-                      </div>
-                    </div> */}
-                    <div class="row">
-                      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-
-                        <img
-                          src="https://bit.ly/3z90bkq"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Wintry Mountain Landscape"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Mountains in the Clouds"
-                        />
-
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3PgTfar"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Waves at Sea"
-                        />
-
-                        <img
-                          src="https://bit.ly/3ceNueN"
+                          src="https://bit.ly/3cA7dpY"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Yosemite National Park"
                         />
@@ -574,11 +488,11 @@ function BabyShowerForm() {
                     </div>
                     <div class="row"></div>
 
-                    <div class="d-flex justify-content-end pt-3">
+                    {/* <div class="d-flex justify-content-end pt-3">
                       <button type="button" class="btn btn-info btn-lg ms-2 ">
                         Save
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -595,7 +509,7 @@ function BabyShowerForm() {
             })}
           >
             <div class="card-header py-4 px-5 bg-light border-0">
-              <h4 class="mb-0 fw-bold">Baby Shower Event Booking</h4>
+              <h4 class="mb-0 fw-bolder fs-3 text-center">Baby Shower Event Booking</h4>
             </div>
 
             <div class="card-body px-5">

@@ -24,15 +24,15 @@ function Birthdayportfolio() {
       alt="Wintry Mountain Landscape"
     />
      <img
-      src="/images/pic1.jpeg"
+      src="https://bit.ly/3AXWT4h"
       class="w-100 shadow-4-strong rounded mb-4"
       alt="Yosemite National Park"
     />
-     <img
+     {/* <img
       src="/images/pic3.jpeg"
       class="w-100 shadow-4-strong rounded mb-4"
       alt="Mountains in the Clouds"
-    />
+    /> */}
   </div>
 
   <div class="col-lg-4 mb-4 mb-lg-0">
@@ -52,18 +52,18 @@ function Birthdayportfolio() {
 
   <div class="col-lg-4 mb-4 mb-lg-0">
     <img
-      src="/images/pic2.jpg"
+      src="https://bit.ly/3CFkA2L"
       class="w-100 shadow-4-strong rounded mb-4"
       alt="Waves at Sea"
     />
 
     <img
-      src="/images/pic1.jpeg"
+      src="https://bit.ly/3CI75PH"
       class="w-100 shadow-4-strong rounded mb-4"
       alt="Yosemite National Park"
     />
     <img
-      src="/images/pic3.jpeg"
+      src="https://bit.ly/3Q2wlDt"
       class="w-100 shadow-4-strong rounded mb-4"
       alt="Mountains in the Clouds"
     />

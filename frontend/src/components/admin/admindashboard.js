@@ -152,36 +152,6 @@ function Admindashboard() {
                 <i className="fas fa-user fs-1 primary-text border rounded-full secondary-bg p-3"></i>
               </div>
             </div>
-
-            <div className="col-md-3">
-              <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                <div>
-                  <h3 className="fs-2">30</h3>
-                  <p className="fs-5">Ordered Users</p>
-                </div>
-                <i className="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-              </div>
-            </div>
-
-            <div className="col-md-3">
-              <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                <div>
-                  <h3 className="fs-2">30</h3>
-                  <p className="fs-5">Orders</p>
-                </div>
-                <i className="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-              </div>
-            </div>
-
-            <div className="col-md-3">
-              <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                <div>
-                  <h3 className="fs-2">20</h3>
-                  <p className="fs-5">completed Orders</p>
-                </div>
-                <i className="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-              </div>
-            </div>
           </div>
           {/* Orders */}
           {/* {orderspage && <Orders />} */}

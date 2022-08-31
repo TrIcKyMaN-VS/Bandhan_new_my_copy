@@ -1,11 +1,14 @@
 import React from "react";
-// import "./postwed.css";
+import Postweddingcarousel from "./carousal/postweddingcarousel";
 import PostweddingForm from "./formcomponents/postweddingform/postweddingform";
+import Postweddingprotofolio from "./portfoliocomponents/postweddingprotofolio";
 
 function Postwedding() {
   return (
     <div>
-     <PostweddingForm/>
+      <Postweddingcarousel />
+      <Postweddingprotofolio />
+      <PostweddingForm />
     </div>
   );
 }

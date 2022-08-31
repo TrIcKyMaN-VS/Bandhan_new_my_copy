@@ -223,13 +223,13 @@ function PreweddingForm() {
                     <div class="row">
                       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3TrGFYp"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
 
                         <img
-                          src="https://bit.ly/3z90bkq"
+                          src="https://bit.ly/3CG1cmh"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Wintry Mountain Landscape"
                         />
@@ -237,13 +237,13 @@ function PreweddingForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3ob4tkS"
+                          src="https://bit.ly/3RlgXTv"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Mountains in the Clouds"
                         />
 
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3AzkzuC"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
@@ -251,71 +251,29 @@ function PreweddingForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3PgTfar"
+                          src="https://bit.ly/3QhxKpX"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Waves at Sea"
                         />
 
                         <img
-                          src="https://bit.ly/3ceNueN"
+                          src="https://bit.ly/3R4UTwH"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Yosemite National Park"
                         />
                       </div>
                     </div>
-                    {/* <div class="row">
-                      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-
-                        <img
-                          src="https://bit.ly/3z90bkq"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Wintry Mountain Landscape"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Mountains in the Clouds"
-                        />
-
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3PgTfar"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Waves at Sea"
-                        />
-
-                        <img
-                          src="https://bit.ly/3ceNueN"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Yosemite National Park"
-                        />
-                      </div>
-                    </div>
+                    
                     <div class="row">
                       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3AZEaFv"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
 
                         <img
-                          src="https://bit.ly/3z90bkq"
+                          src="https://bit.ly/3AZCV9v"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Wintry Mountain Landscape"
                         />
@@ -323,13 +281,13 @@ function PreweddingForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3ob4tkS"
+                          src="https://bit.ly/3RjM6a4"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Mountains in the Clouds"
                         />
 
                         <img
-                          src="https://bit.ly/3o6TYiy"
+                          src="https://bit.ly/3pT8LhT"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Boat on Calm Water"
                         />
@@ -337,56 +295,13 @@ function PreweddingForm() {
 
                       <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                          src="https://bit.ly/3PgTfar"
+                          src="https://bit.ly/3RqEmTx"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Waves at Sea"
                         />
 
                         <img
-                          src="https://bit.ly/3ceNueN"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Yosemite National Park"
-                        />
-                      </div>
-                    </div> */}
-                    <div class="row">
-                      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-
-                        <img
-                          src="https://bit.ly/3z90bkq"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Wintry Mountain Landscape"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3ob4tkS"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Mountains in the Clouds"
-                        />
-
-                        <img
-                          src="https://bit.ly/3o6TYiy"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Boat on Calm Water"
-                        />
-                      </div>
-
-                      <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                          src="https://bit.ly/3PgTfar"
-                          class="w-100 shadow-4-strong rounded mb-4"
-                          alt="Waves at Sea"
-                        />
-
-                        <img
-                          src="https://bit.ly/3ceNueN"
+                          src="https://bit.ly/3dYo6uE"
                           class="w-100 shadow-4-strong rounded mb-4"
                           alt="Yosemite National Park"
                         />
@@ -524,7 +439,7 @@ function PreweddingForm() {
                         </div>
                       )}
                     </div>
-
+{/* 
                     <div class="btn-group mb-4">
                       <input
                         type="radio"
@@ -559,18 +474,7 @@ function PreweddingForm() {
                       <label class="btn btn-primary" for="bride">
                         Bride
                       </label>
-
-                      {/* <input
-                        type="radio"
-                        class="btn-check"
-                        name="options"
-                        id="option3"
-                        autocomplete="off"
-                      />
-                      <label class="btn btn-primary" for="option3">
-                        Others
-                      </label> */}
-                    </div>
+                    </div> */}
                     <div class="row">
                       {/* <div class="col-md-6 mb-4">
                         <div class="form-floating mb-3">
@@ -635,11 +539,11 @@ function PreweddingForm() {
                     </div>
                     <div class="row"></div>
 
-                    <div class="d-flex justify-content-end pt-3">
+                    {/* <div class="d-flex justify-content-end pt-3">
                       <button type="button" class="btn btn-info btn-lg ms-2 ">
                         Save
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -649,14 +553,14 @@ function PreweddingForm() {
       </div>
 
       <div class="container my-5">
-        <div class="card">
+        <div class="card bg-light">
           <form
             onSubmit={handleSubmit((data) => {
               handleSubmit2(data);
             })}
           >
-            <div class="card-header py-4 px-5 bg-light border-0">
-              <h4 class="mb-0 fw-bold">Pre Wedding Booking</h4>
+            <div class="card-header bg-light border-0">
+              <h4 class="mb-0 fw-bolder fs-3 text-center">Pre Wedding Booking</h4>
             </div>
 
             <div class="card-body px-5">

@@ -42,20 +42,20 @@ function Todo() {
 
   return (
     <div
-      className=" bg-super-light pt-3"
+      className=" bg-super-light pt-3 mt-5"
       style={{
         backgroundImage:
           "-webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%)",
       }}
     >
       <div
-        className="row justify-content-center"
+        className="row justify-content-center "
         style={{ fontFamily: "helvetica neue" }}
       >
-        <div className="col-md-10 mb-9">
+        <div className="col-md-10 mb-9 ">
           <div className="row justify-content-center">
             <div className="col-md-4">
-              <div className="card justify-content-center rounded-3 shadow-5-strong bg-secondary text-white">
+              <div className=" card justify-content-center rounded-3 shadow-5-strong bg-secondary text-white">
                 <div className=" card-header text-center">
                   <h3 className="fw-bold">ToDo</h3>
                 </div>

@@ -39,7 +39,7 @@ const Navbar = () => {
             className=" fs-4 fw-bold text-black "
             style={{ fontVariant: "small-caps" }}
           >
-            Bandhan
+            Dhoom Dhamaka
           </span>
         </a>
         <button
@@ -138,7 +138,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="  me-4 nvbrBtn"
+                  className="  me-4 btn-danger btn-sm btn"
                 >
                   LOGOUT
                   {/* <LogoutIcon className="ps-1" /> */}

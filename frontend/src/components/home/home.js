@@ -1,5 +1,6 @@
 import axios from "axios";
-// import "./home.css";
+import { Link } from "react-router-dom";
+import "./home.css";
 
 import React, { useEffect, useState } from "react";
 import Slide from "./coverFlowSwipe/slide";
@@ -18,38 +19,6 @@ export default function Home() {
           </h3>
         </div>
         <Slide />
-
-        {/* <div class="swiper-container home-slider">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-
-            <div class="swiper-slide">
-              <img src="https://bit.ly/3T7zFQn" alt="" />
-            </div>
-          </div>
-        </div> */}
       </section>
 
       {/* <!-- home section ends --> */}
@@ -57,10 +26,7 @@ export default function Home() {
       {/* <!-- service section starts  --> */}
 
       <section class="service" id="service">
-        <h2
-          class=" fw-bold text-center fs-2 mb-4"
-          style={{ color: "#1ec408" }}
-        >
+        <h2 class=" fw-bold text-center fs-2 mb-4" style={{ color: "#1ec408" }}>
           DHAMAKA
           <span
             className="fw-bold fs-2 ps-2"
@@ -235,7 +201,7 @@ export default function Home() {
 
         <div class="row justify-content-center mb-5">
           <div className="col-md-5">
-            <div class="image hover-zoom">
+            <div class="image hover-zoom text-center">
               <img
                 className=" rounded shadow-5-strong"
                 src="https://bit.ly/3dOEBcx"
@@ -246,11 +212,11 @@ export default function Home() {
             </div>
           </div>
           <div className="col-md-6 ps-0 ms-0">
-            <div class="content mt-5">
-              <h3 className=" text-black fw-bold mb-3 fs-3">
+            <div class="content mt-5 text-md-center">
+              <h3 className=" text-black fw-bold mb-3 text-center fs-3">
                 Our Best Services Just For You
               </h3>
-              <p>
+              <p className="p-3 ms-sm-4 ms-md-2">
                 Dhoom Dhamaka is an online service provider platform which makes
                 your occasion grand, royal and memorable. We all run after any
                 function to see how the preparations are going, instead of
@@ -258,12 +224,14 @@ export default function Home() {
                 assist you in one click and take all your responsibility.
                 Because, it's time to celebrate now!!!
               </p>
-              <button
-                href="./Terms of Service/index.html"
-                className="btn btn-black mt-4"
-              >
-                Terms and condition
-              </button>
+              <div className=" ms-sm-4">
+                <button
+                  href="./Terms of Service/index.html"
+                  className="btn btn-black mt-4"
+                >
+                  Terms and condition
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -427,10 +395,10 @@ export default function Home() {
 
                   <ul className="mb-4">
                     <li
-                      className=" text-muted text-start"
+                      className=" text-muted  text-center"
                       style={{
                         listStyle: "none",
-                        marginLeft: "27px",
+                        // marginLeft: "27px",
                         fontSize: "14px",
                       }}
                     >
@@ -439,7 +407,9 @@ export default function Home() {
                       <p className="mb-1">Pre wedding : 12 days or Prior</p>
                       <p className="mb-1">Post wedding:12 days or Prior </p>
                       <p className="mb-1">Wedding: 15 days or Prior</p>
-                      <p className="mb-1">Destination Event : 20 days or Prior</p>
+                      <p className="mb-1">
+                        Destination Event : 20 days or Prior
+                      </p>
                       <p className="mb-1"> Wedding: 20 days or Prior</p>
                     </li>
                   </ul>
@@ -470,10 +440,10 @@ export default function Home() {
 
                   <ul className="mb-3">
                     <li
-                      className=" text-muted text-start"
+                      className=" text-muted text-center"
                       style={{
                         listStyle: "none",
-                        marginLeft: "27px",
+                        // marginLeft: "27px",
                         fontSize: "14px",
                       }}
                     >
@@ -493,9 +463,9 @@ export default function Home() {
           <div className="col-md-3 me-2 mt-5">
             <div className="card mt-2 bg-black shadow-5-strong rounded-4">
               <div className="card-body">
-                <div className=" text-center mt-3">
+                <div className=" text-center mt-lg-2 mt-md-3 mt-md-3">
                   <div
-                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn mb-3"
+                    className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn mb-2"
                     style={{ width: "60px", height: "60px" }}
                   >
                     <i
@@ -503,11 +473,11 @@ export default function Home() {
                       style={{ fontSize: "25px" }}
                     ></i>
                   </div>
-                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                  <h4 className="text-center fw-bold mb-2 mt-2 text-white">
                     DHAMAKA -{" "}
                     <span style={{ color: "#31e319" }}> [SPECIAL SERVICE]</span>
                   </h4>
-                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
+                  <h4 className="text-center fw-bold mb-2 mt-2 text-white">
                     EMERGENCY SERVICE{" "}
                     <p style={{ color: "#31e319", fontSize: "15px" }}>
                       {" "}
@@ -518,13 +488,23 @@ export default function Home() {
                     If any additionl service required before the event start.
                   </p>
 
-                  <h4 className="text-center fw-bold mb-3 mt-2 text-white">
-                    SPOT SERVICE -{" "}
+                  <h4 className="text-center fw-bold mb-3 mt-1 text-white">
+                    SPOT SERVICE -
                     <span style={{ color: "#31e319" }}> AT THE MOMENT</span>
                   </h4>
                   <p className=" text-muted">
                     If any additionl service required during the event.
                   </p>
+                  <div className="">
+                    <Link
+                      to="/emergencyform"
+                      type="button"
+                      className="btn btn-sm emgBtn mb-2"
+                      // style={{"backgroundColor":"#31e319"}}
+                    >
+                      Book now
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,10 +1,13 @@
-import React from 'react'
-// import "./babyshower.css"
-import BabyShowerForm from './formcomponents/babyshowerevent/babyshowerevent'
+import React from "react";
+import Babyshowercarousel from "./carousal/babyshowercarousel";
+import BabyShowerForm from "./formcomponents/babyshowerevent/babyshowerevent";
+import Babyshowerprotofolio from "./portfoliocomponents/babyshowerprotofolio";
 export default function Babyshower() {
   return (
-   <div>
-     <BabyShowerForm/>
-   </div>
-  )
+    <div>
+      <Babyshowercarousel />
+      <Babyshowerprotofolio />
+      <BabyShowerForm />
+    </div>
+  );
 }

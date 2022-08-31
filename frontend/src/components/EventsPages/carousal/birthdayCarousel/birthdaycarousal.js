@@ -27,55 +27,25 @@ function Birthdaycarousel() {
           <a href="#!" className=" w-100"></a>
           <div class="carousel-caption  d-md-block">
             <h5
-              class="animated bounceInRight  d-none d-md-block"
+              class="animated bounceInRight fw-bold  d-none d-md-block"
               style={{ animationDelay: "1s", overflowY: "hidden" }}
             >
-              Keeper
+              Dhoom Dhamaka
             </h5>
-            <h6
-              class="animated bounceInRight d-sm-block d-md-none"
-              style={{ animationDelay: "1s", overflowY: "hidden" }}
-            >
-              Keeper
-            </h6>
             {/* <!-- lge dve  --> */}
             <p
               class="animated bounceInLeft d-none d-md-block"
               style={{ animationDelay: "2s" }}
             >
-              Explore the World with us
+              Celebrate EveryMoment with us
             </p>
-            <p
-              class="animated bounceInRight d-none d-md-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-            {/* <!-- sm dve  --> */}
-            <p
-              class="animated bounceInLeft  d-md-none d-block desp"
-              style={{ animationDelay: "2s" }}
-            >
-              Explore the World with us
-            </p>
-            <p
-              class="animated bounceInRight d-md-none d-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-          </div>
+            </div>
         </div>
         {/* <!-- second item  --> */}
         <div class="carousel-item">
           <img
             alt="Second slide"
             class="d-block w-100"
-            // src="https://i.postimg.cc/SQXZtrTZ/2.jpg"
             src="https://wallpapercave.com/wp/wp2749902.jpg"
           />
           <div
@@ -84,107 +54,48 @@ function Birthdaycarousel() {
           ></div>
           <div class="carousel-caption  d-md-block">
             <h5
-              class="animated slideInDown d-none d-md-block"
+              class="animated slideInDown d-none fw-bold d-md-block"
               style={{ animationDelay: "1s", overflowY: "hidden" }}
             >
-              Keeper
+              Dhoom Dhamaka
             </h5>
-            <h6
-              class="animated slideInDown d-md-none d-block"
-              style={{ animationDelay: "1s", overflowY: "hidden" }}
-            >
-              Keeper
-            </h6>
             {/* <!-- large device  --> */}
             <p
               class="animated fadeInUp d-none d-md-block"
               style={{ animationDelay: "2s" }}
             >
-              Note EveryThing You Want
+              Celebrate EveryMoment with us{" "}
             </p>
-            <p
-              class="animated zoomIn d-none d-md-block"
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-            {/* <!-- sm dce  --> */}
-            <p
-              class="animated fadeInUp d-md-none d-block desp"
-              style={{ animationDelay: "2s" }}
-            >
-              Your gateway to improve your Knowledge
-            </p>
-            <p
-              class="animated zoomIn d-md-none d-block"
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-          </div>
+            </div>
         </div>
         {/* <!-- third item  --> */}
         <div class="carousel-item">
-          
-             <img
+          <img
             alt="Third slide"
             class="d-block w-100"
             // src="https://i.postimg.cc/Jh4x3cH5/3.jpg"
             src="https://bit.ly/3aNw5K5"
-          /> 
-            <div
-              class="mask"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-            ></div>
-          
+          />
+          <div
+            class="mask"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+          ></div>
+
           <div class="carousel-caption  d-md-block">
             <h5
-              class="animated zoomIn d-none d-md-block"
+              class="animated zoomIn d-none d-md-block fw-bold"
               style={{ animationDelay: "1s", overflowY: "hidden" }}
             >
-              Keeper
+              Dhoom Dhamaka
             </h5>
-            <h6
-              class="animated zoomIn d-md-none d-block"
-              style={{ animationDelay: "1s", overflowY: "hidden" }}
-            >
-              Keeper
-            </h6>
             {/* <!-- lg dve  --> */}
             <p
               class="animated fadeInLeft d-none d-md-block"
               style={{ animationDelay: "2s" }}
             >
-              Notes App
+              Celebrate EveryMoment with us{" "}
             </p>
-            <p
-              class="animated zoomIn d-none d-md-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class="btn btn-outline-dark desb p-2">
-                More Info
-              </Link>
-            </p>
-            {/* <!-- sm dve  --> */}
-            <p
-              class="animated fadeInLeft d-md-none d-block desp"
-              style={{ animationDelay: "2s" }}
-            >
-              Notes App
-            </p>
-            <p
-              class="animated zoomIn d-md-none d-block "
-              style={{ animationDelay: "3s" }}
-            >
-              <Link to="/login" class=" btn btn-outline-dark desb">
-                More Info
-              </Link>
-            </p>
-          </div>
+            </div>
         </div>
       </div>
       <button

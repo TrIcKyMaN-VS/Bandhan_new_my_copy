@@ -29,6 +29,7 @@ router.post("/", auth, async (req, res) => {
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = req.body.data.No_Of_Guests;
+  const points = "0"
 
   const muhDikhal = data.muh_Dikhal? data.muh_Dikhal:"null";
   const muhDikhalvalue = {
@@ -95,10 +96,8 @@ router.post("/", auth, async (req, res) => {
     Honneymoonb,
     honeymoonStatus,
     cateringStatus,
-    // venueb,
-    // decorationb,
-    // status,
-    isVerified
+    isVerified,
+    points
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

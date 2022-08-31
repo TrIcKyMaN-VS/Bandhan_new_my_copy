@@ -115,35 +115,6 @@ function Formbirthday() {
 
            
             <div class="row">
-            {/* <div class="col-md-3">
-                <label for="exampleInput10" class="form-label"
-                       >Dance</label
-                  >
-                <select
-                        id="exampleInput10"
-                        class="form-select mb-3"
-                        aria-label="Default select example"
-                        >
-                  <option selected value="1">Folk</option>
-                  <option value="2">Indian</option>
-                  <option value="3">Western</option>
-                </select>
-              </div> */}
-              
-
-              {/* <div class="col-md-3">
-                <label for="exampleInput10" class="form-label"
-                       >Music</label
-                  >
-                <select
-                        id="exampleInput10"
-                        class="form-select mb-3"
-                        aria-label="Default select example"
-                        >
-                  <option selected value="1">DJ</option>
-                  <option value="2">classic</option>
-                </select>
-              </div> */}
             </div>
           
            <div class="row">
