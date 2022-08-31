@@ -167,6 +167,228 @@ router.get("/familyfunctionorder/orderId/:orderId", async (req, res) => {
 })
 
 
+//change birthday statuus
+router.post("/babyshowerchangevenue/:orderId", async (req, res) => {
+  await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/babyshowerchangedecoration/:orderId", async (req, res) => {
+  await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/babyshowerchangephotography/:orderId", async (req, res) => {
+ await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/babyshowerchangecatering/:orderId", async (req, res) => {
+  await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+
+router.post("/babyshowerchangevenue/:orderId", async (req, res) => {
+  const formdata = await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+
+
+//
+
+
+//change birthday status
+
+router.post("/birthdaychangevenue/:orderId", async (req, res) => {
+  await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/birthdaychangedecoration/:orderId", async (req, res) => {
+ await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/birthdaychangephotography/:orderId", async (req, res) => {
+  await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/birthdaychangecatering/:orderId", async (req, res) => {
+  await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+
+//
+
+//change corporate status
+
+
+router.post("/corporatechangevenue/:orderId", async (req, res) => {
+  await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/corporatechangedecoration/:orderId", async (req, res) => {
+  await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/corporatechangephotography/:orderId", async (req, res) => {
+  await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/corporatechangecatering/:orderId", async (req, res) => {
+ await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+
+//
+
+
+// change family status
+
+
+
+
+
+router.post("/familyfunctionchangevenue/:orderId", async (req, res) => {
+   await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("success");
+    
+})
+router.post("/familyfunctionchangedecoration/:orderId", async (req, res) => {
+  await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/familyfunctionchangephotography/:orderId", async (req, res) => {
+  await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+router.post("/familyfunctionchangecatering/:orderId", async (req, res) => {
+  await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+})
+
+//
+
+// change wedding status
+
+router.post("/weddingchangevenue/:orderId", async (req, res) => {
+  await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("success");
+   
+})
+router.post("/weddingchangedecoration/:orderId", async (req, res) => {
+ await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("successfully completed!!!");
+   
+})
+router.post("/weddingchangephotography/:orderId", async (req, res) => {
+ await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("successfully completed!!!");
+   
+})
+router.post("/weddingchangecatering/:orderId", async (req, res) => {
+ await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("successfully completed!!!");
+   
+})
+//
+
+
+// change engagement status
+
+router.post("/engagementchangevenue/:orderId", async (req, res) => {
+  await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("success");
+   
+})
+router.post("/engagementchangedecoration/:orderId", async (req, res) => {
+ await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("successfully completed!!!");
+   
+})
+router.post("/engagementchangephotography/:orderId", async (req, res) => {
+ await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("successfully completed!!!");
+   
+})
+router.post("/engagementchangecatering/:orderId", async (req, res) => {
+ await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+ res.status(200).send("successfully completed!!!")
+ console.log("successfully completed!!!");
+   
+})
+
+//
+
+// change prewedding status
+
+router.post("/preweddingchangevenue/:orderId", async (req, res) => {
+  await PreWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+ })
+ router.post("/preweddingchangecatering/:orderId", async (req, res) => {
+  await PreWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+ })
+//
+
+
+// change post wedding status
+
+router.post("/postweddingchangehonneymoon/:orderId", async (req, res) => {
+  await PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {honeymoonStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+ })
+ router.post("/postweddingchangecatering/:orderId", async (req, res) => {
+  await PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+    
+ })
+//
+
+
 
 
 

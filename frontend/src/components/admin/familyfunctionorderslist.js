@@ -4,6 +4,25 @@ import axios from 'axios';
 function Orderslist(props) {
     const forms = props.formdata
     console.log("fam",forms);
+    function status(value){
+      if(value === "venue"){
+        axios.post(`api/adminuserlist/familyfunctionchangevenue/${forms[0].orderId}`).then((res) => {
+          console.log(res.data);
+        });
+      }
+      if(value === "decoration"){
+        axios.post(`api/adminuserlist/familyfunctionchangedecoration/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value === "photography"){
+        axios.post(`api/adminuserlist/familyfunctionchangephotography/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value === "catering"){
+        axios.post(`api/adminuserlist/familyfunctionchangecatering/${forms[0].orderId}`).then((res) => {
+        });
+      }
+    }
   return (
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
@@ -149,6 +168,45 @@ function Orderslist(props) {
           <th>Shows</th>
           <td>{forms[0].Shows.show[2]}</td>
         </tr>             
+        </tbody>
+      </table>
+      <hr class="my-5"/>
+      <table className="table bg-white rounded shadow-sm  table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              Order 
+            </th>
+            <th className=" fw-bold" scope="col">
+              Order Status
+            </th>
+            <th className=" fw-bold" scope="col">
+              Change Status
+            </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th>venue Status</th>
+          <td>{forms[0].venueStatus}</td>
+          <td><div className='btn btn-success' onClick={()=>status("venue")}>Completed</div></td>
+        </tr>
+        <tr>
+          <th>decorationStatus</th>
+          <td>{forms[0].decorationStatus}</td>
+          <td><div className='btn btn-success' onClick={()=>status("decoration")}>Completed</div></td>
+        </tr>
+        <tr>
+          <th>photographyStatus</th>
+          <td>{forms[0].photographyStatus}</td>
+          <td><div className='btn btn-success' onClick={()=>status("photography")}>Completed</div></td>
+        </tr>
+        <tr>
+          <th>cateringStatus</th>
+          <td>{forms[0].cateringStatus}</td>
+          <td><div className='btn btn-success' onClick={()=>status("catering")}>Completed</div></td>
+        </tr>     
         </tbody>
       </table>
     </div>

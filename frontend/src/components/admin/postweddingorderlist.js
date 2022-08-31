@@ -5,6 +5,18 @@ import axios from 'axios';
 function Orderslist(props) {
     const forms = props.formdata
     console.log("post",forms);
+    function status(value){
+      if(value === "honneymoon"){
+        axios.post(`api/adminuserlist/postweddingchangehonneymoon/${forms[0].orderId}`).then((res) => {
+          console.log(res.data);
+        });
+      }
+      if(value === "catering"){
+        axios.post(`api/adminuserlist/postweddingchangecatering/${forms[0].orderId}`).then((res) => {
+        });
+      }
+     
+    }
   return (
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
@@ -94,26 +106,6 @@ function Orderslist(props) {
           <th>muhDikhal</th>
           <td>{forms[0].muhDikhal[2]}</td>
         </tr>
-        {/* <tr>
-          <th>Shooting</th>
-          <td>{forms[0].Shooting.Shooting[0]}</td>
-        </tr> */}
-       
-{/*         
-        <tr>
-          <th>Venue One Name</th>
-          <td>{forms[0].BachelorsParty.venues.venue1.name}</td>
-        </tr> */}
-      
- 
-        {/* <tr>
-          <th>Other Services</th>
-          <td>{forms[0].OtherServices[0]}</td>
-        </tr>
-        <tr>
-          <th>Other Services</th>
-          <td>{forms[0].OtherServices[1]}</td>
-        </tr> */}
     
         <tr>
           <th>Dance</th>
@@ -123,18 +115,6 @@ function Orderslist(props) {
           <th>music</th>
           <td>{forms[0].muhDikhalvalue.musicvalues}</td>
         </tr>
-        {/* <tr>
-          <th>Shows</th>
-          <td>{forms[0].Shows.show[0]}</td>
-        </tr>
-        <tr>
-          <th>Shows</th>
-          <td>{forms[0].Shows.show[1]}</td>
-        </tr>
-        <tr>
-          <th>Shows</th>
-          <td>{forms[0].Shows.show[2]}</td>
-        </tr> */}
         <tr>
           <th>Special Service</th>
           <td>{forms[0].SpecialService}</td>
@@ -143,6 +123,36 @@ function Orderslist(props) {
           <th>Date</th>
           <td>{forms[0].date}</td>
         </tr>       
+        </tbody>
+      </table>
+
+      <hr class="my-5"/>
+      <table className="table bg-white rounded shadow-sm  table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              Order 
+            </th>
+            <th className=" fw-bold" scope="col">
+              Order Status
+            </th>
+            <th className=" fw-bold" scope="col">
+              Change Status
+            </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th>Honneymoon status</th>
+          <td>{forms[0].honeymoonStatus}</td>
+          <td><div className='btn btn-success'onClick={()=>status("honneymoon")}>Completed</div></td>
+        </tr>
+        <tr>
+          <th>cateringStatus</th>
+          <td>{forms[0].cateringStatus}</td>
+          <td><div className='btn btn-success' onClick={()=>status("catering")}>Completed</div></td>
+        </tr>     
         </tbody>
       </table>
     </div>
