@@ -23,31 +23,30 @@ router.post("/", auth, async (req, res) => {
   const BrideName = data.Bride_Name;
   const GroomName = data.Groom_Name;
   const date = data.date;
-  const City = data.City;
+  const City = data.city;
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = req.body.data.No_Of_Guests;
-  const points = "0"
 
-  const muhDikhal = data.muh_Dikhal? data.muh_Dikhal:"null";
+  const muhDikhal = data.muh_Dikhal;
   const muhDikhalvalue = {
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
-    dancevalues: checkBoxValues.dancevalue? checkBoxValues.dancevalue:"null",
+    musicvalues: checkBoxValues.musicvalue,
+    dancevalues: checkBoxValues.dancevalue,
   };
-  const SubaarambhYatra = data.subaarambh_Yatra?data.subaarambh_Yatra:"null";
+  const SubaarambhYatra = data.subaarambh_Yatra;
   const Honneymoon = {
-    DestinationIndia: data.destination_India?data.destination_India:"null",
-    DestinationAbroad: data.destination_Abroad?data.destination_Abroad:"null",
-    HonneymoonDays: data.no_of_days_honneymoon?data.no_of_days_honneymoon:"null",
+    DestinationIndia: data.destination_India,
+    DestinationAbroad: data.destination_Abroad,
+    HonneymoonDays: data.no_of_days_honneymoon,
   };
-
-  const SpecialService = data.SpecialService?data.SpecialService:"null";
+  const points = "0"
+  const SpecialService = data.SpecialService;
 
   const Food = {
-    Foodtype: data.Food?data.Food:"null",
-    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
+    Foodtype: data.Food,
+    items: checkBoxValues.foodvalue,
   };
 
   // var venueStatus = "pending"
@@ -96,8 +95,11 @@ router.post("/", auth, async (req, res) => {
     Honneymoonb,
     honeymoonStatus,
     cateringStatus,
-    isVerified,
-    points
+    points,
+    // venueb,
+    // decorationb,
+    // status,
+    isVerified
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

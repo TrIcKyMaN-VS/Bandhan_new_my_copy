@@ -22,45 +22,46 @@ router.post("/", auth, async (req, res) => {
   const ClientName = data.Client_Name;
   const BrideName = data.Bride_Name;
   const GroomName = data.Groom_Name;
-  const Person = data.Person;
+  const Person = data.person;
   const date = data.date;
-  const City = data.City;
+  const City = data.city;
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
-  const BachelorsPartyDate = data.BachelorPartyDate?data.BachelorPartyDate:"null";
-  const ShootingDate = data.ShootingDate?data.ShootingDate:"null";
+  const BachelorsPartyDate = data.BachelorPartyDate;
+  const ShootingDate = data.ShootingDate;
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
 
   const BachelorsParty = {
     venues: {
       venue1: {
-        name: data.Venue_1_Name?data.Venue_1_Name:"null",
-        place: data.Venue_1_Place?data.Venue_1_Place:"null",
+        name: data.Venue_1_Name,
+        place: data.Venue_1_Place,
       },
       venue2: {
-        name: data.Venue_2_Name?data.Venue_2_Name:"null",
-        place: data.Venue_2_Place?data.Venue_2_Place:"null",
+        name: data.Venue_1_Name,
+        place: data.Venue_1_Place,
       },
       venue3: {
-        name: data.Venue_3_Name?data.Venue_3_Name:"null",
-        place: data.Venue_3_Place?data.Venue_3_Place:"null",
+        name: data.Venue_1_Name,
+        place: data.Venue_1_Place,
       },
     },
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
-    dancevalues: checkBoxValues.dancevalue? checkBoxValues.dancevalue:"null",
-    noofguests: data.No_Of_Guests?data.No_Of_Guests:"null",
+    musicvalues: checkBoxValues.musicvalue,
+    dancevalues: checkBoxValues.dancevalue,
+    noofguests: data.No_Of_Guests,
   };
+  const points = "0"
   const Shooting = {
-    Shooting: data.shooting?data.shooting:"null",
-    Destination: data.destination_Place?data.destination_Place:"null",
+    Shooting: data.shooting,
+    Destination: data.destination_Place,
   };
 
-  const SpecialService = data.SpecialService?data.SpecialService:"null";
+  const SpecialService = data.SpecialService;
 
   const Food = {
-    Foodtype: data.Food?data.Food:"null",
-    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
+    Foodtype: data.Food,
+    items: checkBoxValues.foodvalue,
   };
 
   var venueStatus = "pending"
@@ -114,7 +115,8 @@ router.post("/", auth, async (req, res) => {
     shootingStatus,
     cateringStatus,
     venueStatus,
-    isVerified
+    isVerified,
+    points
   });
 
   console.log("def", req.body.name_Of_The_Event);

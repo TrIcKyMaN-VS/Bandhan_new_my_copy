@@ -58,7 +58,7 @@ function Todo() {
             <div className="col-md-4 mt-5 mb-3">
               <div className="mt-5 mb-7 card justify-content-center rounded-3 shadow-5-strong bg-secondary text-white">
                 <div className=" card-header text-center">
-                  <h3 className="fw-bold">ToDo</h3>
+                  <h3 className="fw-bold">TODO</h3>
                 </div>
               </div>
               <div className="card shadow-5-strong rounded-5">

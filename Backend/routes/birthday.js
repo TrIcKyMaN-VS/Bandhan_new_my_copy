@@ -21,39 +21,40 @@ router.post("/", auth, async (req, res) => {
   const Age = req.body.data.Age;
   const Gender = req.body.data.gender;
   const City = req.body.data.city;
-  const FromTime = req.body.data.FromTime;
+  const FromTime = req.body.data.fromTime;
   const ToTime = req.body.data.ToTime;
   const date = req.body.data.date;
   const NoOfGuests = req.body.data.No_Of_Guests;
   const MinBudget = req.body.data.Estimate_Budget_Minimum;
   const MaxBudget = req.body.data.Estimate_Budget_Maximum;
   const Shows = {
-    show: req.body.data.shows?req.body.data.shows:"null",
-    musicvalues: req.body.checkBoxValues.musicvalue?req.body.checkBoxValues.musicvalue:"null",
-    dancevalues: req.body.checkBoxValues.dancevalue? req.body.checkBoxValues.dancevalue:"null",
-    dj: req.body.data.dj?req.body.data.dj:"null",
+    show: req.body.data.shows,
+    musicvalues: req.body.checkBoxValues.musicvalue,
+    dancevalues: req.body.checkBoxValues.dancevalue,
+    dj: req.body.data.dj,
   };
   const Decoration = {
-    RegularDecoration: req.body.checkBoxValues.decorationvalue?req.body.checkBoxValues.decorationvalue:"null",
-    ThemeDecoration: req.body.data.DecorationType?req.body.data.DecorationType:"null",
+    RegularDecoration: req.body.checkBoxValues.decorationvalue,
+    ThemeDecoration: req.body.data.DecorationType,
   };
-  const SpecialService = req.body.data.SpecialService?req.body.data.SpecialService:"null";
-  const OtherServices = req.body.data.OtherServices?req.body.data.OtherServices:"null";
+  const points = "0"
+  const SpecialService = req.body.data.SpecialService;
+  const OtherServices = req.body.data.OtherServices;
   const OtherServiceValues = {
-    invitation: req.body.checkBoxValues.invitationvalue?req.body.checkBoxValues.invitationvalue:"null",
-    photography: req.body.checkBoxValues.photovalue?req.body.checkBoxValues.photovalue:"null",
+    invitation: req.body.checkBoxValues.invitationvalue,
+    photography: req.body.checkBoxValues.photovalue,
     venues: {
       venue1: {
-        name: req.body.data.venue_1_name?req.body.data.venue_1_name:"null",
-        place: req.body.data.venue_1_place?req.body.data.venue_1_place:"null",
+        name: req.body.data.venue_1_name,
+        place: req.body.data.venue_1_place,
       },
       venue2: {
-        name: req.body.data.venue_2_name?req.body.data.venue_2_name:"null",
-        place: req.body.data.venue_2_place?req.body.data.venue_2_place:"null",
+        name: req.body.data.venue_2_name,
+        place: req.body.data.venue_2_place,
       },
       venue3: {
-        name: req.body.data.venue_3_name?req.body.data.venue_3_name:"null",
-        place: req.body.data.venue_3_place?req.body.data.venue_3_place:"null",
+        name: req.body.data.venue_3_name,
+        place: req.body.data.venue_3_place,
       },
     },
   };
@@ -62,8 +63,8 @@ router.post("/", auth, async (req, res) => {
   // }
   // console.log(photography);
   const Food = {
-    Foodtype: req.body.data.Food?req.body.data.Food:"null",
-    items: req.body.checkBoxValues.foodvalue?req.body.checkBoxValues.foodvalue:"null",
+    Foodtype: req.body.data.Food,
+    items: req.body.checkBoxValues.foodvalue,
   };
 
   var venueStatus = "pending"
@@ -118,7 +119,8 @@ router.post("/", auth, async (req, res) => {
     photographyStatus,
     decorationStatus,
     cateringStatus,
-    isVerified
+    isVerified,
+    points
   });
   newBirthdayForm.save().then(() => {
     res.status(200).send("birthday form saved successfully...!");

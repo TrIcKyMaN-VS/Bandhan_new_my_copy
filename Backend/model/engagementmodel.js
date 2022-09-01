@@ -11,6 +11,9 @@ const engagementSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     ClientName: {
       type: String,
     },
@@ -85,7 +88,7 @@ const engagementSchema = new mongoose.Schema(
       invitation: {
         type: String,
       },
-      Photography: {
+      photography: {
         type: Object,
       },
       mehandi: {

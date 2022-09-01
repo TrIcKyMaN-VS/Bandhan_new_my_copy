@@ -11,6 +11,9 @@ const FamilyFunctionSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     TypeOfFunction: {
       type: String,
       required: true,
@@ -75,7 +78,7 @@ const FamilyFunctionSchema = new mongoose.Schema(
       invitation: {
         type: String,
       },
-      Photography: {
+      photography: {
         type: Object,
       },
       venues: {

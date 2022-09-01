@@ -46,7 +46,7 @@ function EventTable(props) {
 
   return (
     <div>
-      <h3 className=" text-center fw-bold mb-3" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName}</h3>
+      <h3 className=" text-center fw-bold mb-3" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName} - [ {props.date} ]</h3>
       <div className="row justify-content-center">
         <div className="col-md-6 text-center">
         <table class="table align-middle mb-0 bg-white mb-8">

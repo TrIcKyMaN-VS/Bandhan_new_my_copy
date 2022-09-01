@@ -33,8 +33,7 @@ const Navbar = () => {
     <nav className=" navbar fixed-top  navbar-expand-lg mb-0 navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand  ms-5 text-white " href="#">
-          {/* <WbIncandescentIcon className="fs-1 mt-2 pe-2" /> */}
-          <img src="./dhoom.ico" style={{ width: "45px" }} />
+          <img src="./images/newlogo.jpg" className="rounded-circle z-depth-2" style={{ width: "50px"}} />
           <span
             className=" fs-4 fw-bold text-black "
             style={{ fontVariant: "small-caps" }}

@@ -24,80 +24,81 @@ router.post("/", auth, async (req, res) => {
   const BrideName = data.Bride_Name;
   const GroomName = data.Groom_Name;
   const date = data.date;
-  const City = data.City;
+  const City = data.city;
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = data.No_Of_Guests;
-  const Services = data.service ?data.service : "null";
+  const Services = data.service;
   const Servicevalue = {
     Mehandi: {
-      DateMehandiShow: data.DateMehandiShow ?data.DateMehandiShow : "null",
-      TimeMehandiShow: data.TimeMehandiShow ?data.TimeMehandiShow:"null",
+      DateMehandiShow: data.DateMehandiShow,
+      TimeMehandiShow: data.TimeMehandiShow,
     },
     Reception: {
-      DateReception: data.DateReception ?data.DateReception:"null",
-      TimeReception: data.TimeReception?data.TimeReception:"null",
+      DateReception: data.DateReception,
+      TimeReception: data.TimeReception,
     },
     Phera: {
-      DatePhera: data.DatePhera ?data.DatePhera:"null",
-      TimePhera: data.TimePhera ?data.TimePhera :"null",
+      DatePhera: data.DatePhera,
+      TimePhera: data.TimePhera,
     },
     Sangeet: {
-      DateSangeet: data.DateSangeet?data.DateSangeet:"null",
-      TimeSangeet: data.TimeSangeet ?data.TimeSangeet:"null",
+      DateSangeet: data.DateSangeet,
+      TimeSangeet: data.TimeSangeet,
     },
     Pooja: {
-      DatePooja: data.DatePooja?data.DatePooja:"null",
-      TimePooja: data.TimePooja?data.TimePooja:"null",
+      DatePooja: data.DatePooja,
+      TimePooja: data.TimePooja,
     },
     Baraat: {
-      DateBaraat: data.DateBaraat ? data.DateBaraat: "null",
-      TimeBaraat: data.TimeBaraat ? data.TimeBaraat: "null",
+      DateBaraat: data.DateBaraat,
+      TimeBaraat: data.TimeBaraat,
     },
     Haldi: {
-      DateHaldi: data.DateHaldi?data.DateHaldi:"null",
-      TimeHaldi: data.TimeHaldi? data.TimeHaldi:"null",
+      DateHaldi: data.DateHaldi,
+      TimeHaldi: data.TimeHaldi,
     },
     Tilak: {
-      dateTilak: data.dateTilak?data.dateTilak:"null",
-      TimeTilak: data.TimeTilak?data.TimeTilak:"null",
+      dateTilak: data.dateTilak,
+      TimeTilak: data.TimeTilak,
     },
   };
-  const ConceptWedding = checkBoxValues.Conceptweddingvalue?checkBoxValues.Conceptweddingvalu:"null";
-  const ThemeWedding = checkBoxValues.Themeweddingvalue ?checkBoxValues.Themeweddingvalue:"null";
+  const ConceptWedding = checkBoxValues.Conceptweddingvalue;
+  const ThemeWedding = checkBoxValues.Themeweddingvalue;
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
-    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:'null',
+    RegularDecoration: checkBoxValues.decorationvalue,
+    ThemeDecoration: data.ThemeDecoration,
   };
   const Shows = {
-    show: data.shows?data.show:"null",
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
-    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
-    dj: data.Dj?data.Dj:"null",
+    show: data.shows,
+    musicvalues: checkBoxValues.musicvalue,
+    dancevalues: checkBoxValues.dancevalue,
+    dj: data.Dj,
   };
   const Food = {
-    Foodtype: data.Food?data.Food:"null",
-    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
+    Foodtype: data.Food,
+    items: checkBoxValues.foodvalue,
   };
-  const SpecialService = data.SpecialService?data.SpecialService:"null";
-  const OtherServices = data.OtherServices?data.OtherServices:"null";
+  const points = "0"
+  const SpecialService = data.SpecialService;
+  const OtherServices = data.OtherServices;
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"null",
-    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"null",
+    invitation: checkBoxValues.invitationvalue,
+    photography: checkBoxValues.photovalue,
     venues: {
       venue1: {
-        name: data.Venue_1_name?data.Venue_1_name:"null",
-        place: data.Venue_1_place?data.Venue_1_place:"null",
+        name: data.venue_1_name,
+        place: data.venue_1_place,
       },
       venue2: {
-        name: data.Venue_2_name?data.Venue_2_name:"null",
-        place: data.Venue_2_place?data.Venue_2_place:"null",
+        name: data.venue_2_name,
+        place: data.venue_2_place,
       },
       venue3: {
-        name: data.Venue_3_name?data.Venue_3_name:"null",
-        place: data.Venue_3_place?data.Venue_3_place:"null",
+        name: data.venue_3_name,
+        place: data.venue_3_place,
       },
     },
   };
@@ -157,7 +158,8 @@ router.post("/", auth, async (req, res) => {
     photographyStatus,
     decorationStatus,
     cateringStatus,
-    isVerified
+    isVerified,
+    points
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
@@ -172,7 +174,6 @@ router.post("/", auth, async (req, res) => {
   newWeddingForm.save().then(() => {
     res.status(200).send("Wedding form saved successfully...!");
   });
-  console.log(req.body);
 });
 
 module.exports = router;

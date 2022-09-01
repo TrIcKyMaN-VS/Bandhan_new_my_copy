@@ -21,45 +21,46 @@ router.post("/", auth, async (req, res) => {
   const orderId = uuidv4().slice(0,6)
   const TypeOfFunction = data.type_Of_Function;
   const NameOfFunction = data.name_Of_Function;
-  const NoOfDays = data.no_Of_Days?data.no_Of_Days:"null";
-  const FromDate = data.fromDate?data.fromDate:"null";
-  const ToData = data.ToDate;
+  const NoOfDays = data.no_Of_Days;
+  const FromDate = data.fromDate;
+  const ToDate = data.ToDate;
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = data.No_Of_Guests;
 
   const Shows = {
-    show: data.shows?data.shows:"null",
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
-    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
-    dj: data.dj?data.dj:"null",
+    show: data.shows,
+    musicvalues: checkBoxValues.musicvalue,
+    dancevalues: checkBoxValues.dancevalue,
+    dj: data.dj,
   };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
-    ThemeDecoration: data.DecorationType?data.DecorationType:"null",
+    RegularDecoration: checkBoxValues.decorationvalue,
+    ThemeDecoration: data.DecorationType,
   };
-  const SpecialService = data.SpecialService?data.SpecialService:"null";
+  const SpecialService = data.SpecialService;
 
   const Food = {
-    Foodtype: data.Food?data.Food:"null",
-    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
+    Foodtype: data.Food,
+    items: checkBoxValues.foodvalue,
   };
-  const OtherServices = data.OtherServices?data.OtherServices:"null";
+  const points = "0"
+  const OtherServices = data.OtherServices;
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"null",
-    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"null",
+    invitation: checkBoxValues.invitationvalue,
+    photography: checkBoxValues.photovalue,
     venues: {
       venue1: {
-        name: data.Venue_1_name?data.Venue_1_name:"null",
-        place: data.Venue_1_place?data.Venue_1_place:"null",
+        name: data.venue_1_name,
+        place: data.venue_1_place,
       },
       venue2: {
-        name: data.Venue_2_name?data.Venue_2_name:"null",
-        place: data.Venue_2_place?data.Venue_2_place:"null",
+        name: data.venue_2_name,
+        place: data.venue_2_place,
       },
       venue3: {
-        name: data.Venue_3_name?data.Venue_3_name:"null",
-        place: data.Venue_3_place?data.Venue_3_place:"null",
+        name: data.venue_3_name,
+        place: data.venue_3_place,
       },
     },
   };
@@ -94,7 +95,7 @@ router.post("/", auth, async (req, res) => {
     TypeOfFunction,
     NameOfFunction,
     FromDate,
-    ToData,
+    ToDate,
     NoOfDays,
     NoOfGuests,
     MinBudget,
@@ -114,6 +115,7 @@ router.post("/", auth, async (req, res) => {
     decorationStatus,
     cateringStatus,
     isVerified,
+    points
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

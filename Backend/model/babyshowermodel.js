@@ -11,11 +11,14 @@ const babyshowerSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     DadName: {
       type: String,
       required: true,
     },
-    DadName: {
+    MomName: {
       type: String,
     },
     Gender: {
@@ -77,7 +80,7 @@ const babyshowerSchema = new mongoose.Schema(
       invitation: {
         type: String,
       },
-      Photography: {
+      photography: {
         type: Object,
       },
       venues: {

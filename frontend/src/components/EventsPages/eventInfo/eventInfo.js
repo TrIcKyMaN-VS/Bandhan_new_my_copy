@@ -123,6 +123,7 @@ function EventInfo() {
   return (
     <div className=" mt-5 mb-5 ps-5 pe-5 ms-3 me-3 pb-5 pt-3">
       {datas.map((item,i) => {
+        console.log(item)
         if(item.foodb == true){
           item.foodb = "Catering"
         }
@@ -141,11 +142,14 @@ function EventInfo() {
         if(item.shootingb == true){
           item.shootingb = "Shooting"
         }
+        
         return (
 
           <EventTable
+          
             key={i}
             item={item}
+            date={item.date}
             Catering={item.foodb}
             Photography={item.photographyb}
             Venue={item.venueb}

@@ -19,6 +19,7 @@ function Orderslist(props) {
     }
     function points(val){
       axios.post(`api/adminuserlist/postweddingpoints/${forms[0].orderId}`,{val}).then((res) => {
+        console.log(res.data);
       });
     }
   return (
@@ -188,6 +189,7 @@ function Orderslist(props) {
           <td><div className='btn btn-success btn-sm' onClick={()=>points("3000")}>3000</div></td>
           <td><div className='btn btn-success btn-sm' onClick={()=>points("4000")}>4000</div></td>
           <td><div className='btn btn-success btn-sm' onClick={()=>points("5000")}>5000</div></td>
+          <td><div className='btn btn-danger btn-sm' onClick={()=>points("0")}>0</div></td>
         </tr>     
         </tbody>
       </table>

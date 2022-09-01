@@ -204,7 +204,8 @@ export default function Home() {
             <div class="image hover-zoom text-center">
               <img
                 className=" rounded shadow-5-strong"
-                src="https://bit.ly/3dOEBcx"
+                src="./images/newlogo.jpg"
+                // src="https://bit.ly/3dOEBcx"
                 width={"500px"}
                 height={"300px"}
                 alt="dhoom"
@@ -499,7 +500,7 @@ export default function Home() {
                     <Link
                       to="/emergencyform"
                       type="button"
-                      className="btn btn-sm emgBtn mb-2"
+                      className="btn btn-sm emgBtn mb-2 mt-3"
                       // style={{"backgroundColor":"#31e319"}}
                     >
                       Book now

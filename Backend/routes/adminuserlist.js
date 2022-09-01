@@ -3,6 +3,7 @@ const router = express.Router();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
+const auth = require("../middleware/auth")
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -388,30 +389,131 @@ router.post("/postweddingchangehonneymoon/:orderId", async (req, res) => {
  })
 //
 
-//points
 
+
+
+//points
+//post wedding
 router.post("/postweddingpoints/:orderId", async (req, res) => {
   const point = req.body.val
-  console.log(req.params.orderId);
-  await PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {points: point}})
+  console.log(point);
+  PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
   res.status(200).send("successfully completed!!!")
   console.log("successfully completed!!!");
-    
  })
- router.get("/postweddingpoints", async (req, res) => {
- const value = await PostWeddingForm.aggregate([
-    // {$group:{userId:req.id}},
-    {$project:{userId:1}}
-  ])
-  res.status(200).send(value)
-  console.log(value);
-  console.log(req.id);
+ 
+//prewedding
+router.post("/preweddingpoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(point);
+  PreWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
   console.log("successfully completed!!!");
-    
+ })
+
+//engagement
+router.post("/engagementpoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(point);
+  EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+ })
+
+//wedding
+router.post("/weddingpoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(req.params.orderId);
+  WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+ })
+
+//babyshower
+router.post("/babyshowerpoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(point);
+  BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+ })
+
+ //family function
+
+ router.post("/familyfunctionpoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(point);
+  FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+ })
+
+ //corporate function 
+ router.post("/corporatepoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(point);
+  CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
  })
 
 
-
+//birthday
+router.post("/birthdaypoints/:orderId", async (req, res) => {
+  const point = req.body.val
+  console.log(point);
+  BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
+    if(!doc){
+      console.log(err);
+    }else{
+      console.log("success!!");
+    }
+  })
+  res.status(200).send("successfully completed!!!")
+  console.log("successfully completed!!!");
+ })
 
 
 

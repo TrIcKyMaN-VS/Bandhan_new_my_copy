@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      minlength: 5,
-      maxlength: 20,
+      minlength: 3,
+      maxlength: 40,
     },
     email: {
       type: String,
@@ -76,7 +76,7 @@ const TodoText = mongoose.model("TodoText", todoSchema);
 
 const validateUser = (user) => {
   const schema = Joi.object({
-    username: Joi.string().min(5).max(20).required(),
+    username: Joi.string().min(3).max(50).required(),
     email: Joi.string().min(5).max(200).required().email(),
     phone: Joi.number().required(),
     password: Joi.string().min(5).max(1024).required(),

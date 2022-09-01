@@ -73,7 +73,7 @@ export default function Engagement() {
             aria-controls="ex2-tabs-2"
             aria-selected="false"
           >
-            <span className=" fw-bolder">ToDo's</span>
+            <span className=" fw-bolder">TODO</span>
           </a>
         </li>
       </ul>

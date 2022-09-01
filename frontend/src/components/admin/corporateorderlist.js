@@ -22,6 +22,10 @@ function Orderslist(props) {
         });
       }
     }
+    function points(val){
+      axios.post(`api/adminuserlist/corporatepoints/${forms[0].orderId}`,{val}).then((res) => {
+      });
+    }
   return (
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
@@ -210,6 +214,38 @@ function Orderslist(props) {
           <th>cateringStatus</th>
           <td>{forms[0].cateringStatus}</td>
           <td><div className='btn btn-success' onClick={()=>status("catering")}>Completed</div></td>
+        </tr>     
+        </tbody>
+      </table>
+      <hr class="my-5"/>
+      <table className="table bg-white rounded shadow-sm  table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              Points and Vouchers
+            </th>
+            <th className=" fw-bold" scope="col">
+            </th>
+            <th className=" fw-bold" scope="col">
+            </th>
+            <th className=" fw-bold" scope="col">
+            </th>
+            <th className=" fw-bold" scope="col">
+            </th>
+            <th className=" fw-bold" scope="col">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th>Points</th>
+          <td>{forms[0].points}</td>
+          <td><div className='btn btn-success btn-sm' onClick={(val)=>points("1000")}>1000</div></td>
+          <td><div className='btn btn-success btn-sm' onClick={()=>points("2000")}>2000</div></td>
+          <td><div className='btn btn-success btn-sm' onClick={()=>points("3000")}>3000</div></td>
+          <td><div className='btn btn-success btn-sm' onClick={()=>points("4000")}>4000</div></td>
+          <td><div className='btn btn-success btn-sm' onClick={()=>points("5000")}>5000</div></td>
+          <td><div className='btn btn-danger btn-sm' onClick={()=>points("0")}>0</div></td>
         </tr>     
         </tbody>
       </table>

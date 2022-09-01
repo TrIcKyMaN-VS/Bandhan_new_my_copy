@@ -11,6 +11,9 @@ const birthdaySchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     BirthdayPersonName: {
       type: String,
       required: true,

@@ -11,6 +11,9 @@ const weddingSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     ClientName: {
       type: String,
     },
@@ -165,7 +168,7 @@ const weddingSchema = new mongoose.Schema(
       invitation: {
         type: String,
       },
-      Photography: {
+      photography: {
         type: Object,
       },
       venues: {

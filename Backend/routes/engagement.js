@@ -26,46 +26,47 @@ router.post("/", auth, async (req, res) => {
   const Age = data.Age;
   const Gender = data.Gender;
   const date = data.date;
-  const City = data.City;
+  const City = data.city;
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
   const NoOfGuests = data.No_Of_Guests;
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const Shows = {
-    show: data.shows?data.shows:"null",
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
-    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
+    show: data.shows,
+    musicvalues: checkBoxValues.musicvalue,
+    dancevalues: checkBoxValues.dancevalue,
     dj: data.Dj,
   };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
-    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:"null",
+    RegularDecoration: checkBoxValues.decorationvalue,
+    ThemeDecoration: data.ThemeDecoration,
   };
-  const SpecialService = data.SpecialService?data.SpecialService:"null";
-  const OtherServices = data.OtherServices?data.OtherServices:"null";
+  const points = "0"
+  const SpecialService = data.SpecialService;
+  const OtherServices = data.OtherServices;
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"null",
-    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"null",
-    mehandi: checkBoxValues.checkedMehandi?checkBoxValues.checkedMehandi:"null",
+    invitation: checkBoxValues.invitationvalue,
+    photography: checkBoxValues.photovalue,
+    mehandi: checkBoxValues.checkedMehandi,
     venues: {
       venue1: {
-        name: data.Venue_1_name?data.Venue_1_name:"null",
-        place: data.Venue_1_place?data.Venue_1_place:"null",
+        name: data.Venue_1_Name,
+        place: data.Venue_1_Place,
       },
       venue2: {
-        name: data.Venue_2_name?data.Venue_2_name:"null",
-        place: data.Venue_2_place?data.Venue_2_place:"null",
+        name: data.Venue_2_Name,
+        place: data.Venue_2_Place,
       },
       venue3: {
-        name: data.Venue_3_name?data.Venue_3_name:"null",
-        place: data.Venue_3_place?data.Venue_3_place:"null",
+        name: data.Venue_3_Name,
+        place: data.Venue_3_Place,
       },
     },
   };
   const Food = {
-    Foodtype: data.Food? data.Food:"null",
-    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"null",
+    Foodtype: data.Food,
+    items: checkBoxValues.foodvalue,
   };
 
   var venueStatus = "pending"
@@ -120,7 +121,8 @@ router.post("/", auth, async (req, res) => {
     photographyStatus,
     decorationStatus,
     cateringStatus,
-    isVerified
+    isVerified,
+    points
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

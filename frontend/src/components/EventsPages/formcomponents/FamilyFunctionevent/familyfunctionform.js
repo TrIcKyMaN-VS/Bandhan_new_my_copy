@@ -352,23 +352,24 @@ function FamilyfunctionForm() {
                               Type of Function
                             </label>
                             <select
+                              {...register("type_Of_Function")}
                               id="exampleInput555"
                               class="form-select mb-4"
                               aria-label="Default select example"
                             >
                               <option value={null}>
-                                <b>Select any one</b>
+                                <b>Select any One</b>
                               </option>
 
                               <option
-                                {...register("type_Of_Function")}
+                                // {...register("type_Of_Function")}
                                 value="non-Festival"
                                 id="non-Festival"
                               >
                                 Non-Festival
                               </option>
                               <option
-                                {...register("type_Of_Function")}
+                                // {...register("type_Of_Function")}
                                 value="festival"
                                 id="festival"
                               >
@@ -497,7 +498,9 @@ function FamilyfunctionForm() {
             })}
           >
             <div class="card-header py-4 px-5 bg-light border-0">
-              <h4 class="mb-0 fw-bolder fs-3 text-center">Family Function Booking</h4>
+              <h4 class="mb-0 fw-bolder fs-3 text-center">
+                Family Function Booking
+              </h4>
             </div>
 
             <div class="card-body px-5">
@@ -559,7 +562,7 @@ function FamilyfunctionForm() {
                           Devotional Music
                         </label>
                         <input
-                          {...register("devotionalMusic")}
+                          {...register("shows")}
                           type="checkbox"
                           value={"devotionalMusic"}
                           class="form-check-input"
@@ -578,7 +581,7 @@ function FamilyfunctionForm() {
                           Devotional Play
                         </label>
                         <input
-                          {...register("devotionalPlay")}
+                          {...register("shows")}
                           type="checkbox"
                           value={"devotionalPlay"}
                           class="form-check-input"

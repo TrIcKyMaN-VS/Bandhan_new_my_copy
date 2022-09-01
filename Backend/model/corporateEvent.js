@@ -11,6 +11,9 @@ const CorporateEventSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
+    points:{
+      type:String
+    },
     TypeOfFunction: {
       type: String,
       required: true,
@@ -53,9 +56,9 @@ const CorporateEventSchema = new mongoose.Schema(
       dancevalues: {
         type: String,
       },
-      play:{
-        type:String
-      }
+      dj: {
+        type: String,
+      },
     },
     Decoration: {
       RegularDecoration: {
@@ -77,7 +80,7 @@ const CorporateEventSchema = new mongoose.Schema(
       invitation: {
         type: String,
       },
-      Photography: {
+      photography: {
         type: Object,
       },
       venues: {
