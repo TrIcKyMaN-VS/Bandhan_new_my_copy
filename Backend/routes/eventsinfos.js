@@ -131,6 +131,7 @@ router.get("/babyshowerpoints", async  (req, res) => {
    console.log("successfully completed!!!");
   })
 
+
 //birthday
 router.get("/birthdaypoints", async  (req, res) => {
   const value = await BirthdayForm.aggregate([
@@ -169,7 +170,23 @@ router.get("/engagementpoints", async  (req, res) => {
      {$project:{points:1}}
    ])
    res.status(200).send(value)
+   console.log(value);
    console.log("successfully completed!!!");
   })
+
+
+
+
+// vouchers 
+  router.get("/babyshowervoucher", async  (req, res) => {
+    const value = await BabyShowerForm.aggregate([
+       {$match:{userId:req.id}},
+       {$project:{voucher:1}}
+     ])
+     res.status(200).send(value)
+     console.log(value);
+     console.log("successfully completed!!!");
+    })
+
 
 module.exports = router;

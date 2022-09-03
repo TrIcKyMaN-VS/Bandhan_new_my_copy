@@ -26,8 +26,17 @@ router.post("/", async (req, res) => {
     username : req.body.data.username,
     email : req.body.data.email,
     phone : req.body.data.phone,
-    password : req.body.data.password
+    password : req.body.data.password,
+    points : 0,
+    voucher :0
   }
+  const username = req.body.data.username
+  const email = req.body.data.email
+  const phone =  req.body.data.phone
+  const password = req.body.data.password
+  const points = 0
+  const voucher = 0
+
 
   const { error } = validate(registerData);
 
@@ -39,7 +48,9 @@ router.post("/", async (req, res) => {
   let user = await User.findOne({ email: req.body.data.email });
   if (user) return res.status(400).send("User already registered...");
 
-  user = new User(_.pick(req.body.data, ["username", "email","phone", "password"]));
+  // user = new User(_.pick(req.body.data, ["username", "email","phone", "password","points", "voucher"]));
+  user = new User({username,email,phone,password,points,voucher});
+
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 

@@ -161,7 +161,7 @@ export default function Becomevendor() {
                   </div>
                 </div>
               </div>
-              <div class="row row-space">
+              {/* <div class="row row-space">
                 <div class="col-2">
                   <div class="input-group">
                     Samples photos{" "}
@@ -188,12 +188,17 @@ export default function Becomevendor() {
                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                   </div>
                 </div>
+              </div> */}
+              <div>
+              {/* <span className="fs-2">Note</span> */}
+              <p className="text-danger fw-bold" > <span className="fs-5 text-dark">Note : </span> Send images to dhoomdhamaka0@gmail.com</p>
               </div>
 
               <div class="p-t-20">
-                <button class="btn btn--radius btn--green" type="submit">
+                <button class="btn btn--radius btn-success" type="submit">
                   Submit
                 </button>
+               
               </div>
             </form>
           </div>

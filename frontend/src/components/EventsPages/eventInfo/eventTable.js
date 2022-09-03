@@ -46,7 +46,9 @@ function EventTable(props) {
 
   return (
     <div>
-      <h3 className=" text-center fw-bold mb-3" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName} - [ {props.date} ]</h3>
+      <h3 className=" text-center fw-bold mb-2" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName} - [ {props.item.date} ]</h3>
+
+      <h5 className="text-center fw-bold text-muted mb-3" >Order ID - <span className="fs-6" style={{color:"limegreen"}}>[ {props.item.orderId} ]</span></h5>
       <div className="row justify-content-center">
         <div className="col-md-6 text-center">
         <table class="table align-middle mb-0 bg-white mb-8">
@@ -62,8 +64,7 @@ function EventTable(props) {
               <tr key={i}>
                 <td>
                   <p class="fw-normal mb-1">{data}</p>
-                  {/* <p class="text-muted mb-0">IT department</p> */}
-                </td>
+                </td> 
                 <td>
                   {eventStatus[i] == "pending" && (
                     <span class="badge badge-warning rounded-pill d-inline">

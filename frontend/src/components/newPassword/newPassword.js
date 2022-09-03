@@ -1,99 +1,96 @@
 import axios from "axios";
 import React, { useReducer } from "react";
 import { useParams } from "react-router-dom";
-import "./newPassword.css";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-function newpassReducer(state, action) {
-  switch (action.type) {
-    case "field": {
-      return {
-        ...state,
-        [action.fieldName]: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-}
+const schema = yup.object().shape({
+  password: yup
+  .string()
+  .min(8, "Password must be atleast 8 characters")
+  .required("password must be required"),
+resetPass: yup
+  .string()
+  .min(8, "Password must be atleast 8 characters")
+  .oneOf([yup.ref("password"), null], "Does not match with Password")
+  .required("password must be required"),
+});
 
-const initialState = {
-  passsword: "",
-  confirmPass: "",
-  // isLoading: false,
-  // error: "",
-  // isLoggedIn: false
-};
 
 function NewPassword() {
-  const [state, dispatch] = useReducer(newpassReducer, initialState);
-  const { resetTok } = useParams();
-  // console.log(resetTok);
-  const handleChange = (e) => {
-    dispatch({
-      type: "field",
-      fieldName: e.target.name,
-      payload: e.target.value,
-    });
-    // console.log(e.target.name);
-    // console.log(e.target.value);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    let { password, confirmPass } = state;
-    // console.log(password);
-    console.log(confirmPass);
-    if (password !== confirmPass) {
-      console.log(" Password and Confirm Password doesn't match");
-    } else {
+  const navigate = useNavigate();
+
+
+
+  const { resetTok } = useParams();
+
+  function handleSubmit2(data) {
+    console.log(data);
       axios
-        .post("/api/newPassword", { password, token: resetTok })
-        .then((res) => console.log(res))
+        .post("/api/newPassword", { data, token: resetTok })
+        .then((res) => {
+          console.log(res)
+          if(res.status === 200){
+            navigate("/login")
+          }
+        })
         .catch((err) => console.log(err));
-    }
   }
 
+
   return (
-    <div class="card login-form">
-      <div class="card-body">
-        <h3 class="card-title text-center">Change password</h3>
+    <div className="row justify-content-center mt-5 mb-5">
+      <div className="col-md-4 mt-3 mb-3">
+        <div class="card rounded-5">
+          <div class="card-body">
+            <h3 class="card-title text-center fw-bold mb-4">Reset Password</h3>
 
-        {/* <!--Password must contain one lowercase letter, one number, and be at least 7 characters long.--> */}
+            {/* <!--Password must contain one lowercase letter, one number, and be at least 7 characters long.--> */}
 
-        <div class="card-text">
-          <form onSubmit={handleSubmit}>
-            <div
-              class="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>Holy guacamole!</strong> You should check in on some of
-              those fields below.
-              <a class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </a>
+            <div class="card-text">
+              <form onSubmit={handleSubmit((data) => {
+                        handleSubmit2(data);
+                      })}>
+                <div class="form-group mb-3" >
+                  <label for="exampleInputEmail12" className="fw-bold">New Password</label>
+                  <input
+                  {...register("password")}
+                    type="password"
+                    class="form-control"
+                    id="exampleInputEmail12"
+                    aria-describedby="emailHelp"
+                    placeholder="New Password"
+                  />
+                </div>
+                <div class="form-group mb-4">
+                  <label for="exampleInputEmail1" className="fw-bold">Confirm Password</label>
+                  <input
+                  {...register("resetPass")}
+                    type="password"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Repeat Password"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block submit-btn"
+                >
+                  Reset
+                </button>
+              </form>
             </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Your new password</label>
-              <input
-                type="password"
-                name="password"
-                class="form-control form-control-sm"
-                onChange={handleChange}
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Repeat password</label>
-              <input
-                type="password"
-                class="form-control form-control-sm"
-                name="confirmPass"
-                onChange={handleChange}
-              />
-            </div>
-            <button type="submit" class="btn btn-primary btn-block submit-btn">
-              Confirm
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

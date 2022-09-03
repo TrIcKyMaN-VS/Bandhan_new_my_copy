@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function PasswordReset() {
   const [email, setEmail] = useState();
+  const navigate = useNavigate();
 
   function handleEmail(e) {
     setEmail(e.target.value);
@@ -10,11 +12,13 @@ function PasswordReset() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(email);
     axios
       .post("api/passwordReset", {email})
       .then((res) => {
         console.log(res.data);
+        if(res.status === 200){
+          navigate("/passwordresetsuccess")
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -23,7 +27,7 @@ function PasswordReset() {
 
   return (
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-center mt-4 mb-5 pt-4 pb-4">
         <div class="col-md-4 col-md-offset-4">
           <div class="panel panel-default">
             <div class="panel-body">

@@ -206,6 +206,9 @@ function Finalbirthdayform() {
       .post("/api/birthday", { data, checkBoxValues })
       .then((res) => {
         console.log(res.data);
+        if(res.status === 200){
+          navigate("/")
+        }
       })
       .catch((err) => {
         if (err.response.data === "Accesss Denied. No Token Provided") {
@@ -324,7 +327,10 @@ function Finalbirthdayform() {
                 <div class="col-xl-6">
                   <div className="card bg-light">
                     <div class="card-body bg-indigo p-md-5 text-dark fw-bolder rounded">
-                      <h3 class="mb-5 text-center fw-bold" style={{"fontVariant":"small-caps"}}>
+                      <h3
+                        class="mb-5 text-center fw-bold"
+                        style={{ fontVariant: "small-caps" }}
+                      >
                         Personal Details
                       </h3>
                       <form>
@@ -586,7 +592,12 @@ function Finalbirthdayform() {
         <div class="card">
           <form onSubmit={handleSubmit((data) => handleSubmit2(data))}>
             <div class="card-header mb-4 bg-light border-0">
-              <h3 class="mb-0 fw-bolder fs-3 text-center" style={{"fontVariant":"small-caps"}}>Birthday Event Booking</h3>
+              <h3
+                class="mb-0 fw-bolder fs-3 text-center"
+                style={{ fontVariant: "small-caps" }}
+              >
+                Birthday Event Booking
+              </h3>
             </div>
 
             <div class="card-body px-5">
@@ -900,27 +911,7 @@ function Finalbirthdayform() {
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <div class="form-check">
-                          <input
-                            {...register("Food")}
-                            class="form-check-input"
-                            type="radio"
-                            name="Food"
-                            value={"Non-veg"}
-                            id="non-veg"
-                          />
 
-                          <label
-                            class="form-check-label"
-                            HtmlFor="flexRadioDefault1"
-                          >
-                            Non-Veg
-                          </label>
-                        </div>
-                      </div>
-                    </div>
                     <div class="col-md-4">
                       <div class="mb-3">
                         <div class="form-check">

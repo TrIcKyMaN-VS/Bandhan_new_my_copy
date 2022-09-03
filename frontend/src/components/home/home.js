@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./home.css";
 
 import React, { useEffect, useState } from "react";
@@ -58,9 +58,9 @@ export default function Home() {
                   <p className="mb-3 text-white text-muted">
                     Capturing is must because time passes, not memories.
                   </p>
-                  <button href="#" className="btn btn-light text-dark">
+                  <Link to="./photographygallery" className="btn btn-light text-dark">
                     Know More
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -84,9 +84,9 @@ export default function Home() {
                   <p className="mb-3 text-white text-muted">
                     Each and Every work starts with almighty’s blessings.
                   </p>
-                  <button href="#" className="btn btn-light text-dark">
+                  <Link to="./poojaGallery" className="btn btn-light text-dark">
                     Know More
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -110,12 +110,12 @@ export default function Home() {
                   <p className="mb-1 text-white text-muted">
                     It Helps to Bright your future.
                   </p>
-                  <button
-                    href="#"
+                  <Link
+                    to="./decorationgallery"
                     className="btn btn-light text-dark mb-1 mt-3"
                   >
                     Know More
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -141,9 +141,9 @@ export default function Home() {
                     Beauty
                   </h3>
                   <p className="mb-3 text-white text-muted">Shine Forever.</p>
-                  <button href="#" className="btn btn-light text-dark">
+                  <Link to="./beautygallery" className="btn btn-light text-dark">
                     Know More
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -167,9 +167,9 @@ export default function Home() {
                   <p className="mb-3 text-white text-muted">
                     Food is the secret of energy.
                   </p>
-                  <button href="#" className="btn btn-light text-dark">
+                  <Link to="./cateringgallery" className="btn btn-light text-dark">
                     Know More
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

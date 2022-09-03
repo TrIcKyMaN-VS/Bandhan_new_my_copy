@@ -27,14 +27,15 @@ router.post("/", auth, async (req, res) => {
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = data.No_Of_Guests;
   const points = "0"
+  const voucher = "0"
   const Shows = {
-    show: data.shows,
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
-    dj: data.dj,
+    show: data.shows?data.shows:"null",
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
+    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
+    dj: data.dj? data.dj:"null",
   };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue,
+    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
     ThemeDecoration: data.ThemeDecoration,
   };
   const SpecialService = data.SpecialService;
@@ -112,7 +113,8 @@ router.post("/", auth, async (req, res) => {
     decorationStatus,
     cateringStatus,
     isVerified,
-    points
+    points,
+    voucher
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

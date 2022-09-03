@@ -149,7 +149,6 @@ function EventInfo() {
           
             key={i}
             item={item}
-            date={item.date}
             Catering={item.foodb}
             Photography={item.photographyb}
             Venue={item.venueb}

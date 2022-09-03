@@ -16,6 +16,8 @@ const {WeddingForm} = require("../model/weddingmodel")
 const {BabyShowerForm} = require("../model/babyshowermodel")
 const {FamilyFunctionForm} = require("../model/familyFunction")
 const {CorporateEventForm} = require("../model/corporateEvent")
+
+// const {User} = require("../model/user")
 async function gettingdata(res,formdata){
   var list = []
   await Promise.all(formdata.map(async (user)=>{
@@ -392,126 +394,400 @@ router.post("/postweddingchangehonneymoon/:orderId", async (req, res) => {
 
 
 
-//points
+//points and vouchers
 //post wedding
-router.post("/postweddingpoints/:orderId", async (req, res) => {
+//points
+router.post("/postweddingpoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
- 
+ //voucher
+router.post("/postweddingvoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+
+
+
+
 //prewedding
-router.post("/preweddingpoints/:orderId", async (req, res) => {
+//points
+router.post("/preweddingpoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  PreWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
+//voucher
+router.post("/preweddingvoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+
+
+
+
 
 //engagement
-router.post("/engagementpoints/:orderId", async (req, res) => {
+//points
+router.post("/engagementpoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
+
+//voucher
+router.post("/engagementvoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+
+
+
+
 
 //wedding
-router.post("/weddingpoints/:orderId", async (req, res) => {
+//points
+router.post("/weddingpoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(req.params.orderId);
-  WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+ //voucher
+ router.post("/weddingvoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
 
+
+
+
 //babyshower
-router.post("/babyshowerpoints/:orderId", async (req, res) => {
+router.post("/babyshowerpoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
+
+//voucher
+ router.post("/babyshowervoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+
+
 
  //family function
 
- router.post("/familyfunctionpoints/:orderId", async (req, res) => {
+//points
+ router.post("/familyfunctionpoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+ //vouchers
+ router.post("/familyfunctionvoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
 
- //corporate function 
- router.post("/corporatepoints/:orderId", async (req, res) => {
+
+
+
+
+ //corporate function
+ //points 
+ router.post("/corporatepoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
+//vouchers
+router.post("/corporatevoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+
+
+
+
 
 
 //birthday
-router.post("/birthdaypoints/:orderId", async (req, res) => {
+//points
+router.post("/birthdaypoints/:userId", async (req, res) => {
   const point = req.body.val
-  console.log(point);
-  BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {"points": point}},(err,doc)=>{
-    if(!doc){
-      console.log(err);
-    }else{
-      console.log("success!!");
-    }
-  })
-  res.status(200).send("successfully completed!!!")
+  if(point === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
+  console.log("successfully completed!!!");
+ })
+
+ //vouchers
+ router.post("/birthdayvoucher/:userId", async (req, res) => {
+  const voucher = req.body.val
+  if(voucher === 0){
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }else{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"voucher": voucher}},(err,doc)=>{
+      if(!doc){
+        console.log(err);
+      }else{
+        res.status(200).send("successfully completed!!!")
+      }
+    })
+  }
   console.log("successfully completed!!!");
  })
 
