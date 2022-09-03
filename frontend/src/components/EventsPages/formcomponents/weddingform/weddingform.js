@@ -304,6 +304,9 @@ function Weddingform() {
       .post("/api/wedding", { data, checkBoxValues })
       .then((res) => {
         console.log(res.data);
+        if(res.status === 200){
+          navigate("/")
+        }
       })
       .catch((err) => {
         if (err.response.data === "Accesss Denied. No Token Provided") {
@@ -1449,27 +1452,7 @@ function Weddingform() {
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <div class="form-check">
-                          <input
-                            {...register("Food")}
-                            class="form-check-input"
-                            type="radio"
-                            name="Food"
-                            value={"Non-veg"}
-                            id="non-veg"
-                          />
-
-                          <label
-                            class="form-check-label"
-                            for="flexRadioDefault1"
-                          >
-                            Non-Veg
-                          </label>
-                        </div>
-                      </div>
-                    </div>
+                    
                     <div class="col-md-4">
                       <div class="mb-3">
                         <div class="form-check">

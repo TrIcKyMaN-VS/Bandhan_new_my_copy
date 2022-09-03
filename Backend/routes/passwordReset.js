@@ -63,14 +63,16 @@ router.post("/", (req, res) => {
 
     transporter.sendMail(emailCnt, (error, info) => {
       if (error) {
-        return console.log(error + "hii err");
+        return console.log(error);
       }
       console.log("Message sent: %s", info.messageId);
       transporter.sendMail(emailCnt2, (error, info) => {
         if(error){
-          return console.log(error + "2 err");
+           console.log(error + "2 err");
+          res.status(400).send("Something went wrong.please try again after sometime")
         }else{
           console.log("message sent");
+          res.status(200).send("Successfully reset mail sended.check your mail")
         }
       })
     });

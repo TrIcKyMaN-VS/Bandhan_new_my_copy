@@ -5,7 +5,9 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
 const userSchema = new mongoose.Schema(
-  {
+  { userId :{
+    type:String
+  },
     username: {
       type: String,
       required: true,
@@ -26,6 +28,9 @@ const userSchema = new mongoose.Schema(
     },
     points: {
       type: Number,
+    },
+    voucher:{
+      type:Number
     },
     password: {
       type: String,
@@ -80,6 +85,8 @@ const validateUser = (user) => {
     email: Joi.string().min(5).max(200).required().email(),
     phone: Joi.number().required(),
     password: Joi.string().min(5).max(1024).required(),
+    points :Joi.number(),
+    voucher :Joi.number()
   });
 
   return schema.validate(user);

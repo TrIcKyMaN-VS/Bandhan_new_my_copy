@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify'; 
+import { ToastContainer, toast } from "react-toastify";
 
 import "./App.css";
 import Home from "./components/home/home";
@@ -11,8 +11,8 @@ import Account from "./components/Myprofile/account";
 // import Account from "./components/EventsPages/myprof";
 import Events from "./components/Event/events";
 import Becomevendor from "./components/BecomeVendor/becomevendor";
-import Admin from './components/admin/adminlogin'
-import Admindashboard from './components/admin/admindashboard'
+import Admin from "./components/admin/adminlogin";
+import Admindashboard from "./components/admin/admindashboard";
 import Birthday from "./components/EventsPages/birthday";
 import Babyshower from "./components/EventsPages/babyshower";
 import Corporateevent from "./components/EventsPages/corporateevent";
@@ -27,17 +27,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store";
 import Footer from "./components/Footer/footer";
 import Navbar from "./components/Navbar/navbar";
-import Emergency from "./components/emergencyform/emergencyform"
-import Chat from './components/chatbot/chat';
+import Emergency from "./components/emergencyform/emergencyform";
+import Chat from "./components/chatbot/chat";
+import PoojaGallery from "./components/serviceGallery/poojaGallery";
+import PhotographyGallery from "./components/serviceGallery/photographyGallery";
+import DecorationGallery from "./components/serviceGallery/decorationGallery";
+import BeautyGallery from "./components/serviceGallery/beautyGallery";
+import CateringGallery from "./components/serviceGallery/cateringGallery";
+import Passwordresetsuccess from "./components/passwordReset/passwordresetsuccess";
 function App() {
-  const dispatch = useDispatch()
-    if(localStorage.bandhanUserToken){
-      dispatch(authActions.login())
-    }
+  const dispatch = useDispatch();
+  if (localStorage.bandhanUserToken) {
+    dispatch(authActions.login());
+  }
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   // console.log(isLoggedIn);
-  
-
 
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -61,7 +65,7 @@ function App() {
   if (isLoggedIn) {
     loginRoutes = (
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/myacc" element={<Account />}></Route>
         <Route path="/birthday" element={<Birthday />}></Route>
         <Route path="/babyshower" element={<Babyshower />}></Route>
@@ -73,27 +77,35 @@ function App() {
         <Route path="/wedding" element={<Wedding />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/events" element={<Events />}></Route>
+        <Route path="/poojagallery" element={<PoojaGallery />}></Route>
+        <Route path="/photographygallery" element={<PhotographyGallery /> }></Route>
+        <Route path="/beautygallery" element={<BeautyGallery />}></Route>
+        <Route path="/decorationgallery" element={<DecorationGallery />}></Route>
+        <Route path="/cateringgallery" element={<CateringGallery />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
         <Route path="/emergencyform" element={<Emergency />}></Route>
-        <Route path="/admin" element={<Admin /> }></Route>
-      <Route path="admindashboard" element={<Admindashboard /> }></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="admindashboard" element={<Admindashboard />}></Route>
+        <Route path="/passwordresetsuccess" element={<Passwordresetsuccess />}></Route>
         <Route path="*" element={<Events />}></Route>
       </Routes>
     );
   } else {
     loginRoutes = (
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/events" element={<Events />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/passwordReset" element={<Passwordreset />}></Route>
         <Route path="/newPassword/:resetTok" element={<NewPassword />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
-        
-      <Route path="/admin" element={<Admin /> }></Route>
-      <Route path="admindashboard" element={<Admindashboard /> }></Route>
-      <Route path="/*" element={<Login />}></Route>
+
+        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="admindashboard" element={<Admindashboard />}></Route>
+        <Route path="/poojagallery" element={<PoojaGallery />}></Route>
+        <Route path="/passwordresetsuccess" element={<Passwordresetsuccess />}></Route>
+        <Route path="/*" element={<Login />}></Route>
       </Routes>
     );
   }
@@ -101,10 +113,10 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <ToastContainer/>
+        <ToastContainer />
         <Navbar />
         <main>{loginRoutes}</main>
-        <Chat/>
+        <Chat />
         <Footer />
       </div>
     </Router>
