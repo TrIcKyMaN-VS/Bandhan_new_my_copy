@@ -225,7 +225,12 @@ function EngagementForm() {
       .then((res) => {
         console.log(res.data);
         if(res.status === 200){
-          navigate("/")
+          toast.success("Successfully saved", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          setTimeout(() => {
+            navigate("/")                                 
+          }, 2000);
         }
       })
       .catch((err) => {

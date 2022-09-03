@@ -3,8 +3,17 @@ import axios from 'axios';
 
 function Orderslist(props) {
     const forms = props.formdata
-    console.log("baby",forms);
+    const [datapoints , setdatapoints] = useState("")
+    const [datavoucher , setdatavoucher] = useState("")
+    useEffect(()=>{
+      axios.get(`api/adminuserlist/babyshowerpointsvoucher/${forms[0].userId}`).then((res) => {
+        setdatapoints(res.data[0].points)
+        setdatavoucher(res.data[0].voucher)
+
+      });
+    },[])
     function status(value){
+      
       if(value === "venue"){
         axios.post(`api/adminuserlist/babyshowerchangevenue/${forms[0].orderId}`).then((res) => {
         });
@@ -31,7 +40,7 @@ function Orderslist(props) {
         console.log(res.data);
       });
     }
-    
+   
   return (
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
@@ -135,7 +144,7 @@ function Orderslist(props) {
         <tbody>
         <tr>
           <th>Points</th>
-          <td>{forms[0].points}</td>
+          <td>{datapoints}</td>
           <td><div className='btn btn-success btn-sm' onClick={(val)=>points(50)}>50</div></td>
           <td><div className='btn btn-success btn-sm' onClick={()=>points(100)}>100</div></td>
           <td><div className='btn btn-success btn-sm' onClick={()=>points(150)}>150</div></td>
@@ -151,7 +160,7 @@ function Orderslist(props) {
         </tr>     
         <tr>
           <th>Vouchers</th>
-          <td>{forms[0].voucher}</td>
+          <td>{datavoucher}</td>
           <td><div className='btn btn-success btn-sm' onClick={(val)=>voucher(1000)}>1000</div></td>
           <td><div className='btn btn-success btn-sm' onClick={()=>voucher(2000)}>2000</div></td>
           <td><div className='btn btn-success btn-sm' onClick={()=>voucher(3000)}>3000</div></td>

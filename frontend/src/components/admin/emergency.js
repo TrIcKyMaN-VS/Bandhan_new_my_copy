@@ -3,16 +3,6 @@ import axios from "axios";
 
 function Emergency(props) {
     var datas = props.users;
-  
-//   const [datas,setdatas] = useState([])
-
-//   useEffect(() => {
-//     axios.get("api/emergencyform").then((res) => {
-//       console.log(res.data);
-//       setdatas(res.data);
-//     });
-//   }, [0]);
-
   return (
     <div className="row my-5">
       <h3 className="fs-4 mb-3">Emergency forms</h3>

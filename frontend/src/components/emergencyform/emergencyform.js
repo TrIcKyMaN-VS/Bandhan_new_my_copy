@@ -4,7 +4,12 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
 
+
+// const dispatch = useDispatch();
 const schema = yup.object().shape({
     email: yup.string().required("Email must be required"),
      username: yup.string().required("Username must be required"),
@@ -19,6 +24,7 @@ const schema = yup.object().shape({
   });
 
   export default function Emergency(){
+    const navigate = useNavigate(); 
     const {
         register,
         handleSubmit,
@@ -33,7 +39,12 @@ const schema = yup.object().shape({
           .post("api/emergencyform", { data })
           .then((res) => {
             console.log(res);
-           
+            toast.success("Successfully saved", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+            setTimeout(() => {
+              navigate("/")                                 
+            }, 2000);
           })
     
           .catch((err) => {

@@ -18,7 +18,7 @@ const { WeddingForm } = require("../model/weddingmodel");
 const { EventName } = require("../model/eventName");
 const { BabyShowerForm } = require("../model/babyshowermodel");
 const { resolveContent } = require("nodemailer/lib/shared");
-
+const {User} = require("../model/user")
 
 router.get("/prewedding", auth, (req, res) => {
   console.log("req rec eventinfo");
@@ -93,100 +93,62 @@ router.get("/familyfunction", auth, (req, res) => {
 
 //post wedding 
 router.get("/postweddingpoints", async  (req, res) => {
-  const value = await PostWeddingForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 //pre wedding 
 router.get("/preweddingpoints", async  (req, res) => {
-  const value = await PreWeddingForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 // wedding
 router.get("/weddingpoints", async  (req, res) => {
-  const value = await WeddingForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 //baby shower
 router.get("/babyshowerpoints", async  (req, res) => {
-  const value = await BabyShowerForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 
 //birthday
 router.get("/birthdaypoints", async  (req, res) => {
-  const value = await BirthdayForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 // family function
 router.get("/familyfunctionpoints", async  (req, res) => {
-  const value = await FamilyFunctionForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 // corporate 
 
 router.get("/corporatepoints", async  (req, res) => {
-  const value = await CorporateEventForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
 // engagement
 router.get("/engagementpoints", async  (req, res) => {
-  const value = await EngagementForm.aggregate([
-     {$match:{userId:req.id}},
-     {$project:{points:1}}
-   ])
-   res.status(200).send(value)
-   console.log(value);
+  const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
+  res.status(200).send(value)
    console.log("successfully completed!!!");
   })
 
-
-
-
-// vouchers 
-  router.get("/babyshowervoucher", async  (req, res) => {
-    const value = await BabyShowerForm.aggregate([
-       {$match:{userId:req.id}},
-       {$project:{voucher:1}}
-     ])
-     res.status(200).send(value)
-     console.log(value);
-     console.log("successfully completed!!!");
-    })
 
 
 module.exports = router;

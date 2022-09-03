@@ -11,12 +11,6 @@ const babyshowerSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
-    points:{
-      type:String
-    },
-    voucher:{
-      type:String
-    },
     DadName: {
       type: String,
       required: true,

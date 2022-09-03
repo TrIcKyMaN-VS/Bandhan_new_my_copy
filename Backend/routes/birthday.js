@@ -21,40 +21,39 @@ router.post("/", auth, async (req, res) => {
   const Age = req.body.data.Age;
   const Gender = req.body.data.gender;
   const City = req.body.data.city;
-  const FromTime = req.body.data.fromTime;
-  const ToTime = req.body.data.ToTime;
-  const date = req.body.data.date;
-  const NoOfGuests = req.body.data.No_Of_Guests;
-  const MinBudget = req.body.data.Estimate_Budget_Minimum;
-  const MaxBudget = req.body.data.Estimate_Budget_Maximum;
+  const FromTime = req.body.data.fromTime?req.body.data.fromTime:"-";
+  const ToTime = req.body.data.ToTime?req.body.data.ToTime:"-";
+  const date = req.body.data.date?req.body.data.date:"-";
+  const NoOfGuests = req.body.data.No_Of_Guests?req.body.data.No_Of_Guests:"-";
+  const MinBudget = req.body.data.Estimate_Budget_Minimum?req.body.data.Estimate_Budget_Minimum:"-";
+  const MaxBudget = req.body.data.Estimate_Budget_Maximum?req.body.data.Estimate_Budget_Maximum:"-";
   const Shows = {
-    show: req.body.data.shows,
-    musicvalues: req.body.checkBoxValues.musicvalue,
-    dancevalues: req.body.checkBoxValues.dancevalue,
-    dj: req.body.data.dj,
+    show: req.body.data.shows?req.body.data.shows:"-",
+    musicvalues: req.body.checkBoxValues.musicvalue? req.body.checkBoxValues.musicvalue:"-",
+    dancevalues: req.body.checkBoxValues.dancevalue?req.body.checkBoxValues.dancevalue:"-",
+    dj: req.body.data.dj? req.body.data.dj:"-",
   };
   const Decoration = {
-    RegularDecoration: req.body.checkBoxValues.decorationvalue,
-    ThemeDecoration: req.body.data.DecorationType,
+    RegularDecoration: req.body.checkBoxValues.decorationvalue?req.body.checkBoxValues.decorationvalue:"-",
+    ThemeDecoration: req.body.data.DecorationType?req.body.data.DecorationType:"-",
   };
-  const points = "0"
-  const SpecialService = req.body.data.SpecialService;
-  const OtherServices = req.body.data.OtherServices;
+  const SpecialService = req.body.data.SpecialService?req.body.data.SpecialService:"-";
+  const OtherServices = req.body.data.OtherServices?req.body.data.OtherServices:"-";
   const OtherServiceValues = {
-    invitation: req.body.checkBoxValues.invitationvalue,
-    photography: req.body.checkBoxValues.photovalue,
+    invitation: req.body.checkBoxValues.invitationvalue?req.body.checkBoxValues.invitationvalue:"-",
+    photography: req.body.checkBoxValues.photovalue?req.body.checkBoxValues.photovalue:"-",
     venues: {
       venue1: {
-        name: req.body.data.venue_1_name,
-        place: req.body.data.venue_1_place,
+        name: req.body.data.venue_1_name? req.body.data.venue_1_name:"-",
+        place: req.body.data.venue_1_place?req.body.data.venue_1_place:"-",
       },
       venue2: {
-        name: req.body.data.venue_2_name,
-        place: req.body.data.venue_2_place,
+        name: req.body.data.venue_2_name?req.body.data.venue_2_name:"-",
+        place: req.body.data.venue_2_place?req.body.data.venue_2_place:"-",
       },
       venue3: {
-        name: req.body.data.venue_3_name,
-        place: req.body.data.venue_3_place,
+        name: req.body.data.venue_3_name?req.body.data.venue_3_name:"-",
+        place: req.body.data.venue_3_place?req.body.data.venue_3_place:"-",
       },
     },
   };
@@ -63,8 +62,8 @@ router.post("/", auth, async (req, res) => {
   // }
   // console.log(photography);
   const Food = {
-    Foodtype: req.body.data.Food,
-    items: req.body.checkBoxValues.foodvalue,
+    Foodtype: req.body.data.Food?req.body.data.Food:"-",
+    items: req.body.checkBoxValues.foodvalue?req.body.checkBoxValues.foodvalue:"-",
   };
 
   var venueStatus = "pending"
@@ -120,7 +119,6 @@ router.post("/", auth, async (req, res) => {
     decorationStatus,
     cateringStatus,
     isVerified,
-    points
   });
   newBirthdayForm.save().then(() => {
     res.status(200).send("birthday form saved successfully...!");

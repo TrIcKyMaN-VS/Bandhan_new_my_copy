@@ -24,7 +24,7 @@ router.post("/", auth, async (req, res) => {
   const GroomName = data.Groom_Name;
   const Person = data.person;
   const date = data.date;
-  const City = data.city;
+  const City = data.city?data.city:"-";
   const FromDate = data.fromDate;
   const ToData = data.ToDate;
   const BachelorsPartyDate = data.BachelorPartyDate;
@@ -35,33 +35,33 @@ router.post("/", auth, async (req, res) => {
   const BachelorsParty = {
     venues: {
       venue1: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_1_Name?data.Venue_1_Name:"-",
+        place: data.Venue_1_Place?data.Venue_1_Place:"-",
       },
       venue2: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_2_Name?data.Venue_2_Name:"-",
+        place: data.Venue_2_Place?data.Venue_2_Place:"-",
       },
       venue3: {
-        name: data.Venue_1_Name,
-        place: data.Venue_1_Place,
+        name: data.Venue_3_Name?data.Venue_3_Name:"-",
+        place: data.Venue_3_Place?data.Venue_3_Place:"-",
       },
     },
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
-    noofguests: data.No_Of_Guests,
-  };
-  const points = "0"
-  const Shooting = {
-    Shooting: data.shooting,
-    Destination: data.destination_Place,
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"-",
+    dancevalues: checkBoxValues.dancevalue? checkBoxValues.dancevalue:"-",
+    noofguests: data.No_Of_Guests?data.No_Of_Guests:"-",
   };
 
-  const SpecialService = data.SpecialService;
+  const Shooting = {
+    Shooting: data.shooting?data.shooting:"-",
+    Destination: data.destination_Place? data.destination_Place:"-",
+  };
+
+  const SpecialService = data.SpecialService?data.SpecialService:"-";
 
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food?data.Food:"-",
+    items: checkBoxValues.foodvalue? checkBoxValues.foodvalue:"-",
   };
 
   var venueStatus = "pending"
@@ -116,7 +116,7 @@ router.post("/", auth, async (req, res) => {
     cateringStatus,
     venueStatus,
     isVerified,
-    points
+
   });
 
   console.log("def", req.body.name_Of_The_Event);
