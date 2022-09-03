@@ -20,23 +20,23 @@ router.post("/", auth, async (req, res) => {
   const eventName = "Corporate Event"
   const orderId = uuidv4().slice(0,6)
   const userId = req.id;
-  const TypeOfFunction = data.type_Of_Function;
-  const NameOfEvent = data.name_Of_Event;
-  const NameOfConcern = data.name_Of_Concern;
+  const TypeOfFunction = data.type_Of_Function?data.type_Of_Function:"-";
+  const NameOfEvent = data.name_Of_Event?data.name_Of_Event:"-";
+  const NameOfConcern = data.name_Of_Concern?data.name_Of_Concern:"-";
   const Date = data.date;
   const FromTime = data.fromTime;
   const ToTime = data.ToTime;
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
-  const NoOfGuests = data.No_Of_Guests;
+  const NoOfGuests = data.No_Of_Guests?data.No_Of_Guests:"-";
 
   // const shows = data.shows;
   
   const Shows = {
-    show: data.shows,
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
-    dj: data.Dj,
+    show: data.shows? data.shows:"-",
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"-",
+    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"-",
+    dj: data.Dj?data.Dj:"-",
   };
   // const ShowsValue = {
   //   show: data.shows,
@@ -45,35 +45,35 @@ router.post("/", auth, async (req, res) => {
   //   dj: data.dj,
   // };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue,
-    ThemeDecoration: data.DecorationType,
+    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"-",
+    ThemeDecoration: data.DecorationType?data.DecorationType:"-",
   };
-  const SpecialService = data.SpecialService;
+  const SpecialService = data.SpecialService?data.SpecialService:"-";
 
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food? data.Food:"-",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"-",
   };
-  const OtherServices = data.OtherServices;
+  const OtherServices = data.OtherServices?data.OtherServices:"-";
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue,
-    photography: checkBoxValues.photovalue,
+    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"-",
+    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"-",
     venues: {
       venue1: {
-        name: data.venue_1_name,
-        place: data.venue_1_place,
+        name: data.venue_1_name?data.venue_1_name:"-",
+        place: data.venue_1_place?data.venue_1_place:"-",
       },
       venue2: {
-        name: data.venue_2_name,
-        place: data.venue_2_place,
+        name: data.venue_2_name?data.venue_2_name:"-",
+        place: data.venue_2_place?data.venue_2_place:"-",
       },
       venue3: {
-        name: data.venue_3_name,
-        place: data.venue_3_place,
+        name: data.venue_3_name? data.venue_3_name:"-",
+        place: data.venue_3_place?data.venue_3_place:"-",
       },
     },
   };
-  const points = "0"
+
   var venueStatus = "pending"
   var cateringStatus = "pending"
   var photographyStatus = "pending"
@@ -124,7 +124,7 @@ router.post("/", auth, async (req, res) => {
     decorationStatus,
     cateringStatus,
     isVerified,
-    points
+  
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

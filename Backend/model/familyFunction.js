@@ -11,9 +11,6 @@ const FamilyFunctionSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
-    points:{
-      type:String
-    },
     TypeOfFunction: {
       type: String,
       required: true,

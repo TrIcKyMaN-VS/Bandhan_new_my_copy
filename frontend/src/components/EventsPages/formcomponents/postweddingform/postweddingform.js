@@ -196,7 +196,12 @@ function PostweddingForm() {
       .post("/api/postwedding", { data, checkBoxValues })
       .then((res) => {
         if(res.status === 200){
-          navigate("/")
+          toast.success("Successfully saved", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          setTimeout(() => {
+            navigate("/")                                 
+          }, 2000);
         }
         console.log(res.data);
       })

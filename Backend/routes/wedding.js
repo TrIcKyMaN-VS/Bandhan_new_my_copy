@@ -33,72 +33,72 @@ router.post("/", auth, async (req, res) => {
   const Services = data.service;
   const Servicevalue = {
     Mehandi: {
-      DateMehandiShow: data.DateMehandiShow,
-      TimeMehandiShow: data.TimeMehandiShow,
+      DateMehandiShow: data.DateMehandiShow?data.DateMehandiShow:"-",
+      TimeMehandiShow: data.TimeMehandiShow?data.TimeMehandiShow:"-",
     },
     Reception: {
-      DateReception: data.DateReception,
-      TimeReception: data.TimeReception,
+      DateReception: data.DateReception?data.DateReception:"-",
+      TimeReception: data.TimeReception? data.TimeReception:"-",
     },
     Phera: {
-      DatePhera: data.DatePhera,
-      TimePhera: data.TimePhera,
+      DatePhera: data.DatePhera?data.DatePhera:"-",
+      TimePhera: data.TimePhera?data.TimePhera:"-",
     },
     Sangeet: {
-      DateSangeet: data.DateSangeet,
-      TimeSangeet: data.TimeSangeet,
+      DateSangeet: data.DateSangeet?data.DateSangeet:"-",
+      TimeSangeet: data.TimeSangeet?data.TimeSangeet:"-",
     },
     Pooja: {
-      DatePooja: data.DatePooja,
-      TimePooja: data.TimePooja,
+      DatePooja: data.DatePooja?data.DatePooja:"-",
+      TimePooja: data.TimePooja?data.TimePooja:"-",
     },
     Baraat: {
-      DateBaraat: data.DateBaraat,
-      TimeBaraat: data.TimeBaraat,
+      DateBaraat: data.DateBaraat?data.DateBaraat:"-",
+      TimeBaraat: data.TimeBaraat? data.TimeBaraat:"-",
     },
     Haldi: {
-      DateHaldi: data.DateHaldi,
-      TimeHaldi: data.TimeHaldi,
+      DateHaldi: data.DateHaldi?data.DateHaldi:"-",
+      TimeHaldi: data.TimeHaldi?data.TimeHaldi:"-",
     },
     Tilak: {
-      dateTilak: data.dateTilak,
-      TimeTilak: data.TimeTilak,
+      dateTilak: data.dateTilak?data.dateTilak:"-",
+      TimeTilak: data.TimeTilak?data.TimeTilak:"-",
     },
   };
-  const ConceptWedding = checkBoxValues.Conceptweddingvalue;
-  const ThemeWedding = checkBoxValues.Themeweddingvalue;
+  const ConceptWedding = checkBoxValues.Conceptweddingvalue?checkBoxValues.Conceptweddingvalue:"-";
+  const ThemeWedding = checkBoxValues.Themeweddingvalue?checkBoxValues.Themeweddingvalue:"-";
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue,
-    ThemeDecoration: data.ThemeDecoration,
+    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"-",
+    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:"-",
   };
   const Shows = {
-    show: data.shows,
-    musicvalues: checkBoxValues.musicvalue,
-    dancevalues: checkBoxValues.dancevalue,
-    dj: data.Dj,
+    show: data.shows?data.shows:"-",
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"-",
+    dancevalues: checkBoxValues.dancevalue?heckBoxValues.dancevalue:"-",
+    dj: data.Dj?data.Dj:"-",
   };
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food?data.Food:"-",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"-",
   };
-  const points = "0"
-  const SpecialService = data.SpecialService;
-  const OtherServices = data.OtherServices;
+
+  const SpecialService = data.SpecialService?data.SpecialService:"-";
+  const OtherServices = data.OtherServices? data.OtherServices:"-";
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue,
-    photography: checkBoxValues.photovalue,
+    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"-",
+    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"-",
     venues: {
       venue1: {
-        name: data.venue_1_name,
-        place: data.venue_1_place,
+        name: data.venue_1_name?data.venue_1_name:"-",
+        place: data.venue_1_place?data.venue_1_place:"-",
       },
       venue2: {
-        name: data.venue_2_name,
-        place: data.venue_2_place,
+        name: data.venue_2_name? data.venue_2_name:"-",
+        place: data.venue_2_place?data.venue_2_place:"-",
       },
       venue3: {
-        name: data.venue_3_name,
-        place: data.venue_3_place,
+        name: data.venue_3_name?data.venue_3_name:"-",
+        place: data.venue_3_place?data.venue_3_place:"-",
       },
     },
   };
@@ -159,7 +159,7 @@ router.post("/", auth, async (req, res) => {
     decorationStatus,
     cateringStatus,
     isVerified,
-    points
+
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

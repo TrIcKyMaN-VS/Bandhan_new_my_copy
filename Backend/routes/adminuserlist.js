@@ -400,7 +400,7 @@ router.post("/postweddingchangehonneymoon/:orderId", async (req, res) => {
 router.post("/postweddingpoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -408,7 +408,7 @@ router.post("/postweddingpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -449,7 +449,7 @@ router.post("/postweddingvoucher/:userId", async (req, res) => {
 router.post("/preweddingpoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -457,7 +457,7 @@ router.post("/preweddingpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -499,7 +499,7 @@ router.post("/preweddingvoucher/:userId", async (req, res) => {
 router.post("/engagementpoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -507,7 +507,7 @@ router.post("/engagementpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -550,7 +550,7 @@ router.post("/engagementvoucher/:userId", async (req, res) => {
 router.post("/weddingpoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -558,7 +558,7 @@ router.post("/weddingpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -598,7 +598,7 @@ router.post("/weddingpoints/:userId", async (req, res) => {
 router.post("/babyshowerpoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -606,7 +606,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -648,7 +648,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
  router.post("/familyfunctionpoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -656,7 +656,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -790,6 +790,45 @@ router.post("/birthdaypoints/:userId", async (req, res) => {
   }
   console.log("successfully completed!!!");
  })
+
+
+
+
+
+
+
+ router.get("/babyshowerpointsvoucher/:userId", async (req, res) => {   
+    const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+    res.status(200).send(value)
+ })
+ router.get("/familyfunctionpointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
+router.get("/corporatepointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
+router.get("/weddingpointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
+router.get("/postweddingpointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
+router.get("/preweddingpointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
+router.get("/birthdaypointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
+router.get("/engagementpointsvoucher/:userId", async (req, res) => {   
+  const value = await User.find( { _id: req.params.userId }, { points: 1,voucher:1 } )
+  res.status(200).send(value)
+})
 
 
 

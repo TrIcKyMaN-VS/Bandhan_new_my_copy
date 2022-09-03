@@ -26,40 +26,38 @@ router.post("/", auth, async (req, res) => {
   const MinBudget = data.Estimate_Budget_Minimum;
   const MaxBudget = data.Estimate_Budget_Maximum;
   const NoOfGuests = data.No_Of_Guests;
-  const points = "0"
-  const voucher = "0"
   const Shows = {
-    show: data.shows?data.shows:"null",
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"null",
-    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"null",
+    show: data.shows?data.shows:"-",
+    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"-",
+    dancevalues: checkBoxValues.dancevalue?checkBoxValues.dancevalue:"-",
     dj: data.dj? data.dj:"null",
   };
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"null",
-    ThemeDecoration: data.ThemeDecoration,
+    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"-",
+    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:"-",
   };
-  const SpecialService = data.SpecialService;
+  const SpecialService = data.SpecialService?data.SpecialService:"-";
 
   const Food = {
-    Foodtype: data.Food,
-    items: checkBoxValues.foodvalue,
+    Foodtype: data.Food?data.Food:"-",
+    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"-",
   };
-  const OtherServices = data.OtherServices;
+  const OtherServices = data.OtherServices?data.OtherServices:"-";
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue,
-    photography: checkBoxValues.photovalue,
+    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"-",
+    photography: checkBoxValues.photovalue? checkBoxValues.photovalue:"-",
     venues: {
       venue1: {
-        name: data.venue_1_name,
-        place: data.venue_1_place,
+        name: data.venue_1_name?data.venue_1_name:"-",
+        place: data.venue_1_place?data.venue_1_place:"-",
       },
       venue2: {
-        name: data.venue_2_name,
-        place: data.venue_2_place,
+        name: data.venue_2_name?data.venue_2_name:"-",
+        place: data.venue_2_place?data.venue_2_place:"-",
       },
       venue3: {
-        name: data.venue_3_name,
-        place: data.venue_3_place,
+        name: data.venue_3_name?data.venue_3_name:"-",
+        place: data.venue_3_place?data.venue_3_place:"-",
       },
     },
   };
@@ -113,8 +111,7 @@ router.post("/", auth, async (req, res) => {
     decorationStatus,
     cateringStatus,
     isVerified,
-    points,
-    voucher
+    
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;

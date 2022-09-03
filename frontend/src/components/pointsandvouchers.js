@@ -9,73 +9,40 @@ function Points() {
 
 useEffect(()=>{
     axios.get("api/eventInfo/postweddingpoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
       });
     axios.get("api/eventInfo/preweddingpoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
      });
      axios.get("api/eventInfo/weddingpoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
      });
      axios.get("api/eventInfo/birthdaypoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
      });
      axios.get("api/eventInfo/babyshowerpoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
         
      });
      axios.get("api/eventInfo/familyfunctionpoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
      });
      axios.get("api/eventInfo/corporatepoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)
      });
      axios.get("api/eventInfo/engagementpoints").then((res) => {
-        res.data[0].points ? 
-        setpoints(res.data[0].points): setpoints("0")   
+        setpoints(res.data[0].points)
+        setvoucher(res.data[0].voucher)  
      });
 
-     //vouchers
-
-     axios.get("api/eventInfo/babyshowervoucher").then((res) => {
-        res.data[0].voucher ? 
-        setvoucher(res.data[0].voucher): setvoucher("0")
-     });
-    //  axios.get("api/eventInfo/engagementvoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
-    //  axios.get("api/eventInfo/corporatevoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
-    //  axios.get("api/eventInfo/familyfunctionvoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
-    //  axios.get("api/eventInfo/birthdayvoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
-    //  axios.get("api/eventInfo/weddingvoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
-    //  axios.get("api/eventInfo/preweddingvoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
-    //  axios.get("api/eventInfo/postweddingvoucher").then((res) => {
-    //     res.data[0].voucher ? 
-    //     setvoucher(res.data[0].voucher): setvoucher("0")
-    //  });
+ 
 },[])
   return (
     <div class="container mt-5">

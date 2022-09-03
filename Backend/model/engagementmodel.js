@@ -11,9 +11,6 @@ const engagementSchema = new mongoose.Schema(
     userId: {
       type: String,
     },
-    points:{
-      type:String
-    },
     ClientName: {
       type: String,
     },
