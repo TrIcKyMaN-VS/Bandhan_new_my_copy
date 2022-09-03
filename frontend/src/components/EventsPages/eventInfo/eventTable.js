@@ -4,7 +4,14 @@ import React, { useEffect, useState } from "react";
 function EventTable(props) {
   var eventsList = [];
   var eventStatus = [];
-
+  const [name , setname] = useState("")
+  useEffect(()=>{
+    axios.get("api/eventInfo/getname").then((res) => {
+      setname(res.data[0].username);
+      console.log(res.data[0].username);
+    });
+  },[])
+  console.log("props",props);
   if (props.item.foodb) {
     if (props.Catering.length > 2) {
       eventsList.push("Catering");
@@ -45,6 +52,37 @@ function EventTable(props) {
   // console.log(eventsList);
 
   return (
+    <>
+    <div className="container">
+     <table class="table">
+  <tbody>
+    <tr>
+      <th scope="row" className="fw-bold">Name of the customer</th>
+      <td>{name}</td>
+     
+    </tr>
+    <tr>
+      <th scope="row" className="fw-bold">Event Name</th>
+      <td>{props.item.eventName}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row" className="fw-bold">Date</th>
+      <td colspan="2">{props.item.date}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row" className="fw-bold">Number Of Guest</th>
+      <td colspan="2">{props.item.NoOfGuests}</td>
+      
+    </tr>
+  </tbody>
+</table>
+</div>
+   
+   <div class="my-5" />
+  
+
     <div>
       <h3 className=" text-center fw-bold mb-2" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName} - [ {props.item.date} ]</h3>
 
@@ -86,6 +124,7 @@ function EventTable(props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

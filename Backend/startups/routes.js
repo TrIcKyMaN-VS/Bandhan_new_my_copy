@@ -23,7 +23,7 @@ const logout = require("../controllers/user-controller");
 const birthdayorder = require("../routes/adminorderslist/birthdayorder")
 const vendoradminlist = require("../routes/vendoradminlist");
 const auth = require("../middleware/auth");
-
+const PaymentRoute = require("../routes/paymentRoute")
 module.exports = function (app) {
   app.use("/api/register", register);
   app.use("/api/login", login);
@@ -47,4 +47,5 @@ module.exports = function (app) {
   app.use("/api/adminuserlist", adminuserlist)
   app.use("/api/emergencyform",emergencyform)
   app.use("/api/vendoradminlist",vendoradminlist)
+  app.use("/api/payment", PaymentRoute)
 };

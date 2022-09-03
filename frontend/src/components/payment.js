@@ -1,42 +1,157 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./payment.css";
 
 function Payment() {
-  const [amount, setamount] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [orderAmount, setamount] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (amount === "") {
-      alert("please enter amount");
-    } else {
-      var options = {
-        key: "rzp_live_1O186ppZkaxXI2",
-        key_secret: "9ZARPPU9e2N93mcwQZ7Rb0sM",
-        amount: amount * 100,
-        currency: "INR",
-        name: "Dhoom dhamaka",
-        description: "for testing purpose",
-        handler: function (response) {
-          alert(response.razorpay_payment_id);
-        },
-        prefill: {
-          name: "jerry",
-          email: "jerry33@gmail.com",
-          contact: "9489330433 ",
-        },
-        notes: {
-          address: "Razorpay Corporate office",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-      var pay = new window.Razorpay(options);
-      pay.open();
-    }
-  };
+  function loadRazorpay() {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onerror = () => {
+      alert("Razorpay SDK failed to load. Are you online?");
+    };
+    script.onload = async () => {
+      try {
+        setLoading(true);
+        const result = await axios.post(
+          "http://localhost:3001/api/payment/create-order",
+          {
+            amount: orderAmount * 100,
+          }
+        );
+        const { amount, id: order_id, currency } = result.data;
+        const {
+          data: { key: razorpayKey },
+        } = await axios.get("api/payment/get-razorpay-key");
+
+        const options = {
+          key: razorpayKey,
+          amount: amount.toString(),
+          currency: currency,
+          name: "example name",
+          description: "example transaction",
+          order_id: order_id,
+          handler: async function (response) {
+            const result = await axios.post("api/payment/pay-order", {
+              orderId:12345,
+              amount: amount,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+            });
+            alert(result.data.msg);
+            // fetchOrders();
+          },
+          prefill: {
+            name: "example name",
+            email: "email@example.com",
+            contact: "111111",
+          },
+          notes: {
+            address: "example address",
+          },
+          theme: {
+            color: "#80c0f0",
+          },
+        };
+
+        setLoading(false);
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      } catch (err) {
+        alert(err);
+        setLoading(false);
+      }
+    };
+    document.body.appendChild(script);
+  }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (orderAmount === "") {
+  //     alert("please enter amount");
+  //   } else {
+  //     var options = {
+  //       key: "rzp_test_NKBO2XLeXbHMHB",
+  //       key_secret: "1qryLbykXZBeFC4w1RdQRE9p",
+  //       amount: amount * 100,
+  //       currency: "INR",
+  //       name: "Dhoom dhamaka",
+  //       description: "for testing purpose",
+  //       handler: function (response) {
+  //         alert(response.razorpay_payment_id);
+  //       },
+  //       prefill: {
+  //         name: "jerry",
+  //         email: "jerry33@gmail.com",
+  //         contact: "9489330433 ",
+  //       },
+  //       notes: {
+  //         address: "Razorpay Corporate office",
+  //       },
+  //       theme: {
+  //         color: "#3399cc",
+  //       },
+  //     };
+  //     var pay = new window.Razorpay(options);
+  //     pay.open();
+  //   }
+  // };
   return (
     <div className="mb-10">
+      <div className="row justify-content-center mx-5">
+        <div className="col-md-3">
+          <div className="card shadow-4-strong">
+            <div className="card-body text-center">
+              <h3 className="mb-4">Payment</h3>
+              <button type="button" className="btn btn-secondary">go to</button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card shadow-4-strong">
+            <div className="card-body text-center">
+              <h3 className="mb-4">Payment</h3>
+              <button type="button" className="btn btn-secondary">go to</button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card shadow-4-strong">
+            <div className="card-body text-center">
+              <h3 className="mb-4">Payment</h3>
+              <button type="button" className="btn btn-secondary">go to</button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card shadow-4-strong">
+            <div className="card-body text-center">
+              <h3 className="mb-4">Payment</h3>
+              <button type="button" className="btn btn-secondary">go to</button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card shadow-4-strong">
+            <div className="card-body text-center">
+              <h3 className="mb-4">Payment</h3>
+              <button type="button" className="btn btn-secondary">go to</button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card shadow-4-strong">
+            <div className="card-body text-center">
+              <h3 className="mb-4">Payment</h3>
+              <button type="button" className="btn btn-secondary">go to</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
       <div className="row justify-content-center">
         <div className="col-md-8 mt-4 mb-7">
           <h3 className=" fw-bold text-center mb-4">Invoices</h3>
@@ -73,7 +188,7 @@ function Payment() {
                       id="form12"
                       class="form-control mb-4"
                       placeholder="Enter Amount"
-                      value={amount}
+                      value={orderAmount}
                       onChange={(e) => setamount(e.target.value)}
                     />
                     <label for="floatingInput">Enter amount ₹</label>
@@ -84,7 +199,8 @@ function Payment() {
                 href="{#}"
                 type={"button"}
                 class="btn btn-primary btn-block btn-lg"
-                onClick={handleSubmit}
+                disabled={loading}
+                onClick={loadRazorpay}
               >
                 Proceed to payment <i class="fas fa-long-arrow-alt-right"></i>
               </button>
