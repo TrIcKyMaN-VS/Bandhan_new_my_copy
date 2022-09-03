@@ -151,4 +151,15 @@ router.get("/engagementpoints", async  (req, res) => {
 
 
 
+
+
+
+
+  //EVent info
+
+  router.get("/getname", async  (req, res) => {
+    const value = await User.find( { _id: req.id}, { username: 1, } )
+    res.status(200).send(value)
+     console.log("successfully completed!!!");
+    })
 module.exports = router;

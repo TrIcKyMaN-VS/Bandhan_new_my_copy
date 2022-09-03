@@ -28,6 +28,7 @@
     "nodemailer": "^6.7.5",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.19",
+    "razorpay": "^2.8.3",
     "universal-cookie": "^4.0.4",
     "urid": "^1.1.0",
     "uuid": "^8.3.2"
