@@ -112,6 +112,7 @@ function EventInfo() {
         const ll = res.data;
         if (ll.length > 0) {
           setdata((data) => [...data, ll[0]]);
+          // console.log(datas);
         }
       })
       .catch((err) => {

@@ -84,9 +84,9 @@ const postweddingSchema = new mongoose.Schema(
         type: String,
       },
     },
-    honeymoonStatus: {
-      type: String,
-    },
+    // honeymoonStatus: {
+    //   type: String,
+    // },
     cateringStatus: {
       type: String,
     },
@@ -105,6 +105,64 @@ const postweddingSchema = new mongoose.Schema(
   }
 );
 
+// Post wedding
+// Muh - Dikhai
+// Subharambh Yatra
+// Honney moon
+
+
+const postweddingInfoSchema = new mongoose.Schema({
+  eventName: {
+    type: String,
+  },
+  orderId : {
+    type: String
+  },
+  userId: {
+    type: String,
+  },
+  muh_DikhaiReason:{
+    type: String
+  } ,
+  muh_DikhaiConfirmation:{
+    type: String
+  } ,
+  muh_Dikhaistatus:{
+    type: String
+  } ,
+  muh_DikhaiPromiseDate:{
+    type: String
+  } ,
+  subaarambhYatraReason:{
+    type: String
+  } ,
+  subaarambhYatraConfirmation:{
+    type: String
+  } ,
+  subaarambhYatrastatus:{
+    type: String
+  } ,
+  subaarambhYatraPromiseDate:{
+    type: String
+  } ,
+
+  honeymoonReason:{
+    type: String
+  } ,
+  honeymoonConfirmation:{
+    type: String
+  } ,
+  honeymoonstatus:{
+    type: String
+  } ,
+  honeymoonPromiseDate:{
+    type: String
+  } ,
+  
+})
+
 const PostWeddingForm = mongoose.model("PostWeddingForm", postweddingSchema);
+const PostWeddinngInfo = mongoose.model("PostWeddingInfo", postweddingInfoSchema);
 
 exports.PostWeddingForm = PostWeddingForm;
+exports.PostWeddinngInfo = PostWeddinngInfo;

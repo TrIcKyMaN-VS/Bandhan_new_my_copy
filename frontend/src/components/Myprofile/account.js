@@ -1,6 +1,6 @@
 import React from "react";
 import Todo from "../todo";
-import Payment from "../payment";
+import Payment from '../payment/payment';
 import Points from "./../pointsandvouchers";
 
 import "./account.css";

@@ -21,7 +21,6 @@ const { resolveContent } = require("nodemailer/lib/shared");
 const {User} = require("../model/user")
 
 router.get("/prewedding", auth, (req, res) => {
-  console.log("req rec eventinfo");
   PreWeddingForm.find({ userId: req.id },(err, doc) => {
     if (doc) {
       res.json(doc)

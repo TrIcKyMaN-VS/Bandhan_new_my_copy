@@ -14,6 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
+router.get("/details", (req,res) => {
+  res.status(200).send("req receiveds")
+})
+
   
   router.get('/get-razorpay-key', (req, res) => {
       res.send({ key: process.env.RAZORPAY_KEY_ID });
