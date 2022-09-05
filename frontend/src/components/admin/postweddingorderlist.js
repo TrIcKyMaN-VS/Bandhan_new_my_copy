@@ -4,24 +4,28 @@ import axios from "axios";
 function Orderslist(props) {
   const forms = props.formdata;
   const [datapoints, setdatapoints] = useState("");
+  const [updtBtn, setUpdtBtn] = useState(true);
   const [datavoucher, setdatavoucher] = useState("");
   const [postInfo, setPostInfo] = useState("");
 
-  const [honeymoonReas, setHoneymoonReas] = useState("");
-  const [honeymoonstats, setHoneymoonstats] = useState("");
-  const [honeymoonConf, setHoneymoonConf] = useState("");
-  const [honeymoonPromiseDat, setHoneymoonPromiseDate] = useState("");
+  const [honeymoon, setHoneymoon] = useState(false);
+  const [honeymoonReas, setHoneymoonReas] = useState(null);
+  const [honeymoonstats, setHoneymoonstats] = useState(null);
+  const [honeymoonConf, setHoneymoonConf] = useState(null);
+  const [honeymoonPromiseDat, setHoneymoonPromiseDate] = useState(null);
 
-  const [muh_DikhaiReas, setmuh_DikhaiReas] = useState("");
-  const [muh_Dikhaistats, setmuh_Dikhaistats] = useState("");
-  const [muh_DikhaiConf, setmuh_DikhaiConf] = useState("");
-  const [muh_DikhaiPromiseDat, setmuh_DikhaiPromiseDate] = useState("");
+  const [muh_Dikhai, setMuh_Dikhai] = useState(false);
+  const [muh_DikhaiReas, setmuh_DikhaiReas] = useState(null);
+  const [muh_Dikhaistats, setmuh_Dikhaistats] = useState(null);
+  const [muh_DikhaiConf, setmuh_DikhaiConf] = useState(null);
+  const [muh_DikhaiPromiseDat, setmuh_DikhaiPromiseDate] = useState(null);
 
-  const [subaarambhYatraReas, setsubaarambhYatraReas] = useState("");
-  const [subaarambhYatrastats, setsubaarambhYatrastats] = useState("");
-  const [subaarambhYatraConf, setsubaarambhYatraConf] = useState("");
+  const [subaarambhYatra, setSubaarambhYatra] = useState(false);
+  const [subaarambhYatraReas, setsubaarambhYatraReas] = useState(null);
+  const [subaarambhYatrastats, setsubaarambhYatrastats] = useState(null);
+  const [subaarambhYatraConf, setsubaarambhYatraConf] = useState(null);
   const [subaarambhYatraPromiseDat, setsubaarambhYatraPromiseDate] =
-    useState("");
+    useState(null);
 
   useEffect(() => {
     axios
@@ -36,22 +40,54 @@ function Orderslist(props) {
       .then((res) => {
         // setdatapoints(res.data[0].points)
         // setdatavoucher(res.data[0].voucher)
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         setPostInfo(res.data[0]);
-        setHoneymoonReas(res.data[0].honeymoonReason);
-        setHoneymoonConf(res.data[0].honeymoonConfirmation);
-        setHoneymoonPromiseDate(res.data[0].honeymoonPromiseDate);
-        setHoneymoonstats(res.data[0].honeymoonstatus);
+        if (res.data[0].honeymoonConfirmation) {
+          setHoneymoonReas(res.data[0].honeymoonReason);
+          setHoneymoonConf(res.data[0].honeymoonConfirmation);
+          setHoneymoonPromiseDate(res.data[0].honeymoonPromiseDate);
+          setHoneymoonstats(res.data[0].honeymoonstatus);
+          if (res.data[0].honeymoonConfirmation.length > 4) {
+            setHoneymoon(true);
+          } else {
+            setHoneymoon(false);
+          }
+        }
+        // console.log(res.data[0].muh_DikhaiConfirmation);
 
-        setmuh_DikhaiReas(res.data[0].muh_DikhaiReason);
-        setmuh_DikhaiConf(res.data[0].muh_DikhaiConfirmation);
-        setmuh_DikhaiPromiseDate(res.data[0].muh_DikhaiPromiseDate);
-        setmuh_Dikhaistats(res.data[0].muh_Dikhaistatus);
+        if (
+          // res.data[0].muh_DikhaiReason ||
+          res.data[0].muh_DikhaiConfirmation
+          // res.data[0].muh_DikhaiPromiseDate ||
+          // res.data[0].muh_Dikhaistatus
+        ) {
+          setmuh_DikhaiReas(res.data[0].muh_DikhaiReason);
+          setmuh_DikhaiConf(res.data[0].muh_DikhaiConfirmation);
+          setmuh_DikhaiPromiseDate(res.data[0].muh_DikhaiPromiseDate);
+          setmuh_Dikhaistats(res.data[0].muh_Dikhaistatus);
+          if (res.data[0].muh_DikhaiConfirmation.length > 4) {
+            setMuh_Dikhai(true);
+          } else {
+            setMuh_Dikhai(false);
+          }
+        }
 
-        setsubaarambhYatraReas(res.data[0].subaarambhYatraReason);
-        setsubaarambhYatrastats(res.data[0].subaarambhYatrastatus);
-        setsubaarambhYatraPromiseDate(res.data[0].subaarambhYatraPromiseDate);
-        setsubaarambhYatraConf(res.data[0].subaarambhYatraConfirmation);
+        if (
+          // res.data[0].subaarambhYatraReason ||
+          // res.data[0].subaarambhYatrastatus ||
+          res.data[0].subaarambhYatraConfirmation
+          // res.data[0].subaarambhYatraPromiseDate
+        ) {
+          setsubaarambhYatraReas(res.data[0].subaarambhYatraReason);
+          setsubaarambhYatrastats(res.data[0].subaarambhYatrastatus);
+          setsubaarambhYatraPromiseDate(res.data[0].subaarambhYatraPromiseDate);
+          setsubaarambhYatraConf(res.data[0].subaarambhYatraConfirmation);
+          if (res.data[0].subaarambhYatraConfirmation.length > 4) {
+            setSubaarambhYatra(true);
+          } else {
+            setSubaarambhYatra(false);
+          }
+        }
       });
   }, []);
 
@@ -85,6 +121,7 @@ function Orderslist(props) {
       .then((res) => {});
   }
 
+  // console.log(honeymoonConf);
   function updateEventDetails() {
     const eventDatas = {
       orderId,
@@ -101,8 +138,7 @@ function Orderslist(props) {
       subaarambhYatraReas,
       subaarambhYatrastats,
     };
-
-    console.log(eventDatas);
+    // console.log(eventDatas);
 
     axios
       .post("/api/postwedding/updateInfos", { eventDatas })
@@ -137,185 +173,210 @@ function Orderslist(props) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>Honneymoon</th>
-              <td className="text-start ps-0 ms-0 pe-5">
-                <input
-                  type={"date"}
-                  onChange={(e) => {
-                    setHoneymoonPromiseDate(e.target.value);
-                  }}
-                  value={honeymoonPromiseDat}
-                  className={"input"}
-                />
-              </td>
+            {!!honeymoon && (
+              <tr>
+                <th>Honneymoon</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    onChange={(e) => {
+                      setHoneymoonPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    value={honeymoonPromiseDat}
+                    className={"input"}
+                  />
+                </td>
 
-              <td>
-                <div
-                  type="button"
-                  className="btn btn-sm btn btn-info"
-                  onClick={() => {
-                    if (honeymoonConf == "Not Confirmed") {
-                      setHoneymoonConf("Confirmed");
-                    } else if (honeymoonConf == "Confirmed") {
-                      setHoneymoonConf("Not Confirmed");
-                    } else {
-                      alert("Refresh the Page.Internet Connection Lost");
-                    }
-                  }}
-                >
-                  {honeymoonConf}
-                </div>
-              </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (honeymoonConf == "Not Confirmed") {
+                        setHoneymoonConf("Confirmed");
+                      } else if (honeymoonConf == "Confirmed") {
+                        setHoneymoonConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {honeymoonConf}
+                  </div>
+                </td>
 
-              <td>
-                <input
-                  type={"text"}
-                  value={honeymoonReas}
-                  onChange={(e) => setHoneymoonReas(e.target.value)}
-                />
-              </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={honeymoonReas}
+                    onChange={(e) => {
+                      setHoneymoonReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
 
-              <td>
-                <div
-                  type="button"
-                  className="btn btn-sm btn-info"
-                  onClick={() => {
-                    if (honeymoonstats == "pending") {
-                      setHoneymoonstats("Completed");
-                    } else if (honeymoonstats == "Completed") {
-                      setHoneymoonstats("pending");
-                    } else {
-                      alert("Refresh the Page.Internet Connection Lost");
-                    }
-                  }}
-                >
-                  {honeymoonstats}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th>muh_Dikhai</th>
-              <td className="text-start ps-0 ms-0 pe-5">
-                <input
-                  value={muh_DikhaiPromiseDat}
-                  type={"date"}
-                  onChange={(e) => {
-                    setmuh_DikhaiPromiseDate(e.target.value);
-                  }}
-                  className={"input-sm"}
-                />
-              </td>
-              <td>
-                <div
-                  type="button"
-                  className="btn btn-sm btn btn-info"
-                  onClick={() => {
-                    if (muh_DikhaiConf == "Not Confirmed") {
-                      setmuh_DikhaiConf("Confirmed");
-                    } else if (muh_DikhaiConf == "Confirmed") {
-                      setmuh_DikhaiConf("Not Confirmed");
-                    } else {
-                      alert("Refresh the Page.Internet Connection Lost");
-                    }
-                  }}
-                >
-                  {muh_DikhaiConf}
-                </div>
-              </td>
-              <td>
-                <input
-                  type={"text"}
-                  value={muh_DikhaiReas}
-                  onChange={(e) => setmuh_DikhaiReas(e.target.value)}
-                />
-              </td>
-              <td>
-                <div
-                  type="button"
-                  className="btn btn-sm btn-info"
-                  onClick={() => {
-                    if (muh_Dikhaistats == "pending") {
-                      setmuh_Dikhaistats("Completed");
-                    } else if (muh_Dikhaistats == "Completed") {
-                      setmuh_Dikhaistats("pending");
-                    } else {
-                      alert("Refresh the Page.Internet Connection Lost");
-                    }
-                  }}
-                >
-                  {muh_Dikhaistats}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th>subaarambhYatra</th>
-              <td className="text-start ps-0 ms-0 pe-5">
-                <input
-                  type={"date"}
-                  value={subaarambhYatraPromiseDat}
-                  onChange={(e) => {
-                    setsubaarambhYatraPromiseDate(e.target.value);
-                  }}
-                  className={"input"}
-                />
-              </td>
-              <td>
-                <div
-                  type="button"
-                  className="btn btn-sm btn btn-info"
-                  onClick={() => {
-                    if (subaarambhYatraConf == "Not Confirmed") {
-                      setsubaarambhYatraConf("Confirmed");
-                    } else if (subaarambhYatraConf == "Confirmed") {
-                      setsubaarambhYatraConf("Not Confirmed");
-                    } else {
-                      alert("Refresh the Page.Internet Connection Lost");
-                    }
-                  }}
-                >
-                  {subaarambhYatraConf}
-                </div>
-              </td>
-              <td>
-                <input
-                  type={"text"}
-                  value={subaarambhYatraReas}
-                  onChange={(e) => setsubaarambhYatraReas(e.target.value)}
-                />
-              </td>
-              <td>
-                <div
-                  type="button"
-                  className="btn btn-sm btn-info"
-                  onClick={() => {
-                    if (subaarambhYatrastats == "pending") {
-                      setsubaarambhYatrastats("Completed");
-                    } else if (subaarambhYatrastats == "Completed") {
-                      setsubaarambhYatrastats("pending");
-                    } else {
-                      alert("Refresh the Page.Internet Connection Lost");
-                    }
-                  }}
-                >
-                  {subaarambhYatrastats}
-                </div>
-              </td>
-            </tr>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (honeymoonstats == "pending") {
+                        setHoneymoonstats("Completed");
+                      } else if (honeymoonstats == "Completed") {
+                        setHoneymoonstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {honeymoonstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!muh_Dikhai && (
+              <tr>
+                <th>muh_Dikhai</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    value={muh_DikhaiPromiseDat}
+                    type={"date"}
+                    onChange={(e) => {
+                      setmuh_DikhaiPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input-sm"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (muh_DikhaiConf == "Not Confirmed") {
+                        setmuh_DikhaiConf("Confirmed");
+                      } else if (muh_DikhaiConf == "Confirmed") {
+                        setmuh_DikhaiConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {muh_DikhaiConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={muh_DikhaiReas}
+                    onChange={(e) => {
+                      setmuh_DikhaiReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (muh_Dikhaistats == "pending") {
+                        setmuh_Dikhaistats("Completed");
+                      } else if (muh_Dikhaistats == "Completed") {
+                        setmuh_Dikhaistats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {muh_Dikhaistats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!subaarambhYatra && (
+              <tr>
+                <th>subaarambhYatra</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={subaarambhYatraPromiseDat}
+                    onChange={(e) => {
+                      setsubaarambhYatraPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (subaarambhYatraConf == "Not Confirmed") {
+                        setsubaarambhYatraConf("Confirmed");
+                      } else if (subaarambhYatraConf == "Confirmed") {
+                        setsubaarambhYatraConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {subaarambhYatraConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={subaarambhYatraReas}
+                    onChange={(e) => {
+                      setsubaarambhYatraReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (subaarambhYatrastats == "pending") {
+                        setsubaarambhYatrastats("Completed");
+                      } else if (subaarambhYatrastats == "Completed") {
+                        setsubaarambhYatrastats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {subaarambhYatrastats}
+                  </div>
+                </td>
+              </tr>
+            )}
           </tbody>
           <tr rowspan="5" className="text-center">
             <th></th>
             <th></th>
-            <div
+            <button
               type="button"
               onClick={() => updateEventDetails()}
               className="my-3 btn btn-success"
+              disabled={updtBtn}
             >
               Update
-            </div>
+            </button>
           </tr>
         </table>
-
+        {/* } */}
         <hr class="my-5" />
         <table className="table bg-white rounded shadow-sm  table-hover">
           <thead>
