@@ -75,7 +75,7 @@ router.post("/", auth, async (req, res) => {
 
   if (muhDikhal[0] != undefined) {
     if (muhDikhal[0].length > 1) {
-      (muh_DikhaiReason = "-"), (muh_DikhaiConfirmation = "-");
+      (muh_DikhaiReason = "-"), (muh_DikhaiConfirmation = "Not Confirmed");
       (muh_Dikhaistatus = "pending"), (muh_DikhaiPromiseDate = "");
     }
   } else {
@@ -91,7 +91,7 @@ router.post("/", auth, async (req, res) => {
     Honneymoon.DestinationIndia.length > 1 ||
     Honneymoon.DestinationAbroad.length > 1
   ) {
-    (honeymoonReason = "-"), (honeymoonConfirmation = "-");
+    (honeymoonReason = "-"), (honeymoonConfirmation = "Not Confirmed");
     (honeymoonstatus = "pending"), (honeymoonPromiseDate = "");
   } else {
     (honeymoonReason = null), (honeymoonConfirmation = null);
@@ -105,7 +105,7 @@ router.post("/", auth, async (req, res) => {
 
   if (SubaarambhYatra[0] != undefined) {
     if (SubaarambhYatra[0].length > 1) {
-      (subaarambhYatraReason = "-"), (subaarambhYatraConfirmation = "-");
+      (subaarambhYatraReason = "-"), (subaarambhYatraConfirmation = "Not Confirmed");
       (subaarambhYatrastatus = "pending"), (subaarambhYatraPromiseDate = "");
     }
   } else {
@@ -174,9 +174,7 @@ router.post("/", auth, async (req, res) => {
     console.log(fffs);
     res.status(200).send("Postwedding form saved successfully...!");
   });
-  // console.log("completed!! saved");
 
-  // console.log(req.body);
 });
 
 router.get("/postweddingInfo/:orderIdp", (req, res) => {
