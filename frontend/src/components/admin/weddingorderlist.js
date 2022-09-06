@@ -286,14 +286,18 @@ function Orderslist(props) {
       hostingstats,
     };
 
-    // axios
-    //   .post("/api/wedding/updateInfos", { eventDatas })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .post("/api/wedding/updateInfos", { eventDatas })
+      .then((res) => {
+        // console.log(res);
+        if (res.status===200) {
+          alert("success")
+          setUpdtBtn(true)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   
   return (

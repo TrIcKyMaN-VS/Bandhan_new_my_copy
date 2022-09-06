@@ -239,7 +239,7 @@ router.post("/", auth, async (req, res) => {
     venueReason = "-";
     venuePromiseDate = "";
     venueService = "Not Confirmed";
-  }else{
+  } else {
     venueStatus = null;
     venueReason = null;
     venuePromiseDate = null;
@@ -251,7 +251,7 @@ router.post("/", auth, async (req, res) => {
     photographyReason = "-";
     photographyPromiseDate = "";
     photographyService = "Not Confirmed";
-  }else{
+  } else {
     photographyStatus = null;
     photographyReason = null;
     photographyPromiseDate = null;
@@ -262,7 +262,7 @@ router.post("/", auth, async (req, res) => {
     cateringReason = "-";
     cateringPromiseDate = "";
     cateringService = "Not Confirmed";
-  }else{
+  } else {
     cateringStatus = null;
     cateringReason = null;
     cateringPromiseDate = null;
@@ -274,7 +274,7 @@ router.post("/", auth, async (req, res) => {
     weddingTypeReason = "-";
     weddingTypePromiseDate = "";
     weddingTypeService = "Not Confirmed";
-  }else{
+  } else {
     weddingTypeStatus = null;
     weddingTypeReason = null;
     weddingTypePromiseDate = null;
@@ -285,9 +285,7 @@ router.post("/", auth, async (req, res) => {
     showsReason = "-";
     showsPromiseDate = "";
     showsService = "Not Confirmed";
-    console.log("arg");
-  }else{
-    console.log("brg");
+  } else {
     showsStatus = null;
     showsReason = null;
     showsPromiseDate = null;
@@ -299,7 +297,7 @@ router.post("/", auth, async (req, res) => {
     invitationReason = "-";
     invitationPromiseDate = "";
     invitationService = "Not Confirmed";
-  }else{
+  } else {
     invitationStatus = null;
     invitationReason = null;
     invitationPromiseDate = null;
@@ -310,7 +308,7 @@ router.post("/", auth, async (req, res) => {
     decorationReason = "-";
     decorationPromiseDate = "";
     decorationService = "Not Confirmed";
-  }else{
+  } else {
     decorationStatus = null;
     decorationReason = null;
     decorationPromiseDate = null;
@@ -321,7 +319,7 @@ router.post("/", auth, async (req, res) => {
     hostingReason = "-";
     hostingPromiseDate = "";
     hostingService = "Not Confirmed";
-  }else{
+  } else {
     hostingStatus = null;
     hostingReason = null;
     hostingPromiseDate = null;
@@ -332,7 +330,7 @@ router.post("/", auth, async (req, res) => {
     pandit_JiReason = "-";
     pandit_JiPromiseDate = "";
     pandit_JiService = "Not Confirmed";
-  }else{
+  } else {
     pandit_JiStatus = null;
     pandit_JiReason = null;
     pandit_JiPromiseDate = null;
@@ -343,14 +341,12 @@ router.post("/", auth, async (req, res) => {
     beautyReason = "-";
     beautyPromiseDate = "";
     beautyService = "Not Confirmed";
-  }else{
+  } else {
     beautyStatus = null;
     beautyReason = null;
     beautyPromiseDate = null;
     beautyService = null;
   }
-
-
 
   const newWeddingInfo = WeddingInfo({
     eventName,
@@ -419,7 +415,6 @@ router.post("/", auth, async (req, res) => {
   });
 });
 
-
 router.get("/weddingInfo/:orderIdp", (req, res) => {
   // console.log(req.params.orderIdp);
   WeddingInfo.find({ orderId: req.params.orderIdp }, (err, doc) => {
@@ -433,37 +428,68 @@ router.get("/weddingInfo/:orderIdp", (req, res) => {
   });
 });
 
-// router.post("/updateInfos", (req, res) => {
-//   const datass = req.body.eventDatas;
-//   PostWeddinngInfo.findOneAndUpdate(
-//     { orderId: datass.orderId },
-//     {
-//       $set: {
-//         honeymoonstatus: datass.honeymoonstats,
-//         honeymoonConfirmation: datass.honeymoonConf,
-//         honeymoonPromiseDate: datass.honeymoonPromiseDat,
-//         honeymoonReason: datass.honeymoonReas,
-//         muh_DikhaiConfirmation: datass.muh_DikhaiConf,
-//         muh_DikhaiPromiseDate: datass.muh_DikhaiPromiseDat,
-//         muh_Dikhaistatus: datass.muh_Dikhaistats,
-//         muh_DikhaiReason: datass.muh_DikhaiReas,
-//         subaarambhYatraConfirmation: datass.subaarambhYatraConf,
-//         subaarambhYatraPromiseDate: datass.subaarambhYatraPromiseDat,
-//         subaarambhYatraReason: datass.subaarambhYatraReas,
-//         subaarambhYatrastatus: datass.subaarambhYatrastats,
-//       },
-//     },
-//     (err, doc) => {
-//       if (err) {
-//         console.log(err);
-//         res.status(400).send(err);
-//       } else {
-//         // console.log(doc);
-//         res.status(200).send(doc);
-//       }
-//     }
-//   );
-// });
-
+router.post("/updateInfos", (req, res) => {
+  const datass = req.body.eventDatas;
+  WeddingInfo.findOneAndUpdate(
+    { orderId: datass.orderId },
+    {
+      $set: {
+        invitationReason: datass.invitationReas,
+        invitationStatus: datass.invitationstats,
+        invitationPromiseDate: datass.invitationPromiseDat,
+        invitationService: datass.invitationConf,
+        beautyReason: datass.beautyReas,
+        beautyStatus: datass.beautystats,
+        beautyPromiseDate: datass.beautyPromiseDat,
+        beautyService: datass.beautyConf,
+        venueReason: datass.venueReas,
+        venueStatus: datass.venuestats,
+        venuePromiseDate: datass.venuePromiseDat,
+        venueService: datass.venueConf,
+        photographyReason: datass.photographyReas,
+        photographyStatus: datass.photographystats,
+        photographyPromiseDate: datass.photographyPromiseDat,
+        photographyService: datass.photographyConf,
+        weddingTypeReason: datass.weddingTypeReas,
+        weddingTypeStatus: datass.weddingTypestats,
+        weddingTypePromiseDate: datass.weddingTypePromiseDat,
+        weddingTypeService: datass.weddingTypeConf,
+        cateringReason: datass.cateringReas,
+        cateringStatus: datass.cateringstats,
+        cateringPromiseDate: datass.cateringPromiseDat,
+        cateringService: datass.cateringConf,
+        decorationReason: datass.decorationReas,
+        decorationStatus: datass.decorationstats,
+        decorationPromiseDate: datass.decorationPromiseDat,
+        decorationService: datass.decorationConf,
+        showsReason: datass.showsReas,
+        showsStatus: datass.showsstats,
+        showsPromiseDate: datass.showsPromiseDat,
+        showsService: datass.showsConf,
+        pandit_JiReason: datass.pandit_JiReas,
+        pandit_JiStatus: datass.pandit_Jistats,
+        pandit_JiPromiseDate: datass.pandit_JiPromiseDat,
+        pandit_JiService: datass.pandit_JiConf,
+        mehandiReason: datass.mehandiReas,
+        mehandiStatus: datass.mehandistats,
+        mehandiPromiseDate: datass.mehandiPromiseDat,
+        mehandiService: datass.mehandiConf,
+        hostingReason: datass.hostingReas,
+        hostingStatus: datass.hostingstats,
+        hostingPromiseDate: datass.hostingPromiseDat,
+        hostingService: datass.hostingConf,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send(doc);
+      }
+    }
+  );
+});
 
 module.exports = router;
