@@ -174,32 +174,32 @@ router.get("/familyfunctionorder/orderId/:orderId", async (req, res) => {
 router.post("/babyshowerchangevenue/:orderId", async (req, res) => {
   await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/babyshowerchangedecoration/:orderId", async (req, res) => {
   await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/babyshowerchangephotography/:orderId", async (req, res) => {
  await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/babyshowerchangecatering/:orderId", async (req, res) => {
   await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 
 router.post("/babyshowerchangevenue/:orderId", async (req, res) => {
   const formdata = await BabyShowerForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 
@@ -212,25 +212,25 @@ router.post("/babyshowerchangevenue/:orderId", async (req, res) => {
 router.post("/birthdaychangevenue/:orderId", async (req, res) => {
   await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/birthdaychangedecoration/:orderId", async (req, res) => {
  await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/birthdaychangephotography/:orderId", async (req, res) => {
   await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/birthdaychangecatering/:orderId", async (req, res) => {
   await BirthdayForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 
@@ -242,25 +242,25 @@ router.post("/birthdaychangecatering/:orderId", async (req, res) => {
 router.post("/corporatechangevenue/:orderId", async (req, res) => {
   await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/corporatechangedecoration/:orderId", async (req, res) => {
   await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/corporatechangephotography/:orderId", async (req, res) => {
   await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/corporatechangecatering/:orderId", async (req, res) => {
  await CorporateEventForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 
@@ -282,19 +282,19 @@ router.post("/familyfunctionchangevenue/:orderId", async (req, res) => {
 router.post("/familyfunctionchangedecoration/:orderId", async (req, res) => {
   await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/familyfunctionchangephotography/:orderId", async (req, res) => {
   await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 router.post("/familyfunctionchangecatering/:orderId", async (req, res) => {
   await FamilyFunctionForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
 })
 
@@ -311,19 +311,19 @@ router.post("/weddingchangevenue/:orderId", async (req, res) => {
 router.post("/weddingchangedecoration/:orderId", async (req, res) => {
  await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
  res.status(200).send("successfully completed!!!")
- console.log("successfully completed!!!");
+//  console.log("successfully completed!!!");
    
 })
 router.post("/weddingchangephotography/:orderId", async (req, res) => {
  await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
  res.status(200).send("successfully completed!!!")
- console.log("successfully completed!!!");
+//  console.log("successfully completed!!!");
    
 })
 router.post("/weddingchangecatering/:orderId", async (req, res) => {
  await WeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
  res.status(200).send("successfully completed!!!")
- console.log("successfully completed!!!");
+//  console.log("successfully completed!!!");
    
 })
 //
@@ -340,19 +340,19 @@ router.post("/engagementchangevenue/:orderId", async (req, res) => {
 router.post("/engagementchangedecoration/:orderId", async (req, res) => {
  await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {decorationStatus: "Completed"}})
  res.status(200).send("successfully completed!!!")
- console.log("successfully completed!!!");
+//  console.log("successfully completed!!!");
    
 })
 router.post("/engagementchangephotography/:orderId", async (req, res) => {
  await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {photographyStatus: "Completed"}})
  res.status(200).send("successfully completed!!!")
- console.log("successfully completed!!!");
+//  console.log("successfully completed!!!");
    
 })
 router.post("/engagementchangecatering/:orderId", async (req, res) => {
  await EngagementForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
  res.status(200).send("successfully completed!!!")
- console.log("successfully completed!!!");
+//  console.log("successfully completed!!!");
    
 })
 
@@ -363,13 +363,13 @@ router.post("/engagementchangecatering/:orderId", async (req, res) => {
 router.post("/preweddingchangevenue/:orderId", async (req, res) => {
   await PreWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {venueStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
  })
  router.post("/preweddingchangecatering/:orderId", async (req, res) => {
   await PreWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
  })
 //
@@ -380,13 +380,13 @@ router.post("/preweddingchangevenue/:orderId", async (req, res) => {
 router.post("/postweddingchangehonneymoon/:orderId", async (req, res) => {
   await PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {honeymoonStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
  })
  router.post("/postweddingchangecatering/:orderId", async (req, res) => {
   await PostWeddingForm.findOneAndUpdate({orderId:req.params.orderId}, {$set: {cateringStatus: "Completed"}})
   res.status(200).send("successfully completed!!!")
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
     
  })
 //
@@ -416,7 +416,7 @@ router.post("/postweddingpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
  //voucher
 router.post("/postweddingvoucher/:userId", async (req, res) => {
@@ -438,7 +438,7 @@ router.post("/postweddingvoucher/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -465,7 +465,7 @@ router.post("/preweddingpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 //voucher
 router.post("/preweddingvoucher/:userId", async (req, res) => {
@@ -487,7 +487,7 @@ router.post("/preweddingvoucher/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -515,7 +515,7 @@ router.post("/engagementpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 //voucher
@@ -538,7 +538,7 @@ router.post("/engagementvoucher/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -566,7 +566,7 @@ router.post("/weddingpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
  //voucher
  router.post("/weddingvoucher/:userId", async (req, res) => {
@@ -588,7 +588,7 @@ router.post("/weddingpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -614,7 +614,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 //voucher
@@ -637,7 +637,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -664,7 +664,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
  //vouchers
  router.post("/familyfunctionvoucher/:userId", async (req, res) => {
@@ -686,7 +686,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -714,7 +714,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 //vouchers
 router.post("/corporatevoucher/:userId", async (req, res) => {
@@ -736,7 +736,7 @@ router.post("/corporatevoucher/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 
@@ -765,7 +765,7 @@ router.post("/birthdaypoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
  //vouchers
@@ -788,7 +788,7 @@ router.post("/birthdaypoints/:userId", async (req, res) => {
       }
     })
   }
-  console.log("successfully completed!!!");
+  // console.log("successfully completed!!!");
  })
 
 

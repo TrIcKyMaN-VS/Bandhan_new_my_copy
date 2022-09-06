@@ -1,385 +1,1422 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function Orderslist(props) {
-    const forms = props.formdata
-    const [datapoints , setdatapoints] = useState("")
-    const [datavoucher , setdatavoucher] = useState("")
-    useEffect(()=>{
-      axios.get(`api/adminuserlist/babyshowerpointsvoucher/${forms[0].userId}`).then((res) => {
-        setdatapoints(res.data[0].points)
-        setdatavoucher(res.data[0].voucher)
+  const forms = props.formdata;
+  const [updtBtn, setUpdtBtn] = useState(true);
+  const [postInfo, setPostInfo] = useState("");
 
+
+  const [invitation, setInvitation] = useState(false);
+  const [invitationReas, setInvitationReas] = useState(null);
+  const [invitationstats, setInvitationstats] = useState(null);
+  const [invitationConf, setInvitationConf] = useState(null);
+  const [invitationPromiseDat, setInvitationPromiseDate] = useState(null);
+
+  const [beauty, setBeauty] = useState(false);
+  const [beautyReas, setBeautyReas] = useState(null);
+  const [beautystats, setBeautystats] = useState(null);
+  const [beautyConf, setBeautyConf] = useState(null);
+  const [beautyPromiseDat, setBeautyPromiseDate] = useState(null);
+
+  const [venue, setVenue] = useState(false);
+  const [venueReas, setVenueReas] = useState(null);
+  const [venuestats, setVenuestats] = useState(null);
+  const [venueConf, setVenueConf] = useState(null);
+  const [venuePromiseDat, setVenuePromiseDate] = useState(null);
+
+  const [photography, setPhotography] = useState(false);
+  const [photographyReas, setPhotographyReas] = useState(null);
+  const [photographystats, setPhotographystats] = useState(null);
+  const [photographyConf, setPhotographyConf] = useState(null);
+  const [photographyPromiseDat, setPhotographyPromiseDate] = useState(null);
+
+  const [weddingType, setWeddingType] = useState(false);
+  const [weddingTypeReas, setWeddingTypeReas] = useState(null);
+  const [weddingTypestats, setWeddingTypestats] = useState(null);
+  const [weddingTypeConf, setWeddingTypeConf] = useState(null);
+  const [weddingTypePromiseDat, setWeddingTypePromiseDate] = useState(null);
+
+  const [catering, setCatering] = useState(false);
+  const [cateringReas, setCateringReas] = useState(null);
+  const [cateringstats, setCateringstats] = useState(null);
+  const [cateringConf, setCateringConf] = useState(null);
+  const [cateringPromiseDat, setCateringPromiseDate] = useState(null);
+
+  const [decoration, setDecoration] = useState(false);
+  const [decorationReas, setDecorationReas] = useState(null);
+  const [decorationstats, setDecorationstats] = useState(null);
+  const [decorationConf, setDecorationConf] = useState(null);
+  const [decorationPromiseDat, setDecorationPromiseDate] = useState(null);
+
+  const [shows, setShows] = useState(false);
+  const [showsReas, setShowsReas] = useState(null);
+  const [showsstats, setShowsstats] = useState(null);
+  const [showsConf, setShowsConf] = useState(null);
+  const [showsPromiseDat, setShowsPromiseDate] = useState(null);
+
+  const [pandit_Ji, setPandit_Ji] = useState(false);
+  const [pandit_JiReas, setPandit_JiReas] = useState(null);
+  const [pandit_Jistats, setPandit_Jistats] = useState(null);
+  const [pandit_JiConf, setPandit_JiConf] = useState(null);
+  const [pandit_JiPromiseDat, setPandit_JiPromiseDate] = useState(null);
+
+  const [mehandi, setMehandi] = useState(false);
+  const [mehandiReas, setMehandiReas] = useState(null);
+  const [mehandistats, setMehandistats] = useState(null);
+  const [mehandiConf, setMehandiConf] = useState(null);
+  const [mehandiPromiseDat, setMehandiPromiseDate] = useState(null);
+
+  const [hosting, setHosting] = useState(false);
+  const [hostingReas, setHostingReas] = useState(null);
+  const [hostingstats, setHostingstats] = useState(null);
+  const [hostingConf, setHostingConf] = useState(null);
+  const [hostingPromiseDat, setHostingPromiseDate] = useState(null);
+
+  const [datapoints, setdatapoints] = useState("");
+  const [datavoucher, setdatavoucher] = useState("");
+  useEffect(() => {
+    axios
+      .get(`api/adminuserlist/babyshowerpointsvoucher/${forms[0].userId}`)
+      .then((res) => {
+        setdatapoints(res.data[0].points);
+        setdatavoucher(res.data[0].voucher);
       });
-    },[])
-    function status(value){
-      if(value === "venue"){
-        axios.post(`api/adminuserlist/weddingchangevenue/${forms[0].orderId}`).then((res) => {
-        });
+
+    axios.get(`api/wedding/weddingInfo/${forms[0].orderId}`).then((res) => {
+      let resDat = res.data[0];
+      setPostInfo(res.data[0]);
+      console.log(resDat);
+
+      if (resDat.invitationService != null) {
+        setInvitation(true);
+        setInvitationConf(resDat.invitationService);
+        setInvitationPromiseDate(resDat.invitationPromiseDate);
+        setInvitationReas(resDat.invitationReason);
+        setInvitationstats(resDat.invitationStatus);
+      } else {
+        setInvitation(false);
       }
-      if(value === "decoration"){
-        axios.post(`api/adminuserlist/weddingchangedecoration/${forms[0].orderId}`).then((res) => {
-        });
+
+      if (resDat.beautyReason != null) {
+        setBeauty(true);
+        setBeautyConf(resDat.beautyService);
+        setBeautyPromiseDate(resDat.beautyPromiseDate);
+        setBeautyReas(resDat.beautyReason);
+        setBeautystats(resDat.beautyStatus);
+      } else {
+        setBeauty(false);
       }
-      if(value === "photography"){
-        axios.post(`api/adminuserlist/weddingchangephotography/${forms[0].orderId}`).then((res) => {
-        });
+
+      if (resDat.venueReason != null) {
+        setVenue(true);
+        setVenueConf(resDat.venueService);
+        setVenuePromiseDate(resDat.venuePromiseDate);
+        setVenueReas(resDat.venueReason);
+        setVenuestats(resDat.venueStatus);
+      } else {
+        setVenue(false);
       }
-      if(value === "catering"){
-        axios.post(`api/adminuserlist/weddingchangecatering/${forms[0].orderId}`).then((res) => {
-        });
+
+      if (resDat.photographyReason != null) {
+        setPhotography(true);
+        setPhotographyConf(resDat.photographyService);
+        setPhotographyPromiseDate(resDat.photographyPromiseDate);
+        setPhotographyReas(resDat.photographyReason);
+        setPhotographystats(resDat.photographyStatus);
+      } else {
+        setPhotography(false);
       }
+
+      if (resDat.weddingTypeReason != null) {
+        setWeddingType(true);
+        setWeddingTypeConf(resDat.weddingTypeService);
+        setWeddingTypePromiseDate(resDat.weddingTypePromiseDate);
+        setWeddingTypeReas(resDat.weddingTypeReason);
+        setWeddingTypestats(resDat.weddingTypeStatus);
+      } else {
+        setWeddingType(false);
+      }
+
+      if (resDat.cateringReason != null) {
+        console.log("fbjfhb");
+        setCatering(true);
+        setCateringConf(res.data[0].cateringService);
+        setCateringPromiseDate(resDat.cateringPromiseDate);
+        setCateringReas(resDat.cateringReason);
+        setCateringstats(resDat.cateringStatus);
+      } else {
+        setCatering(false);
+      }
+
+      if (resDat.decorationReason != null) {
+        setDecoration(true);
+        setDecorationConf(resDat.decorationService);
+        setDecorationPromiseDate(resDat.decorationPromiseDate);
+        setDecorationReas(resDat.decorationReason);
+        setDecorationstats(resDat.decorationStatus);
+      } else {
+        setDecoration(false);
+      }
+
+      if (resDat.showsReason != null) {
+        setShows(true);
+        setShowsConf(resDat.showsService);
+        setShowsPromiseDate(resDat.showsPromiseDate);
+        setShowsReas(resDat.showsReason);
+        setShowsstats(resDat.showsStatus);
+      } else {
+        setShows(false);
+      }
+
+      if (resDat.pandit_JiReason != null) {
+        setPandit_Ji(true);
+        setPandit_JiConf(resDat.pandit_JiService);
+        setPandit_JiPromiseDate(resDat.pandit_JiPromiseDate);
+        setPandit_JiReas(resDat.pandit_JiReason);
+        setPandit_Jistats(resDat.pandit_JiStatus);
+      } else {
+        setPandit_Ji(false);
+      }
+
+      if (resDat.mehandiReason != null) {
+        setMehandi(true);
+        setMehandiConf(resDat.mehandiService);
+        setMehandiPromiseDate(resDat.mehandiPromiseDate);
+        setMehandiReas(resDat.mehandiReason);
+        setMehandistats(resDat.mehandiStatus);
+      } else {
+        setMehandi(false);
+      }
+
+      if (resDat.hostingReason != null) {
+        setHosting(true);
+        setHostingConf(resDat.hostingService);
+        setHostingPromiseDate(resDat.hostingPromiseDate);
+        setHostingReas(resDat.hostingReason);
+        setHostingstats(resDat.hostingStatus);
+      } else {
+        setHosting(false);
+      }
+    });
+  }, []);
+  function Status(value) {
+    if (value === "venue") {
+      axios
+        .post(`api/adminuserlist/weddingchangevenue/${forms[0].orderId}`)
+        .then((res) => {});
     }
-    function points(val){
-      axios.post(`api/adminuserlist/weddingpoints/${forms[0].userId}`,{val}).then((res) => {
-      });
+    if (value === "decoration") {
+      axios
+        .post(`api/adminuserlist/weddingchangedecoration/${forms[0].orderId}`)
+        .then((res) => {});
     }
-    function voucher(val){
-      axios.post(`api/adminuserlist/weddingvoucher/${forms[0].userId}`,{val}).then((res) => {
-      });
+    if (value === "photography") {
+      axios
+        .post(`api/adminuserlist/weddingchangephotography/${forms[0].orderId}`)
+        .then((res) => {});
     }
+    if (value === "catering") {
+      axios
+        .post(`api/adminuserlist/weddingchangecatering/${forms[0].orderId}`)
+        .then((res) => {});
+    }
+  }
+  function points(val) {
+    axios
+      .post(`api/adminuserlist/weddingpoints/${forms[0].userId}`, { val })
+      .then((res) => {});
+  }
+  function voucher(val) {
+    axios
+      .post(`api/adminuserlist/weddingvoucher/${forms[0].userId}`, { val })
+      .then((res) => {});
+  }
+
+  function updateEventDetails() {
+    const eventDatas = {
+      orderId : postInfo.orderId,
+      invitationConf,
+      invitationPromiseDat,
+      invitationReas,
+      invitationstats,
+      beautyConf,
+      beautyPromiseDat,
+      beautyReas,
+      beautystats,
+      venueConf,
+      venuePromiseDat,
+      venueReas,
+      venuestats,
+      cateringConf,
+      cateringPromiseDat,
+      cateringReas,
+      cateringstats,
+      decorationConf,
+      decorationPromiseDat,
+      decorationReas,
+      decorationstats,
+      photographyConf,
+      photographyPromiseDat,
+      photographyReas,
+      photographystats,
+      weddingTypeConf,
+      weddingTypePromiseDat,
+      weddingTypeReas,
+      weddingTypestats,
+      decorationConf,
+      decorationPromiseDat,
+      decorationReas,
+      decorationstats,
+      showsConf,
+      showsPromiseDat,
+      showsReas,
+      showsstats,
+      pandit_JiConf,
+      pandit_JiPromiseDat,
+      pandit_JiReas,
+      pandit_Jistats,
+      mehandiConf,
+      mehandiPromiseDat,
+      mehandiReas,
+      mehandistats,
+      hostingConf,
+      hostingPromiseDat,
+      hostingReas,
+      hostingstats,
+    };
+
+    // axios
+    //   .post("/api/wedding/updateInfos", { eventDatas })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
+  
   return (
     <div className="row my-12">
-    <h3 className="fs-4 mb-3">Details</h3>
-    <div className="col">
-            
-      <table className="table bg-white rounded shadow-sm  table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              Order 
-            </th>
-            <th className=" fw-bold" scope="col">
-              Order Status
-            </th>
-            <th className=" fw-bold" scope="col">
-              Change Status
-            </th>
-            
-          </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th>venue Status</th>
-          <td>{forms[0].venueStatus}</td>
-          <td><div className='btn btn-success' onClick={()=>status("venue")}>Completed</div></td>
-        </tr>
-        <tr>
-          <th>decorationStatus</th>
-          <td>{forms[0].decorationStatus}</td>
-          <td><div className='btn btn-success' onClick={()=>status("decoration")}>Completed</div></td>
-        </tr>
-        <tr>
-          <th>photographyStatus</th>
-          <td>{forms[0].photographyStatus}</td>
-          <td><div className='btn btn-success' onClick={()=>status("photography")}>Completed</div></td>
-        </tr>
-        <tr>
-          <th>cateringStatus</th>
-          <td>{forms[0].cateringStatus}</td>
-          <td><div className='btn btn-success' onClick={()=>status("catering")}>Completed</div></td>
-        </tr>     
-        </tbody>
-      </table>
-      <hr class="my-5"/>
-      <table className="table bg-white rounded shadow-sm  table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              Points and Vouchers
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th>Points</th>
-          <td>{datapoints}</td>
-          <td><div className='btn btn-success btn-sm' onClick={(val)=>points(50)}>50</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(100)}>100</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(150)}>150</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(200)}>200</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(250)}>250</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(300)}>300</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(350)}>350</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(400)}>400</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(450)}>450</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>points(500)}>500</div></td>
-          <td><div className='btn btn-danger btn-sm' onClick={()=>points(0)}>0</div></td>
+      <h3 className="fs-4 mb-3">Details</h3>
+      <div className="col">
+        <table className="table bg-white rounded shadow-sm  table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Event</th>
+              <th className=" fw-bold" scope="col">
+                Promise Date
+              </th>
+              <th className=" fw-bold" scope="col">
+                Confirmed
+              </th>
+              <th className=" fw-bold" scope="col">
+                Reason
+              </th>
+              <th className=" fw-bold" scope="col">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {!!invitation && (
+              <tr>
+                <th>Invitation</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    onChange={(e) => {
+                      setInvitationPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    value={invitationPromiseDat}
+                    className={"input"}
+                  />
+                </td>
 
-        </tr>     
-        <tr>
-          <th>Vouchers</th>
-          <td>{datavoucher}</td>
-          <td><div className='btn btn-success btn-sm' onClick={(val)=>voucher(1000)}>1000</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>voucher(2000)}>2000</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>voucher(3000)}>3000</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>voucher(4000)}>4000</div></td>
-          <td><div className='btn btn-success btn-sm' onClick={()=>voucher(5000)}>5000</div></td>
-          <td><div className='btn btn-danger btn-sm' onClick={()=>voucher(0)}>0</div></td>
-        </tr> 
-        </tbody>
-      </table>
-      <hr class="my-5"/>
-      <table className="table bg-white rounded shadow-sm  table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              Name
-            </th>
-            <th className=" fw-bold" scope="col">
-              Order Details
-            </th>
-            
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (invitationConf == "Not Confirmed") {
+                        setInvitationConf("Confirmed");
+                      } else if (invitationConf == "Confirmed") {
+                        setInvitationConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {invitationConf}
+                  </div>
+                </td>
+
+                <td>
+                  <input
+                    type={"text"}
+                    value={invitationReas}
+                    onChange={(e) => {
+                      setInvitationReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (invitationstats == "pending") {
+                        setInvitationstats("Completed");
+                      } else if (invitationstats == "Completed") {
+                        setInvitationstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {invitationstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!beauty && (
+              <tr>
+                <th>Beauty</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    value={beautyPromiseDat}
+                    type={"date"}
+                    onChange={(e) => {
+                      setBeautyPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input-sm"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (beautyConf == "Not Confirmed") {
+                        setBeautyConf("Confirmed");
+                      } else if (beautyConf == "Confirmed") {
+                        setBeautyConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {beautyConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={beautyReas}
+                    onChange={(e) => {
+                      setBeautyReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (beautystats == "pending") {
+                        setBeautystats("Completed");
+                      } else if (beautystats == "Completed") {
+                        setBeautystats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {beautystats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!venue && (
+              <tr>
+                <th>Venue</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={venuePromiseDat}
+                    onChange={(e) => {
+                      setVenuePromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (venueConf == "Not Confirmed") {
+                        setVenueConf("Confirmed");
+                      } else if (venueConf == "Confirmed") {
+                        setVenueConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {venueConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={venueReas}
+                    onChange={(e) => {
+                      setVenueReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (venuestats == "pending") {
+                        setVenuestats("Completed");
+                      } else if (venuestats == "Completed") {
+                        setVenuestats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {venuestats}
+                  </div>
+                </td>
+              </tr>
+            )}
+
+            {!!weddingType && (
+              <tr>
+                <th>weddingType</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={weddingTypePromiseDat}
+                    onChange={(e) => {
+                      setWeddingTypePromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (weddingTypeConf == "Not Confirmed") {
+                        setWeddingTypeConf("Confirmed");
+                      } else if (weddingTypeConf == "Confirmed") {
+                        setWeddingTypeConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {weddingTypeConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={weddingTypeReas}
+                    onChange={(e) => {
+                      setWeddingTypeReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (weddingTypestats == "pending") {
+                        setWeddingTypestats("Completed");
+                      } else if (weddingTypestats == "Completed") {
+                        setWeddingTypestats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {weddingTypestats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!catering && (
+              <tr>
+                <th>Catering</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={cateringPromiseDat}
+                    onChange={(e) => {
+                      setCateringPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (cateringConf == "Not Confirmed") {
+                        setCateringConf("Confirmed");
+                      } else if (cateringConf == "Confirmed") {
+                        setCateringConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {cateringConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={cateringReas}
+                    onChange={(e) => {
+                      setCateringReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (cateringstats == "pending") {
+                        setCateringstats("Completed");
+                      } else if (cateringstats == "Completed") {
+                        setCateringstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {cateringstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!photography && (
+              <tr>
+                <th>Photography</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={photographyPromiseDat}
+                    onChange={(e) => {
+                      setPhotographyPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (photographyConf == "Not Confirmed") {
+                        setPhotographyConf("Confirmed");
+                      } else if (photographyConf == "Confirmed") {
+                        setPhotographyConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {photographyConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={photographyReas}
+                    onChange={(e) => {
+                      setPhotographyReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (photographystats == "pending") {
+                        setPhotographystats("Completed");
+                      } else if (photographystats == "Completed") {
+                        setPhotographystats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {photographystats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!decoration && (
+              <tr>
+                <th>Decoration</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={decorationPromiseDat}
+                    onChange={(e) => {
+                      setDecorationPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (decorationConf == "Not Confirmed") {
+                        setDecorationConf("Confirmed");
+                      } else if (decorationConf == "Confirmed") {
+                        setDecorationConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {decorationConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={decorationReas}
+                    onChange={(e) => {
+                      setDecorationReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (decorationstats == "pending") {
+                        setDecorationstats("Completed");
+                      } else if (decorationstats == "Completed") {
+                        setDecorationstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {decorationstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!shows && <tr>
+              <th>Shows</th>
+              <td className="text-start ps-0 ms-0 pe-5">
+                <input
+                  type={"date"}
+                  value={showsPromiseDat}
+                  onChange={(e) => {
+                    setShowsPromiseDate(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                  className={"input"}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn btn-info"
+                  onClick={() => {
+                    if (showsConf == "Not Confirmed") {
+                      setShowsConf("Confirmed");
+                    } else if (showsConf == "Confirmed") {
+                      setShowsConf("Not Confirmed");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {showsConf}
+                </div>
+              </td>
+              <td>
+                <input
+                  type={"text"}
+                  value={showsReas}
+                  onChange={(e) => {
+                    setShowsReas(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn-info"
+                  onClick={() => {
+                    if (showsstats == "pending") {
+                      setShowsstats("Completed");
+                    } else if (showsstats == "Completed") {
+                      setShowsstats("pending");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {showsstats}
+                </div>
+              </td>
+            </tr>}
+            {!!pandit_Ji && <tr>
+              <th>Pandi Ji</th>
+              <td className="text-start ps-0 ms-0 pe-5">
+                <input
+                  type={"date"}
+                  value={pandit_JiPromiseDat}
+                  onChange={(e) => {
+                    setPandit_JiPromiseDate(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                  className={"input"}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn btn-info"
+                  onClick={() => {
+                    if (pandit_JiConf == "Not Confirmed") {
+                      setPandit_JiConf("Confirmed");
+                    } else if (pandit_JiConf == "Confirmed") {
+                      setPandit_JiConf("Not Confirmed");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {pandit_JiConf}
+                </div>
+              </td>
+              <td>
+                <input
+                  type={"text"}
+                  value={pandit_JiReas}
+                  onChange={(e) => {
+                    setPandit_JiReas(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn-info"
+                  onClick={() => {
+                    if (pandit_Jistats == "pending") {
+                      setPandit_Jistats("Completed");
+                    } else if (pandit_Jistats == "Completed") {
+                      setPandit_Jistats("pending");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {pandit_Jistats}
+                </div>
+              </td>
+            </tr>}
+            {!!mehandi && <tr>
+              <th>Mehandi</th>
+              <td className="text-start ps-0 ms-0 pe-5">
+                <input
+                  type={"date"}
+                  value={mehandiPromiseDat}
+                  onChange={(e) => {
+                    setMehandiPromiseDate(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                  className={"input"}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn btn-info"
+                  onClick={() => {
+                    if (mehandiConf == "Not Confirmed") {
+                      setMehandiConf("Confirmed");
+                    } else if (mehandiConf == "Confirmed") {
+                      setMehandiConf("Not Confirmed");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {mehandiConf}
+                </div>
+              </td>
+              <td>
+                <input
+                  type={"text"}
+                  value={mehandiReas}
+                  onChange={(e) => {
+                    setMehandiReas(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn-info"
+                  onClick={() => {
+                    if (mehandistats == "pending") {
+                      setMehandistats("Completed");
+                    } else if (mehandistats == "Completed") {
+                      setMehandistats("pending");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {mehandistats}
+                </div>
+              </td>
+            </tr>}
+            {!!hosting && <tr>
+              <th>Hosting</th>
+              <td className="text-start ps-0 ms-0 pe-5">
+                <input
+                  type={"date"}
+                  value={hostingPromiseDat}
+                  onChange={(e) => {
+                    setHostingPromiseDate(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                  className={"input"}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn btn-info"
+                  onClick={() => {
+                    if (hostingConf == "Not Confirmed") {
+                      setHostingConf("Confirmed");
+                    } else if (hostingConf == "Confirmed") {
+                      setHostingConf("Not Confirmed");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {hostingConf}
+                </div>
+              </td>
+              <td>
+                <input
+                  type={"text"}
+                  value={hostingReas}
+                  onChange={(e) => {
+                    setHostingReas(e.target.value);
+                    setUpdtBtn(false);
+                  }}
+                />
+              </td>
+              <td>
+                <div
+                  type="button"
+                  className="btn btn-sm btn-info"
+                  onClick={() => {
+                    if (hostingstats == "pending") {
+                      setHostingstats("Completed");
+                    } else if (hostingstats == "Completed") {
+                      setHostingstats("pending");
+                    } else {
+                      alert("Refresh the Page.Internet Connection Lost");
+                    }
+                    setUpdtBtn(false);
+                  }}
+                >
+                  {hostingstats}
+                </div>
+              </td>
+            </tr>}
+          </tbody>
+          <tr rowspan="5" className="text-center">
+            <th></th>
+            <th></th>
+            <button
+              type="button"
+              onClick={() => updateEventDetails()}
+              className="my-3 btn btn-success"
+              disabled={updtBtn}
+            >
+              Update
+            </button>
           </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th>Bride Name </th>
-          <td>{forms[0].BrideName}</td>
-        </tr>
-        <tr>
-          <th>Client Name</th>
-          <td>{forms[0].ClientName}</td>
-        </tr>
-        <tr>
-          <th>Groom Name</th>
-          <td>{forms[0].GroomName}</td>
-        </tr>
-        <tr>
-          <th>ConceptWedding</th>
-          <td>{forms[0].ConceptWedding}</td>
-        </tr>
-        <tr>
-          <th>FromDate</th>
-          <td>{forms[0].FromDate}</td>
-        </tr>
-        <tr>
-          <th>Max Budget</th>
-          <td>{forms[0].MaxBudget}</td>
-        </tr>
-        <tr>
-          <th>Min Budget</th>
-          <td>{forms[0].MinBudget}</td>
-        </tr>
-        <tr>
-          <th>ConceptWedding</th>
-          <td>{forms[0].ConceptWedding}</td>
-        </tr>
-        <tr>
-          <th>Number Of Guests</th>
-          <td>{forms[0].NoOfGuests}</td>
-        </tr>
-        <tr>
-          <th>Special Service</th>
-          <td>{forms[0].SpecialService}</td>
-        </tr>
-        <tr>
-          <th>Theme Wedding</th>
-          <td>{forms[0].ThemeWedding}</td>
-        </tr>
-        <tr>
-          <th>From Date</th>
-          <td>{forms[0].FromDate}</td>
-        </tr>
-        <tr>
-          <th>To Date</th>
-          <td>{forms[0].ToData}</td>
-        </tr>
-        <tr>
-          <th>Regular Decoration</th>
-          <td>{forms[0].Decoration.RegularDecoration}</td>
-        </tr>
-        <tr>
-          <th>Theme Decoration</th>
-          <td>{forms[0].Decoration.ThemeDecoration}</td>
-        </tr>
-        <tr>
-          <th>Food Type</th>
-          <td>{forms[0].Food.Foodtype}</td>
-        </tr>
-        
-        <tr>
-          <th>Food Items</th>
-          <td>{forms[0].Food.items}</td>
-        </tr>
-        <tr>
-          <th>City</th>
-          <td>{forms[0].City}</td>
-        </tr>
-        <tr>
-          <th>Invitation </th>
-          <td>{forms[0].OtherServiceValues.invitation}</td>
-        </tr>
-        <tr>
-          <th>Photography  </th>
-          <td>{forms[0].OtherServiceValues.photography}</td>
-        </tr>
-        <tr>
-          <th>OtherServices </th>
-          <td>{forms[0].OtherServices[0]}</td>
-        </tr>
-        <tr>
-          <th>OtherServices </th>
-          <td>{forms[0].OtherServices[1]}</td>
-        </tr>
-        <tr>
-          <th>OtherServices </th>
-          <td>{forms[0].OtherServices[2]}</td>
-        </tr>
-        <tr>
-          <th>OtherServices </th>
-          <td>{forms[0].OtherServices[3]}</td>
-        </tr>
-        <tr>
-          <th>OtherServices </th>
-          <td>{forms[0].OtherServices[4]}</td>
-        </tr>
-        <tr>
-          <th>OtherServices </th>
-          <td>{forms[0].OtherServices[5]}</td>
-        </tr>
-       
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[0]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[1]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[2]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[3]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[4]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[5]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[6]}</td>
-        </tr>
-        <tr>
-          <th>Services </th>
-          <td>{forms[0].Services[7]}</td>
-        </tr>
-        <tr>
-          <th>Baraat Date</th>
-          <td>{forms[0].Servicevalue.Baraat.DateBaraat}</td>
-        </tr>
-        <tr>
-          <th>Baraat Time</th>
-          <td>{forms[0].Servicevalue.Baraat.TimeBaraat}</td>
-        </tr>
-        <tr>
-          <th>Haldi Date</th>
-          <td>{forms[0].Servicevalue.Haldi.DateHaldi}</td>
-        </tr>
-        <tr>
-          <th>Haldi Time</th>
-          <td>{forms[0].Servicevalue.Haldi.TimeHaldi}</td>
-        </tr>
-        <tr>
-          <th>Mehandi Date</th>
-          <td>{forms[0].Servicevalue.Mehandi.DateMehandiShow}</td>
-        </tr>
-        <tr>
-          <th>Mehandi Time</th>
-          <td>{forms[0].Servicevalue.Mehandi.TimeMehandiShow}</td>
-        </tr>
-        <tr>
-          <th>Pooja Date</th>
-          <td>{forms[0].Servicevalue.Pooja.DatePooja}</td>
-        </tr>
-        <tr>
-          <th>Pooja Time</th>
-          <td>{forms[0].Servicevalue.Pooja.TimePooja}</td>
-        </tr>
-        <tr>
-          <th>Reception Date</th>
-          <td>{forms[0].Servicevalue.Reception.DateReception}</td>
-        </tr>
-        <tr>
-          <th>Reception Time</th>
-          <td>{forms[0].Servicevalue.Reception.TimeReception}</td>
-        </tr>
-        <tr>
-          <th>Sangeet Date</th>
-          <td>{forms[0].Servicevalue.Sangeet.DateSangeet}</td>
-        </tr>
-        <tr>
-          <th>Sangeet Time</th>
-          <td>{forms[0].Servicevalue.Sangeet.TimeSangeet}</td>
-        </tr>
-        <tr>
-          <th>Tilak Date</th>
-          <td>{forms[0].Servicevalue.Tilak.dateTilak}</td>
-        </tr>
-        <tr>
-          <th>Tilak Time</th>
-          <td>{forms[0].Servicevalue.Tilak.TimeTilak}</td>
-        </tr>
-    
-        <tr>
-          <th>Dance</th>
-          <td>{forms[0].Shows.dancevalues}</td>
-        </tr>
-        <tr>
-          <th>music</th>
-          <td>{forms[0].Shows.musicvalues}</td>
-        </tr>
-        <tr>
-          <th>Venue One Name</th>
-          <td>{forms[0].OtherServiceValues.venues.venue1.name}</td>
-        </tr>
-        <tr>
-          <th>Venue One Place</th>
-          <td>{forms[0].OtherServiceValues.venues.venue1.place}</td>
-        </tr>
-        <tr>
-          <th>Venue two Name</th>
-          <td>{forms[0].OtherServiceValues.venues.venue2.name}</td>
-        </tr>
-        <tr>
-          <th>Venue two Place</th>
-          <td>{forms[0].OtherServiceValues.venues.venue2.place}</td>
-        </tr>
-        <tr>
-          <th>Venue three Name</th>
-          <td>{forms[0].OtherServiceValues.venues.venue3.name}</td>
-        </tr>
-        <tr>
-          <th>Venue three Place</th>
-          <td>{forms[0].OtherServiceValues.venues.venue3.place}</td>
-        </tr>        
-        <tr>
-          <th>Date</th>
-          <td>{forms[0].date}</td>
-        </tr>       
-        </tbody>
-      </table>
+        </table>
+        <hr class="my-5" />
+        <table className="table bg-white rounded shadow-sm  table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Points and Vouchers</th>
+              <th className=" fw-bold" scope="col"></th>
+              <th className=" fw-bold" scope="col"></th>
+              <th className=" fw-bold" scope="col"></th>
+              <th className=" fw-bold" scope="col"></th>
+              <th className=" fw-bold" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Points</th>
+              <td>{datapoints}</td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={(val) => points(50)}
+                >
+                  50
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(100)}
+                >
+                  100
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(150)}
+                >
+                  150
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(200)}
+                >
+                  200
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(250)}
+                >
+                  250
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(300)}
+                >
+                  300
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(350)}
+                >
+                  350
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(400)}
+                >
+                  400
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(450)}
+                >
+                  450
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => points(500)}
+                >
+                  500
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-danger btn-sm"
+                  onClick={() => points(0)}
+                >
+                  0
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>Vouchers</th>
+              <td>{datavoucher}</td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={(val) => voucher(1000)}
+                >
+                  1000
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => voucher(2000)}
+                >
+                  2000
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => voucher(3000)}
+                >
+                  3000
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => voucher(4000)}
+                >
+                  4000
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-success btn-sm"
+                  onClick={() => voucher(5000)}
+                >
+                  5000
+                </div>
+              </td>
+              <td>
+                <div
+                  className="btn btn-danger btn-sm"
+                  onClick={() => voucher(0)}
+                >
+                  0
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr class="my-5" />
+        <table className="table bg-white rounded shadow-sm  table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th className=" fw-bold" scope="col">
+                Order Details
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Bride Name </th>
+              <td>{forms[0].BrideName}</td>
+            </tr>
+            <tr>
+              <th>Client Name</th>
+              <td>{forms[0].ClientName}</td>
+            </tr>
+            <tr>
+              <th>Groom Name</th>
+              <td>{forms[0].GroomName}</td>
+            </tr>
+            <tr>
+              <th>ConceptWedding</th>
+              <td>{forms[0].ConceptWedding}</td>
+            </tr>
+            <tr>
+              <th>FromDate</th>
+              <td>{forms[0].FromDate}</td>
+            </tr>
+            <tr>
+              <th>Max Budget</th>
+              <td>{forms[0].MaxBudget}</td>
+            </tr>
+            <tr>
+              <th>Min Budget</th>
+              <td>{forms[0].MinBudget}</td>
+            </tr>
+            <tr>
+              <th>ConceptWedding</th>
+              <td>{forms[0].ConceptWedding}</td>
+            </tr>
+            <tr>
+              <th>Number Of Guests</th>
+              <td>{forms[0].NoOfGuests}</td>
+            </tr>
+            <tr>
+              <th>Special Service</th>
+              <td>{forms[0].SpecialService}</td>
+            </tr>
+            <tr>
+              <th>Theme Wedding</th>
+              <td>{forms[0].ThemeWedding}</td>
+            </tr>
+            <tr>
+              <th>From Date</th>
+              <td>{forms[0].FromDate}</td>
+            </tr>
+            <tr>
+              <th>To Date</th>
+              <td>{forms[0].ToData}</td>
+            </tr>
+            <tr>
+              <th>Regular Decoration</th>
+              <td>{forms[0].Decoration.RegularDecoration}</td>
+            </tr>
+            <tr>
+              <th>Theme Decoration</th>
+              <td>{forms[0].Decoration.ThemeDecoration}</td>
+            </tr>
+            <tr>
+              <th>Food Type</th>
+              <td>{forms[0].Food.Foodtype}</td>
+            </tr>
+
+            <tr>
+              <th>Food Items</th>
+              <td>{forms[0].Food.items}</td>
+            </tr>
+            <tr>
+              <th>City</th>
+              <td>{forms[0].City}</td>
+            </tr>
+            <tr>
+              <th>Invitation </th>
+              <td>{forms[0].OtherServiceValues.invitation}</td>
+            </tr>
+            <tr>
+              <th>Photography </th>
+              <td>{forms[0].OtherServiceValues.photography}</td>
+            </tr>
+            <tr>
+              <th>OtherServices </th>
+              <td>{forms[0].OtherServices[0]}</td>
+            </tr>
+            <tr>
+              <th>OtherServices </th>
+              <td>{forms[0].OtherServices[1]}</td>
+            </tr>
+            <tr>
+              <th>OtherServices </th>
+              <td>{forms[0].OtherServices[2]}</td>
+            </tr>
+            <tr>
+              <th>OtherServices </th>
+              <td>{forms[0].OtherServices[3]}</td>
+            </tr>
+            <tr>
+              <th>OtherServices </th>
+              <td>{forms[0].OtherServices[4]}</td>
+            </tr>
+            <tr>
+              <th>OtherServices </th>
+              <td>{forms[0].OtherServices[5]}</td>
+            </tr>
+
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[0]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[1]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[2]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[3]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[4]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[5]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[6]}</td>
+            </tr>
+            <tr>
+              <th>Services </th>
+              <td>{forms[0].Services[7]}</td>
+            </tr>
+            <tr>
+              <th>Baraat Date</th>
+              <td>{forms[0].Servicevalue.Baraat.DateBaraat}</td>
+            </tr>
+            <tr>
+              <th>Baraat Time</th>
+              <td>{forms[0].Servicevalue.Baraat.TimeBaraat}</td>
+            </tr>
+            <tr>
+              <th>Haldi Date</th>
+              <td>{forms[0].Servicevalue.Haldi.DateHaldi}</td>
+            </tr>
+            <tr>
+              <th>Haldi Time</th>
+              <td>{forms[0].Servicevalue.Haldi.TimeHaldi}</td>
+            </tr>
+            <tr>
+              <th>Mehandi Date</th>
+              <td>{forms[0].Servicevalue.Mehandi.DateMehandiShow}</td>
+            </tr>
+            <tr>
+              <th>Mehandi Time</th>
+              <td>{forms[0].Servicevalue.Mehandi.TimeMehandiShow}</td>
+            </tr>
+            <tr>
+              <th>Pooja Date</th>
+              <td>{forms[0].Servicevalue.Pooja.DatePooja}</td>
+            </tr>
+            <tr>
+              <th>Pooja Time</th>
+              <td>{forms[0].Servicevalue.Pooja.TimePooja}</td>
+            </tr>
+            <tr>
+              <th>Reception Date</th>
+              <td>{forms[0].Servicevalue.Reception.DateReception}</td>
+            </tr>
+            <tr>
+              <th>Reception Time</th>
+              <td>{forms[0].Servicevalue.Reception.TimeReception}</td>
+            </tr>
+            <tr>
+              <th>Sangeet Date</th>
+              <td>{forms[0].Servicevalue.Sangeet.DateSangeet}</td>
+            </tr>
+            <tr>
+              <th>Sangeet Time</th>
+              <td>{forms[0].Servicevalue.Sangeet.TimeSangeet}</td>
+            </tr>
+            <tr>
+              <th>Tilak Date</th>
+              <td>{forms[0].Servicevalue.Tilak.dateTilak}</td>
+            </tr>
+            <tr>
+              <th>Tilak Time</th>
+              <td>{forms[0].Servicevalue.Tilak.TimeTilak}</td>
+            </tr>
+
+            <tr>
+              <th>Dance</th>
+              <td>{forms[0].Shows.dancevalues}</td>
+            </tr>
+            <tr>
+              <th>music</th>
+              <td>{forms[0].Shows.musicvalues}</td>
+            </tr>
+            <tr>
+              <th>Venue One Name</th>
+              <td>{forms[0].OtherServiceValues.venues.venue1.name}</td>
+            </tr>
+            <tr>
+              <th>Venue One Place</th>
+              <td>{forms[0].OtherServiceValues.venues.venue1.place}</td>
+            </tr>
+            <tr>
+              <th>Venue two Name</th>
+              <td>{forms[0].OtherServiceValues.venues.venue2.name}</td>
+            </tr>
+            <tr>
+              <th>Venue two Place</th>
+              <td>{forms[0].OtherServiceValues.venues.venue2.place}</td>
+            </tr>
+            <tr>
+              <th>Venue three Name</th>
+              <td>{forms[0].OtherServiceValues.venues.venue3.name}</td>
+            </tr>
+            <tr>
+              <th>Venue three Place</th>
+              <td>{forms[0].OtherServiceValues.venues.venue3.place}</td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{forms[0].date}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default Orderslist
+export default Orderslist;

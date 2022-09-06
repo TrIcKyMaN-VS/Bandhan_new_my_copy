@@ -17,7 +17,6 @@ const { FamilyFunctionForm } = require("../model/familyFunction");
 const { WeddingForm } = require("../model/weddingmodel");
 const { EventName } = require("../model/eventName");
 const { BabyShowerForm } = require("../model/babyshowermodel");
-const { resolveContent } = require("nodemailer/lib/shared");
 const {User} = require("../model/user")
 
 router.get("/prewedding", auth, (req, res) => {
@@ -94,28 +93,28 @@ router.get("/familyfunction", auth, (req, res) => {
 router.get("/postweddingpoints", async  (req, res) => {
   const value = await User.find( { _id: req.id }, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 //pre wedding 
 router.get("/preweddingpoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 // wedding
 router.get("/weddingpoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 //baby shower
 router.get("/babyshowerpoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 
@@ -123,14 +122,14 @@ router.get("/babyshowerpoints", async  (req, res) => {
 router.get("/birthdaypoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 // family function
 router.get("/familyfunctionpoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 // corporate 
@@ -138,14 +137,14 @@ router.get("/familyfunctionpoints", async  (req, res) => {
 router.get("/corporatepoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 // engagement
 router.get("/engagementpoints", async  (req, res) => {
   const value = await User.find( { _id: req.id}, { points: 1,voucher:1 } )
   res.status(200).send(value)
-   console.log("successfully completed!!!");
+  //  console.log("successfully completed!!!");
   })
 
 
@@ -159,6 +158,6 @@ router.get("/engagementpoints", async  (req, res) => {
   router.get("/getname", async  (req, res) => {
     const value = await User.find( { _id: req.id}, { username: 1, } )
     res.status(200).send(value)
-     console.log("successfully completed!!!");
+    //  console.log("successfully completed!!!");
     })
 module.exports = router;

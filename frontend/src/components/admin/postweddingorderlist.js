@@ -120,8 +120,6 @@ function Orderslist(props) {
       .post(`api/adminuserlist/postweddingvoucher/${forms[0].userId}`, { val })
       .then((res) => {});
   }
-
-  // console.log(honeymoonConf);
   function updateEventDetails() {
     const eventDatas = {
       orderId,
@@ -138,7 +136,6 @@ function Orderslist(props) {
       subaarambhYatraReas,
       subaarambhYatrastats,
     };
-    // console.log(eventDatas);
 
     axios
       .post("/api/postwedding/updateInfos", { eventDatas })

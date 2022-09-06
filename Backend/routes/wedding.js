@@ -3,15 +3,14 @@ const router = express.Router();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
+const auth = require("../middleware/auth");
+const { EventName } = require("../model/eventName");
+const { WeddingForm, WeddingInfo } = require("../model/weddingmodel");
 app.use(cors());
 app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { EventForm } = require("../model/eventModel");
-const auth = require("../middleware/auth");
-const { EventName } = require("../model/eventName");
-const { WeddingForm } = require("../model/weddingmodel");
 
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
@@ -19,7 +18,7 @@ router.post("/", auth, async (req, res) => {
 
   const eventName = "Wedding Event";
   const userId = req.id;
-  const orderId = uuidv4().slice(0,6)
+  const orderId = uuidv4().slice(0, 6);
   const ClientName = data.Client_Name;
   const BrideName = data.Bride_Name;
   const GroomName = data.Groom_Name;
@@ -33,100 +32,162 @@ router.post("/", auth, async (req, res) => {
   const Services = data.service;
   const Servicevalue = {
     Mehandi: {
-      DateMehandiShow: data.DateMehandiShow?data.DateMehandiShow:"-",
-      TimeMehandiShow: data.TimeMehandiShow?data.TimeMehandiShow:"-",
+      DateMehandiShow: data.DateMehandiShow ? data.DateMehandiShow : "-",
+      TimeMehandiShow: data.TimeMehandiShow ? data.TimeMehandiShow : "-",
     },
     Reception: {
-      DateReception: data.DateReception?data.DateReception:"-",
-      TimeReception: data.TimeReception? data.TimeReception:"-",
+      DateReception: data.DateReception ? data.DateReception : "-",
+      TimeReception: data.TimeReception ? data.TimeReception : "-",
     },
     Phera: {
-      DatePhera: data.DatePhera?data.DatePhera:"-",
-      TimePhera: data.TimePhera?data.TimePhera:"-",
+      DatePhera: data.DatePhera ? data.DatePhera : "-",
+      TimePhera: data.TimePhera ? data.TimePhera : "-",
     },
     Sangeet: {
-      DateSangeet: data.DateSangeet?data.DateSangeet:"-",
-      TimeSangeet: data.TimeSangeet?data.TimeSangeet:"-",
+      DateSangeet: data.DateSangeet ? data.DateSangeet : "-",
+      TimeSangeet: data.TimeSangeet ? data.TimeSangeet : "-",
     },
     Pooja: {
-      DatePooja: data.DatePooja?data.DatePooja:"-",
-      TimePooja: data.TimePooja?data.TimePooja:"-",
+      DatePooja: data.DatePooja ? data.DatePooja : "-",
+      TimePooja: data.TimePooja ? data.TimePooja : "-",
     },
     Baraat: {
-      DateBaraat: data.DateBaraat?data.DateBaraat:"-",
-      TimeBaraat: data.TimeBaraat? data.TimeBaraat:"-",
+      DateBaraat: data.DateBaraat ? data.DateBaraat : "-",
+      TimeBaraat: data.TimeBaraat ? data.TimeBaraat : "-",
     },
     Haldi: {
-      DateHaldi: data.DateHaldi?data.DateHaldi:"-",
-      TimeHaldi: data.TimeHaldi?data.TimeHaldi:"-",
+      DateHaldi: data.DateHaldi ? data.DateHaldi : "-",
+      TimeHaldi: data.TimeHaldi ? data.TimeHaldi : "-",
     },
     Tilak: {
-      dateTilak: data.dateTilak?data.dateTilak:"-",
-      TimeTilak: data.TimeTilak?data.TimeTilak:"-",
+      dateTilak: data.dateTilak ? data.dateTilak : "-",
+      TimeTilak: data.TimeTilak ? data.TimeTilak : "-",
     },
   };
-  const ConceptWedding = checkBoxValues.Conceptweddingvalue?checkBoxValues.Conceptweddingvalue:"-";
-  const ThemeWedding = checkBoxValues.Themeweddingvalue?checkBoxValues.Themeweddingvalue:"-";
+  const ConceptWedding = checkBoxValues.Conceptweddingvalue
+    ? checkBoxValues.Conceptweddingvalue
+    : "-";
+  const ThemeWedding = checkBoxValues.Themeweddingvalue
+    ? checkBoxValues.Themeweddingvalue
+    : "-";
   const Decoration = {
-    RegularDecoration: checkBoxValues.decorationvalue?checkBoxValues.decorationvalue:"-",
-    ThemeDecoration: data.ThemeDecoration?data.ThemeDecoration:"-",
+    RegularDecoration: checkBoxValues.decorationvalue
+      ? checkBoxValues.decorationvalue
+      : "-",
+    ThemeDecoration: data.ThemeDecoration ? data.ThemeDecoration : "-",
   };
   const Shows = {
-    show: data.shows?data.shows:"-",
-    musicvalues: checkBoxValues.musicvalue?checkBoxValues.musicvalue:"-",
-    dancevalues: checkBoxValues.dancevalue?heckBoxValues.dancevalue:"-",
-    dj: data.Dj?data.Dj:"-",
+    show: data.shows ? data.shows : "-",
+    musicvalues: checkBoxValues.musicvalue ? checkBoxValues.musicvalue : "-",
+    dancevalues: checkBoxValues.dancevalue ? checkBoxValues.dancevalue : "-",
+    dj: data.Dj ? data.Dj : "-",
   };
   const Food = {
-    Foodtype: data.Food?data.Food:"-",
-    items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"-",
+    Foodtype: data.Food ? data.Food : "-",
+    items: checkBoxValues.foodvalue ? checkBoxValues.foodvalue : "-",
   };
 
-  const SpecialService = data.SpecialService?data.SpecialService:"-";
-  const OtherServices = data.OtherServices? data.OtherServices:"-";
+  const SpecialService = data.SpecialService ? data.SpecialService : "-";
+  const OtherServices = data.OtherServices ? data.OtherServices : "-";
   const OtherServiceValues = {
-    invitation: checkBoxValues.invitationvalue?checkBoxValues.invitationvalue:"-",
-    photography: checkBoxValues.photovalue?checkBoxValues.photovalue:"-",
+    invitation: checkBoxValues.invitationvalue
+      ? checkBoxValues.invitationvalue
+      : "-",
+    photography: checkBoxValues.photovalue ? checkBoxValues.photovalue : "-",
     venues: {
       venue1: {
-        name: data.venue_1_name?data.venue_1_name:"-",
-        place: data.venue_1_place?data.venue_1_place:"-",
+        name: data.venue_1_name ? data.venue_1_name : "-",
+        place: data.venue_1_place ? data.venue_1_place : "-",
       },
       venue2: {
-        name: data.venue_2_name? data.venue_2_name:"-",
-        place: data.venue_2_place?data.venue_2_place:"-",
+        name: data.venue_2_name ? data.venue_2_name : "-",
+        place: data.venue_2_place ? data.venue_2_place : "-",
       },
       venue3: {
-        name: data.venue_3_name?data.venue_3_name:"-",
-        place: data.venue_3_place?data.venue_3_place:"-",
+        name: data.venue_3_name ? data.venue_3_name : "-",
+        place: data.venue_3_place ? data.venue_3_place : "-",
       },
     },
   };
 
-  var venueStatus = "pending"
-  var cateringStatus = "pending"
-  var photographyStatus = "pending"
-  var decorationStatus = "pending"
-  var isVerified = false
-  var foodb = false
-   var photographyb = false
-   var venueb = false
-   var decorationb = false
-   if (Food.Foodtype){
-    foodb = true
-   }
-   if(OtherServiceValues.photography){
-    photographyb= true
-   }
-   if(OtherServiceValues.venues){
-    venueb = true
-   }
-   if(Decoration.RegularDecoration || Decoration.ThemeDecoration){
-      decorationb = true
-   }
+  // var venueStatus = "pending";
+  // var cateringStatus = "pending";
+  // var photographyStatus = "pending";
+  // var decorationStatus = "pending";
+  // var isVerified = false;
+  // var foodb = false;
+  // var photographyb = false;
+  // var venueb = false;
+  // var decorationb = false;
+  // if (Food.Foodtype) {
+  //   foodb = true;
+  // }
+  // if (OtherServiceValues.photography) {
+  //   photographyb = true;
+  // }
+  // if (OtherServiceValues.venues) {
+  //   venueb = true;
+  // }
+  // if (Decoration.RegularDecoration || Decoration.ThemeDecoration) {
+  //   decorationb = true;
+  // }
+
+  let invitationReason;
+  let invitationStatus;
+  let invitationPromiseDate;
+  let invitationService;
+
+  let beautyReason;
+  let beautyStatus;
+  let beautyPromiseDate;
+  let beautyService;
+
+  let venueReason;
+  let venueStatus;
+  let venuePromiseDate;
+  let venueService;
+
+  let photographyReason;
+  let photographyStatus;
+  let photographyPromiseDate;
+  let photographyService;
+
+  let weddingTypeReason;
+  let weddingTypeStatus;
+  let weddingTypePromiseDate;
+  let weddingTypeService;
+
+  let cateringReason;
+  let cateringStatus;
+  let cateringPromiseDate;
+  let cateringService;
+
+  let decorationReason;
+  let decorationStatus;
+  let decorationPromiseDate;
+  let decorationService;
+
+  let showsReason;
+  let showsStatus;
+  let showsPromiseDate;
+  let showsService;
+
+  let pandit_JiReason;
+  let pandit_JiStatus;
+  let pandit_JiPromiseDate;
+  let pandit_JiService;
+
+  let mehandiReason;
+  let mehandiStatus;
+  let mehandiPromiseDate;
+  let mehandiService;
+
+  let hostingReason;
+  let hostingStatus;
+  let hostingPromiseDate;
+  let hostingService;
 
   const newWeddingForm = WeddingForm({
-
     eventName,
     userId,
     orderId,
@@ -150,16 +211,195 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     Food,
-    foodb,
-    photographyb,
-    venueb,
-    decorationb,
-    venueStatus,
-    photographyStatus,
-    decorationStatus,
-    cateringStatus,
-    isVerified,
+    // foodb,
+    // photographyb,
+    // venueb,
+    // decorationb,
+    // venueStatus,
+    // photographyStatus,
+    // decorationStatus,
+    // cateringStatus,
+    // isVerified,
+  });
 
+  if (data.service[0] === "Mehandi") {
+    mehandiStatus = "pending";
+    mehandiReason = "-";
+    mehandiPromiseDate = "";
+    mehandiService = "Not Confirmed";
+  } else {
+    mehandiStatus = null;
+    mehandiReason = null;
+    mehandiPromiseDate = null;
+    mehandiService = null;
+  }
+
+  if (data.OtherServices.includes("venue")) {
+    venueStatus = "pending";
+    venueReason = "-";
+    venuePromiseDate = "";
+    venueService = "Not Confirmed";
+  }else{
+    venueStatus = null;
+    venueReason = null;
+    venuePromiseDate = null;
+    venueService = null;
+  }
+
+  if (data.OtherServices.includes("photography")) {
+    photographyStatus = "pending";
+    photographyReason = "-";
+    photographyPromiseDate = "";
+    photographyService = "Not Confirmed";
+  }else{
+    photographyStatus = null;
+    photographyReason = null;
+    photographyPromiseDate = null;
+    photographyService = null;
+  }
+  if (data.Food) {
+    cateringStatus = "pending";
+    cateringReason = "-";
+    cateringPromiseDate = "";
+    cateringService = "Not Confirmed";
+  }else{
+    cateringStatus = null;
+    cateringReason = null;
+    cateringPromiseDate = null;
+    cateringService = null;
+  }
+
+  if (checkBoxValues.Conceptweddingvalue || checkBoxValues.Themeweddingvalue) {
+    weddingTypeStatus = "pending";
+    weddingTypeReason = "-";
+    weddingTypePromiseDate = "";
+    weddingTypeService = "Not Confirmed";
+  }else{
+    weddingTypeStatus = null;
+    weddingTypeReason = null;
+    weddingTypePromiseDate = null;
+    weddingTypeService = null;
+  }
+  if (data.shows[0] != undefined) {
+    showsStatus = "pending";
+    showsReason = "-";
+    showsPromiseDate = "";
+    showsService = "Not Confirmed";
+    console.log("arg");
+  }else{
+    console.log("brg");
+    showsStatus = null;
+    showsReason = null;
+    showsPromiseDate = null;
+    showsService = null;
+  }
+
+  if (data.OtherServices.includes("invitation")) {
+    invitationStatus = "pending";
+    invitationReason = "-";
+    invitationPromiseDate = "";
+    invitationService = "Not Confirmed";
+  }else{
+    invitationStatus = null;
+    invitationReason = null;
+    invitationPromiseDate = null;
+    invitationService = null;
+  }
+  if (checkBoxValues.decorationvalue || data.ThemeDecoration) {
+    decorationStatus = "pending";
+    decorationReason = "-";
+    decorationPromiseDate = "";
+    decorationService = "Not Confirmed";
+  }else{
+    decorationStatus = null;
+    decorationReason = null;
+    decorationPromiseDate = null;
+    decorationService = null;
+  }
+  if (!!data.OtherServices.includes("hosting")) {
+    hostingStatus = "pending";
+    hostingReason = "-";
+    hostingPromiseDate = "";
+    hostingService = "Not Confirmed";
+  }else{
+    hostingStatus = null;
+    hostingReason = null;
+    hostingPromiseDate = null;
+    hostingService = null;
+  }
+  if (data.OtherServices.includes("pooja_pandit_Ji")) {
+    pandit_JiStatus = "pending";
+    pandit_JiReason = "-";
+    pandit_JiPromiseDate = "";
+    pandit_JiService = "Not Confirmed";
+  }else{
+    pandit_JiStatus = null;
+    pandit_JiReason = null;
+    pandit_JiPromiseDate = null;
+    pandit_JiService = null;
+  }
+  if (!!data.OtherServices.includes("beauty")) {
+    beautyStatus = "pending";
+    beautyReason = "-";
+    beautyPromiseDate = "";
+    beautyService = "Not Confirmed";
+  }else{
+    beautyStatus = null;
+    beautyReason = null;
+    beautyPromiseDate = null;
+    beautyService = null;
+  }
+
+
+
+  const newWeddingInfo = WeddingInfo({
+    eventName,
+    userId,
+    orderId,
+    invitationReason,
+    invitationStatus,
+    invitationPromiseDate,
+    invitationService,
+    beautyReason,
+    beautyStatus,
+    beautyPromiseDate,
+    beautyService,
+    venueReason,
+    venueStatus,
+    venuePromiseDate,
+    venueService,
+    photographyReason,
+    photographyStatus,
+    photographyPromiseDate,
+    photographyService,
+    weddingTypeReason,
+    weddingTypeStatus,
+    weddingTypePromiseDate,
+    weddingTypeService,
+    cateringReason,
+    cateringStatus,
+    cateringPromiseDate,
+    cateringService,
+    decorationReason,
+    decorationStatus,
+    decorationPromiseDate,
+    decorationService,
+    showsReason,
+    showsStatus,
+    showsPromiseDate,
+    showsService,
+    pandit_JiReason,
+    pandit_JiStatus,
+    pandit_JiPromiseDate,
+    pandit_JiService,
+    mehandiReason,
+    mehandiStatus,
+    mehandiPromiseDate,
+    mehandiService,
+    hostingReason,
+    hostingStatus,
+    hostingPromiseDate,
+    hostingService,
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
@@ -171,9 +411,59 @@ router.post("/", auth, async (req, res) => {
 
   newEventName.save().then(() => console.log("successfully event name saved"));
 
+  newWeddingInfo.save().then(() => console.log("success infowed saved"));
+
   newWeddingForm.save().then(() => {
+    console.log(drdr);
     res.status(200).send("Wedding form saved successfully...!");
   });
 });
+
+
+router.get("/weddingInfo/:orderIdp", (req, res) => {
+  // console.log(req.params.orderIdp);
+  WeddingInfo.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      // console.log(doc);
+      res.status(200).send(doc);
+    }
+  });
+});
+
+// router.post("/updateInfos", (req, res) => {
+//   const datass = req.body.eventDatas;
+//   PostWeddinngInfo.findOneAndUpdate(
+//     { orderId: datass.orderId },
+//     {
+//       $set: {
+//         honeymoonstatus: datass.honeymoonstats,
+//         honeymoonConfirmation: datass.honeymoonConf,
+//         honeymoonPromiseDate: datass.honeymoonPromiseDat,
+//         honeymoonReason: datass.honeymoonReas,
+//         muh_DikhaiConfirmation: datass.muh_DikhaiConf,
+//         muh_DikhaiPromiseDate: datass.muh_DikhaiPromiseDat,
+//         muh_Dikhaistatus: datass.muh_Dikhaistats,
+//         muh_DikhaiReason: datass.muh_DikhaiReas,
+//         subaarambhYatraConfirmation: datass.subaarambhYatraConf,
+//         subaarambhYatraPromiseDate: datass.subaarambhYatraPromiseDat,
+//         subaarambhYatraReason: datass.subaarambhYatraReas,
+//         subaarambhYatrastatus: datass.subaarambhYatrastats,
+//       },
+//     },
+//     (err, doc) => {
+//       if (err) {
+//         console.log(err);
+//         res.status(400).send(err);
+//       } else {
+//         // console.log(doc);
+//         res.status(200).send(doc);
+//       }
+//     }
+//   );
+// });
+
 
 module.exports = router;
