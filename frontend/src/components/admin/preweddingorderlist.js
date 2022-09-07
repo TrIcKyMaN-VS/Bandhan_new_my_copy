@@ -7,7 +7,7 @@ function Orderslist(props) {
     const [datapoints , setdatapoints] = useState("")
     const [datavoucher , setdatavoucher] = useState("")
     useEffect(()=>{
-      axios.get(`api/adminuserlist/babyshowerpointsvoucher/${forms[0].userId}`).then((res) => {
+      axios.get(`api/adminuserlist/preweddingpointsvoucher/${forms[0].userId}`).then((res) => {
         setdatapoints(res.data[0].points)
         setdatavoucher(res.data[0].voucher)
 

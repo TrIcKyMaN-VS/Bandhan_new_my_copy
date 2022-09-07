@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
 const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
-const { FamilyFunctionForm } = require("../model/familyFunction");
+const { FamilyFunctionForm,FamilyFunctionInfo } = require("../model/familyFunction");
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
   const checkBoxValues = req.body.checkBoxValues;
@@ -64,28 +64,28 @@ router.post("/", auth, async (req, res) => {
     },
   };
 
-  var venueStatus = "pending";
-  var cateringStatus = "pending";
-  var photographyStatus = "pending";
-  var decorationStatus = "pending";
-  var isVerified = false;
-  var foodb = false;
-  var photographyb = false;
-  var venueb = false;
-  var decorationb = false;
+  // var venueStatus = "pending";
+  // var cateringStatus = "pending";
+  // var photographyStatus = "pending";
+  // var decorationStatus = "pending";
+  // var isVerified = false;
+  // var foodb = false;
+  // var photographyb = false;
+  // var venueb = false;
+  // var decorationb = false;
 
-  if (Food.Foodtype) {
-    foodb = true;
-  }
-  if (OtherServiceValues.photography) {
-    photographyb = true;
-  }
-  if (OtherServiceValues.venues) {
-    venueb = true;
-  }
-  if (Decoration.RegularDecoration || Decoration.ThemeDecoration) {
-    decorationb = true;
-  }
+  // if (Food.Foodtype) {
+  //   foodb = true;
+  // }
+  // if (OtherServiceValues.photography) {
+  //   photographyb = true;
+  // }
+  // if (OtherServiceValues.venues) {
+  //   venueb = true;
+  // }
+  // if (Decoration.RegularDecoration || Decoration.ThemeDecoration) {
+  //   decorationb = true;
+  // }
 
   const newFamilyFunctionForm = FamilyFunctionForm({
     eventName,
@@ -105,17 +105,236 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     Food,
-    foodb,
-    photographyb,
-    venueb,
-    decorationb,
-    venueStatus,
-    photographyStatus,
-    decorationStatus,
-    cateringStatus,
-    isVerified,
+    // foodb,
+    // photographyb,
+    // venueb,
+    // decorationb,
+    // venueStatus,
+    // photographyStatus,
+    // decorationStatus,
+    // cateringStatus,
+    // isVerified,
  
   });
+
+
+  let invitationReason;
+  let invitationStatus;
+  let invitationPromiseDate;
+  let invitationService;
+
+  let beautyReason;
+  let beautyStatus;
+  let beautyPromiseDate;
+  let beautyService;
+
+  let venueReason;
+  let venueStatus;
+  let venuePromiseDate;
+  let venueService;
+
+  let photographyReason;
+  let photographyStatus;
+  let photographyPromiseDate;
+  let photographyService;
+
+  let cateringReason;
+  let cateringStatus;
+  let cateringPromiseDate;
+  let cateringService;
+
+  let decorationReason;
+  let decorationStatus;
+  let decorationPromiseDate;
+  let decorationService;
+
+  let showsReason;
+  let showsStatus;
+  let showsPromiseDate;
+  let showsService;
+
+  let pandit_JiReason;
+  let pandit_JiStatus;
+  let pandit_JiPromiseDate;
+  let pandit_JiService;
+
+  let mehandiReason;
+  let mehandiStatus;
+  let mehandiPromiseDate;
+  let mehandiService;
+
+  let hostingReason;
+  let hostingStatus;
+  let hostingPromiseDate;
+  let hostingService;
+
+
+
+  if (data.OtherServices.includes("Mehandi")) {
+    mehandiStatus = "pending";
+    mehandiReason = "-";
+    mehandiPromiseDate = "";
+    mehandiService = "Not Confirmed";
+  } else {
+    mehandiStatus = null;
+    mehandiReason = null;
+    mehandiPromiseDate = null;
+    mehandiService = null;
+  }
+
+  if (data.OtherServices.includes("venue")) {
+    venueStatus = "pending";
+    venueReason = "-";
+    venuePromiseDate = "";
+    venueService = "Not Confirmed";
+  } else {
+    venueStatus = null;
+    venueReason = null;
+    venuePromiseDate = null;
+    venueService = null;
+  }
+
+  if (data.OtherServices.includes("photography")) {
+    photographyStatus = "pending";
+    photographyReason = "-";
+    photographyPromiseDate = "";
+    photographyService = "Not Confirmed";
+  } else {
+    photographyStatus = null;
+    photographyReason = null;
+    photographyPromiseDate = null;
+    photographyService = null;
+  }
+  if (data.Food) {
+    cateringStatus = "pending";
+    cateringReason = "-";
+    cateringPromiseDate = "";
+    cateringService = "Not Confirmed";
+  } else {
+    cateringStatus = null;
+    cateringReason = null;
+    cateringPromiseDate = null;
+    cateringService = null;
+  }
+
+  if (data.shows[0] != undefined) {
+    showsStatus = "pending";
+    showsReason = "-";
+    showsPromiseDate = "";
+    showsService = "Not Confirmed";
+  } else {
+    showsStatus = null;
+    showsReason = null;
+    showsPromiseDate = null;
+    showsService = null;
+  }
+
+  if (data.OtherServices.includes("invitation")) {
+    invitationStatus = "pending";
+    invitationReason = "-";
+    invitationPromiseDate = "";
+    invitationService = "Not Confirmed";
+  } else {
+    invitationStatus = null;
+    invitationReason = null;
+    invitationPromiseDate = null;
+    invitationService = null;
+  }
+  if (checkBoxValues.decorationvalue || data.ThemeDecoration) {
+    decorationStatus = "pending";
+    decorationReason = "-";
+    decorationPromiseDate = "";
+    decorationService = "Not Confirmed";
+  } else {
+    decorationStatus = null;
+    decorationReason = null;
+    decorationPromiseDate = null;
+    decorationService = null;
+  }
+  if (!!data.OtherServices.includes("hosting")) {
+    hostingStatus = "pending";
+    hostingReason = "-";
+    hostingPromiseDate = "";
+    hostingService = "Not Confirmed";
+  } else {
+    hostingStatus = null;
+    hostingReason = null;
+    hostingPromiseDate = null;
+    hostingService = null;
+  }
+  if (data.OtherServices.includes("pooja_pandit_Ji")) {
+    pandit_JiStatus = "pending";
+    pandit_JiReason = "-";
+    pandit_JiPromiseDate = "";
+    pandit_JiService = "Not Confirmed";
+  } else {
+    pandit_JiStatus = null;
+    pandit_JiReason = null;
+    pandit_JiPromiseDate = null;
+    pandit_JiService = null;
+  }
+  if (!!data.OtherServices.includes("beauty")) {
+    beautyStatus = "pending";
+    beautyReason = "-";
+    beautyPromiseDate = "";
+    beautyService = "Not Confirmed";
+  } else {
+    beautyStatus = null;
+    beautyReason = null;
+    beautyPromiseDate = null;
+    beautyService = null;
+  }
+
+  const newFamilyFunctionInfo = FamilyFunctionInfo({
+    eventName,
+    userId,
+    orderId,
+    invitationReason,
+    invitationStatus,
+    invitationPromiseDate,
+    invitationService,
+    beautyReason,
+    beautyStatus,
+    beautyPromiseDate,
+    beautyService,
+    venueReason,
+    venueStatus,
+    venuePromiseDate,
+    venueService,
+    photographyReason,
+    photographyStatus,
+    photographyPromiseDate,
+    photographyService,
+    cateringReason,
+    cateringStatus,
+    cateringPromiseDate,
+    cateringService,
+    decorationReason,
+    decorationStatus,
+    decorationPromiseDate,
+    decorationService,
+    showsReason,
+    showsStatus,
+    showsPromiseDate,
+    showsService,
+    pandit_JiReason,
+    pandit_JiStatus,
+    pandit_JiPromiseDate,
+    pandit_JiService,
+    mehandiReason,
+    mehandiStatus,
+    mehandiPromiseDate,
+    mehandiService,
+    hostingReason,
+    hostingStatus,
+    hostingPromiseDate,
+    hostingService,
+  });
+
+
+
+
+
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
 
@@ -123,7 +342,7 @@ router.post("/", auth, async (req, res) => {
     userId,
     name_Of_The_Event,
   });
-
+  newFamilyFunctionInfo.save().then(()=>console.log("success infowed saved"))
   newEventName.save().then(() => console.log("successfully event name saved"));
 
   newFamilyFunctionForm.save().then(() => {
@@ -133,5 +352,81 @@ router.post("/", auth, async (req, res) => {
 
   console.log(req.body);
 });
+
+
+router.get("/familyfunctionInfo/:orderIdp", (req, res) => {
+  // console.log(req.params.orderIdp);
+  FamilyFunctionInfo.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      // console.log(doc);
+      res.status(200).send(doc);
+    }
+  });
+});
+
+router.post("/updateInfos", (req, res) => {
+  const datass = req.body.eventDatas;
+  FamilyFunctionInfo.findOneAndUpdate(
+    { orderId: datass.orderId },
+    {
+      $set: {
+        invitationReason: datass.invitationReas,
+        invitationStatus: datass.invitationstats,
+        invitationPromiseDate: datass.invitationPromiseDat,
+        invitationService: datass.invitationConf,
+        beautyReason: datass.beautyReas,
+        beautyStatus: datass.beautystats,
+        beautyPromiseDate: datass.beautyPromiseDat,
+        beautyService: datass.beautyConf,
+        venueReason: datass.venueReas,
+        venueStatus: datass.venuestats,
+        venuePromiseDate: datass.venuePromiseDat,
+        venueService: datass.venueConf,
+        photographyReason: datass.photographyReas,
+        photographyStatus: datass.photographystats,
+        photographyPromiseDate: datass.photographyPromiseDat,
+        photographyService: datass.photographyConf,
+        cateringReason: datass.cateringReas,
+        cateringStatus: datass.cateringstats,
+        cateringPromiseDate: datass.cateringPromiseDat,
+        cateringService: datass.cateringConf,
+        decorationReason: datass.decorationReas,
+        decorationStatus: datass.decorationstats,
+        decorationPromiseDate: datass.decorationPromiseDat,
+        decorationService: datass.decorationConf,
+        showsReason: datass.showsReas,
+        showsStatus: datass.showsstats,
+        showsPromiseDate: datass.showsPromiseDat,
+        showsService: datass.showsConf,
+        pandit_JiReason: datass.pandit_JiReas,
+        pandit_JiStatus: datass.pandit_Jistats,
+        pandit_JiPromiseDate: datass.pandit_JiPromiseDat,
+        pandit_JiService: datass.pandit_JiConf,
+        mehandiReason: datass.mehandiReas,
+        mehandiStatus: datass.mehandistats,
+        mehandiPromiseDate: datass.mehandiPromiseDat,
+        mehandiService: datass.mehandiConf,
+        hostingReason: datass.hostingReas,
+        hostingStatus: datass.hostingstats,
+        hostingPromiseDate: datass.hostingPromiseDat,
+        hostingService: datass.hostingConf,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send(doc);
+      }
+    }
+  );
+});
+
+
 
 module.exports = router;

@@ -154,6 +154,119 @@ const birthdaySchema = new mongoose.Schema(
   }
 );
 
+const BirthdayInfoSchema = new mongoose.Schema({
+
+  eventName: {
+    type: String,
+  },
+  orderId : {
+    type: String
+  },
+  userId: {
+    type: String,
+  },
+
+  //1
+  invitationReason : {
+    type: String
+  },
+  invitationStatus : {
+    type: String
+  },
+  invitationPromiseDate : {
+    type : String
+  },
+  invitationService : {
+    type : String
+  },
+
+  //2
+
+  beautyReason : {
+    type: String
+  },
+  beautyStatus : {
+    type: String
+  },
+  beautyPromiseDate : {
+    type : String
+  },
+  beautyService : {
+    type : String
+  },
+  //3
+  venueReason : {
+    type: String
+  },
+  venueStatus : {
+    type: String
+  },
+  venuePromiseDate : {
+    type : String
+  },
+  venueService : {
+    type : String
+  },
+//4
+  showsReason : {
+    type: String
+  },
+  showsStatus : {
+    type: String
+  },
+  showsPromiseDate : {
+    type : String
+  },
+  showsService : {
+    type : String
+  },
+//5
+  photographyReason : {
+    type: String
+  },
+  photographyStatus : {
+    type: String
+  },
+  photographyPromiseDate : {
+    type : String
+  },
+  photographyService : {
+    type : String
+  },
+
+  cateringReason : {
+    type: String
+  },
+  cateringStatus : {
+    type: String
+  },
+  cateringPromiseDate : {
+    type : String
+  },
+  cateringService : {
+    type : String
+  },
+//8
+  decorationReason : {
+    type: String
+  },
+  decorationStatus : {
+    type: String
+  },
+  decorationPromiseDate : {
+    type : String
+  },
+  decorationService : {
+    type : String
+  },
+
+
+})
+
+
+const BirthdayInfo = mongoose.model("BirthdayInfo",BirthdayInfoSchema)
+
 const BirthdayForm = mongoose.model("BirthdayForm", birthdaySchema);
 
 exports.BirthdayForm = BirthdayForm;
+exports.BirthdayInfo = BirthdayInfo

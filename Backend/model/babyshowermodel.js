@@ -148,6 +148,155 @@ const babyshowerSchema = new mongoose.Schema(
   }
 );
 
+const babyshowerInfoSchema = new mongoose.Schema({
+
+  eventName: {
+    type: String,
+  },
+  orderId : {
+    type: String
+  },
+  userId: {
+    type: String,
+  },
+
+  //1
+  invitationReason : {
+    type: String
+  },
+  invitationStatus : {
+    type: String
+  },
+  invitationPromiseDate : {
+    type : String
+  },
+  invitationService : {
+    type : String
+  },
+
+  //2
+
+  beautyReason : {
+    type: String
+  },
+  beautyStatus : {
+    type: String
+  },
+  beautyPromiseDate : {
+    type : String
+  },
+  beautyService : {
+    type : String
+  },
+  //3
+  venueReason : {
+    type: String
+  },
+  venueStatus : {
+    type: String
+  },
+  venuePromiseDate : {
+    type : String
+  },
+  venueService : {
+    type : String
+  },
+//4
+  showsReason : {
+    type: String
+  },
+  showsStatus : {
+    type: String
+  },
+  showsPromiseDate : {
+    type : String
+  },
+  showsService : {
+    type : String
+  },
+//5
+  photographyReason : {
+    type: String
+  },
+  photographyStatus : {
+    type: String
+  },
+  photographyPromiseDate : {
+    type : String
+  },
+  photographyService : {
+    type : String
+  },
+
+  cateringReason : {
+    type: String
+  },
+  cateringStatus : {
+    type: String
+  },
+  cateringPromiseDate : {
+    type : String
+  },
+  cateringService : {
+    type : String
+  },
+//8
+  decorationReason : {
+    type: String
+  },
+  decorationStatus : {
+    type: String
+  },
+  decorationPromiseDate : {
+    type : String
+  },
+  decorationService : {
+    type : String
+  },
+//9
+  pandit_JiReason : {
+    type: String
+  },
+  pandit_JiStatus : {
+    type: String
+  },
+  pandit_JiPromiseDate : {
+    type : String
+  },
+  pandit_JiService : {
+    type : String
+  },
+//10
+  mehandiReason : {
+    type: String
+  },
+  mehandiStatus : {
+    type: String
+  },
+  mehandiPromiseDate : {
+    type : String
+  },
+  mehandiService : {
+    type : String
+  },
+//11
+  hostingReason : {
+    type: String
+  },
+  hostingStatus : {
+    type: String
+  },
+  hostingPromiseDate : {
+    type : String
+  },
+  hostingService : {
+    type : String
+  },
+
+})
+
+const BabyShowerInfo = mongoose.model("BabyShowerInfo",babyshowerInfoSchema)
 const BabyShowerForm = mongoose.model("BabyShowerForm", babyshowerSchema);
 
 exports.BabyShowerForm = BabyShowerForm;
+exports.BabyShowerInfo = BabyShowerInfo;

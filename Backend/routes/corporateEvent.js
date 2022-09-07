@@ -11,7 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
 const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
-const {CorporateEventForm} = require("../model/corporateEvent")
+const {CorporateEventForm, CorporateInfo} = require("../model/corporateEvent")
+
+
+
 
 router.post("/", auth, async (req, res) => {
   const data = req.body.data;
@@ -74,27 +77,31 @@ router.post("/", auth, async (req, res) => {
     },
   };
 
-  var venueStatus = "pending"
-  var cateringStatus = "pending"
-  var photographyStatus = "pending"
-  var decorationStatus = "pending"
-  var isVerified = false
-  var foodb = false
-   var photographyb = false
-   var venueb = false
-   var decorationb = false
-   if (Food.Foodtype){
-    foodb = true
-   }
-   if(OtherServiceValues.photography){
-    photographyb= true
-   }
-   if(OtherServiceValues.venues){
-    venueb = true
-   }
-   if(Decoration.RegularDecoration || Decoration.ThemeDecoration){
-      decorationb = true
-   }
+  // var venueStatus = "pending"
+  // var cateringStatus = "pending"
+  // var photographyStatus = "pending"
+  // var decorationStatus = "pending"
+  // var isVerified = false
+  // var foodb = false
+  //  var photographyb = false
+  //  var venueb = false
+  //  var decorationb = false
+  //  if (Food.Foodtype){
+  //   foodb = true
+  //  }
+  //  if(OtherServiceValues.photography){
+  //   photographyb= true
+  //  }
+  //  if(OtherServiceValues.venues){
+  //   venueb = true
+  //  }
+  //  if(Decoration.RegularDecoration || Decoration.ThemeDecoration){
+  //     decorationb = true
+  //  }
+
+
+
+
 
   const newcorporateeventform = CorporateEventForm({
     eventName,
@@ -115,17 +122,176 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     Food,
-    foodb,
-    photographyb,
-    venueb,
-    decorationb,
-    venueStatus,
-    photographyStatus,
-    decorationStatus,
-    cateringStatus,
-    isVerified,
   
   });
+
+
+
+    
+  let showsReason;
+  let showsStatus;
+  let showsPromiseDate;
+  let showsService;
+
+  let decorationReason;
+  let decorationStatus;
+  let decorationPromiseDate;
+  let decorationService;
+
+  let cateringReason;
+  let cateringStatus;
+  let cateringPromiseDate;
+  let cateringService;
+
+  let invitationReason;
+  let invitationStatus;
+  let invitationPromiseDate;
+  let invitationService;
+
+  let venueReason;
+  let venueStatus;
+  let venuePromiseDate;
+  let venueService;
+
+  let photographyReason;
+  let photographyStatus;
+  let photographyPromiseDate;
+  let photographyService;
+
+  let hostingReason;
+  let hostingStatus;
+  let hostingPromiseDate;
+  let hostingService;
+
+
+
+
+  if (data.OtherServices.includes("venue")) {
+    venueStatus = "pending";
+    venueReason = "-";
+    venuePromiseDate = "";
+    venueService = "Not Confirmed";
+  } else {
+    venueStatus = null;
+    venueReason = null;
+    venuePromiseDate = null;
+    venueService = null;
+  }
+
+  if (data.OtherServices.includes("photography")) {
+    photographyStatus = "pending";
+    photographyReason = "-";
+    photographyPromiseDate = "";
+    photographyService = "Not Confirmed";
+  } else {
+    photographyStatus = null;
+    photographyReason = null;
+    photographyPromiseDate = null;
+    photographyService = null;
+  }
+
+  if (data.OtherServices.includes("invitation")) {
+    invitationStatus = "pending";
+    invitationReason = "-";
+    invitationPromiseDate = "";
+    invitationService = "Not Confirmed";
+  } else {
+    invitationStatus = null;
+    invitationReason = null;
+    invitationPromiseDate = null;
+    invitationService = null;
+  }
+
+  if (!!data.OtherServices.includes("hosting")) {
+    hostingStatus = "pending";
+    hostingReason = "-";
+    hostingPromiseDate = "";
+    hostingService = "Not Confirmed";
+  } else {
+    hostingStatus = null;
+    hostingReason = null;
+    hostingPromiseDate = null;
+    hostingService = null;
+  }
+
+  if (data.Food) {
+    cateringStatus = "pending";
+    cateringReason = "-";
+    cateringPromiseDate = "";
+    cateringService = "Not Confirmed";
+  } else {
+    cateringStatus = null;
+    cateringReason = null;
+    cateringPromiseDate = null;
+    cateringService = null;
+  }
+
+ if (data.shows[0] != undefined) {
+    showsStatus = "pending";
+    showsReason = "-";
+    showsPromiseDate = "";
+    showsService = "Not Confirmed";
+  } else {
+    showsStatus = null;
+    showsReason = null;
+    showsPromiseDate = null;
+    showsService = null;
+  }
+  
+  if (checkBoxValues.decorationvalue || data.ThemeDecoration) {
+    decorationStatus = "pending";
+    decorationReason = "-";
+    decorationPromiseDate = "";
+    decorationService = "Not Confirmed";
+  } else {
+    decorationStatus = null;
+    decorationReason = null;
+    decorationPromiseDate = null;
+    decorationService = null;
+  }
+
+  const newCorporateInfo = CorporateInfo({
+    eventName,
+    userId,
+    orderId,
+    invitationReason,
+    invitationStatus,
+    invitationPromiseDate,
+    invitationService,
+   
+    venueReason,
+    venueStatus,
+    venuePromiseDate,
+    venueService,
+
+    photographyReason,
+    photographyStatus,
+    photographyPromiseDate,
+    photographyService,
+   
+    cateringReason,
+    cateringStatus,
+    cateringPromiseDate,
+    cateringService,
+
+    decorationReason,
+    decorationStatus,
+    decorationPromiseDate,
+    decorationService,
+
+    showsReason,
+    showsStatus,
+    showsPromiseDate,
+    showsService,
+
+    hostingReason,
+    hostingStatus,
+    hostingPromiseDate,
+    hostingService,
+  });
+
+
+
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
 
@@ -133,14 +299,81 @@ router.post("/", auth, async (req, res) => {
     userId,
     name_Of_The_Event,
   });
-
+ 
+  newCorporateInfo.save().then(()=>console.log("success infowed saved"))
   newEventName.save().then(() => console.log("successfully event name saved"));
   newcorporateeventform.save().then(() => {
     res.status(200).send("Family Function form saved successfully...!");
   });
   console.log("completed!! saved");
 
-  console.log(req.body);
 });
+
+
+
+router.get("/corporateInfo/:orderIdp", (req, res) => {
+  CorporateInfo.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(doc);
+    }
+  });
+});
+
+router.post("/updateInfos", (req, res) => {
+  const datass = req.body.eventDatas;
+  CorporateInfo.findOneAndUpdate(
+    { orderId: datass.orderId },
+    {
+      $set: {
+        invitationReason: datass.invitationReas,
+        invitationStatus: datass.invitationstats,
+        invitationPromiseDate: datass.invitationPromiseDat,
+        invitationService: datass.invitationConf,
+       
+        venueReason: datass.venueReas,
+        venueStatus: datass.venuestats,
+        venuePromiseDate: datass.venuePromiseDat,
+        venueService: datass.venueConf,
+
+        photographyReason: datass.photographyReas,
+        photographyStatus: datass.photographystats,
+        photographyPromiseDate: datass.photographyPromiseDat,
+        photographyService: datass.photographyConf,
+
+        cateringReason: datass.cateringReas,
+        cateringStatus: datass.cateringstats,
+        cateringPromiseDate: datass.cateringPromiseDat,
+        cateringService: datass.cateringConf,
+
+        decorationReason: datass.decorationReas,
+        decorationStatus: datass.decorationstats,
+        decorationPromiseDate: datass.decorationPromiseDat,
+        decorationService: datass.decorationConf,
+
+        showsReason: datass.showsReas,
+        showsStatus: datass.showsstats,
+        showsPromiseDate: datass.showsPromiseDat,
+        showsService: datass.showsConf,
+
+        hostingReason: datass.hostingReas,
+        hostingStatus: datass.hostingstats,
+        hostingPromiseDate: datass.hostingPromiseDat,
+        hostingService: datass.hostingConf,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(doc);
+      }
+    }
+  );
+});
+
 
 module.exports = router;

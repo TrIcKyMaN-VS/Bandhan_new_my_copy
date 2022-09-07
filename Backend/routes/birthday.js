@@ -9,7 +9,7 @@ app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
-const { BirthdayForm } = require("../model/birthdaymodel");
+const { BirthdayForm ,BirthdayInfo} = require("../model/birthdaymodel");
 const auth = require("../middleware/auth");
 
 //routes
@@ -66,27 +66,27 @@ router.post("/", auth, async (req, res) => {
     items: req.body.checkBoxValues.foodvalue?req.body.checkBoxValues.foodvalue:"-",
   };
 
-  var venueStatus = "pending"
-  var cateringStatus = "pending"
-  var photographyStatus = "pending"
-  var decorationStatus = "pending"
-  var isVerified = false
-  var foodb = false
-   var photographyb = false
-   var venueb = false
-   var decorationb = false
-   if (Food.Foodtype){
-    foodb = true
-   }
-   if(OtherServiceValues.photography){
-    photographyb= true
-   }
-   if(OtherServiceValues.venues){
-    venueb = true
-   }
-   if(Decoration.RegularDecoration || Decoration.ThemeDecoration){
-      decorationb = true
-   }
+  // var venueStatus = "pending"
+  // var cateringStatus = "pending"
+  // var photographyStatus = "pending"
+  // var decorationStatus = "pending"
+  // var isVerified = false
+  // var foodb = false
+  //  var photographyb = false
+  //  var venueb = false
+  //  var decorationb = false
+  //  if (Food.Foodtype){
+  //   foodb = true
+  //  }
+  //  if(OtherServiceValues.photography){
+  //   photographyb= true
+  //  }
+  //  if(OtherServiceValues.venues){
+  //   venueb = true
+  //  }
+  //  if(Decoration.RegularDecoration || Decoration.ThemeDecoration){
+  //     decorationb = true
+  //  }
   //    console.log(req.body);
 
   const newBirthdayForm = BirthdayForm({
@@ -109,21 +109,260 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     // Photography,
-    Food,
-    foodb,
-    photographyb,
-    venueb,
-    decorationb,
-    venueStatus,
-    photographyStatus,
-    decorationStatus,
-    cateringStatus,
-    isVerified,
+    // Food,
+    // foodb,
+    // photographyb,
+    // venueb,
+    // decorationb,
+    // venueStatus,
+    // photographyStatus,
+    // decorationStatus,
+    // cateringStatus,
+    // isVerified,
   });
+
+
+  let invitationReason;
+  let invitationStatus;
+  let invitationPromiseDate;
+  let invitationService;
+
+  let beautyReason;
+  let beautyStatus;
+  let beautyPromiseDate;
+  let beautyService;
+
+  let venueReason;
+  let venueStatus;
+  let venuePromiseDate;
+  let venueService;
+
+  let photographyReason;
+  let photographyStatus;
+  let photographyPromiseDate;
+  let photographyService;
+
+  let cateringReason;
+  let cateringStatus;
+  let cateringPromiseDate;
+  let cateringService;
+
+  let decorationReason;
+  let decorationStatus;
+  let decorationPromiseDate;
+  let decorationService;
+
+  let showsReason;
+  let showsStatus;
+  let showsPromiseDate;
+  let showsService;
+
+
+
+
+  if (req.body.data.OtherServices.includes("venue")) {
+    venueStatus = "pending";
+    venueReason = "-";
+    venuePromiseDate = "";
+    venueService = "Not Confirmed";
+  } else {
+    venueStatus = null;
+    venueReason = null;
+    venuePromiseDate = null;
+    venueService = null;
+  }
+
+  if (req.body.data.OtherServices.includes("photography")) {
+    photographyStatus = "pending";
+    photographyReason = "-";
+    photographyPromiseDate = "";
+    photographyService = "Not Confirmed";
+  } else {
+    photographyStatus = null;
+    photographyReason = null;
+    photographyPromiseDate = null;
+    photographyService = null;
+  }
+  if (req.body.data.Food) {
+    cateringStatus = "pending";
+    cateringReason = "-";
+    cateringPromiseDate = "";
+    cateringService = "Not Confirmed";
+  } else {
+    cateringStatus = null;
+    cateringReason = null;
+    cateringPromiseDate = null;
+    cateringService = null;
+  }
+
+  if (req.body.data.shows[0] != undefined) {
+    showsStatus = "pending";
+    showsReason = "-";
+    showsPromiseDate = "";
+    showsService = "Not Confirmed";
+  } else {
+    showsStatus = null;
+    showsReason = null;
+    showsPromiseDate = null;
+    showsService = null;
+  }
+
+  if (req.body.data.OtherServices.includes("invitation")) {
+    invitationStatus = "pending";
+    invitationReason = "-";
+    invitationPromiseDate = "";
+    invitationService = "Not Confirmed";
+  } else {
+    invitationStatus = null;
+    invitationReason = null;
+    invitationPromiseDate = null;
+    invitationService = null;
+  }
+  if (req.body.checkBoxValues.decorationvalue || data.ThemeDecoration) {
+    decorationStatus = "pending";
+    decorationReason = "-";
+    decorationPromiseDate = "";
+    decorationService = "Not Confirmed";
+  } else {
+    decorationStatus = null;
+    decorationReason = null;
+    decorationPromiseDate = null;
+    decorationService = null;
+  }
+
+  if (!!req.body.data.OtherServices.includes("beauty")) {
+    beautyStatus = "pending";
+    beautyReason = "-";
+    beautyPromiseDate = "";
+    beautyService = "Not Confirmed";
+  } else {
+    beautyStatus = null;
+    beautyReason = null;
+    beautyPromiseDate = null;
+    beautyService = null;
+  }
+
+  const newBirthdayInfo = BirthdayInfo({
+    eventName,
+    userId,
+    orderId,
+    invitationReason,
+    invitationStatus,
+    invitationPromiseDate,
+    invitationService,
+    beautyReason,
+    beautyStatus,
+    beautyPromiseDate,
+    beautyService,
+    venueReason,
+    venueStatus,
+    venuePromiseDate,
+    venueService,
+    photographyReason,
+    photographyStatus,
+    photographyPromiseDate,
+    photographyService,
+    cateringReason,
+    cateringStatus,
+    cateringPromiseDate,
+    cateringService,
+    decorationReason,
+    decorationStatus,
+    decorationPromiseDate,
+    decorationService,
+    showsReason,
+    showsStatus,
+    showsPromiseDate,
+    showsService,
+  
+  });
+
+  newBirthdayInfo.save().then(()=>console.log("success infowed saved"))
+
+
   newBirthdayForm.save().then(() => {
     res.status(200).send("birthday form saved successfully...!");
   });
   // console.log( );
 });
+
+
+
+router.get("/birthdayInfo/:orderIdp", (req, res) => {
+  // console.log(req.params.orderIdp);
+  BirthdayInfo.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      // console.log(doc);
+      res.status(200).send(doc);
+    }
+  });
+});
+
+router.post("/updateInfos", (req, res) => {
+  const datass = req.body.eventDatas;
+  BirthdayInfo.findOneAndUpdate(
+    { orderId: datass.orderId },
+    {
+      $set: {
+        invitationReason: datass.invitationReas,
+        invitationStatus: datass.invitationstats,
+        invitationPromiseDate: datass.invitationPromiseDat,
+        invitationService: datass.invitationConf,
+        beautyReason: datass.beautyReas,
+        beautyStatus: datass.beautystats,
+        beautyPromiseDate: datass.beautyPromiseDat,
+        beautyService: datass.beautyConf,
+        venueReason: datass.venueReas,
+        venueStatus: datass.venuestats,
+        venuePromiseDate: datass.venuePromiseDat,
+        venueService: datass.venueConf,
+        photographyReason: datass.photographyReas,
+        photographyStatus: datass.photographystats,
+        photographyPromiseDate: datass.photographyPromiseDat,
+        photographyService: datass.photographyConf,
+        cateringReason: datass.cateringReas,
+        cateringStatus: datass.cateringstats,
+        cateringPromiseDate: datass.cateringPromiseDat,
+        cateringService: datass.cateringConf,
+        decorationReason: datass.decorationReas,
+        decorationStatus: datass.decorationstats,
+        decorationPromiseDate: datass.decorationPromiseDat,
+        decorationService: datass.decorationConf,
+        showsReason: datass.showsReas,
+        showsStatus: datass.showsstats,
+        showsPromiseDate: datass.showsPromiseDat,
+        showsService: datass.showsConf,
+        pandit_JiReason: datass.pandit_JiReas,
+        pandit_JiStatus: datass.pandit_Jistats,
+        pandit_JiPromiseDate: datass.pandit_JiPromiseDat,
+        pandit_JiService: datass.pandit_JiConf,
+        mehandiReason: datass.mehandiReas,
+        mehandiStatus: datass.mehandistats,
+        mehandiPromiseDate: datass.mehandiPromiseDat,
+        mehandiService: datass.mehandiConf,
+        hostingReason: datass.hostingReas,
+        hostingStatus: datass.hostingstats,
+        hostingPromiseDate: datass.hostingPromiseDat,
+        hostingService: datass.hostingConf,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send(doc);
+      }
+    }
+  );
+});
+
+
+
+
 
 module.exports = router;

@@ -171,7 +171,7 @@ router.post("/", auth, async (req, res) => {
   newEventName.save().then(() => console.log("successfully event name saved"));
 
   newPostWeddingForm.save().then(() => {
-    console.log(fffs);
+    // console.log(fffs);
     res.status(200).send("Postwedding form saved successfully...!");
   });
 

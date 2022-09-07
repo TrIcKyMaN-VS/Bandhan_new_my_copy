@@ -410,7 +410,7 @@ router.post("/", auth, async (req, res) => {
   newWeddingInfo.save().then(() => console.log("success infowed saved"));
 
   newWeddingForm.save().then(() => {
-    console.log(drdr);
+    // console.log(drdr);
     res.status(200).send("Wedding form saved successfully...!");
   });
 });

@@ -29,7 +29,7 @@ function Orderslist(props) {
 
   useEffect(() => {
     axios
-      .get(`api/adminuserlist/babyshowerpointsvoucher/${forms[0].userId}`)
+      .get(`api/adminuserlist/postweddingpointsvoucher/${forms[0].userId}`)
       .then((res) => {
         setdatapoints(res.data[0].points);
         setdatavoucher(res.data[0].voucher);
