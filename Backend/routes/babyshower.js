@@ -165,6 +165,10 @@ router.post("/", auth, async (req, res) => {
   let hostingPromiseDate;
   let hostingService;
 
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
 
 
   if (data.OtherServices.includes("Mehandi")) {
@@ -281,7 +285,17 @@ router.post("/", auth, async (req, res) => {
     beautyPromiseDate = null;
     beautyService = null;
   }
-
+  if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
+  }
 
   const newBabyShowerInfo = BabyShowerInfo({
     eventName,
@@ -327,6 +341,10 @@ router.post("/", auth, async (req, res) => {
     hostingStatus,
     hostingPromiseDate,
     hostingService,
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
   });
 
 
@@ -408,6 +426,10 @@ router.post("/updateInfos", (req, res) => {
         hostingStatus: datass.hostingstats,
         hostingPromiseDate: datass.hostingPromiseDat,
         hostingService: datass.hostingConf,
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
       },
     },
     (err, doc) => {

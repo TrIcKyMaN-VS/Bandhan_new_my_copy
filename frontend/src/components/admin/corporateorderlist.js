@@ -8,6 +8,12 @@ function Orderslist(props) {
     const [updtBtn, setUpdtBtn] = useState(true);
     const [postInfo, setPostInfo] = useState("");
 
+    const [additional, setAdditional] = useState(false);
+    const [additionalReas, setAdditionalReas] = useState(null);
+    const [additionalstats, setAdditionalstats] = useState(null);
+    const [additionalConf, setAdditionalConf] = useState(null);
+    const [additionalPromiseDat, setAdditionalPromiseDate] = useState(null);
+
     const [invitation, setInvitation] = useState(false);
     const [invitationReas, setInvitationReas] = useState(null);
     const [invitationstats, setInvitationstats] = useState(null);
@@ -79,7 +85,15 @@ function Orderslist(props) {
           } else {
             setInvitation(false);
           }
-    
+          if (resDat.AdditionalReason != null) {
+            setAdditional(true);
+            setAdditionalConf(resDat.AdditionalService);
+            setAdditionalPromiseDate(resDat.AdditionalPromiseDate);
+            setAdditionalReas(resDat.AdditionalReason);
+            setAdditionalstats(resDat.AdditionalStatus);
+          } else {
+            setAdditional(false);
+          }
     
           if (resDat.venueReason != null) {
             setVenue(true);
@@ -206,6 +220,11 @@ function Orderslist(props) {
         hostingPromiseDat,
         hostingReas,
         hostingstats,
+
+        additionalConf,
+        additionalPromiseDat,
+        additionalReas,
+        additionalstats,
       };
   
       axios
@@ -249,7 +268,71 @@ function Orderslist(props) {
             </tr>
           </thead>
         <tbody>
-        
+        {!!additional && (
+              <tr>
+                <th>Additional Service</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    onChange={(e) => {
+                      setAdditionalPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    value={additionalPromiseDat}
+                    className={"input"}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (additionalConf == "Not Confirmed") {
+                        setAdditionalConf("Confirmed");
+                      } else if (additionalConf == "Confirmed") {
+                        setAdditionalConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalConf}
+                  </div>
+                </td>
+
+                <td>
+                  <input
+                    type={"text"}
+                    value={additionalReas}
+                    onChange={(e) => {
+                      setAdditionalReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (additionalstats == "pending") {
+                        setAdditionalstats("Completed");
+                      } else if (additionalstats == "Completed") {
+                        setAdditionalstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalstats}
+                  </div>
+                </td>
+              </tr>
+            )}
         {!!invitation && (
               <tr>
                 <th>Invitation</th>

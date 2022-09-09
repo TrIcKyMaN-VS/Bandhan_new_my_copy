@@ -163,6 +163,10 @@ router.post("/", auth, async (req, res) => {
   let hostingPromiseDate;
   let hostingService;
 
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
 
 
 
@@ -250,6 +254,18 @@ router.post("/", auth, async (req, res) => {
     decorationService = null;
   }
 
+  if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
+  }
+
   const newCorporateInfo = CorporateInfo({
     eventName,
     userId,
@@ -288,6 +304,11 @@ router.post("/", auth, async (req, res) => {
     hostingStatus,
     hostingPromiseDate,
     hostingService,
+
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
   });
 
 
@@ -342,6 +363,11 @@ router.post("/updateInfos", (req, res) => {
         photographyStatus: datass.photographystats,
         photographyPromiseDate: datass.photographyPromiseDat,
         photographyService: datass.photographyConf,
+
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
 
         cateringReason: datass.cateringReas,
         cateringStatus: datass.cateringstats,

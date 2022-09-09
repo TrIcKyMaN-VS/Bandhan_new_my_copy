@@ -304,7 +304,18 @@ const EngagementInfoSchema = new mongoose.Schema({
   hostingService : {
     type : String
   },
-
+  AdditionalReason : {
+    type: String
+  },
+  AdditionalStatus : {
+    type: String
+  },
+  AdditionalPromiseDate : {
+    type : String
+  },
+  AdditionalService : {
+    type : String
+  },
 })
 
 const EngagementInfo = mongoose.model("EngagementInfo",EngagementInfoSchema)

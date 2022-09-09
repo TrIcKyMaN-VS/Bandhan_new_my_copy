@@ -159,6 +159,18 @@ const postweddingInfoSchema = new mongoose.Schema({
     type: String
   } ,
   
+  AdditionalReason : {
+    type: String
+  },
+  AdditionalStatus : {
+    type: String
+  },
+  AdditionalPromiseDate : {
+    type : String
+  },
+  AdditionalService : {
+    type : String
+  },
 })
 
 const PostWeddingForm = mongoose.model("PostWeddingForm", postweddingSchema);

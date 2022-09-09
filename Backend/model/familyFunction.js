@@ -290,6 +290,18 @@ const FamilyFunctionInfoSchema = new mongoose.Schema({
   hostingService : {
     type : String
   },
+  AdditionalReason : {
+    type: String
+  },
+  AdditionalStatus : {
+    type: String
+  },
+  AdditionalPromiseDate : {
+    type : String
+  },
+  AdditionalService : {
+    type : String
+  },
 
 })
 

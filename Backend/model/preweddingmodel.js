@@ -138,6 +138,79 @@ const preweddingSchema = new mongoose.Schema(
   }
 );
 
+const PreWeddingInfoSchema = new mongoose.Schema({
+
+  eventName: {
+    type: String,
+  },
+  orderId : {
+    type: String
+  },
+  userId: {
+    type: String,
+  },
+
+  //1
+  ShootingReason : {
+    type: String
+  },
+  ShootingStatus : {
+    type: String
+  },
+  ShootingPromiseDate : {
+    type : String
+  },
+  ShootingService : {
+    type : String
+  },
+
+  //2
+
+  AdditionalReason : {
+    type: String
+  },
+  AdditionalStatus : {
+    type: String
+  },
+  AdditionalPromiseDate : {
+    type : String
+  },
+  AdditionalService : {
+    type : String
+  },
+
+
+  cateringReason : {
+    type: String
+  },
+  cateringStatus : {
+    type: String
+  },
+  cateringPromiseDate : {
+    type : String
+  },
+  cateringService : {
+    type : String
+  },
+
+  BachelorsPartyReason : {
+    type: String
+  },
+  BachelorsPartyStatus : {
+    type: String
+  },
+  BachelorsPartyPromiseDate : {
+    type : String
+  },
+  BachelorsPartyService : {
+    type : String
+  },
+
+})
+
+const PreweddingInfo = mongoose.model("PreweddingInfo",PreWeddingInfoSchema)
+
 const PreWeddingForm = mongoose.model("PreWeddingForm", preweddingSchema);
 
 exports.PreWeddingForm = PreWeddingForm;
+exports.PreweddingInfo = PreweddingInfo;

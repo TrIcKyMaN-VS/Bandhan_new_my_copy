@@ -291,6 +291,21 @@ const weddingInfoSchema = new mongoose.Schema({
     type : String
   },
 //4
+
+AdditionalReason : {
+  type: String
+},
+AdditionalStatus : {
+  type: String
+},
+AdditionalPromiseDate : {
+  type : String
+},
+AdditionalService : {
+  type : String
+},
+
+
   showsReason : {
     type: String
   },

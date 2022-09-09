@@ -8,6 +8,11 @@ function Orderslist(props) {
     const [updtBtn, setUpdtBtn] = useState(true);
     const [postInfo, setPostInfo] = useState("");
 
+    const [additional, setAdditional] = useState(false);
+    const [additionalReas, setAdditionalReas] = useState(null);
+    const [additionalstats, setAdditionalstats] = useState(null);
+    const [additionalConf, setAdditionalConf] = useState(null);
+    const [additionalPromiseDat, setAdditionalPromiseDate] = useState(null);
 
     const [invitation, setInvitation] = useState(false);
     const [invitationReas, setInvitationReas] = useState(null);
@@ -106,7 +111,15 @@ function Orderslist(props) {
           } else {
             setPhotography(false);
           }
-    
+          if (resDat.AdditionalReason != null) {
+            setAdditional(true);
+            setAdditionalConf(resDat.AdditionalService);
+            setAdditionalPromiseDate(resDat.AdditionalPromiseDate);
+            setAdditionalReas(resDat.AdditionalReason);
+            setAdditionalstats(resDat.AdditionalStatus);
+          } else {
+            setAdditional(false);
+          }
           if (resDat.cateringReason != null) {
             console.log("fbjfhb");
             setCatering(true);
@@ -205,7 +218,10 @@ function Orderslist(props) {
         showsPromiseDat,
         showsReas,
         showsstats,
-       
+        additionalConf,
+        additionalPromiseDat,
+        additionalReas,
+        additionalstats,
       };
   
       axios
@@ -229,21 +245,89 @@ function Orderslist(props) {
 
       
       <table className="table bg-white rounded shadow-sm  table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              Order 
-            </th>
-            <th className=" fw-bold" scope="col">
-              Order Status
-            </th>
-            <th className=" fw-bold" scope="col">
-              Change Status
-            </th>
-            
-          </tr>
-        </thead>
+      <thead>
+            <tr>
+              <th scope="col">Event</th>
+              <th className=" fw-bold" scope="col">
+                Promise Date
+              </th>
+              <th className=" fw-bold" scope="col">
+                Confirmed
+              </th>
+              <th className=" fw-bold" scope="col">
+                Reason
+              </th>
+              <th className=" fw-bold" scope="col">
+                Status
+              </th>
+            </tr>
+          </thead>
         <tbody>
+        {!!additional && (
+              <tr>
+                <th>Additional Service</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    onChange={(e) => {
+                      setAdditionalPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    value={additionalPromiseDat}
+                    className={"input"}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (additionalConf == "Not Confirmed") {
+                        setAdditionalConf("Confirmed");
+                      } else if (additionalConf == "Confirmed") {
+                        setAdditionalConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalConf}
+                  </div>
+                </td>
+
+                <td>
+                  <input
+                    type={"text"}
+                    value={additionalReas}
+                    onChange={(e) => {
+                      setAdditionalReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (additionalstats == "pending") {
+                        setAdditionalstats("Completed");
+                      } else if (additionalstats == "Completed") {
+                        setAdditionalstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalstats}
+                  </div>
+                </td>
+              </tr>
+            )}
             {!!invitation && (
               <tr>
                 <th>Invitation</th>

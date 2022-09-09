@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.static("files"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { PreWeddingForm } = require("../model/preweddingmodel");
+const { PreWeddingForm ,PreweddingInfo} = require("../model/preweddingmodel");
 const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
 
@@ -64,25 +64,25 @@ router.post("/", auth, async (req, res) => {
     items: checkBoxValues.foodvalue? checkBoxValues.foodvalue:"-",
   };
 
-  var venueStatus = "pending"
-  var cateringStatus = "pending"
-  var shootingStatus = "pending"
-  // var decorationStatus = "pending"
-  var status = "pending"
-  var isVerified = false
-  var foodb = false
-   var shootingb = true
-   var venueb = false
-  //  var decorationb = false
-   if (Food.Foodtype){
-    foodb = true
-   }
+  // var venueStatus = "pending"
+  // var cateringStatus = "pending"
+  // var shootingStatus = "pending"
+  // // var decorationStatus = "pending"
+  // var status = "pending"
+  // var isVerified = false
+  // var foodb = false
+  //  var shootingb = true
+  //  var venueb = false
+  // //  var decorationb = false
+  //  if (Food.Foodtype){
+  //   foodb = true
+  //  }
   //  if(OtherServiceValues.photography){
   //   photographyb= true
   //  }
-   if(BachelorsParty.venues){
-    venueb = true
-   }
+  //  if(BachelorsParty.venues){
+  //   venueb = true
+  //  }
   //  if(Decoration.RegularDecoration || Decoration.ThemeDecoration){
   //     decorationb = true
   //  }
@@ -108,18 +108,120 @@ router.post("/", auth, async (req, res) => {
     SpecialService,
     Shooting,
     Food,
-    foodb,
-    shootingb,
-    venueb,
-    // decorationb,
-    shootingStatus,
-    cateringStatus,
-    venueStatus,
-    isVerified,
+    // foodb,
+    // shootingb,
+    // venueb,
+    // // decorationb,
+    // shootingStatus,
+    // cateringStatus,
+    // venueStatus,
+    // isVerified,
 
   });
 
   console.log("def", req.body.name_Of_The_Event);
+
+
+  let BachelorsPartyReason;
+  let BachelorsPartyStatus;
+  let BachelorsPartyPromiseDate;
+  let BachelorsPartyService;
+
+  let ShootingReason;
+  let ShootingStatus;
+  let ShootingPromiseDate;
+  let ShootingService;
+
+  let cateringReason;
+  let cateringStatus;
+  let cateringPromiseDate;
+  let cateringService;
+
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
+
+
+  if (data.Venue_1_Name ||
+     checkBoxValues.musicvalue ||
+     checkBoxValues.dancevalue ||
+     data.No_Of_Guests    
+    ) {
+    BachelorsPartyStatus = "pending";
+    BachelorsPartyReason = "-";
+    BachelorsPartyPromiseDate = "";
+    BachelorsPartyService = "Not Confirmed";
+  } else {
+    BachelorsPartyStatus = null;
+    BachelorsPartyReason = null;
+    BachelorsPartyPromiseDate = null;
+    BachelorsPartyService = null;
+  }
+  if (data.shooting || data.destination_Place ) {
+    ShootingStatus = "pending";
+    ShootingReason = "-";
+    ShootingPromiseDate = "";
+    ShootingService = "Not Confirmed";
+  } else {
+    ShootingStatus = null;
+    ShootingReason = null;
+    ShootingPromiseDate = null;
+    ShootingService = null;
+  }
+  if (data.Food) {
+    cateringStatus = "pending";
+    cateringReason = "-";
+    cateringPromiseDate = "";
+    cateringService = "Not Confirmed";
+  } else {
+    cateringStatus = null;
+    cateringReason = null;
+    cateringPromiseDate = null;
+    cateringService = null;
+  }
+  if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
+  }
+
+  const newPreweddingInfo = PreweddingInfo({
+    eventName,
+    userId,
+    orderId,
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
+
+    ShootingReason,
+    ShootingStatus,
+    ShootingPromiseDate,
+    ShootingService,
+
+    BachelorsPartyReason,
+    BachelorsPartyStatus,
+    BachelorsPartyPromiseDate,
+    BachelorsPartyService,
+    
+    cateringReason,
+    cateringStatus,
+    cateringPromiseDate,
+    cateringService,
+   
+  });
+
+  newPreweddingInfo.save().then(()=>console.log("successfully event name saved"))
+
+
+
 
   // const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
   const name_Of_The_Event = req.body.name_Of_The_Event
@@ -140,5 +242,66 @@ router.post("/", auth, async (req, res) => {
 
   console.log(req.body);
 });
+
+
+
+
+router.get("/preweddingInfo/:orderIdp", (req, res) => {
+  // console.log(req.params.orderIdp);
+  PreweddingInfo.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      // console.log(doc);
+      res.status(200).send(doc);
+    }
+  });
+});
+
+router.post("/updateInfos", (req, res) => {
+  const datass = req.body.eventDatas;
+  PreweddingInfo.findOneAndUpdate(
+    { orderId: datass.orderId },
+    {
+      $set: {
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
+
+        ShootingReason: datass.shootingReas,
+      ShootingStatus: datass.shootingstats,
+      ShootingPromiseDate: datass.shootingPromiseDat,
+      ShootingService: datass.shootingConf,
+
+        BachelorsPartyReason: datass.bachelorsPartyReas,
+        BachelorsPartyStatus: datass.bachelorsPartystats,
+        BachelorsPartyPromiseDate: datass.bachelorsPartyPromiseDat,
+        BachelorsPartyService: datass.bachelorsPartyConf,
+
+      
+        cateringReason: datass.cateringReas,
+        cateringStatus: datass.cateringstats,
+        cateringPromiseDate: datass.cateringPromiseDat,
+        cateringService: datass.cateringConf,
+       
+       
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send(doc);
+      }
+    }
+  );
+});
+
+
+
 
 module.exports = router;

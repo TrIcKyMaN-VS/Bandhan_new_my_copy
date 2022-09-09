@@ -157,7 +157,10 @@ router.post("/", auth, async (req, res) => {
   let showsPromiseDate;
   let showsService;
 
-
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
 
 
   if (req.body.data.OtherServices.includes("venue")) {
@@ -170,6 +173,18 @@ router.post("/", auth, async (req, res) => {
     venueReason = null;
     venuePromiseDate = null;
     venueService = null;
+  }
+
+  if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
   }
 
   if (req.body.data.OtherServices.includes("photography")) {
@@ -274,6 +289,10 @@ router.post("/", auth, async (req, res) => {
     showsStatus,
     showsPromiseDate,
     showsService,
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
   
   });
 
@@ -347,6 +366,10 @@ router.post("/updateInfos", (req, res) => {
         hostingStatus: datass.hostingstats,
         hostingPromiseDate: datass.hostingPromiseDat,
         hostingService: datass.hostingConf,
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
       },
     },
     (err, doc) => {

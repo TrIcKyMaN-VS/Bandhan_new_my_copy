@@ -173,7 +173,18 @@ const babyshowerInfoSchema = new mongoose.Schema({
   invitationService : {
     type : String
   },
-
+  AdditionalReason : {
+    type: String
+  },
+  AdditionalStatus : {
+    type: String
+  },
+  AdditionalPromiseDate : {
+    type : String
+  },
+  AdditionalService : {
+    type : String
+  },
   //2
 
   beautyReason : {

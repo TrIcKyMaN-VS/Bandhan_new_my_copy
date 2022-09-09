@@ -113,6 +113,22 @@ router.post("/", auth, async (req, res) => {
     (subaarambhYatrastatus = null), (subaarambhYatraPromiseDate = null);
   }
 
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
+if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
+  }
+
   const newPostWeddingForm = PostWeddingForm({
     eventName,
     userId,
@@ -159,6 +175,10 @@ router.post("/", auth, async (req, res) => {
     muh_DikhaiPromiseDate,
     muh_Dikhaistatus,
     muh_DikhaiConfirmation,
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
   });
 
   const newEventName = EventName({
@@ -208,6 +228,10 @@ router.post("/updateInfos", (req, res) => {
         subaarambhYatraPromiseDate: datass.subaarambhYatraPromiseDat,
         subaarambhYatraReason: datass.subaarambhYatraReas,
         subaarambhYatrastatus: datass.subaarambhYatrastats,
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
       },
     },
     (err, doc) => {

@@ -6,10 +6,89 @@ function Orderslist(props) {
     const forms = props.formdata
     const [datapoints , setdatapoints] = useState("")
     const [datavoucher , setdatavoucher] = useState("")
+    const [updtBtn, setUpdtBtn] = useState(true);
+    const [postInfo, setPostInfo] = useState("");
+
+    const [catering, setCatering] = useState(false);
+    const [cateringReas, setCateringReas] = useState(null);
+    const [cateringstats, setCateringstats] = useState(null);
+    const [cateringConf, setCateringConf] = useState(null);
+    const [cateringPromiseDat, setCateringPromiseDate] = useState(null);
+  
+    const [additional, setAdditional] = useState(false);
+    const [additionalReas, setAdditionalReas] = useState(null);
+    const [additionalstats, setAdditionalstats] = useState(null);
+    const [additionalConf, setAdditionalConf] = useState(null);
+    const [additionalPromiseDat, setAdditionalPromiseDate] = useState(null);
+  
+    const [shooting, setShooting] = useState(false);
+    const [shootingReas, setShootingReas] = useState(null);
+    const [shootingstats, setShootingstats] = useState(null);
+    const [shootingConf, setShootingConf] = useState(null);
+    const [shootingPromiseDat, setShootingPromiseDate] = useState(null);
+  
+    const [bachelorsParty, setBachelorsParty] = useState(false);
+    const [bachelorsPartyReas, setBachelorsPartyReas] = useState(null);
+    const [bachelorsPartystats, setBachelorsPartystats] = useState(null);
+    const [bachelorsPartyConf, setBachelorsPartyConf] = useState(null);
+    const [bachelorsPartyPromiseDat, setBachelorsPartyPromiseDate] = useState(null);
+  
+
+
+
     useEffect(()=>{
       axios.get(`api/adminuserlist/preweddingpointsvoucher/${forms[0].userId}`).then((res) => {
         setdatapoints(res.data[0].points)
         setdatavoucher(res.data[0].voucher)
+
+        axios.get(`api/prewedding/preweddingInfo/${forms[0].orderId}`).then((res) => {
+          let resDat = res.data[0];
+          setPostInfo(res.data[0]);
+          console.log(resDat);
+    
+    
+          if (resDat.AdditionalReason != null) {
+            setAdditional(true);
+            setAdditionalConf(resDat.AdditionalService);
+            setAdditionalPromiseDate(resDat.AdditionalPromiseDate);
+            setAdditionalReas(resDat.AdditionalReason);
+            setAdditionalstats(resDat.AdditionalStatus);
+          } else {
+            setAdditional(false);
+          }
+    
+          if (resDat.ShootingReason != null) {
+            setShooting(true);
+            setShootingConf(resDat.ShootingService);
+            setShootingPromiseDate(resDat.ShootingPromiseDate);
+            setShootingReas(resDat.ShootingReason);
+            setShootingstats(resDat.ShootingStatus);
+          } else {
+            setShooting(false);
+          }
+    
+          if (resDat.BachelorsPartyReason != null) {
+            setBachelorsParty(true);
+            setBachelorsPartyConf(resDat.BachelorsPartyService);
+            setBachelorsPartyPromiseDate(resDat.BachelorsPartyPromiseDate);
+            setBachelorsPartyReas(resDat.BachelorsPartyReason);
+            setBachelorsPartystats(resDat.BachelorsPartyStatus);
+          } else {
+            setBachelorsParty(false);
+          }
+    
+          if (resDat.cateringReason != null) {
+            console.log("fbjfhb");
+            setCatering(true);
+            setCateringConf(res.data[0].cateringService);
+            setCateringPromiseDate(resDat.cateringPromiseDate);
+            setCateringReas(resDat.cateringReason);
+            setCateringstats(resDat.cateringStatus);
+          } else {
+            setCatering(false);
+          }
+    
+        }); 
 
       });
     },[])
@@ -33,39 +112,337 @@ function Orderslist(props) {
       axios.post(`api/adminuserlist/preweddingvoucher/${forms[0].userId}`,{val}).then((res) => {
       });
     }
+
+    function updateEventDetails() {
+      const eventDatas = {
+        orderId : postInfo.orderId,
+        additionalConf,
+        additionalPromiseDat,
+        additionalReas,
+        additionalstats,
+
+        shootingConf,
+        shootingPromiseDat,
+        shootingReas,
+        shootingstats,
+
+        bachelorsPartyConf,
+        bachelorsPartyPromiseDat,
+        bachelorsPartyReas,
+        bachelorsPartystats,
+
+        cateringConf,
+        cateringPromiseDat,
+        cateringReas,
+        cateringstats,
+
+
+        
+        
+      };
+  
+      axios
+        .post("/api/prewedding/updateInfos", { eventDatas })
+        .then((res) => {
+          // console.log(res);
+          if (res.status===200) {
+            alert("success")
+            setUpdtBtn(true)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
   return (
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
     <div className="col">
-      
-      
       <table className="table bg-white rounded shadow-sm  table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              Order 
-            </th>
-            <th className=" fw-bold" scope="col">
-              Order Status
-            </th>
-            <th className=" fw-bold" scope="col">
-              Change Status
-            </th>
-            
-          </tr>
-        </thead>
+      <thead>
+            <tr>
+              <th scope="col">Event</th>
+              <th className=" fw-bold" scope="col">
+                Promise Date
+              </th>
+              <th className=" fw-bold" scope="col">
+                Confirmed
+              </th>
+              <th className=" fw-bold" scope="col">
+                Reason
+              </th>
+              <th className=" fw-bold" scope="col">
+                Status
+              </th>
+            </tr>
+          </thead>
         <tbody>
-        <tr>
-          <th>Venue status</th>
-          <td>{forms[0].venueStatus}</td>
-          <td><div className='btn btn-success' onClick={()=>status("venue")}>Completed</div></td>
-        </tr>
-        <tr>
-          <th>cateringStatus</th>
-          <td>{forms[0].cateringStatus}</td>
-          <td><div className='btn btn-success' onClick={()=>status("catering")}>Completed</div></td>
-        </tr>     
-        </tbody>
+            {!!additional && (
+              <tr>
+                <th>Additional Service</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    onChange={(e) => {
+                      setAdditionalPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    value={additionalPromiseDat}
+                    className={"input"}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (additionalConf == "Not Confirmed") {
+                        setAdditionalConf("Confirmed");
+                      } else if (additionalConf == "Confirmed") {
+                        setAdditionalConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalConf}
+                  </div>
+                </td>
+
+                <td>
+                  <input
+                    type={"text"}
+                    value={additionalReas}
+                    onChange={(e) => {
+                      setAdditionalReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (additionalstats == "pending") {
+                        setAdditionalstats("Completed");
+                      } else if (additionalstats == "Completed") {
+                        setAdditionalstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!shooting && (
+              <tr>
+                <th>Shooting</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    value={shootingPromiseDat}
+                    type={"date"}
+                    onChange={(e) => {
+                      setShootingPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input-sm"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (shootingConf == "Not Confirmed") {
+                        setShootingConf("Confirmed");
+                      } else if (shootingConf == "Confirmed") {
+                        setShootingConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {shootingConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={shootingReas}
+                    onChange={(e) => {
+                      setShootingReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (shootingstats == "pending") {
+                        setShootingstats("Completed");
+                      } else if (shootingstats == "Completed") {
+                        setShootingstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {shootingstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!bachelorsParty && (
+              <tr>
+                <th>BachelorsParty</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={bachelorsPartyPromiseDat}
+                    onChange={(e) => {
+                      setBachelorsPartyPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (bachelorsPartyConf == "Not Confirmed") {
+                        setBachelorsPartyConf("Confirmed");
+                      } else if (bachelorsPartyConf == "Confirmed") {
+                        setBachelorsPartyConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {bachelorsPartyConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={bachelorsPartyReas}
+                    onChange={(e) => {
+                      setBachelorsPartyReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (bachelorsPartystats == "pending") {
+                        setBachelorsPartystats("Completed");
+                      } else if (bachelorsPartystats == "Completed") {
+                        setBachelorsPartystats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {bachelorsPartystats}
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!!catering && (
+              <tr>
+                <th>Catering</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    value={cateringPromiseDat}
+                    onChange={(e) => {
+                      setCateringPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    className={"input"}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (cateringConf == "Not Confirmed") {
+                        setCateringConf("Confirmed");
+                      } else if (cateringConf == "Confirmed") {
+                        setCateringConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {cateringConf}
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type={"text"}
+                    value={cateringReas}
+                    onChange={(e) => {
+                      setCateringReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (cateringstats == "pending") {
+                        setCateringstats("Completed");
+                      } else if (cateringstats == "Completed") {
+                        setCateringstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {cateringstats}
+                  </div>
+                </td>
+              </tr>
+            )}
+           
+          </tbody>
+          <tr rowspan="5" className="text-center">
+            <th></th>
+            <th></th>
+            <button
+              type="button"
+              onClick={() => updateEventDetails()}
+              className="my-3 btn btn-success"
+              disabled={updtBtn}
+            >
+              Update
+            </button>
+          </tr>
       </table>
       <hr class="my-5"/>
       <table className="table bg-white rounded shadow-sm  table-hover">

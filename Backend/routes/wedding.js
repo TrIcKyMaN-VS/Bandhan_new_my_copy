@@ -187,6 +187,11 @@ router.post("/", auth, async (req, res) => {
   let hostingPromiseDate;
   let hostingService;
 
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
+
   const newWeddingForm = WeddingForm({
     eventName,
     userId,
@@ -223,7 +228,7 @@ router.post("/", auth, async (req, res) => {
   });
 
   if (data.service[0] === "Mehandi") {
-    mehandiStatus = "pending";
+    mehandiStatus = "pending";``
     mehandiReason = "-";
     mehandiPromiseDate = "";
     mehandiService = "Not Confirmed";
@@ -233,7 +238,17 @@ router.post("/", auth, async (req, res) => {
     mehandiPromiseDate = null;
     mehandiService = null;
   }
-
+  if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
+  }
   if (data.OtherServices.includes("venue")) {
     venueStatus = "pending";
     venueReason = "-";
@@ -396,6 +411,10 @@ router.post("/", auth, async (req, res) => {
     hostingStatus,
     hostingPromiseDate,
     hostingService,
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
   });
 
   const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
@@ -478,6 +497,10 @@ router.post("/updateInfos", (req, res) => {
         hostingStatus: datass.hostingstats,
         hostingPromiseDate: datass.hostingPromiseDat,
         hostingService: datass.hostingConf,
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
       },
     },
     (err, doc) => {

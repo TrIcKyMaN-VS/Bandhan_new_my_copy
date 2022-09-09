@@ -158,6 +158,11 @@ router.post("/", auth, async (req, res) => {
   let showsPromiseDate;
   let showsService;
 
+  let AdditionalReason;
+  let AdditionalStatus;
+  let AdditionalPromiseDate;
+  let AdditionalService;
+
   let pandit_JiReason;
   let pandit_JiStatus;
   let pandit_JiPromiseDate;
@@ -289,6 +294,17 @@ router.post("/", auth, async (req, res) => {
     beautyPromiseDate = null;
     beautyService = null;
   }
+  if (data.SpecialService) {
+    AdditionalStatus = "pending";
+    AdditionalReason = "-";
+    AdditionalPromiseDate = "";
+    AdditionalService = "Not Confirmed";
+  } else {
+    AdditionalStatus = null;
+    AdditionalReason = null;
+    AdditionalPromiseDate = null;
+    AdditionalService = null;
+  }
 
   const newEngagementInfo = EngagementInfo({
     eventName,
@@ -334,6 +350,10 @@ router.post("/", auth, async (req, res) => {
     hostingStatus,
     hostingPromiseDate,
     hostingService,
+    AdditionalReason,
+    AdditionalStatus,
+    AdditionalPromiseDate,
+    AdditionalService,
   });
 
   newEngagementInfo.save().then(()=>console.log("success infowed saved"))
@@ -428,6 +448,10 @@ router.post("/updateInfos", (req, res) => {
         hostingStatus: datass.hostingstats,
         hostingPromiseDate: datass.hostingPromiseDat,
         hostingService: datass.hostingConf,
+        AdditionalReason: datass.additionalReas,
+        AdditionalStatus: datass.additionalstats,
+        AdditionalPromiseDate: datass.additionalPromiseDat,
+        AdditionalService: datass.additionalConf,
       },
     },
     (err, doc) => {
