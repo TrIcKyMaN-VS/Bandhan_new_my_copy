@@ -636,7 +636,7 @@ function CorporateForm() {
                     <div class="col-md-4">
                       <div class="mb-3">
                         <label
-                          for="Motivational Speech"
+                          for="MotivationalSpeech"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -647,7 +647,7 @@ function CorporateForm() {
                           {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
-                          id="Motivational_Speech"
+                          id="MotivationalSpeech"
                           value="Motivational_Speech"
                         />
                       </div>
@@ -748,7 +748,7 @@ function CorporateForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          HtmlFor="regulardecoration"
+                          for="regulardecoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -759,7 +759,7 @@ function CorporateForm() {
                           {...register("Decoration")}
                           type="checkbox"
                           class="form-check-input"
-                          id="RegularDecoration"
+                          id="regulardecoration"
                           value={"Regular Decoration"}
                           checked={checkedRegulardecoration}
                           onChange={() => {
@@ -774,7 +774,7 @@ function CorporateForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          HtmlFor="decoration"
+                          for="decoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -884,7 +884,7 @@ function CorporateForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -906,7 +906,7 @@ function CorporateForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>
@@ -948,7 +948,7 @@ function CorporateForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="invitation"
+                          for="invitation"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -988,7 +988,7 @@ function CorporateForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="venue"
+                          for="venue"
                           class="form-check-label"
                           value=" "
                           style={{ marginRight: "15px" }}
@@ -1012,7 +1012,7 @@ function CorporateForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="photography"
+                          for="photography"
                           class="form-check-label"
                           style={{ marginRight: "15px" }}
                         >

@@ -28,21 +28,16 @@ function Footer() {
         <a href="" class="text-white me-4">
           <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="" class="text-white me-4">
+        {/* <a href="" class="text-white me-4">
           <i class="fab fa-twitter"></i>
-        </a>
+        </a> */}
         <a href="" class="text-white me-4">
           <i class="fab fa-google"></i>
         </a>
-        <a href="" class="text-white me-4">
+        <a href="https://www.instagram.com/dhoomdhamaka" class="text-white me-4">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-github"></i>
-        </a>
+        
       </div>
       {/* <!-- Right --> */}
     </section>
@@ -80,7 +75,7 @@ function Footer() {
      <a
        class="btn text-white btn-floating m-1"
        style={{backgroundColor:" #ac2bac"}}
-       href="#!"
+       href="https://www.instagram.com/dhoomdhamaka"
        role="button"
        ><i class="fab fa-instagram"></i
      ></a>

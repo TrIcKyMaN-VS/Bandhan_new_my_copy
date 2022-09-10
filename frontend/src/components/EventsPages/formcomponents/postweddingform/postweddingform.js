@@ -644,7 +644,7 @@ function PostweddingForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -666,7 +666,7 @@ function PostweddingForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>

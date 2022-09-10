@@ -866,7 +866,7 @@ function PreweddingForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -888,7 +888,7 @@ function PreweddingForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>

@@ -1450,7 +1450,7 @@ function Weddingform() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -1472,7 +1472,7 @@ function Weddingform() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>
@@ -1537,7 +1537,7 @@ function Weddingform() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="beauty"
+                          for="poojaa"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -1549,7 +1549,7 @@ function Weddingform() {
                           type="checkbox"
                           class="form-check-input"
                           value="pooja_pandit_Ji"
-                          id="pooja_pandit_Ji"
+                          id="poojaa"
                         />
                       </div>
                     </div>

@@ -810,7 +810,7 @@ function Finalbirthdayform() {
                           {...register("Decoration")}
                           type="checkbox"
                           class="form-check-input"
-                          id="theme decoration"
+                          id="themedecoration"
                           value="Theme Decoration"
                           checked={checkedDecoration}
                           onChange={() => {
@@ -909,7 +909,9 @@ function Finalbirthdayform() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault"
+                            // HtmlFor="Veg"
+                            for="veg"
+                           
                           >
                             Veg
                           </label>
@@ -931,7 +933,7 @@ function Finalbirthdayform() {
 
                           <label
                             class="form-check-label"
-                            HtmlFor="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>

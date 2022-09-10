@@ -176,7 +176,7 @@ router.post("/", auth, async (req, res) => {
   let AdditionalPromiseDate;
   let AdditionalService;
 
-
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("mehandi")) {
     mehandiStatus = "pending";
     mehandiReason = "-";
@@ -188,6 +188,12 @@ router.post("/", auth, async (req, res) => {
     mehandiPromiseDate = null;
     mehandiService = null;
   }
+} else {
+  mehandiStatus = null;
+  mehandiReason = null;
+  mehandiPromiseDate = null;
+  mehandiService = null;
+}
   if (data.SpecialService) {
     AdditionalStatus = "pending";
     AdditionalReason = "-";
@@ -199,7 +205,7 @@ router.post("/", auth, async (req, res) => {
     AdditionalPromiseDate = null;
     AdditionalService = null;
   }
-
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("venue")) {
     venueStatus = "pending";
     venueReason = "-";
@@ -211,7 +217,13 @@ router.post("/", auth, async (req, res) => {
     venuePromiseDate = null;
     venueService = null;
   }
-
+} else {
+  venueStatus = null;
+  venueReason = null;
+  venuePromiseDate = null;
+  venueService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("photography")) {
     photographyStatus = "pending";
     photographyReason = "-";
@@ -223,6 +235,12 @@ router.post("/", auth, async (req, res) => {
     photographyPromiseDate = null;
     photographyService = null;
   }
+} else {
+  photographyStatus = null;
+  photographyReason = null;
+  photographyPromiseDate = null;
+  photographyService = null;
+}
   if (data.Food) {
     cateringStatus = "pending";
     cateringReason = "-";
@@ -246,7 +264,7 @@ router.post("/", auth, async (req, res) => {
     showsPromiseDate = null;
     showsService = null;
   }
-
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("invitation")) {
     invitationStatus = "pending";
     invitationReason = "-";
@@ -258,6 +276,12 @@ router.post("/", auth, async (req, res) => {
     invitationPromiseDate = null;
     invitationService = null;
   }
+} else {
+  invitationStatus = null;
+  invitationReason = null;
+  invitationPromiseDate = null;
+  invitationService = null;
+}
   if (checkBoxValues.decorationvalue || data.ThemeDecoration) {
     decorationStatus = "pending";
     decorationReason = "-";
@@ -269,6 +293,7 @@ router.post("/", auth, async (req, res) => {
     decorationPromiseDate = null;
     decorationService = null;
   }
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("hosting")) {
     hostingStatus = "pending";
     hostingReason = "-";
@@ -280,6 +305,13 @@ router.post("/", auth, async (req, res) => {
     hostingPromiseDate = null;
     hostingService = null;
   }
+} else {
+  hostingStatus = null;
+  hostingReason = null;
+  hostingPromiseDate = null;
+  hostingService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("pooja_pandit_ji")) {
     pandit_JiStatus = "pending";
     pandit_JiReason = "-";
@@ -291,6 +323,13 @@ router.post("/", auth, async (req, res) => {
     pandit_JiPromiseDate = null;
     pandit_JiService = null;
   }
+} else {
+  pandit_JiStatus = null;
+  pandit_JiReason = null;
+  pandit_JiPromiseDate = null;
+  pandit_JiService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("beauty")) {
     beautyStatus = "pending";
     beautyReason = "-";
@@ -302,6 +341,12 @@ router.post("/", auth, async (req, res) => {
     beautyPromiseDate = null;
     beautyService = null;
   }
+} else {
+  beautyStatus = null;
+  beautyReason = null;
+  beautyPromiseDate = null;
+  beautyService = null;
+}
 
   const newFamilyFunctionInfo = FamilyFunctionInfo({
     eventName,

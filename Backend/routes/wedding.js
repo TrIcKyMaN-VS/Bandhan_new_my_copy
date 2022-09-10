@@ -228,7 +228,7 @@ console.log(req.body);
     // cateringStatus,
     // isVerified,
   });
-
+  if (data.OtherServices.length > 1) {
   if (data.Services.includes("mehandi")) {
     mehandiStatus = "pending";``
     mehandiReason = "-";
@@ -240,6 +240,12 @@ console.log(req.body);
     mehandiPromiseDate = null;
     mehandiService = null;
   }
+} else {
+  mehandiStatus = null;
+  mehandiReason = null;
+  mehandiPromiseDate = null;
+  mehandiService = null;
+}
   if (data.SpecialService) {
     AdditionalStatus = "pending";
     AdditionalReason = "-";
@@ -251,6 +257,7 @@ console.log(req.body);
     AdditionalPromiseDate = null;
     AdditionalService = null;
   }
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("venue")) {
     venueStatus = "pending";
     venueReason = "-";
@@ -262,7 +269,13 @@ console.log(req.body);
     venuePromiseDate = null;
     venueService = null;
   }
-
+} else {
+  venueStatus = null;
+  venueReason = null;
+  venuePromiseDate = null;
+  venueService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("photography")) {
     photographyStatus = "pending";
     photographyReason = "-";
@@ -274,6 +287,12 @@ console.log(req.body);
     photographyPromiseDate = null;
     photographyService = null;
   }
+} else {
+  photographyStatus = null;
+  photographyReason = null;
+  photographyPromiseDate = null;
+  photographyService = null;
+}
   if (data.Food) {
     cateringStatus = "pending";
     cateringReason = "-";
@@ -308,7 +327,7 @@ console.log(req.body);
     showsPromiseDate = null;
     showsService = null;
   }
-
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("invitation")) {
     invitationStatus = "pending";
     invitationReason = "-";
@@ -320,6 +339,12 @@ console.log(req.body);
     invitationPromiseDate = null;
     invitationService = null;
   }
+} else {
+  invitationStatus = null;
+  invitationReason = null;
+  invitationPromiseDate = null;
+  invitationService = null;
+}
   if (checkBoxValues.decorationvalue || data.ThemeDecoration) {
     decorationStatus = "pending";
     decorationReason = "-";
@@ -331,6 +356,7 @@ console.log(req.body);
     decorationPromiseDate = null;
     decorationService = null;
   }
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("hosting")) {
     hostingStatus = "pending";
     hostingReason = "-";
@@ -342,6 +368,13 @@ console.log(req.body);
     hostingPromiseDate = null;
     hostingService = null;
   }
+} else {
+  hostingStatus = null;
+  hostingReason = null;
+  hostingPromiseDate = null;
+  hostingService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("pooja_pandit_Ji")) {
     pandit_JiStatus = "pending";
     pandit_JiReason = "-";
@@ -353,6 +386,13 @@ console.log(req.body);
     pandit_JiPromiseDate = null;
     pandit_JiService = null;
   }
+} else {
+  pandit_JiStatus = null;
+  pandit_JiReason = null;
+  pandit_JiPromiseDate = null;
+  pandit_JiService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("beauty")) {
     beautyStatus = "pending";
     beautyReason = "-";
@@ -364,6 +404,12 @@ console.log(req.body);
     beautyPromiseDate = null;
     beautyService = null;
   }
+} else {
+  beautyStatus = null;
+  beautyReason = null;
+  beautyPromiseDate = null;
+  beautyService = null;
+}
 
   const newWeddingInfo = WeddingInfo({
     eventName,

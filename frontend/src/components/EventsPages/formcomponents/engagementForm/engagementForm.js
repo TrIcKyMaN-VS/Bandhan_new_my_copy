@@ -213,7 +213,7 @@ function EngagementForm() {
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if (diffDays < 10) {
+    if (diffDays < 5) {
       toast.success("you are under premium booking!!!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -815,7 +815,7 @@ function EngagementForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -837,7 +837,7 @@ function EngagementForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>
@@ -902,7 +902,7 @@ function EngagementForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="beauty"
+                          for="pooja"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -913,7 +913,7 @@ function EngagementForm() {
                           {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
-                          id="beauty"
+                          id="pooja"
                           value="Pooja Pandit"
                         />
                       </div>

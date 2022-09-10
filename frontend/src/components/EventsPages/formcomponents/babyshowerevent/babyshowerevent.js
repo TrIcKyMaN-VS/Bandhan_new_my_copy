@@ -537,7 +537,7 @@ function BabyShowerForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="games"
+                          for="gamess"
                           class="form-check-label"
                           style={{ marginRight: "15px" }}
                         >
@@ -547,7 +547,7 @@ function BabyShowerForm() {
                           {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
-                          id="games"
+                          id="gamess"
                           value={"games"}
                         />
                       </div>
@@ -555,7 +555,7 @@ function BabyShowerForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="magic"
+                          for="magicc"
                           class="form-check-label"
                           style={{ marginRight: "15px" }}
                         >
@@ -565,7 +565,7 @@ function BabyShowerForm() {
                           {...register("shows")}
                           type="checkbox"
                           class="form-check-input"
-                          id="magic"
+                          id="magicc"
                           value={"magic"}
                         />
                       </div>
@@ -834,7 +834,7 @@ function BabyShowerForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -856,7 +856,7 @@ function BabyShowerForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>

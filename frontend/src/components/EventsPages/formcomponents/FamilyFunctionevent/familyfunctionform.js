@@ -715,7 +715,7 @@ function FamilyfunctionForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          HtmlFor="regulardecoration"
+                          for="RegularDecoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -741,7 +741,7 @@ function FamilyfunctionForm() {
                       <div class="mb-3">
                         <br />
                         <label
-                          HtmlFor="decoration"
+                          for="decoration"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -851,7 +851,7 @@ function FamilyfunctionForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault"
+                            for="veg"
                           >
                             Veg
                           </label>
@@ -873,7 +873,7 @@ function FamilyfunctionForm() {
 
                           <label
                             class="form-check-label"
-                            for="flexRadioDefault2"
+                            for="jain"
                           >
                             Jain
                           </label>
@@ -938,7 +938,7 @@ function FamilyfunctionForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          for="beauty"
+                          for="poojapand"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}
@@ -949,7 +949,7 @@ function FamilyfunctionForm() {
                           {...register("OtherServices")}
                           type="checkbox"
                           class="form-check-input"
-                          id="pooja_pandit_ji"
+                          id="poojapand"
                           value={"pooja_pandit_ji"}
                         />
                       </div>
@@ -980,7 +980,7 @@ function FamilyfunctionForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="photography"
+                          for="photography"
                           class="form-check-label"
                           style={{ marginRight: "15px" }}
                         >
@@ -1002,7 +1002,7 @@ function FamilyfunctionForm() {
                     <div class="col-md-3">
                       <div class="mb-3">
                         <label
-                          HtmlFor="beauty"
+                          for="beauty"
                           class="form-check-label"
                           value=""
                           style={{ marginRight: "15px" }}

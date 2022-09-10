@@ -170,7 +170,7 @@ console.log(req.body);
   let AdditionalService;
 
 
-
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("venue")) {
     venueStatus = "pending";
     venueReason = "-";
@@ -182,7 +182,13 @@ console.log(req.body);
     venuePromiseDate = null;
     venueService = null;
   }
-
+} else {
+  venueStatus = null;
+  venueReason = null;
+  venuePromiseDate = null;
+  venueService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("photography")) {
     photographyStatus = "pending";
     photographyReason = "-";
@@ -194,7 +200,13 @@ console.log(req.body);
     photographyPromiseDate = null;
     photographyService = null;
   }
-
+} else {
+  photographyStatus = null;
+  photographyReason = null;
+  photographyPromiseDate = null;
+  photographyService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("invitation")) {
     invitationStatus = "pending";
     invitationReason = "-";
@@ -206,7 +218,13 @@ console.log(req.body);
     invitationPromiseDate = null;
     invitationService = null;
   }
-
+} else {
+  invitationStatus = null;
+  invitationReason = null;
+  invitationPromiseDate = null;
+  invitationService = null;
+}
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("hosting")) {
     hostingStatus = "pending";
     hostingReason = "-";
@@ -218,6 +236,12 @@ console.log(req.body);
     hostingPromiseDate = null;
     hostingService = null;
   }
+} else {
+  hostingStatus = null;
+  hostingReason = null;
+  hostingPromiseDate = null;
+  hostingService = null;
+}
 
   if (data.Food) {
     cateringStatus = "pending";
