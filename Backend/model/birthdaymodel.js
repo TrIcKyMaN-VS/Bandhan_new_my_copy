@@ -83,7 +83,7 @@ const birthdaySchema = new mongoose.Schema(
       invitation: {
         type: String,
       },
-      Photography: {
+      photography: {
         type: Object,
       },
       venues: {

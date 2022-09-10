@@ -60,7 +60,7 @@ router.post("/", auth, async (req, res) => {
   // const Photography = {
   //     photography : req.body.checkBoxValues.photovalue
   // }
-  // console.log(photography);
+  console.log(req.body);
   const Food = {
     Foodtype: req.body.data.Food?req.body.data.Food:"-",
     items: req.body.checkBoxValues.foodvalue?req.body.checkBoxValues.foodvalue:"-",
@@ -109,7 +109,7 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     // Photography,
-    // Food,
+    Food,
     // foodb,
     // photographyb,
     // venueb,
@@ -175,7 +175,7 @@ router.post("/", auth, async (req, res) => {
     venueService = null;
   }
 
-  if (data.SpecialService) {
+  if (req.body.data.SpecialService) {
     AdditionalStatus = "pending";
     AdditionalReason = "-";
     AdditionalPromiseDate = "";
@@ -233,7 +233,7 @@ router.post("/", auth, async (req, res) => {
     invitationPromiseDate = null;
     invitationService = null;
   }
-  if (req.body.checkBoxValues.decorationvalue || data.ThemeDecoration) {
+  if (req.body.checkBoxValues.decorationvalue || req.body.data.ThemeDecoration) {
     decorationStatus = "pending";
     decorationReason = "-";
     decorationPromiseDate = "";

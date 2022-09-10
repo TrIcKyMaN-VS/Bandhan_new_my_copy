@@ -8,6 +8,12 @@ function Orderslist(props) {
   const [datavoucher, setdatavoucher] = useState("");
   const [postInfo, setPostInfo] = useState("");
 
+  const [additional, setAdditional] = useState(false);
+  const [additionalReas, setAdditionalReas] = useState(null);
+  const [additionalstats, setAdditionalstats] = useState(null);
+  const [additionalConf, setAdditionalConf] = useState(null);
+  const [additionalPromiseDat, setAdditionalPromiseDate] = useState(null);
+
   const [honeymoon, setHoneymoon] = useState(false);
   const [honeymoonReas, setHoneymoonReas] = useState(null);
   const [honeymoonstats, setHoneymoonstats] = useState(null);
@@ -52,6 +58,16 @@ function Orderslist(props) {
           } else {
             setHoneymoon(false);
           }
+        }
+
+        if (res.data[0].AdditionalReason != null) {
+          setAdditional(true);
+          setAdditionalConf(res.data[0].AdditionalService);
+          setAdditionalPromiseDate(res.data[0].AdditionalPromiseDate);
+          setAdditionalReas(res.data[0].AdditionalReason);
+          setAdditionalstats(res.data[0].AdditionalStatus);
+        } else {
+          setAdditional(false);
         }
         // console.log(res.data[0].muh_DikhaiConfirmation);
 
@@ -135,6 +151,10 @@ function Orderslist(props) {
       subaarambhYatraPromiseDat,
       subaarambhYatraReas,
       subaarambhYatrastats,
+      additionalConf,
+      additionalPromiseDat,
+      additionalReas,
+      additionalstats,
     };
 
     axios
@@ -170,6 +190,71 @@ function Orderslist(props) {
             </tr>
           </thead>
           <tbody>
+          {!!additional && (
+              <tr>
+                <th>Additional Service</th>
+                <td className="text-start ps-0 ms-0 pe-5">
+                  <input
+                    type={"date"}
+                    onChange={(e) => {
+                      setAdditionalPromiseDate(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                    value={additionalPromiseDat}
+                    className={"input"}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn btn-info"
+                    onClick={() => {
+                      if (additionalConf == "Not Confirmed") {
+                        setAdditionalConf("Confirmed");
+                      } else if (additionalConf == "Confirmed") {
+                        setAdditionalConf("Not Confirmed");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalConf}
+                  </div>
+                </td>
+
+                <td>
+                  <input
+                    type={"text"}
+                    value={additionalReas}
+                    onChange={(e) => {
+                      setAdditionalReas(e.target.value);
+                      setUpdtBtn(false);
+                    }}
+                  />
+                </td>
+
+                <td>
+                  <div
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={() => {
+                      if (additionalstats == "pending") {
+                        setAdditionalstats("Completed");
+                      } else if (additionalstats == "Completed") {
+                        setAdditionalstats("pending");
+                      } else {
+                        alert("Refresh the Page.Internet Connection Lost");
+                      }
+                      setUpdtBtn(false);
+                    }}
+                  >
+                    {additionalstats}
+                  </div>
+                </td>
+              </tr>
+            )}
             {!!honeymoon && (
               <tr>
                 <th>Honneymoon</th>

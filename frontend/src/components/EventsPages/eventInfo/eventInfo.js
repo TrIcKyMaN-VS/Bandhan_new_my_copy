@@ -3,163 +3,186 @@ import React, { useEffect, useState } from "react";
 import EventTable from "./eventTable";
 
 function EventInfo() {
-  const [datas, setdata] = useState([]);
+  // const [datas, setdata] = useState([]);
+  const [userId , setuserId] = useState("")
+ const [preweddingdata, setpreweddingdata] = useState([])
+ const [babyshowerdata,setbabyshowerdata ] = useState([])
+const [weddingdata, setweddingdata] = useState([])
+const [engagementdata, setengagementdata] = useState([])
+const [birthdaydata, setbirthdaydata] = useState([])
+const [corporatedata, setcorporatedata] = useState([])
+const [familyfunctiondata, setfamilyfunctiondata] = useState([])
+const [postweddingdata, setpostweddingdata] = useState([])
+  
   useEffect(() => {
-    //req for preWed
 
+  
+    axios.get("api/eventInfo/getorderId").then((res) => {
+      setuserId(res.data[0].userId);
+      console.log("userId",res.data[0].userId);
+
+      //req for preWed
     axios
-      .get("api/eventInfo/prewedding")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .get(`api/eventInfo/preweddingInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setpreweddingdata(ll[0]);
+      }
+      else{
+        setpreweddingdata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-    //req for babyshower
+  //req for babyshower
 
-    axios
-      .get("api/eventInfo/babyshower")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+    .get(`api/eventInfo/babyshowerInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setbabyshowerdata(ll[0]);
+      }
+      else{
+        setbabyshowerdata([])
+      }
+    })
+    .catch((err) => {
+      console.log("intha",err);
+    });
 
-    //req for Wed
+  //req for Wed
 
-    axios
-      .get("api/eventInfo/wedding")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+  .get(`api/eventInfo/weddingInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setweddingdata(ll[0]);
+      }
+      else{
+        setweddingdata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-    //req for engag
+  //req for engag
 
-    axios
-      .get("api/eventInfo/engagement")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          // console.log(ll);
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+  .get(`api/eventInfo/engagementInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        // console.log(ll);
+        setengagementdata(ll[0]);
+      }
+      else{
+        setengagementdata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-    //req for bdy
+  //req for bdy
 
-    axios
-      .get("api/eventInfo/birthday")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+  .get(`api/eventInfo/birthdayInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setbirthdaydata(ll[0]);
+      }
+      else{
+        setbirthdaydata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-    //req for corpor
+  //req for corpor
 
-    axios
-      .get("api/eventInfo/corporate")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+  .get(`api/eventInfo/corporateInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setcorporatedata(ll[0]);
+      }
+      else{
+        setcorporatedata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-    //req for familfunc
+  //req for familfunc
 
-    axios
-      .get("api/eventInfo/familyfunction")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+  .get(`api/eventInfo/familyfunctionInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setfamilyfunctiondata(ll[0]);
+      }
+      else{
+        setfamilyfunctiondata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-    //req for postWed
+  //req for postWed
 
-    axios
-      .get("api/eventInfo/postwedding")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => [...data, ll[0]]);
-          // console.log(datas);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  axios
+  .get(`api/eventInfo/postweddingInfo/${res.data[0].userId}`)
+    .then((res) => {
+      const ll = res.data;
+      if (ll.length > 0) {
+        setpostweddingdata(ll[0]);
+        // console.log(datas);
+      }
+      else{
+        setpostweddingdata([])
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    });
+
+
   }, []);
-  // console.log("last", datas);
+
 
   return (
-    <div className=" mt-5 mb-5 ps-5 pe-5 ms-3 me-3 pb-5 pt-3">
-      {datas.map((item,i) => {
-        console.log(item)
-        if(item.foodb == true){
-          item.foodb = "Catering"
-        }
-        if(item.venueb == true){
-          item.venueb = "Venue"
-        }
-        if(item.photographyb == true){
-          item.photographyb = "Photography"
-        }
-        if(item.decorationb == true){
-          item.decorationb = "Decoration"
-        }
-        if(item.Honneymoonb == true){
-          item.Honneymoonb = "HoneyMoon"
-        }
-        if(item.shootingb == true){
-          item.shootingb = "Shooting"
-        }
-        
+    <div className=" mt-5 mb-5 ps-5 pe-5 ms-3 me-3 pb-5 pt-3">     
         return (
-
+       
           <EventTable
-          
-            key={i}
-            item={item}
-            Catering={item.foodb}
-            Photography={item.photographyb}
-            Venue={item.venueb}
-            Decoration={item.decorationb}
-            Honeymoon={item.Honneymoonb}
-            Shooting={item.shootingb}
+            prewedding = {preweddingdata}
+            postwedding = {postweddingdata}
+            babyshower = {babyshowerdata}
+            birthday = {birthdaydata}
+            engagement = {engagementdata}
+            corporate = {corporatedata}
+            familyfunction = {familyfunctiondata}
+            wedding = {weddingdata}
+            // datas = {datas}
+            
           />
         );
-      })}
+    
     </div>
+
   );
 }
 
