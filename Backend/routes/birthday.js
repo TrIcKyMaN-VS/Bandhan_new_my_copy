@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const { EventForm } = require("../model/eventModel");
 const { BirthdayForm ,BirthdayInfo} = require("../model/birthdaymodel");
 const auth = require("../middleware/auth");
+const { PaymentfullDhoom } = require("../model/paymentfullmodel");
 
 //routes
 router.post("/", auth, async (req, res) => {
@@ -162,7 +163,7 @@ router.post("/", auth, async (req, res) => {
   let AdditionalPromiseDate;
   let AdditionalService;
 
-
+  if (req.body.data.OtherServices.length > 1) {
   if (req.body.data.OtherServices.includes("venue")) {
     venueStatus = "pending";
     venueReason = "-";
@@ -174,6 +175,12 @@ router.post("/", auth, async (req, res) => {
     venuePromiseDate = null;
     venueService = null;
   }
+} else {
+  venueStatus = null;
+  venueReason = null;
+  venuePromiseDate = null;
+  venueService = null;
+}
 
   if (req.body.data.SpecialService) {
     AdditionalStatus = "pending";
@@ -187,6 +194,8 @@ router.post("/", auth, async (req, res) => {
     AdditionalService = null;
   }
 
+
+  if (req.body.data.OtherServices.length > 1) {
   if (req.body.data.OtherServices.includes("photography")) {
     photographyStatus = "pending";
     photographyReason = "-";
@@ -198,6 +207,12 @@ router.post("/", auth, async (req, res) => {
     photographyPromiseDate = null;
     photographyService = null;
   }
+} else {
+  photographyStatus = null;
+  photographyReason = null;
+  photographyPromiseDate = null;
+  photographyService = null;
+}
   if (req.body.data.Food) {
     cateringStatus = "pending";
     cateringReason = "-";
@@ -222,6 +237,7 @@ router.post("/", auth, async (req, res) => {
     showsService = null;
   }
 
+  if (req.body.data.OtherServices.length > 1) {
   if (req.body.data.OtherServices.includes("invitation")) {
     invitationStatus = "pending";
     invitationReason = "-";
@@ -233,6 +249,12 @@ router.post("/", auth, async (req, res) => {
     invitationPromiseDate = null;
     invitationService = null;
   }
+} else {
+  invitationStatus = null;
+  invitationReason = null;
+  invitationPromiseDate = null;
+  invitationService = null;
+}
   if (req.body.checkBoxValues.decorationvalue || req.body.data.ThemeDecoration) {
     decorationStatus = "pending";
     decorationReason = "-";
@@ -245,11 +267,18 @@ router.post("/", auth, async (req, res) => {
     decorationService = null;
   }
 
+  if (req.body.data.OtherServices.length > 1) {
   if (!!req.body.data.OtherServices.includes("beauty")) {
     beautyStatus = "pending";
     beautyReason = "-";
     beautyPromiseDate = "";
     beautyService = "Not Confirmed";
+  } else {
+    beautyStatus = null;
+    beautyReason = null;
+    beautyPromiseDate = null;
+    beautyService = null;
+  }
   } else {
     beautyStatus = null;
     beautyReason = null;
@@ -301,6 +330,52 @@ router.post("/", auth, async (req, res) => {
 
   newBirthdayForm.save().then(() => {
     res.status(200).send("birthday form saved successfully...!");
+        
+//payment Setting
+
+const newPaymentfullDhoom = PaymentfullDhoom({
+  eventName,
+  userId,
+  orderId,
+  eventCharge: null,
+  bookingCharge: null,
+  confirmationCharge: null,
+  pendingCharge: null,
+
+  //booking
+  booking: {
+    booking_Amount: null,
+    booking_paymentId: null,
+    booking_signature: null,
+    booking_isPaid: false,
+  },
+
+  //confirmation
+
+  confirmation: {
+    confirmation_Amount: null,
+    confirmation_paymentId: null,
+    confirmation_isPaid: false,
+    confirmation_signature: null,
+  },
+
+  //pending
+  pending: {
+    pending_Amount: null,
+    pending_paymentId: null,
+    pending_isPaid: false,
+    pending_signature: null,
+  },
+});
+
+newPaymentfullDhoom
+  .save()
+  .then(() => console.log("successfully payment saved"));
+
+
+
+
+
   });
   // console.log( );
 });
@@ -386,6 +461,41 @@ router.post("/updateInfos", (req, res) => {
 
 
 
+router.get("/paymentDetails/:orderIdp", (req, res) => {
+  PaymentfullDhoom.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).send(doc);
+    }
+  });
+});
 
+//payment updation
+
+router.post("/updatePaymentDetails", (req, res) => {
+  // console.log(req.body.paymentUpdation);
+  const paymentDataUpd = req.body.paymentUpdation;
+  PaymentfullDhoom.findOneAndUpdate(
+    { orderId: paymentDataUpd.orderId },
+    {
+      $set: {
+        eventCharge: paymentDataUpd.eventCharge,
+        bookingCharge: paymentDataUpd.bookingCharge,
+        confirmationCharge: paymentDataUpd.confirmationCharge,
+        pendingCharge: paymentDataUpd.pendingCharge,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send("Succefully payment Details Updated");
+      }
+    }
+  );
+});
 
 module.exports = router;

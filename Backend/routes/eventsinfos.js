@@ -155,11 +155,11 @@ router.get("/engagementpoints", async  (req, res) => {
 
   //EVent info
 
-  // router.get("/getname", async  (req, res) => {
-  //   const value = await User.find( { _id: req.id}, { username: 1,_id:1 } )
-  //   res.status(200).send(value)
-  //   //  console.log("successfully completed!!!");
-  //   })
+  router.get("/getname", async  (req, res) => {
+    const value = await User.find( { _id: req.id}, { username: 1,_id:1 } )
+    res.status(200).send(value)
+    //  console.log("successfully completed!!!");
+    })
 
   router.get("/getorderId", async  (req, res) => {
     const value = await EventName.find( { userId: req.id}, { userId: 1 } )

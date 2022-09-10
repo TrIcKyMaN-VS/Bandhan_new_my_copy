@@ -12,6 +12,7 @@ const { EventForm } = require("../model/eventModel");
 const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
 const {CorporateEventForm, CorporateInfo} = require("../model/corporateEvent")
+const { PaymentfullDhoom } = require("../model/paymentfullmodel");
 
 
 
@@ -26,7 +27,7 @@ router.post("/", auth, async (req, res) => {
   const TypeOfFunction = data.type_Of_Function?data.type_Of_Function:"-";
   const NameOfEvent = data.name_Of_Event?data.name_Of_Event:"-";
   const NameOfConcern = data.name_Of_Concern?data.name_Of_Concern:"-";
-  const Date = data.date;
+  const date = data.date;
   const FromTime = data.fromTime;
   const ToTime = data.ToTime;
   const MinBudget = data.Estimate_Budget_Minimum;
@@ -52,7 +53,7 @@ router.post("/", auth, async (req, res) => {
     ThemeDecoration: data.DecorationType?data.DecorationType:"-",
   };
   const SpecialService = data.SpecialService?data.SpecialService:"-";
-
+console.log(req.body);
   const Food = {
     Foodtype: data.Food? data.Food:"-",
     items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"-",
@@ -110,7 +111,7 @@ router.post("/", auth, async (req, res) => {
     TypeOfFunction,
     NameOfEvent,
     NameOfConcern,
-    Date,
+    date,
     FromTime,
     ToTime,
     NoOfGuests,
@@ -325,6 +326,51 @@ router.post("/", auth, async (req, res) => {
   newEventName.save().then(() => console.log("successfully event name saved"));
   newcorporateeventform.save().then(() => {
     res.status(200).send("Family Function form saved successfully...!");
+        
+//payment Setting
+
+const newPaymentfullDhoom = PaymentfullDhoom({
+  eventName,
+  userId,
+  orderId,
+  eventCharge: null,
+  bookingCharge: null,
+  confirmationCharge: null,
+  pendingCharge: null,
+
+  //booking
+  booking: {
+    booking_Amount: null,
+    booking_paymentId: null,
+    booking_signature: null,
+    booking_isPaid: false,
+  },
+
+  //confirmation
+
+  confirmation: {
+    confirmation_Amount: null,
+    confirmation_paymentId: null,
+    confirmation_isPaid: false,
+    confirmation_signature: null,
+  },
+
+  //pending
+  pending: {
+    pending_Amount: null,
+    pending_paymentId: null,
+    pending_isPaid: false,
+    pending_signature: null,
+  },
+});
+newPaymentfullDhoom
+  .save()
+  .then(() => console.log("successfully payment saved"));
+
+
+
+
+
   });
   console.log("completed!! saved");
 
@@ -401,5 +447,41 @@ router.post("/updateInfos", (req, res) => {
   );
 });
 
+router.get("/paymentDetails/:orderIdp", (req, res) => {
+  PaymentfullDhoom.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).send(doc);
+    }
+  });
+});
+
+//payment updation
+
+router.post("/updatePaymentDetails", (req, res) => {
+  // console.log(req.body.paymentUpdation);
+  const paymentDataUpd = req.body.paymentUpdation;
+  PaymentfullDhoom.findOneAndUpdate(
+    { orderId: paymentDataUpd.orderId },
+    {
+      $set: {
+        eventCharge: paymentDataUpd.eventCharge,
+        bookingCharge: paymentDataUpd.bookingCharge,
+        confirmationCharge: paymentDataUpd.confirmationCharge,
+        pendingCharge: paymentDataUpd.pendingCharge,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send("Succefully payment Details Updated");
+      }
+    }
+  );
+});
 
 module.exports = router;

@@ -67,10 +67,10 @@ const weddingSchema = new mongoose.Schema(
         },
       },
       Phera: {
-        DateMehandiShow: {
+        DatePhera: {
           type: String,
         },
-        TimeMehandiShow: {
+        TimePhera: {
           type: String,
         },
       },

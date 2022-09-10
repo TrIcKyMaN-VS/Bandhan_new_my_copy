@@ -5,160 +5,39 @@ import PaymentDetail from "./paymentDetail";
 
 function Payment() {
   const [datas, setdata] = useState([]);
-  const [display, setDisplay] = useState(false)
+  const [currentDetail, setCurrentDetail] = useState();
+  const [display, setDisplay] = useState(false);
 
   useEffect(() => {
-    //req for preWed
-
-    axios
-      .get("api/eventInfo/prewedding")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for babyshower
-
-    axios
-      .get("api/eventInfo/babyshower")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for Wed
-
-    axios
-      .get("api/eventInfo/wedding")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for engag
-
-    axios
-      .get("api/eventInfo/engagement")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          // console.log(ll);
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for bdy
-
-    axios
-      .get("api/eventInfo/birthday")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for corpor
-
-    axios
-      .get("api/eventInfo/corporate")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for familfunc
-
-    axios
-      .get("api/eventInfo/familyfunction")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    //req for postWed
-
-    axios
-      .get("api/eventInfo/postwedding")
-      .then((res) => {
-        const ll = res.data;
-        if (ll.length > 0) {
-          setdata((data) => {
-            return [...data, ll[0]];
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.get("api/payment/getPaymentLists").then((res) => {
+      if (res.status === 200) {
+        setdata(res.data);
+      }
+    });
   }, []);
 
-  async function detailsCall121(orderId) {
-    axios
-      .get("api/payment/details")
-      .then((res) => {
-        console.log(res.data);
-        if(res.status === 200){
-          setDisplay(true)
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  console.log(datas);
+
+  async function detailsCall121(item) {
+    // axios
+    //   .get("api/payment/getPaymentDetails")
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if(res.status === 200){
+    setCurrentDetail(item);
+    setDisplay(true);
+    console.log(currentDetail);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   return (
     <div className="mb-10 mt-5">
       <div className="row justify-content-center mx-5">
         {datas.map((item, i) => {
-          {
-            /* console.log(item.orderId) */
-          }
           return (
             <div className="col-md-4" key={i}>
               <div className="card rounded shadow-4-strong">
@@ -167,7 +46,7 @@ function Payment() {
                   <button
                     type="button"
                     className="btn btn-secondary"
-                    onClick={() => detailsCall121(item.orderId)}
+                    onClick={() => detailsCall121(item)}
                   >
                     Details
                   </button>
@@ -178,7 +57,7 @@ function Payment() {
         })}
       </div>
 
-      { display && <PaymentDetail />}
+      {display && <PaymentDetail data={currentDetail} />}
     </div>
   );
 

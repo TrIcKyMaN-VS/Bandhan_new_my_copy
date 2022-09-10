@@ -11,6 +11,7 @@ const auth = require("../middleware/auth");
 const { EventForm } = require("../model/eventModel");
 const { EventName } = require("../model/eventName");
 const { BabyShowerForm ,BabyShowerInfo} = require("../model/babyshowermodel");
+const { PaymentfullDhoom } = require("../model/paymentfullmodel");
 
 router.post("/", auth, async (req, res) => {
   const eventName = "BabyShower Event";
@@ -170,8 +171,8 @@ router.post("/", auth, async (req, res) => {
   let AdditionalPromiseDate;
   let AdditionalService;
 
-
-  if (data.OtherServices.includes("Mehandi")) {
+  if (data.OtherServices.length > 1) {
+  if (data.OtherServices.includes("mehandi")) {
     mehandiStatus = "pending";
     mehandiReason = "-";
     mehandiPromiseDate = "";
@@ -181,8 +182,16 @@ router.post("/", auth, async (req, res) => {
     mehandiReason = null;
     mehandiPromiseDate = null;
     mehandiService = null;
+  }}
+   else {
+    mehandiStatus = null;
+    mehandiReason = null;
+    mehandiPromiseDate = null;
+    mehandiService = null;
   }
 
+
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("venue")) {
     venueStatus = "pending";
     venueReason = "-";
@@ -194,7 +203,14 @@ router.post("/", auth, async (req, res) => {
     venuePromiseDate = null;
     venueService = null;
   }
+} else {
+  venueStatus = null;
+  venueReason = null;
+  venuePromiseDate = null;
+  venueService = null;
+}
 
+if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("photography")) {
     photographyStatus = "pending";
     photographyReason = "-";
@@ -206,6 +222,14 @@ router.post("/", auth, async (req, res) => {
     photographyPromiseDate = null;
     photographyService = null;
   }
+} else {
+  photographyStatus = null;
+  photographyReason = null;
+  photographyPromiseDate = null;
+  photographyService = null;
+}
+
+
   if (data.Food) {
     cateringStatus = "pending";
     cateringReason = "-";
@@ -229,7 +253,7 @@ router.post("/", auth, async (req, res) => {
     showsPromiseDate = null;
     showsService = null;
   }
-
+  if (data.OtherServices.length > 1) {
   if (data.OtherServices.includes("invitation")) {
     invitationStatus = "pending";
     invitationReason = "-";
@@ -241,6 +265,12 @@ router.post("/", auth, async (req, res) => {
     invitationPromiseDate = null;
     invitationService = null;
   }
+} else {
+  invitationStatus = null;
+  invitationReason = null;
+  invitationPromiseDate = null;
+  invitationService = null;
+}
   if (checkBoxValues.decorationvalue || data.ThemeDecoration) {
     decorationStatus = "pending";
     decorationReason = "-";
@@ -252,6 +282,7 @@ router.post("/", auth, async (req, res) => {
     decorationPromiseDate = null;
     decorationService = null;
   }
+  if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("hosting")) {
     hostingStatus = "pending";
     hostingReason = "-";
@@ -263,7 +294,14 @@ router.post("/", auth, async (req, res) => {
     hostingPromiseDate = null;
     hostingService = null;
   }
-  if (data.OtherServices.includes("pooja_pandit_Ji")) {
+} else {
+  hostingStatus = null;
+  hostingReason = null;
+  hostingPromiseDate = null;
+  hostingService = null;
+}
+if (data.OtherServices.length > 1) {
+  if (!!data.OtherServices.includes("pooja_pandit_ji")) {
     pandit_JiStatus = "pending";
     pandit_JiReason = "-";
     pandit_JiPromiseDate = "";
@@ -274,6 +312,14 @@ router.post("/", auth, async (req, res) => {
     pandit_JiPromiseDate = null;
     pandit_JiService = null;
   }
+} else {
+  pandit_JiStatus = null;
+  pandit_JiReason = null;
+  pandit_JiPromiseDate = null;
+  pandit_JiService = null;
+}
+
+if (data.OtherServices.length > 1) {
   if (!!data.OtherServices.includes("beauty")) {
     beautyStatus = "pending";
     beautyReason = "-";
@@ -285,6 +331,12 @@ router.post("/", auth, async (req, res) => {
     beautyPromiseDate = null;
     beautyService = null;
   }
+} else {
+  beautyStatus = null;
+  beautyReason = null;
+  beautyPromiseDate = null;
+  beautyService = null;
+}
   if (data.SpecialService) {
     AdditionalStatus = "pending";
     AdditionalReason = "-";
@@ -359,7 +411,51 @@ router.post("/", auth, async (req, res) => {
 
   newBabyShowerForm.save().then(() => {
     res.status(200).send("BabyShower form saved successfully...!");
-    console.log(newBabyShowerForm);
+    
+//payment Setting
+
+const newPaymentfullDhoom = PaymentfullDhoom({
+  eventName,
+  userId,
+  orderId,
+  eventCharge: null,
+  bookingCharge: null,
+  confirmationCharge: null,
+  pendingCharge: null,
+
+  //booking
+  booking: {
+    booking_Amount: null,
+    booking_paymentId: null,
+    booking_signature: null,
+    booking_isPaid: false,
+  },
+
+  //confirmation
+
+  confirmation: {
+    confirmation_Amount: null,
+    confirmation_paymentId: null,
+    confirmation_isPaid: false,
+    confirmation_signature: null,
+  },
+
+  //pending
+  pending: {
+    pending_Amount: null,
+    pending_paymentId: null,
+    pending_isPaid: false,
+    pending_signature: null,
+  },
+});
+newPaymentfullDhoom
+  .save()
+  .then(() => console.log("successfully payment saved"));
+
+
+
+
+
   });
   console.log("completed!! saved");
 
@@ -437,12 +533,47 @@ router.post("/updateInfos", (req, res) => {
         console.log(err);
         res.status(400).send(err);
       } else {
-        // console.log(doc);
         res.status(200).send(doc);
       }
     }
   );
 });
 
+router.get("/paymentDetails/:orderIdp", (req, res) => {
+  PaymentfullDhoom.find({ orderId: req.params.orderIdp }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).send(doc);
+    }
+  });
+});
+
+//payment updation
+
+router.post("/updatePaymentDetails", (req, res) => {
+  // console.log(req.body.paymentUpdation);
+  const paymentDataUpd = req.body.paymentUpdation;
+  PaymentfullDhoom.findOneAndUpdate(
+    { orderId: paymentDataUpd.orderId },
+    {
+      $set: {
+        eventCharge: paymentDataUpd.eventCharge,
+        bookingCharge: paymentDataUpd.bookingCharge,
+        confirmationCharge: paymentDataUpd.confirmationCharge,
+        pendingCharge: paymentDataUpd.pendingCharge,
+      },
+    },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        // console.log(doc);
+        res.status(200).send("Succefully payment Details Updated");
+      }
+    }
+  );
+});
 
 module.exports = router;

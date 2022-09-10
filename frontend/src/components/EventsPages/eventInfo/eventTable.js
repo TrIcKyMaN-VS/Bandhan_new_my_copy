@@ -1,5 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import {Preweddinginfo} from "./preweddinginfo"
+import {Postweddinginfo}  from "./postweddinginfo"
+import {Babyshowerinfo} from "./babyshowerinfo"
+import {Weddinginfo} from './weddinginfo'
+import {Engagementinfo} from "./engagementinfo"
+import {Birthdayinfo} from "./birthdayinfo"
+import {Corporateinfo} from "./corporateinfo"
+import Familyfunctioninfo, {Familfunction} from "./familyfunctioninfo"
+
+
+
+
 
 function EventTable(props) {
 
@@ -8,7 +20,7 @@ function EventTable(props) {
 
 
  const [personalprewedding ,setpersonalprewedding ] = useState([])
- const [personalpwedding ,setpersonalpostwedding ] = useState([])
+ const [personalpostedding ,setpersonalpostwedding ] = useState([])
  const [personalbabyshower ,setpersonalbabyshower ] = useState([])
  const [personalwedding ,setpersonalwedding ] = useState([])
  const [personalengagement ,setpersonalengagement ] = useState([])
@@ -21,19 +33,20 @@ function EventTable(props) {
 
 
 
+  // let prewedding = props.prewedding
   let prewedding = props.prewedding
-  let postwedding = props.postwedding
-  let babyshower = props.babyshower
-  let birthday = props.birthday
-  let engagement = props.engagement
-  let corporate = props.corporate
-  let familyfunction = props.familyfunction
-  let wedding = props.wedding
+  let postwedding =Object.keys(props.postwedding).length > 1 && props.postwedding
+  let babyshower =Object.keys(props.babyshower).length > 1 && props.babyshower
+  let birthday =Object.keys(props.birthday).length > 1 && props.birthday
+  let engagement =Object.keys(props.engagement).length > 1 && props.engagement
+  let corporate =Object.keys(props.corporate).length > 1 && props.corporate
+  let familyfunction =Object.keys(props.familyfunction).length > 1 && props.familyfunction
+  let wedding =Object.keys(props.wedding).length > 1 && props.wedding
  
+
   useEffect(()=>{
     axios.get("api/eventInfo/getname").then((res) => {
       setname(res.data[0].username);
-      console.log(res.data[0].username);
     });
 
     
@@ -43,7 +56,9 @@ function EventTable(props) {
       const ll = res.data;
       if (ll.length > 0) {
         setpersonalprewedding(ll[0]);
+        console.log(personalprewedding);
       }
+      
     })
     .catch((err) => {
       console.log(err);
@@ -150,93 +165,72 @@ function EventTable(props) {
     });
 
 
-
-
-  },[])
-console.log(datas[0].orderId);
-
-  // Object.keys(prewedding).length > 1
-
-  return (
-    <>
-
-
-
-
-
-    
-    <div className="container">
-     <table class="table">
-  {/* <tbody>
-    <tr>
-      <th scope="row" className="fw-bold">Name of the customer</th>
-      <td>{name}</td>
-     
-    </tr>
-    <tr>
-      <th scope="row" className="fw-bold">Event Name</th>
-      <td>{props.item.eventName}</td>
-      
-    </tr>
-    <tr>
-      <th scope="row" className="fw-bold">Date</th>
-      <td colspan="2">{props.item.date}</td>
-      
-    </tr>
-    <tr>
-      <th scope="row" className="fw-bold">Number Of Guest</th>
-      <td colspan="2">{props.item.NoOfGuests}</td>
-      
-    </tr>
-  </tbody> */}
-</table>
-</div>
-   
-   <div class="my-5" />
+  },[]);
   
 
-    <div>
-      {/* <h3 className=" text-center fw-bold mb-2" style={{"fontVariant": "small-caps", "display": "block"}}>{props.item.eventName} - [ {props.item.date} ]</h3> */}
+  console.log("preweddingpersonal",personalprewedding);
 
-      {/* <h5 className="text-center fw-bold text-muted mb-3" >Order ID - <span className="fs-6" style={{color:"limegreen"}}>[ {props.item.orderId} ]</span></h5> */}
-      <div className="row justify-content-center">
-        <div className="col-md-6 text-center">
-        <table class="table align-middle mb-0 bg-white mb-8">
-        <thead class="bg-light">
-          <tr>
-            <th>Name of Service</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        {/* <tbody>
-          {eventsList.map((data, i) => {
-            return (
-              <tr key={i}>
-                <td>
-                  <p class="fw-normal mb-1">{data}</p>
-                </td> 
-                <td>
-                  {eventStatus[i] == "pending" && (
-                    <span class="badge badge-warning rounded-pill d-inline">
-                      {eventStatus[i]}
-                    </span>
-                  )}
-                  {eventStatus[i] != "pending" && (
-                    <span class="badge badge-success rounded-pill d-inline">
-                      {eventStatus[i]}
-                    </span>
-                  )}
-                </td>
-               
-              </tr>
-            );
-          })}
-        </tbody> */}
-      </table>
-        </div>
-      </div>
-    </div>
-    </>
+return (
+<>
+        { props.prewedding && 
+         <Preweddinginfo 
+         personalprewedding={personalprewedding} 
+         prewedding={props.prewedding&& props.prewedding}
+         name ={name}
+          />}
+     <div class="my-5" />
+    { props.engagement && 
+         <Engagementinfo 
+         personalengagement={personalengagement} 
+         engagement={props.engagement&& props.engagement}
+         name ={name}
+          />}
+     <div class="my-5" />
+     { props.babyshower && 
+         <Babyshowerinfo 
+         personalbabyshower={personalbabyshower} 
+         babyshower={props.babyshower&& props.babyshower}
+         name ={name}
+          />}
+     <div class="my-5" />
+     { props.familyfunction && 
+         <Familyfunctioninfo
+         personalfamily={personalfamily} 
+         familyfunction={props.familyfunction&& props.familyfunction}
+         name ={name}
+          />}
+     <div class="my-5" />
+     { props.wedding && 
+         <Weddinginfo
+         personalwedding={personalwedding} 
+         wedding={props.wedding&& props.wedding}
+         name ={name}
+          />}
+     <div class="my-5" />
+     { props.birthday && 
+         <Birthdayinfo
+         personalbirthday={personalbirthday} 
+         birthday={props.birthday&& props.birthday}
+         name ={name}
+          />}
+     <div class="my-5" />
+     { props.corporate && 
+         <Corporateinfo
+         personalcorporate={personalcorporate} 
+         corporate={props.corporate&& props.corporate}
+         name ={name}
+          />}
+     <div class="my-5" />
+     <div class="my-5" />
+     { props.postwedding && 
+         <Postweddinginfo
+         personalpostedding={personalpostedding} 
+         postwedding={props.postwedding&& props.postwedding}
+         name ={name}
+          />}
+     <div class="my-5" />
+</>
+
   );
 }
 

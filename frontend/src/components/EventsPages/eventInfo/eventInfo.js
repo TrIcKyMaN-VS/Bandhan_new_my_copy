@@ -28,6 +28,8 @@ const [postweddingdata, setpostweddingdata] = useState([])
       const ll = res.data;
       if (ll.length > 0) {
         setpreweddingdata(ll[0]);
+        // setpreweddingdata([])
+
       }
       else{
         setpreweddingdata([])
@@ -159,27 +161,25 @@ const [postweddingdata, setpostweddingdata] = useState([])
     });
     });
 
-
   }, []);
 
 
   return (
     <div className=" mt-5 mb-5 ps-5 pe-5 ms-3 me-3 pb-5 pt-3">     
-        return (
        
           <EventTable
-            prewedding = {preweddingdata}
-            postwedding = {postweddingdata}
-            babyshower = {babyshowerdata}
-            birthday = {birthdaydata}
-            engagement = {engagementdata}
-            corporate = {corporatedata}
-            familyfunction = {familyfunctiondata}
-            wedding = {weddingdata}
+            prewedding = { Object.keys(preweddingdata).length > 1 && preweddingdata}
+            postwedding = {Object.keys(postweddingdata).length > 1 && postweddingdata}
+            babyshower = {Object.keys(babyshowerdata).length > 1 && babyshowerdata}
+            birthday = {Object.keys(birthdaydata).length > 1 && birthdaydata}
+            engagement = {Object.keys(engagementdata).length > 1 && engagementdata}
+            corporate = {Object.keys(corporatedata).length > 1 && corporatedata}
+            familyfunction = {Object.keys(familyfunctiondata).length > 1 && familyfunctiondata}
+            wedding = {Object.keys(weddingdata).length > 1 && weddingdata}
             // datas = {datas}
             
           />
-        );
+        
     
     </div>
 

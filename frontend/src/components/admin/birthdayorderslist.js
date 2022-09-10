@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import PaymentDetail from "../payment/paymentDetail";
 
 function Orderslist(props) {
     const forms = props.formdata
@@ -58,11 +59,31 @@ function Orderslist(props) {
     const [showsPromiseDat, setShowsPromiseDate] = useState(null);
   
 
+    const [paymentDetails, setPaymentDetails] = useState(null);
 
+    const [eventCharge, setEventCharge] = useState(null);
+    const [bookingCharge, setBookingCharge] = useState(null);
+    const [confirmationCharge, setConfirmationCharge] = useState(null);
+    const [pendingCharge, setPendingCharge] = useState(null);
+  
+    const [showPaymentStatus, setShowPaymentStatus] = useState(false);
+    const [updtBtnPayment, setUpdtBtnPayment] = useState(true);
 
 
 
     useEffect(()=>{
+      axios
+      .get(`api/babyshower/paymentDetails/${forms[0].orderId}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setPaymentDetails(res.data[0]);
+          setShowPaymentStatus(true);
+          setEventCharge(res.data[0].eventCharge);
+          setBookingCharge(res.data[0].bookingCharge);
+          setConfirmationCharge(res.data[0].confirmationCharge);
+          setPendingCharge(res.data[0].pendingCharge);
+        }
+      });
       axios.get(`api/adminuserlist/birthdaypointsvoucher/${forms[0].userId}`).then((res) => {
         setdatapoints(res.data[0].points)
         setdatavoucher(res.data[0].voucher)
@@ -231,6 +252,28 @@ function Orderslist(props) {
           if (res.status===200) {
             alert("success")
             setUpdtBtn(true)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    function updatePaymentDetails() {
+      const paymentUpdation = {
+        orderId: paymentDetails.orderId,
+        eventCharge,
+        bookingCharge,
+        confirmationCharge,
+        pendingCharge,
+      };
+  
+      axios
+        .post("/api/babyShower/updatePaymentDetails", { paymentUpdation })
+        .then((res) => {
+          // console.log(res);
+          if (res.status === 200) {
+            alert(res.data);
+            setUpdtBtnPayment(true);
           }
         })
         .catch((err) => {
@@ -1002,6 +1045,105 @@ function Orderslist(props) {
         </tr>        
         </tbody>
       </table>
+      <table className="table bg-white rounded shadow-sm text-center">
+          <thead>
+            <tr>
+              <th className="fw-bolder">Payable</th>
+              <th className="fw-bolder">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Event Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      value={eventCharge}
+                      onChange={(e) => {
+                        setEventCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Booking Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      value={bookingCharge}
+                      onChange={(e) => {
+                        setBookingCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Confirmation Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      value={confirmationCharge}
+                      onChange={(e) => {
+                        setConfirmationCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Pending Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      onChange={(e) => {
+                        setPendingCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      value={pendingCharge}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tr rowspan="5" className="text-start">
+            <th></th>
+            {/* <th></th> */}
+            <button
+              type="button"
+              onClick={() => updatePaymentDetails()}
+              className="my-3 btn btn-success"
+              disabled={updtBtnPayment}
+            >
+              Update
+            </button>
+          </tr>
+        </table>
+        <hr class="my-5" />
+
+        {showPaymentStatus && (
+          <PaymentDetail data={paymentDetails} admin={true} />
+        )}
     </div>
   </div>
   )
