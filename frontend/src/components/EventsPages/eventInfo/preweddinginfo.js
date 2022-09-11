@@ -6,6 +6,12 @@ export function Preweddinginfo(props) {
   const prewedding = props.prewedding && props.prewedding
   const name = props.name
 
+  function refreshPage(){ 
+    axios
+      .post(`api/eventInfo/preweddingcancel/${props.personalprewedding.orderId}`)
+
+    window.location.reload(); 
+}
 // console.log("vanthutu",props.prewedding);
 return(
       props.prewedding &&
@@ -227,6 +233,37 @@ return(
         
          </tbody>
         </table>
+
+        {!props.personalprewedding.cancelrequest && (
+          <div className='row  col-md-3 text-left'>
+                <button type="button" class="btn btn-danger " onClick={ refreshPage } >Cancel Order</button>
+                </div>
+                )
+              }
+              <div class="my-5" />
+       
+              {props.personalprewedding.cancelrequest && (
+                <div >
+                <div class="card w-75">
+                <div class="card-body">
+                <table class="table">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold">Cancel Request</th>
+                    <td colspan="2">{props.personalprewedding.cancelstatus}</td>
+        
+                  </tr>
+                  {props.personalprewedding.canceled && (<tr>
+                    <th scope="row" className="fw-bold">Refund Amount</th>
+                     <td colspan="2">{props.personalprewedding.refund}</td>
+                  </tr>
+                  )}
+              </tbody>
+              </table>
+  </div>
+</div>      
+              </div>
+              )}
           </div>
         </div>
       </div>

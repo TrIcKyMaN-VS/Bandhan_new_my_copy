@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const mongoose = require("mongoose");
 
 const babyshowerSchema = new mongoose.Schema(
@@ -40,6 +41,18 @@ const babyshowerSchema = new mongoose.Schema(
     MaxBudget: {
       type: String,
       required: true,
+    },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
     },
     Shows: {
       show: [

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import PaymentDetail from "../payment/paymentDetail";
 
 
 function Orderslist(props) {
@@ -8,7 +9,7 @@ function Orderslist(props) {
     const [datavoucher , setdatavoucher] = useState("")
     const [updtBtn, setUpdtBtn] = useState(true);
     const [postInfo, setPostInfo] = useState("");
-
+    const [refundamount, setrefundamount]= useState()
     const [catering, setCatering] = useState(false);
     const [cateringReas, setCateringReas] = useState(null);
     const [cateringstats, setCateringstats] = useState(null);
@@ -33,10 +34,29 @@ function Orderslist(props) {
     const [bachelorsPartyConf, setBachelorsPartyConf] = useState(null);
     const [bachelorsPartyPromiseDat, setBachelorsPartyPromiseDate] = useState(null);
   
+    const [paymentDetails, setPaymentDetails] = useState(null);
 
-
+    const [eventCharge, setEventCharge] = useState(null);
+    const [bookingCharge, setBookingCharge] = useState(null);
+    const [confirmationCharge, setConfirmationCharge] = useState(null);
+    const [pendingCharge, setPendingCharge] = useState(null);
+  
+    const [showPaymentStatus, setShowPaymentStatus] = useState(false);
+    const [updtBtnPayment, setUpdtBtnPayment] = useState(true);
 
     useEffect(()=>{
+      axios
+      .get(`api/prewedding/paymentDetails/${forms[0].orderId}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setPaymentDetails(res.data[0]);
+          setShowPaymentStatus(true);
+          setEventCharge(res.data[0].eventCharge);
+          setBookingCharge(res.data[0].bookingCharge);
+          setConfirmationCharge(res.data[0].confirmationCharge);
+          setPendingCharge(res.data[0].pendingCharge);
+        }
+      });
       axios.get(`api/adminuserlist/preweddingpointsvoucher/${forms[0].userId}`).then((res) => {
         setdatapoints(res.data[0].points)
         setdatavoucher(res.data[0].voucher)
@@ -92,6 +112,20 @@ function Orderslist(props) {
 
       });
     },[])
+    function cancelorder(value){
+      if(value=== "Accepted"){
+        axios.post(`api/eventInfo/preweddingaccepted/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value=== "Declined"){
+        axios.post(`api/eventInfo/preweddingdeclined/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value=== "Refund"){
+        axios.post(`api/eventInfo/preweddingrefund/${forms[0].orderId}`,{refundamount}).then((res) => {
+        });
+      }
+    }
     function status(value){
       if(value === "venue"){
         axios.post(`api/adminuserlist/preweddingchangevenue/${forms[0].orderId}`).then((res) => {
@@ -155,10 +189,73 @@ function Orderslist(props) {
         });
     }
 
+    function updatePaymentDetails() {
+      const paymentUpdation = {
+        orderId: paymentDetails.orderId,
+        eventCharge,
+        bookingCharge,
+        confirmationCharge,
+        pendingCharge,
+      };
+  
+      axios
+        .post("/api/prewedding/updatePaymentDetails", { paymentUpdation })
+        .then((res) => {
+          // console.log(res);
+          if (res.status === 200) {
+            alert(res.data);
+            setUpdtBtnPayment(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  
   return (
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
     <div className="col">
+    {forms[0].cancelrequest && (<div >
+                <div class="card w-75">
+                <div class="card-body">
+                <h5 class="card-title red">Cancel Order</h5>
+                <table class="table ">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold col-md-8 ">Cancel Request</th>
+          <td><div className='btn btn-danger btn-sm' onClick={(val)=>cancelorder("Accepted")}>Accept</div></td>
+          <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Declined")}>Decline</div></td>
+                  </tr>
+                 <tr>
+                    <td scope="row" className="fw-bold">Refund Amount</td>
+                    <td>
+                  <input
+                 
+                    type={"number"}
+                    placeholder={"enter refund amount"}
+                    // value={refundamount}
+                    onChange={(e) => {
+                      setrefundamount(e.target.value);
+                      // setUpdtBtn(false);
+                    }}
+                  />  
+                  </td>
+                <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Refund")}>Refund</div></td>
+                
+                  </tr>
+                  <tr>
+                  <td><div scope="row" className="fw-bold">Refunded Amount : {forms[0].refund}</div></td>
+                  </tr>
+              
+              </tbody>
+              </table>
+                </div>
+              </div>      
+              <hr class="my-5"/>
+              </div>
+              
+           )}
       <table className="table bg-white rounded shadow-sm  table-hover">
       <thead>
             <tr>
@@ -650,6 +747,105 @@ function Orderslist(props) {
         </tr>       
         </tbody>
       </table>
+      <table className="table bg-white rounded shadow-sm text-center">
+          <thead>
+            <tr>
+              <th className="fw-bolder">Payable</th>
+              <th className="fw-bolder">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Event Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      value={eventCharge}
+                      onChange={(e) => {
+                        setEventCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Booking Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      value={bookingCharge}
+                      onChange={(e) => {
+                        setBookingCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Confirmation Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      value={confirmationCharge}
+                      onChange={(e) => {
+                        setConfirmationCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Pending Charge</td>
+              <td className="row justify-content-center">
+                <div className="col-md-4">
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      onChange={(e) => {
+                        setPendingCharge(e.target.value);
+                        setUpdtBtnPayment(false);
+                      }}
+                      value={pendingCharge}
+                      type={"number"}
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tr rowspan="5" className="text-start">
+            <th></th>
+            {/* <th></th> */}
+            <button
+              type="button"
+              onClick={() => updatePaymentDetails()}
+              className="my-3 btn btn-success"
+              disabled={updtBtnPayment}
+            >
+              Update
+            </button>
+          </tr>
+        </table>
+        <hr class="my-5" />
+
+        {showPaymentStatus && (
+          <PaymentDetail data={paymentDetails} admin={true} />
+        )}
     </div>
   </div>
   )

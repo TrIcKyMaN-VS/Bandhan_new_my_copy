@@ -70,6 +70,10 @@ router.post("/", auth, async (req, res) => {
     items: checkBoxValues.foodvalue?checkBoxValues.foodvalue:"-",
   };
 
+  var cancelrequest = false;
+  var cancelstatus = "pending";
+  var canceled = false
+  var refund = 0;
   // var venueStatus = "pending"
   // var cateringStatus = "pending"
   // var photographyStatus = "pending"
@@ -114,6 +118,10 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     Food,
+    cancelrequest,
+    cancelstatus,
+    canceled,
+    refund
     // foodb,
     // photographyb,
     // venueb,

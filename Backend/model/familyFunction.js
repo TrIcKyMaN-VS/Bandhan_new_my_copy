@@ -39,6 +39,18 @@ const FamilyFunctionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
+    },
     Shows: {
       show: [
         {

@@ -130,6 +130,10 @@ if (data.SpecialService) {
     AdditionalPromiseDate = null;
     AdditionalService = null;
   }
+  var cancelrequest = false;
+  var cancelstatus = "pending";
+  var canceled = false
+  var refund = 0;
 
   const newPostWeddingForm = PostWeddingForm({
     eventName,
@@ -153,6 +157,10 @@ if (data.SpecialService) {
     Food,
     foodb,
     Honneymoonb,
+    cancelrequest,
+    cancelstatus,
+    canceled,
+    refund,
     // honeymoonStatus,
     cateringStatus,
 

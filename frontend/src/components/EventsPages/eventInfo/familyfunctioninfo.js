@@ -1,10 +1,17 @@
 import React from 'react'
+import axios from 'axios'
 
 function Familyfunctioninfo(props) {
   const personalfamily = props.personalfamily
   const familyfunction = props.familyfunction && props.familyfunction
   const name = props.name
 
+  function refreshPage(){ 
+    axios
+      .post(`api/eventInfo/familyfunctioncancel/${props.personalfamily.orderId}`)
+
+    window.location.reload(); 
+}
 console.log("vanthutu",props.familyfunction);
 return(
       props.familyfunction &&
@@ -474,6 +481,38 @@ return(
         
          </tbody>
         </table>
+
+
+        {!props.personalfamily.cancelrequest && (
+          <div className='row  col-md-3 text-left'>
+                <button type="button" class="btn btn-danger " onClick={ refreshPage } >Cancel Order</button>
+                </div>
+                )
+              }
+              <div class="my-5" />
+       
+              {props.personalfamily.cancelrequest && (
+                <div >
+                <div class="card w-75">
+                <div class="card-body">
+                <table class="table">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold">Cancel Request</th>
+                    <td colspan="2">{props.personalfamily.cancelstatus}</td>
+        
+                  </tr>
+                  {props.personalfamily.canceled && (<tr>
+                    <th scope="row" className="fw-bold">Refund Amount</th>
+                     <td colspan="2">{props.personalfamily.refund}</td>
+                  </tr>
+                  )}
+              </tbody>
+              </table>
+  </div>
+</div>      
+              </div>
+              )}
           </div>
         </div>
       </div>

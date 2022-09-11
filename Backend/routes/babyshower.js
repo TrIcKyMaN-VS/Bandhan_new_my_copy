@@ -63,27 +63,11 @@ router.post("/", auth, async (req, res) => {
     },
   };
 
-  // var venueStatus = "pending";
-  // var cateringStatus = "pending";
-  // var photographyStatus = "pending";
-  // var decorationStatus = "pending";
-  // var isVerified = false;
-  // var foodb = false;
-  // var photographyb = false;
-  // var venueb = false;
-  // var decorationb = false;
-  // if (Food.Foodtype) {
-  //   foodb = true;
-  // }
-  // if (OtherServiceValues.photography) {
-  //   photographyb = true;
-  // }
-  // if (OtherServiceValues.venues) {
-  //   venueb = true;
-  // }
-  // if (Decoration.RegularDecoration || Decoration.ThemeDecoration) {
-  //   decorationb = true;
-  // }
+  var cancelrequest = false;
+  var cancelstatus = "pending";
+  var canceled = false
+  var refund = 0;
+ 
 
   const newBabyShowerForm = BabyShowerForm({
     eventName,
@@ -103,6 +87,11 @@ router.post("/", auth, async (req, res) => {
     OtherServices,
     OtherServiceValues,
     Food,
+    cancelrequest,
+    cancelstatus,
+    canceled,
+    refund
+
     // foodb,
     // photographyb,
     // venueb,

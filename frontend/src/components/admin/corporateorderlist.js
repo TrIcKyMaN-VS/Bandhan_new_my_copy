@@ -8,7 +8,7 @@ function Orderslist(props) {
     const [datavoucher , setdatavoucher] = useState("")
     const [updtBtn, setUpdtBtn] = useState(true);
     const [postInfo, setPostInfo] = useState("");
-
+    const [refundamount, setrefundamount]= useState()
     const [additional, setAdditional] = useState(false);
     const [additionalReas, setAdditionalReas] = useState(null);
     const [additionalstats, setAdditionalstats] = useState(null);
@@ -76,7 +76,7 @@ function Orderslist(props) {
 
     useEffect(()=>{
       axios
-      .get(`api/babyshower/paymentDetails/${forms[0].orderId}`)
+      .get(`api/corporateEvent/paymentDetails/${forms[0].orderId}`)
       .then((res) => {
         if (res.status === 200) {
           setPaymentDetails(res.data[0]);
@@ -181,6 +181,20 @@ function Orderslist(props) {
         });
       });
     },[])
+    function cancelorder(value){
+      if(value=== "Accepted"){
+        axios.post(`api/eventInfo/corporateaccepted/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value=== "Declined"){
+        axios.post(`api/eventInfo/corporatedeclined/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value=== "Refund"){
+        axios.post(`api/eventInfo/corporaterefund/${forms[0].orderId}`,{refundamount}).then((res) => {
+        });
+      }
+    }
     function status(value){
       if(value === "venue"){
         axios.post(`api/adminuserlist/corporatechangevenue/${forms[0].orderId}`).then((res) => {
@@ -271,7 +285,7 @@ function Orderslist(props) {
       };
   
       axios
-        .post("/api/babyShower/updatePaymentDetails", { paymentUpdation })
+        .post("/api/corporateEvent/updatePaymentDetails", { paymentUpdation })
         .then((res) => {
           // console.log(res);
           if (res.status === 200) {
@@ -289,7 +303,46 @@ function Orderslist(props) {
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
     <div className="col">
-      
+    {forms[0].cancelrequest && (<div >
+                <div class="card w-75">
+                <div class="card-body">
+                <h5 class="card-title red">Cancel Order</h5>
+                <table class="table ">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold col-md-8 ">Cancel Request</th>
+          <td><div className='btn btn-danger btn-sm' onClick={(val)=>cancelorder("Accepted")}>Accept</div></td>
+          <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Declined")}>Decline</div></td>
+                  </tr>
+                 <tr>
+                    <td scope="row" className="fw-bold">Refund Amount</td>
+                    <td>
+                  <input
+                 
+                    type={"number"}
+                    placeholder={"enter refund amount"}
+                    // value={refundamount}
+                    onChange={(e) => {
+                      setrefundamount(e.target.value);
+                      // setUpdtBtn(false);
+                    }}
+                  />  
+                  </td>
+                <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Refund")}>Refund</div></td>
+                
+                  </tr>
+                  <tr>
+                  <td><div scope="row" className="fw-bold">Refunded Amount : {forms[0].refund}</div></td>
+                  </tr>
+              
+              </tbody>
+              </table>
+                </div>
+              </div>      
+              <hr class="my-5"/>
+              </div>
+              
+           )}
       
       <table className="table bg-white rounded shadow-sm  table-hover">
       <thead>

@@ -1,9 +1,18 @@
 import React from 'react'
+import axios from 'axios'
 
 export function Birthdayinfo(props) {
   const personalbirthday = props.personalbirthday
   const birthday = props.birthday && props.birthday
   const name = props.name
+
+
+  function refreshPage(){ 
+    axios
+      .post(`api/eventInfo/birthdaycancel/${props.personalbirthday.orderId}`)
+
+    window.location.reload(); 
+}
 
 console.log("vanthutu",props.birthday);
 return(
@@ -368,6 +377,37 @@ return(
         
          </tbody>
         </table>
+
+        {!props.personalbirthday.cancelrequest && (
+          <div className='row  col-md-3 text-left'>
+                <button type="button" class="btn btn-danger " onClick={ refreshPage } >Cancel Order</button>
+                </div>
+                )
+              }
+              <div class="my-5" />
+       
+              {props.personalbirthday.cancelrequest && (
+                <div >
+                <div class="card w-75">
+                <div class="card-body">
+                <table class="table">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold">Cancel Request</th>
+                    <td colspan="2">{props.personalbirthday.cancelstatus}</td>
+        
+                  </tr>
+                  {props.personalbirthday.canceled && (<tr>
+                    <th scope="row" className="fw-bold">Refund Amount</th>
+                     <td colspan="2">{props.personalbirthday.refund}</td>
+                  </tr>
+                  )}
+              </tbody>
+              </table>
+  </div>
+</div>      
+              </div>
+              )}
           </div>
         </div>
       </div>

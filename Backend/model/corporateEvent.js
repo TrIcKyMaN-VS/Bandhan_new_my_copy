@@ -24,6 +24,18 @@ const CorporateEventSchema = new mongoose.Schema(
     date: {
       type: Number,
     },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
+    },
     FromTime: {
       type: String,
     },

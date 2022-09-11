@@ -37,6 +37,18 @@ const preweddingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
+    },
     BachelorsPartyDate: {
       type: String,
     },

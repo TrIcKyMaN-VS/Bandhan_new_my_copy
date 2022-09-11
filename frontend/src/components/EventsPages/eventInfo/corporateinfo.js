@@ -1,10 +1,17 @@
 import React from 'react'
+import axios from 'axios'
 
 export function Corporateinfo(props) {
   const personalcorporate = props.personalcorporate
   const corporate = props.corporate && props.corporate
   const name = props.name
 
+  function refreshPage(){ 
+    axios
+      .post(`api/eventInfo/corporatecancel/${props.personalcorporate.orderId}`)
+
+    window.location.reload(); 
+}
 console.log("vanthutu",props.corporate);
 return(
       props.corporate &&
@@ -364,6 +371,39 @@ return(
         
          </tbody>
         </table>
+
+
+
+        {!props.personalcorporate.cancelrequest && (
+          <div className='row  col-md-3 text-left'>
+                <button type="button" class="btn btn-danger " onClick={ refreshPage } >Cancel Order</button>
+                </div>
+                )
+              }
+              <div class="my-5" />
+       
+              {props.personalcorporate.cancelrequest && (
+                <div >
+                <div class="card w-75">
+                <div class="card-body">
+                <table class="table">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold">Cancel Request</th>
+                    <td colspan="2">{props.personalcorporate.cancelstatus}</td>
+        
+                  </tr>
+                  {props.personalcorporate.canceled && (<tr>
+                    <th scope="row" className="fw-bold">Refund Amount</th>
+                     <td colspan="2">{props.personalcorporate.refund}</td>
+                  </tr>
+                  )}
+              </tbody>
+              </table>
+  </div>
+</div>      
+              </div>
+              )}
           </div>
         </div>
       </div>

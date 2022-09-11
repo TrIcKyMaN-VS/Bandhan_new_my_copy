@@ -1,9 +1,17 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import axios from 'axios'
 export function Babyshowerinfo(props) {
   const personalbabyshower = props.personalbabyshower
   const babyshower = props.babyshower && props.babyshower
   const name = props.name
+
+
+  function refreshPage(){ 
+    axios
+      .post(`api/eventInfo/babyshowercancel/${props.personalbabyshower.orderId}`)
+
+    window.location.reload(); 
+}
 
 console.log("vanthutu",props.babyshower);
 return(
@@ -13,13 +21,13 @@ return(
        <table class="table">
     <tbody>
     <tr>
-        <th scope="row" className="fw-bold">Bride Name</th>
-        <td colspan="2">{props.personalbabyshower.BrideName}</td>
+        <th scope="row" className="fw-bold">Mom Name</th>
+        <td colspan="2">{props.personalbabyshower.MomName}</td>
         
       </tr>
       <tr>
-        <th scope="row" className="fw-bold">Groom Name</th>
-        <td colspan="2">{props.personalbabyshower.GroomName}</td>
+        <th scope="row" className="fw-bold">Dad Name</th>
+        <td colspan="2">{props.personalbabyshower.DadName}</td>
         
       </tr>
       <tr>
@@ -473,11 +481,45 @@ return(
                   </div>
                 </td>
               </tr>
+              
               )}
 
-        
          </tbody>
         </table>
+
+
+        {!props.personalbabyshower.cancelrequest && (
+          <div className='row  col-md-3 text-left'>
+                <button type="button" class="btn btn-danger " onClick={ refreshPage } >Cancel Order</button>
+                </div>
+                )
+              }
+              <div class="my-5" />
+       
+              {props.personalbabyshower.cancelrequest && (
+                <div >
+                <div class="card w-75">
+                <div class="card-body">
+                <table class="table">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold">Cancel Request</th>
+                    <td colspan="2">{props.personalbabyshower.cancelstatus}</td>
+        
+                  </tr>
+                  {props.personalbabyshower.canceled && (<tr>
+                    <th scope="row" className="fw-bold">Refund Amount</th>
+                     <td colspan="2">{props.personalbabyshower.refund}</td>
+                  </tr>
+                  )}
+              </tbody>
+              </table>
+  </div>
+</div>      
+              </div>
+              )}
+
+
           </div>
         </div>
       </div>

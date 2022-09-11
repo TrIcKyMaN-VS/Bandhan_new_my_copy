@@ -8,7 +8,7 @@ function Orderslist(props) {
     const [datavoucher , setdatavoucher] = useState("")
     const [updtBtn, setUpdtBtn] = useState(true);
     const [postInfo, setPostInfo] = useState("");
-
+    const [refundamount, setrefundamount]= useState()
     const [additional, setAdditional] = useState(false);
     const [additionalReas, setAdditionalReas] = useState(null);
     const [additionalstats, setAdditionalstats] = useState(null);
@@ -73,7 +73,7 @@ function Orderslist(props) {
 
     useEffect(()=>{
       axios
-      .get(`api/babyshower/paymentDetails/${forms[0].orderId}`)
+      .get(`api/birthday/paymentDetails/${forms[0].orderId}`)
       .then((res) => {
         if (res.status === 200) {
           setPaymentDetails(res.data[0]);
@@ -176,6 +176,21 @@ function Orderslist(props) {
 
       });
     },[])
+    function cancelorder(value){
+      if(value=== "Accepted"){
+        axios.post(`api/eventInfo/birthdayaccepted/${forms[0].orderId}`).then((res) => {
+          console.log(res);
+        });
+      }
+      if(value=== "Declined"){
+        axios.post(`api/eventInfo/birthdaydeclined/${forms[0].orderId}`).then((res) => {
+        });
+      }
+      if(value=== "Refund"){
+        axios.post(`api/eventInfo/birthdayrefund/${forms[0].orderId}`,{refundamount}).then((res) => {
+        });
+      }
+    }
     function status(value){
       if(value === "venue"){
         axios.post(`api/adminuserlist/birthdaychangevenue/${forms[0].orderId}`).then((res) => {
@@ -268,7 +283,7 @@ function Orderslist(props) {
       };
   
       axios
-        .post("/api/babyShower/updatePaymentDetails", { paymentUpdation })
+        .post("/api/birthday/updatePaymentDetails", { paymentUpdation })
         .then((res) => {
           // console.log(res);
           if (res.status === 200) {
@@ -285,7 +300,46 @@ function Orderslist(props) {
     <h3 className="fs-4 mb-3">Details</h3>
     <div className="col">
       
-
+    {forms[0].cancelrequest && (<div >
+                <div class="card w-75">
+                <div class="card-body">
+                <h5 class="card-title red">Cancel Order</h5>
+                <table class="table ">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold col-md-8 ">Cancel Request</th>
+          <td><div className='btn btn-danger btn-sm' onClick={(val)=>cancelorder("Accepted")}>Accept</div></td>
+          <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Declined")}>Decline</div></td>
+                  </tr>
+                 <tr>
+                    <td scope="row" className="fw-bold">Refund Amount</td>
+                    <td>
+                  <input
+                 
+                    type={"number"}
+                    placeholder={"enter refund amount"}
+                    // value={refundamount}
+                    onChange={(e) => {
+                      setrefundamount(e.target.value);
+                      // setUpdtBtn(false);
+                    }}
+                  />  
+                  </td>
+                <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Refund")}>Refund</div></td>
+                
+                  </tr>
+                  <tr>
+                  <td><div scope="row" className="fw-bold">Refunded Amount : {forms[0].refund}</div></td>
+                  </tr>
+              
+              </tbody>
+              </table>
+                </div>
+              </div>      
+              <hr class="my-5"/>
+              </div>
+              
+           )}
       
       <table className="table bg-white rounded shadow-sm  table-hover">
       <thead>
@@ -823,7 +877,7 @@ function Orderslist(props) {
           </tr>
       </table>
       <hr class="my-5"/>
-      <table className="table bg-white rounded shadow-sm  table-hover">
+      {/* <table className="table bg-white rounded shadow-sm  table-hover">
         <thead>
           <tr>
             <th scope="col">
@@ -853,7 +907,9 @@ function Orderslist(props) {
           <td><div className='btn btn-danger btn-sm' onClick={()=>points("0")}>0</div></td>
         </tr>     
         </tbody>
-      </table>
+      </table> */}
+
+
       <table className="table bg-white rounded shadow-sm  table-hover">
         <thead>
           <tr>
@@ -901,6 +957,9 @@ function Orderslist(props) {
         </tr> 
         </tbody>
       </table>
+
+
+
       <hr class="my-5"/>
       <table className="table bg-white rounded shadow-sm  table-hover">
         <thead>

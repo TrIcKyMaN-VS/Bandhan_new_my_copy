@@ -273,4 +273,395 @@ router.get("/postweddingInfo/:userId", (req, res) => {
 
 
 
+
+
+//baby shower
+
+router.post("/babyshowercancel/:userId", (req, res) => {
+   BabyShowerForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(doc);
+    }
+  });
+});
+router.post("/babydeclined/:userId", (req, res) => {
+  BabyShowerForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+
+router.post("/babyaccepted/:userId", (req, res) => {
+  BabyShowerForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted", "canceled":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+
+router.post("/babyrefund/:userId", (req, res) => {
+  const amount = req.body.refundamount
+  BabyShowerForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+
+
+
+//birthday
+
+
+router.post("/birthdaycancel/:userId", (req, res) => {
+  BirthdayForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/birthdaydeclined/:userId", (req, res) => {
+  BirthdayForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/birthdayaccepted/:userId", (req, res) => {
+  BirthdayForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted" ,"canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send("hmmm");
+  }
+});
+});
+
+router.post("/birthdayrefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ BirthdayForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+
+//corporate
+
+
+router.post("/corporatecancel/:userId", (req, res) => {
+  CorporateEventForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/corporatedeclined/:userId", (req, res) => {
+  CorporateEventForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/corporateaccepted/:userId", (req, res) => {
+  CorporateEventForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted","canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/corporaterefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ CorporateEventForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+
+//engagement
+
+router.post("/engagementcancel/:userId", (req, res) => {
+  EngagementForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/engagementdeclined/:userId", (req, res) => {
+  EngagementForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/engagementaccepted/:userId", (req, res) => {
+  EngagementForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted","canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/engagementrefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ EngagementForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+
+//family function 
+
+router.post("/familyfunctioncancel/:userId", (req, res) => {
+  FamilyFunctionForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/familyfunctiondeclined/:userId", (req, res) => {
+  FamilyFunctionForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/familyfunctionaccepted/:userId", (req, res) => {
+  FamilyFunctionForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted","canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/familyfunctionrefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ FamilyFunctionForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+
+//postwedding
+
+router.post("/postweddingcancel/:userId", (req, res) => {
+  PostWeddingForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/postweddingdeclined/:userId", (req, res) => {
+  PostWeddingForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/postweddingaccepted/:userId", (req, res) => {
+  PostWeddingForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted","canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/postweddingrefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ PostWeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+//pre wedding
+
+router.post("/preweddingcancel/:userId", (req, res) => {
+  PreWeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/preweddingdeclined/:userId", (req, res) => {
+  PreWeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/preweddingaccepted/:userId", (req, res) => {
+  PreWeddingForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted","canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/preweddingrefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ PreWeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+
+//wedding
+router.post("/weddingcancel/:userId", (req, res) => {
+  WeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelrequest":true}} ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+});
+router.post("/weddingdeclined/:userId", (req, res) => {
+  WeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"cancelstatus":"Declined"}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/weddingaccepted/:userId", (req, res) => {
+  WeddingForm.findOneAndUpdate({ orderId: req.params.userId },
+    {$set:{"cancelstatus":"Accepted","canceled":true}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+router.post("/weddingrefund/:userId", (req, res) => {
+ const amount = req.body.refundamount
+ WeddingForm.findOneAndUpdate({ orderId: req.params.userId },{$set:{"refund":amount}} ,(err, doc) => {
+  if (err) {
+    console.log(err);
+    res.status(400).send(err);
+  } else {
+    res.status(200).send(doc);
+  }
+});
+});
+
+
+
+
 module.exports = router;

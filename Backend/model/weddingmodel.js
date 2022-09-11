@@ -40,6 +40,18 @@ const weddingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
+    },
     City: {
       type: String,
     },

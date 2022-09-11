@@ -46,6 +46,18 @@ const engagementSchema = new mongoose.Schema(
     Gender: {
       type: String,
     },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
+    },
     City: {
       type: String,
     },

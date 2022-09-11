@@ -85,6 +85,9 @@ function Orderslist(props) {
   const [showPaymentStatus, setShowPaymentStatus] = useState(false);
   const [updtBtnPayment, setUpdtBtnPayment] = useState(true);
 
+  const [refundamount, setrefundamount]= useState()
+
+
     useEffect(()=>{
       axios
       .get(`api/babyshower/paymentDetails/${forms[0].orderId}`)
@@ -219,6 +222,25 @@ function Orderslist(props) {
         });
       });
     },[])
+
+function cancelorder(value){
+  if(value=== "Accepted"){
+    axios.post(`api/eventInfo/babyaccepted/${forms[0].orderId}`).then((res) => {
+    });
+  }
+  if(value=== "Declined"){
+    axios.post(`api/eventInfo/babydeclined/${forms[0].orderId}`).then((res) => {
+    });
+  }
+  if(value=== "Refund"){
+    axios.post(`api/eventInfo/babyrefund/${forms[0].orderId}`,{refundamount}).then((res) => {
+    });
+  }
+}
+
+
+
+
     function status(value){
       
       if(value === "venue"){
@@ -343,7 +365,51 @@ function Orderslist(props) {
     <div className="row my-12">
     <h3 className="fs-4 mb-3">Details</h3>
     <div className="col">
-      
+
+
+           {forms[0].cancelrequest && (<div >
+                <div class="card w-75">
+                <div class="card-body">
+                <h5 class="card-title red">Cancel Order</h5>
+                <table class="table ">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold col-md-8 ">Cancel Request</th>
+          <td><div className='btn btn-danger btn-sm' onClick={(val)=>cancelorder("Accepted")}>Accept</div></td>
+          <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Declined")}>Decline</div></td>
+                  </tr>
+                 <tr>
+                    <td scope="row" className="fw-bold">Refund Amount</td>
+                    <td>
+                  <input
+                 
+                    type={"number"}
+                    placeholder={"enter refund amount"}
+                    // value={refundamount}
+                    onChange={(e) => {
+                      setrefundamount(e.target.value);
+                      // setUpdtBtn(false);
+                    }}
+                  />  
+                  </td>
+                <td><div className='btn btn-warning btn-sm' onClick={(val)=>cancelorder("Refund")}>Refund</div></td>
+                
+                  </tr>
+                  <tr>
+                  <td><div scope="row" className="fw-bold">Refunded Amount : {forms[0].refund}</div></td>
+                  </tr>
+              
+              </tbody>
+              </table>
+                </div>
+              </div>      
+              <hr class="my-5"/>
+              </div>
+              
+           )}
+
+         
+
 
       <table className="table bg-white rounded shadow-sm  table-hover">
       <thead>
@@ -1058,43 +1124,13 @@ function Orderslist(props) {
             </button>
           </tr>
       </table>
-      <hr class="my-5"/>
-      <table className="table bg-white rounded shadow-sm  table-hover">
-        <thead>
-          <tr>
-            <th className=" fw-bold" scope="col">
-              Cost
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-            <th className=" fw-bold" scope="col">
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th>Cost</th>
-          <td>{forms[0].points}</td>
-          <td>
-          <form>
-         <div>
-         <label for="exampleFormControlInput1">Amount</label>
-         <input type="number" class="form-control" 
-         id="exampleFormControlInput1" placeholder="amount">
-         </input>
-         </div>
-         <button type="submit" class="btn btn-success mt-3">Submit</button>
-         </form>
-         </td>
-        </tr>     
-        </tbody>
-      </table>
+
+
+
+    
+
+     
+
       <hr class="my-5"/>
       <table className="table bg-white rounded shadow-sm  table-hover">
         <thead>
@@ -1143,6 +1179,7 @@ function Orderslist(props) {
         </tr> 
         </tbody>
       </table>
+
 
       <hr class="my-5"/>
       <table className="table bg-white rounded shadow-sm  table-hover">
@@ -1289,6 +1326,11 @@ function Orderslist(props) {
         </tr>       
         </tbody>
       </table>
+
+
+
+
+
       <table className="table bg-white rounded shadow-sm text-center">
           <thead>
             <tr>

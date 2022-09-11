@@ -21,6 +21,18 @@ const postweddingSchema = new mongoose.Schema(
     GroomName: {
       type: String,
     },
+    cancelrequest:{
+      type:Boolean
+    },
+    cancelstatus:{
+      type:String
+    },
+    canceled:{
+      type:Boolean
+    },
+    refund:{
+      type:Number
+    },
     date: {
       type: String,
     },

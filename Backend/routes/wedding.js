@@ -194,6 +194,11 @@ console.log(req.body);
   let AdditionalPromiseDate;
   let AdditionalService;
 
+  var cancelrequest = false;
+  var cancelstatus = "pending";
+  var canceled = false
+  var refund = 0;
+
   const newWeddingForm = WeddingForm({
     eventName,
     userId,
@@ -218,6 +223,10 @@ console.log(req.body);
     OtherServices,
     OtherServiceValues,
     Food,
+    cancelrequest,
+    cancelstatus,
+    canceled,
+    refund
     // foodb,
     // photographyb,
     // venueb,
@@ -229,7 +238,7 @@ console.log(req.body);
     // isVerified,
   });
   if (data.OtherServices.length > 1) {
-  if (data.Services.includes("mehandi")) {
+  if (data.service.includes("Mehandi")) {
     mehandiStatus = "pending";``
     mehandiReason = "-";
     mehandiPromiseDate = "";

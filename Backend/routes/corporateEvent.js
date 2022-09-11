@@ -77,6 +77,10 @@ console.log(req.body);
       },
     },
   };
+  var cancelrequest = false;
+  var cancelstatus = "pending";
+  var canceled = false
+  var refund = 0;
 
   // var venueStatus = "pending"
   // var cateringStatus = "pending"
@@ -123,6 +127,10 @@ console.log(req.body);
     OtherServices,
     OtherServiceValues,
     Food,
+    cancelrequest,
+    cancelstatus,
+    canceled,
+    refund
   
   });
 

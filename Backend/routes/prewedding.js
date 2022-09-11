@@ -65,6 +65,11 @@ router.post("/", auth, async (req, res) => {
     items: checkBoxValues.foodvalue? checkBoxValues.foodvalue:"-",
   };
 
+  var cancelrequest = false;
+  var cancelstatus = "pending";
+  var canceled = false
+  var refund = 0;
+
   // var venueStatus = "pending"
   // var cateringStatus = "pending"
   // var shootingStatus = "pending"
@@ -109,6 +114,10 @@ router.post("/", auth, async (req, res) => {
     SpecialService,
     Shooting,
     Food,
+    cancelrequest,
+    cancelstatus,
+    canceled,
+    refund
     // foodb,
     // shootingb,
     // venueb,

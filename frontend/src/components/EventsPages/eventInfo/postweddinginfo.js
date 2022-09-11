@@ -1,10 +1,17 @@
 import React from 'react'
+import axios from 'axios'
 
 export function Postweddinginfo(props) {
   const personalpostedding = props.personalpostedding
   const postwedding = props.postwedding && props.postwedding
   const name = props.name
 
+  function refreshPage(){ 
+    axios
+      .post(`api/eventInfo/postweddingcancel/${props.personalpostedding.orderId}`)
+
+    window.location.reload(); 
+}
 console.log("vanthutu",props.postwedding);
 return(
       props.postwedding &&
@@ -234,6 +241,36 @@ return(
         
          </tbody>
         </table>
+        {!props.personalpostedding.cancelrequest && (
+          <div className='row  col-md-3 text-left'>
+                <button type="button" class="btn btn-danger " onClick={ refreshPage } >Cancel Order</button>
+                </div>
+                )
+              }
+              <div class="my-5" />
+       
+              {props.personalpostedding.cancelrequest && (
+                <div >
+                <div class="card w-75">
+                <div class="card-body">
+                <table class="table">
+              <tbody> 
+              <tr>
+                    <th scope="row" className="fw-bold">Cancel Request</th>
+                    <td colspan="2">{props.personalpostedding.cancelstatus}</td>
+        
+                  </tr>
+                  {props.personalpostedding.canceled && (<tr>
+                    <th scope="row" className="fw-bold">Refund Amount</th>
+                     <td colspan="2">{props.personalpostedding.refund}</td>
+                  </tr>
+                  )}
+              </tbody>
+              </table>
+  </div>
+</div>      
+              </div>
+              )}
           </div>
         </div>
       </div>

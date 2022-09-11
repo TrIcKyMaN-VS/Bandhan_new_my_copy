@@ -698,7 +698,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
  router.post("/corporatepoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -706,7 +706,7 @@ router.post("/babyshowerpoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -749,7 +749,7 @@ router.post("/corporatevoucher/:userId", async (req, res) => {
 router.post("/birthdaypoints/:userId", async (req, res) => {
   const point = req.body.val
   if(point === 0){
-    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$set: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
@@ -757,7 +757,7 @@ router.post("/birthdaypoints/:userId", async (req, res) => {
       }
     })
   }else{
-    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": points}},(err,doc)=>{
+    User.findOneAndUpdate({_id:req.params.userId}, {$inc: {"points": point}},(err,doc)=>{
       if(!doc){
         console.log(err);
       }else{
