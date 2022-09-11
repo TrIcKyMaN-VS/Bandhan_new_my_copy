@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
   const password = req.body.data.password
   const points = 0
   const voucher = 0
-
+  const isadmin = "false"
 
   const { error } = validate(registerData);
 
@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered...");
 
   // user = new User(_.pick(req.body.data, ["username", "email","phone", "password","points", "voucher"]));
-  user = new User({username,email,phone,password,points,voucher});
+  user = new User({username,email,phone,password,points,voucher, isadmin});
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);

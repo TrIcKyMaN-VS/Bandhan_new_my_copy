@@ -182,16 +182,22 @@ function BabyShowerForm() {
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if (diffDays < 10) {
-      toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    }
+    
     axios
       .post("/api/babyshower", { data, checkBoxValues })
       .then((res) => {
         console.log(res.data);
-        if(res.status === 200){
+        if(res.data === "already"){
+          toast.success("Already form submitted", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+        if(res.data === "saved"){
+          if (diffDays < 5) {
+            toast.success("you are under premium booking!!!", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
           toast.success("Successfully saved", {
             position: toast.POSITION.TOP_RIGHT,
           });
@@ -199,6 +205,7 @@ function BabyShowerForm() {
             navigate("/")                                 
           }, 2000);
         }
+        
       })
       .catch((err) => {
         if (err.response.data === "Accesss Denied. No Token Provided") {
@@ -1270,13 +1277,23 @@ function BabyShowerForm() {
               </div>
               {/* <hr class="my-2" /> */}
               <h3>
-                <strong>Note : </strong>
+                <strong>Note 1 : </strong>
               </h3>
               <h4>
                 <strong style={{ color: "red" }}>
                   {" "}
                   Once the form is submitted now.Our customer representative
                   will contact you within 12-24 hours to discuss in more detail.
+                </strong>
+              </h4>
+              <h1 class="my-2" /> 
+              <h3>
+                <strong>Note 2 : </strong>
+              </h3>
+              <h4>
+                <strong style={{ color: "red" }}>
+                  {" "}
+                  <a href={"/termsandconditions"} > Terms and Conditions </a>
                 </strong>
               </h4>
             </div>

@@ -481,12 +481,13 @@ console.log(req.body);
     name_Of_The_Event,
   });
 
-  newEventName.save().then(() => console.log("successfully event name saved"));
-
-  newWeddingInfo.save().then(() => console.log("success infowed saved"));
-
+ 
+WeddingForm.find({userId:req.id}).then((already)=>{
+  if(already.length> 0){
+    res.status(200).send("already")
+   }
+   else{
   newWeddingForm.save().then(() => {
-    // console.log(drdr);
     res.status(200).send("Wedding form saved successfully...!");
         
 //payment Setting
@@ -530,8 +531,11 @@ newPaymentfullDhoom
   .then(() => console.log("successfully payment saved"));
 
 
+  newEventName.save().then(() => console.log("successfully event name saved"));
 
-
+  newWeddingInfo.save().then(() => console.log("success infowed saved"));
+});
+}
 
   });
 });

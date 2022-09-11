@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 const { v4: uuidv4 } = require('uuid');
+const { EventName } = require("../model/eventName");
 app.use(cors());
 app.use(express.static("files"));
 app.use(bodyParser.json());
@@ -331,12 +332,20 @@ router.post("/", auth, async (req, res) => {
     AdditionalService,
   
   });
+  // const name_Of_The_Event = checkBoxValues.name_Of_The_Event;
+  // const newEventName = EventName({
+  //   userId,
+  //   name_Of_The_Event,
+  // });
 
-  newBirthdayInfo.save().then(()=>console.log("success infowed saved"))
 
-
+  BirthdayForm.find({userId:req.id}).then((already)=>{
+    if(already.length> 0){
+      res.status(200).send("already")
+     }
+     else{
   newBirthdayForm.save().then(() => {
-    res.status(200).send("birthday form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 
@@ -379,13 +388,18 @@ newPaymentfullDhoom
   .save()
   .then(() => console.log("successfully payment saved"));
 
+  newBirthdayInfo.save()
+  .then(()=>console.log("saved"))
+  // newEventName.save().then(() => console.log("successfully event name saved"));
 
-
+  })
+}
+})
 
 
   });
   // console.log( );
-});
+
 
 
 

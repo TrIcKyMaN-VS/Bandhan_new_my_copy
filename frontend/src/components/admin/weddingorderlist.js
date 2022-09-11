@@ -255,6 +255,11 @@ function Orderslist(props) {
       });
     }
   }
+  function dlt(){
+    axios.delete(`api/eventInfo/weddingdlt/${forms[0].orderId}`)
+    window.location.reload(); 
+  
+  }
   function Status(value) {
     if (value === "venue") {
       axios
@@ -386,6 +391,52 @@ function Orderslist(props) {
     <div className="row my-12">
       <h3 className="fs-4 mb-3">Details</h3>
       <div className="col">
+
+      {forms[0] && (<div >
+                <div class="card w-75">
+                <div class="card-body">
+                <h5 class="card-title red">Delete Order</h5>
+                <table class="table ">
+              <tbody> 
+              <tr>
+              
+            
+<td><button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+Delete
+</button></td>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="exampleModalLabel">Delete User</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Delete all the order information</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-mdb-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" onClick={(val)=>dlt()}>Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+              {/* <td><div className='btn btn-warning btn-sm' onClick={(val)=>dlt()}>Delete</div></td> */}
+                  </tr>                
+              
+              </tbody>
+              </table>
+                </div>
+              </div>      
+              
+              </div>
+              
+              
+           )}
+
+           
+           <hr class="my-5"/>
+
       {forms[0].cancelrequest && (<div >
                 <div class="card w-75">
                 <div class="card-body">

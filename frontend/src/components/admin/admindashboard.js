@@ -17,15 +17,16 @@ function Admindashboard() {
   const [babyshowerids , setbabyshowerids] = useState([])
   const [corporateids, setcorporateids] = useState([])
  const [familyfunctionids, setfamilyfunctionids] = useState([])
-
+const [visible, setvisible] = useState(false)
 
   // const [orderspage, setorderspage] = useState(true);
   const [pages, setpages] = useState("dash");
   const dashorder = () => {
     // setorderspage(true);
+    window.location.reload(); 
     setpages("dash");
   };
-  const userpage = () => {
+  const userpage = () => { 
     setpages("user");
     
   };
@@ -36,6 +37,12 @@ function Admindashboard() {
     setpages("vendor");
   };
   useEffect(() => {
+    axios.get("api/isadmincheck").then((res)=>{
+      console.log("res",res.data);
+      if(res.data === "invalid"){
+        setvisible(true)
+      }
+    })
     axios.get("api/adminuserlist").then((res) => {
       // console.log(res.data);
       setdatas(res.data);
@@ -84,6 +91,8 @@ function Admindashboard() {
   }, [0]);
 
   return (
+    <>
+    {!visible && (
     <div className="d-flex" id="wrapper">
       <div className="bg-white" id="sidebar-wrapper">
         <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
@@ -173,7 +182,15 @@ function Admindashboard() {
         </div>
       </div>
     </div>
+  )}
+  {visible && (
+    <div style={{height: "100vh"}}>
+   <h1 className="text-center">permission denied</h1>
+    </div>
+  )}
+  </>
   );
+  
 }
 
 export default Admindashboard;

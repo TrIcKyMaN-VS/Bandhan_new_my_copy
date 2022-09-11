@@ -242,10 +242,13 @@ router.post("/", auth, async (req, res) => {
     name_Of_The_Event,
   });
 
-  newEventName.save().then(() => console.log("successfully event name saved"));
-
+PreWeddingForm.find({userId:req.id}).then((already)=>{
+  if(already.length> 0){
+    res.status(200).send("already")
+   }
+   else{
   newPreWeddingForm.save().then(() => {
-    res.status(200).send("Prewedding form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 
@@ -287,9 +290,11 @@ newPaymentfullDhoom
   .save()
   .then(() => console.log("successfully payment saved"));
 
+  newEventName.save().then(() => console.log("successfully event name saved"));
 
 
-
+});
+}
 
   });
   console.log("completed!! saved");

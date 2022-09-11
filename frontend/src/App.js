@@ -2,6 +2,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 import "./App.css";
 import Home from "./components/home/home";
+import Termsandcondtions from "./components/home/termsandcondtions";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
@@ -85,8 +86,9 @@ function App() {
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
         <Route path="/emergencyform" element={<Emergency />}></Route>
         <Route path="/admin" element={<Admin />}></Route>
-        <Route path="admindashboard" element={<Admindashboard />}></Route>
+        <Route path="/admindashboard" element={<Admindashboard />}></Route>
         <Route path="/passwordresetsuccess" element={<Passwordresetsuccess />}></Route>
+        <Route path="/termsandconditions" element={<Termsandcondtions/>}></Route>
         <Route path="*" element={<Events />}></Route>
       </Routes>
     );
@@ -100,9 +102,10 @@ function App() {
         <Route path="/passwordReset" element={<Passwordreset />}></Route>
         <Route path="/newPassword/:resetTok" element={<NewPassword />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
-
+        <Route path="/termsandcondtions" element={<Termsandcondtions/>}></Route>
+        
         <Route path="/admin" element={<Admin />}></Route>
-        <Route path="admindashboard" element={<Admindashboard />}></Route>
+        {/* <Route path="admindashboard" element={<Admindashboard />}></Route> */}
         <Route path="/poojagallery" element={<PoojaGallery />}></Route>
         <Route path="/passwordresetsuccess" element={<Passwordresetsuccess />}></Route>
         <Route path="/*" element={<Login />}></Route>

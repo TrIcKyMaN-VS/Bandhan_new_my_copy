@@ -227,10 +227,10 @@ export default function Home() {
               </p>
               <div className=" ms-sm-4">
                 <button
-                  href="./Terms of Service/index.html"
+                 
                   className="btn btn-black mt-4"
                 >
-                  Terms and condition
+                 <a  href="/termsandconditions"> Terms and condition</a>
                 </button>
               </div>
             </div>

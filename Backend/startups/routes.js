@@ -23,6 +23,7 @@ const logout = require("../controllers/user-controller");
 const birthdayorder = require("../routes/adminorderslist/birthdayorder")
 const vendoradminlist = require("../routes/vendoradminlist");
 const auth = require("../middleware/auth");
+const adminauth = require("../routes/adminauth")
 const PaymentRoute = require("../routes/paymentRoute")
 module.exports = function (app) {
   app.use("/api/register", register);
@@ -44,7 +45,9 @@ module.exports = function (app) {
   app.use("/api/familyFunction", familyFunction)
   app.use("/api/corporateEvent", corporateEvent)
   app.use("/api/eventInfo",auth,eventsinfos )
-  app.use("/api/adminuserlist", adminuserlist)
+  app.use("/api/isadmincheck",auth, adminauth)
+  app.use("/api/adminuserlist",auth, adminuserlist)
+
   app.use("/api/emergencyform",emergencyform)
   app.use("/api/vendoradminlist",vendoradminlist)
   app.use("/api/payment", PaymentRoute)

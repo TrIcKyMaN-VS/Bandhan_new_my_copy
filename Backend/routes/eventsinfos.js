@@ -664,4 +664,162 @@ router.post("/weddingrefund/:userId", (req, res) => {
 
 
 
+//delete
+//babyshower
+router.delete("/babydlt/:orderId", (req, res) => {
+  BabyShowerInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  BabyShowerForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+
+
+ //birthday
+ router.delete("/birthdaydlt/:orderId", (req, res) => {
+  BirthdayInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  BirthdayForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+//corporate:
+router.delete("/corporatedlt/:orderId", (req, res) => {
+  CorporateInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  CorporateEventForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+//engagement :
+
+router.delete("/engagementdlt/:orderId", (req, res) => {
+  EngagementInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  EngagementForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+//familyfunction 
+
+router.delete("/familyfunctiondlt/:orderId", (req, res) => {
+  FamilyFunctionInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  FamilyFunctionForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+
+//postwedding:
+
+router.delete("/postweddingdlt/:orderId", (req, res) => {
+  PostWeddinngInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  PostWeddingForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+//prewedding
+
+router.delete("/preweddingdlt/:orderId", (req, res) => {
+  PreweddingInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  PreWeddingForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+//wedding
+
+router.delete("/weddingdlt/:orderId", (req, res) => {
+  WeddingInfo.remove({orderId:req.params.orderId},(err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } 
+  });
+  WeddingForm.remove({ orderId: req.params.orderId } ,(err, doc) => {
+   if (err) {
+     console.log(err);
+     res.status(400).send(err);
+   } else {
+     res.status(200).send(doc);
+   }
+ });
+ });
+
+
+
+
+
+
 module.exports = router;

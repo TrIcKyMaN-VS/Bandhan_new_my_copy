@@ -184,18 +184,28 @@ function PostweddingForm() {
     console.log(diffTime + " milliseconds");
     console.log(diffDays + " days");
 
-    if (diffDays < 10) {
-      toast.success("you are under premium booking!!!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    }
+    // if (diffDays < 6) {
+    //   toast.success("you are under premium booking!!!", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // }
     console.log(checkBoxValues);
     // console.log(checkBoxValues.dancevalue);
     console.log(data);
     axios
       .post("/api/postwedding", { data, checkBoxValues })
       .then((res) => {
-        if(res.status === 200){
+        if(res.data === "already"){
+          toast.success("Already form submitted", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+        if(res.data === "saved"){
+          if (diffDays < 6) {
+            toast.success("you are under premium booking!!!", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
           toast.success("Successfully saved", {
             position: toast.POSITION.TOP_RIGHT,
           });
@@ -939,12 +949,22 @@ function PostweddingForm() {
               </div>
               {/* <hr class="my-2" /> */}
               <h3>
-                <strong>Note : </strong>
+                <strong>Note 1 : </strong>
               </h3>
               <h4>
                 <strong style={{ color: "red" }}>
                   Once the form is submitted now.Our customer representative
                   will contact you within 12-24 hours to discuss in more detail.
+                </strong>
+              </h4>
+              <h1 class="my-2" /> 
+              <h3>
+                <strong>Note 2 : </strong>
+              </h3>
+              <h4>
+                <strong style={{ color: "red" }}>
+                  {" "}
+                  <a href={"/termsandconditions"} > Terms and Conditions </a>
                 </strong>
               </h4>
             </div>

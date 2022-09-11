@@ -3,7 +3,7 @@ const router = express.Router();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
-const auth = require("../middleware/auth")
+const {adminauth} = require("./adminauth")
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

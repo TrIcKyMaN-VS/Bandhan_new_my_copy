@@ -417,11 +417,14 @@ router.post("/", auth, async (req, res) => {
     userId,
     name_Of_The_Event,
   });
-  newFamilyFunctionInfo.save().then(()=>console.log("success infowed saved"))
-  newEventName.save().then(() => console.log("successfully event name saved"));
-
+ 
+  FamilyFunctionForm.find({userId:req.id}).then((already)=>{
+    if(already.length> 0){
+      res.status(200).send("already")
+     }
+     else{
   newFamilyFunctionForm.save().then(() => {
-    res.status(200).send("Family Function form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 
@@ -464,8 +467,10 @@ newPaymentfullDhoom
   .then(() => console.log("successfully payment saved"));
 
 
-
-
+  newFamilyFunctionInfo.save().then(()=>console.log("success infowed saved"))
+  newEventName.save().then(() => console.log("successfully event name saved"));
+});
+}
 
   });
   console.log("completed!! saved");

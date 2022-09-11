@@ -354,8 +354,13 @@ console.log(req.body);
     name_Of_The_Event,
   });
  
-  newCorporateInfo.save().then(()=>console.log("success infowed saved"))
-  newEventName.save().then(() => console.log("successfully event name saved"));
+  CorporateEventForm.find({userId:req.id}).then((already)=>{
+    console.log("alr",already);
+    if(already.length> 0){
+     res.status(200).send("already")
+    }
+    else{
+
   newcorporateeventform.save().then(() => {
     res.status(200).send("Family Function form saved successfully...!");
         
@@ -400,9 +405,11 @@ newPaymentfullDhoom
   .then(() => console.log("successfully payment saved"));
 
 
+  newCorporateInfo.save().then(()=>console.log("success infowed saved"))
+  newEventName.save().then(() => console.log("successfully event name saved"));
 
-
-
+});
+}
   });
   console.log("completed!! saved");
 

@@ -410,12 +410,6 @@ router.post("/", auth, async (req, res) => {
     AdditionalService,
   });
 
-  newEngagementInfo.save().then(()=>console.log("success infowed saved"))
-
-
-
-
-
 
 
 
@@ -430,10 +424,13 @@ router.post("/", auth, async (req, res) => {
     name_Of_The_Event,
   });
 
-  newEventName.save().then(() => console.log("successfully event name saved"));
-
+  EngagementForm.find({userId:req.id}).then((already)=>{
+    if(already.length> 0){
+      res.status(200).send("already")
+     }
+     else{
   newEngagementForm.save().then(() => {
-    res.status(200).send("Engagement form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 
@@ -475,9 +472,12 @@ newPaymentfullDhoom
   .save()
   .then(() => console.log("successfully payment saved"));
 
+  newEngagementInfo.save().then(()=>console.log("success infowed saved"))
+  newEventName.save().then(() => console.log("successfully event name saved"));
 
 
-
+});
+}
 
   });
   console.log("completed!! saved");

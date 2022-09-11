@@ -395,11 +395,17 @@ if (data.OtherServices.length > 1) {
     userId,
     name_Of_The_Event,
   });
-  newBabyShowerInfo.save().then(()=>console.log("success infowed saved"))
-  newEventName.save().then(() => console.log("successfully event name saved"));
+ 
+ BabyShowerForm.find({userId:req.id}).then((already)=>{
 
+ 
+ console.log("alr",already);
+ if(already.length> 0){
+  res.status(200).send("already")
+ }
+ else{
   newBabyShowerForm.save().then(() => {
-    res.status(200).send("BabyShower form saved successfully...!");
+    res.status(200).send("saved");
     
 //payment Setting
 
@@ -443,9 +449,13 @@ newPaymentfullDhoom
 
 
 
-
+  newBabyShowerInfo.save().then(()=>console.log("success infowed saved"))
+  newEventName.save().then(() => console.log("successfully event name saved"));
 
   });
+}
+})
+
   console.log("completed!! saved");
 
   console.log(req.body);

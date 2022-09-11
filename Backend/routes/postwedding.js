@@ -196,13 +196,15 @@ if (data.SpecialService) {
     name_Of_The_Event,
   });
 
-  newPostWeddingInfo.save().then(() => console.log("saved..."));
-
-  newEventName.save().then(() => console.log("successfully event name saved"));
-
+ 
+PostWeddingForm.find({userId:req.id}).then((already)=>{
+  if(already.length> 0){
+    res.status(200).send("already")
+   }
+   else{
   newPostWeddingForm.save().then(() => {
     // console.log(fffs);
-    res.status(200).send("Postwedding form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 
@@ -244,9 +246,12 @@ newPaymentfullDhoom
   .save()
   .then(() => console.log("successfully payment saved"));
 
+  newPostWeddingInfo.save().then(() => console.log("saved..."));
 
+  newEventName.save().then(() => console.log("successfully event name saved"));
 
-
+});
+}
 
   });
 
