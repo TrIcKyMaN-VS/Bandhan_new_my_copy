@@ -1,15 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { authActions } from "../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import TodoList from "./todoList";
 
 function Todo() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [todoTxt, settodoTxt] = useState();
   const [todoItem, setItemTodo] = useState([]);
 
   const tfd = [1, 2, 3, 4, 5];
 
   useEffect(() => {
+    function doLogout() {
+      localStorage.clear("bandhanUserToken");
+      dispatch(authActions.logout());
+      navigate("/login");
+      console.log("Succesfully logged out");
+    }
+
+    if (!!localStorage.getItem("bandhanUserToken")) {
+      axios
+        .get("api/login/getLoginStatus")
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("soop...");
+          } else {
+            doLogout();
+          }
+        })
+        .catch((err) => {
+          doLogout();
+        });
+    }
     axios.get("api/todo").then((res) => {
       // console.log(res.data);
       // console.log(res.data);

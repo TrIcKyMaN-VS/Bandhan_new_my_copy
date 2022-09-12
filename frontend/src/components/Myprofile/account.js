@@ -1,11 +1,44 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { authActions } from "../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Todo from "../todo";
 import Payment from '../payment/payment';
 import Points from "./../pointsandvouchers";
 import Invoice from "../Invoice/invoice";
 import "./account.css";
 import EventInfo from "../EventsPages/eventInfo/eventInfo";
-export default function Engagement() {
+export default function Account() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [displayEve, setDisplayEve] = useState(false);
+
+  useEffect(() => {
+    function doLogout() {
+      localStorage.clear("bandhanUserToken");
+      dispatch(authActions.logout());
+      navigate("/login");
+      console.log("Succesfully logged out");
+    }
+
+    if (!!localStorage.getItem("bandhanUserToken")) {
+      axios
+        .get("api/login/getLoginStatus")
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("soop...");
+            setDisplayEve(true);
+          } else {
+            doLogout();
+          }
+        })
+        .catch((err) => {
+          doLogout();
+        });
+    }
+  }, []);
   return (
     <div>
       {/* <!-- Tabs navs --> */}

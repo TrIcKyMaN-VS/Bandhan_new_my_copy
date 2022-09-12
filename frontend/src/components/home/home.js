@@ -407,11 +407,14 @@ export default function Home() {
                       <p className="mb-1">Engagement: 10 days or Prior</p>
                       <p className="mb-1">Pre wedding : 12 days or Prior</p>
                       <p className="mb-1">Post wedding:12 days or Prior </p>
-                      <p className="mb-1">Wedding: 15 days or Prior</p>
+                      {/* <p className="mb-1">Wedding: 15 days or Prior</p> */}
                       <p className="mb-1">
                         Destination Event : 20 days or Prior
                       </p>
                       <p className="mb-1"> Wedding: 20 days or Prior</p>
+                      <p> Baby shower: 10 days or Prior</p>
+                      <p> Corporate: 10 days or Prior</p>
+                      <p> Family Function: 10 days or Prior</p>
                     </li>
                   </ul>
                 </div>
@@ -454,7 +457,11 @@ export default function Home() {
                       <p>Post wedding:5 days or Prior </p>
                       <p>Wedding: 7 days or Prior</p>
                       <p>Destination Event : 10 days or Prior</p>
-                      <p> Wedding: 10 days or Prior</p>
+                      {/* <p> Wedding: 10 days or Prior</p> */}
+                      <p> Baby shower: 5 days or Prior</p>
+                      <p> Corporate: 5 days or Prior</p>
+                      <p> Family Function: 5 days or Prior</p>
+
                     </li>
                   </ul>
                 </div>

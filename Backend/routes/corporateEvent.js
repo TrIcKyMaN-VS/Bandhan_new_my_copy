@@ -362,7 +362,7 @@ console.log(req.body);
     else{
 
   newcorporateeventform.save().then(() => {
-    res.status(200).send("Family Function form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 

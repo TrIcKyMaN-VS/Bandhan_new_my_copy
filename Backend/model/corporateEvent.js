@@ -22,7 +22,7 @@ const CorporateEventSchema = new mongoose.Schema(
       type: String,
     },
     date: {
-      type: Number,
+      type: String,
     },
     cancelrequest:{
       type:Boolean

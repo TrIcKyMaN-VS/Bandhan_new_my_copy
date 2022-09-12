@@ -228,10 +228,12 @@ function Orderslist(props) {
     function points(val){
       axios.post(`api/adminuserlist/corporatepoints/${forms[0].userId}`,{val}).then((res) => {
       });
+      window.location.reload(); 
     }
     function voucher(val){
       axios.post(`api/adminuserlist/corporatevoucher/${forms[0].userId}`,{val}).then((res) => {
       });
+      window.location.reload(); 
     }
 
 
@@ -281,6 +283,7 @@ function Orderslist(props) {
           if (res.status===200) {
             alert("success")
             setUpdtBtn(true)
+            window.location.reload(); 
           }
         })
         .catch((err) => {
@@ -303,6 +306,7 @@ function Orderslist(props) {
           if (res.status === 200) {
             alert(res.data);
             setUpdtBtnPayment(true);
+            window.location.reload(); 
           }
         })
         .catch((err) => {
@@ -330,6 +334,7 @@ function updateInvoiceDetails(invoiceDet) {
         .then((res) => {
           if (res.status === 200) {
             alert("Invoices Details Updated");
+            window.location.reload(); 
           }
         })
         .catch((err) => {

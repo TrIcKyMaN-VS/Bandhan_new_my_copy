@@ -177,11 +177,13 @@ function Orderslist(props) {
       .then((res) => {
         console.log(res.data);
       });
+      window.location.reload(); 
   }
   function voucher(val) {
     axios
       .post(`api/adminuserlist/postweddingvoucher/${forms[0].userId}`, { val })
       .then((res) => {});
+      window.location.reload(); 
   }
   function updateEventDetails() {
     const eventDatas = {
@@ -208,6 +210,7 @@ function Orderslist(props) {
       .post("/api/postwedding/updateInfos", { eventDatas })
       .then((res) => {
         console.log(res);
+        window.location.reload(); 
       })
       .catch((err) => {
         console.log(err);
@@ -229,6 +232,7 @@ function Orderslist(props) {
         if (res.status === 200) {
           alert(res.data);
           setUpdtBtnPayment(true);
+          window.location.reload(); 
         }
       })
       .catch((err) => {
@@ -252,6 +256,7 @@ function Orderslist(props) {
       .then((res) => {
         if (res.status === 200) {
           alert("Invoices Details Updated");
+          window.location.reload(); 
         }
       })
       .catch((err) => {

@@ -8,8 +8,6 @@ import "lightgallery/css/lg-thumbnail.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 
-// import "./serviceGallery.css";
-
 function PhotographyGallery() {
   const onInit = () => {
     console.log("lightGallery has been initialized");
@@ -18,9 +16,15 @@ function PhotographyGallery() {
   return (
     <div className="App p-5 m-5">
       {/* <!-- Gallery --> */}
-      <p className=" text-center pb-5" style={{ fontSize:"32px" ,fontWeight:"bolder" }}>
+      <p
+        className=" text-center pb-5"
+        style={{ fontSize: "32px", fontWeight: "bolder" }}
+      >
         IT'S TIME TO EXPLORE{" "}
-        <span className="" style={{ fontSize:"32px" ,fontWeight:"bold" ,color: "limegreen" }}>
+        <span
+          className=""
+          style={{ fontSize: "32px", fontWeight: "bold", color: "limegreen" }}
+        >
           {" "}
           OUR GALLERY
         </span>
@@ -32,62 +36,90 @@ function PhotographyGallery() {
             speed={500}
             plugins={[lgThumbnail, lgZoom]}
           >
-            <a href="https://drive.google.com/file/d/1wkuxivbvZwrVdMjOWtKjhGbxkyQ1SE-K/view?usp=sharing">
+            <a href="https://bit.ly/3B5hu5L">
               <img
-                src="https://drive.google.com/file/d/1wkuxivbvZwrVdMjOWtKjhGbxkyQ1SE-K/view?usp=sharing"
+                src="https://bit.ly/3B5hu5L"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/photograohy.jpg">
+            <a href="https://bit.ly/3d45kSw">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3d45kSw"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/dancing.jpg">
+            <a href="https://bit.ly/3DihP7C">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3DihP7C"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/id.jpg">
+            <a href="https://bit.ly/3eKfXdS">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3eKfXdS"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             {/* second */}
+            <a href="./images/imgw2.jpg" className="d-none">
+              <img
+                src="./images/imgw2.jpg"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Photography"
+              />
+            </a>
             <a href="./images/pic1.jpg" className="d-none">
               <img
                 src="./images/pic1.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             <a href="./images/img5.jpg" className="d-none">
               <img
                 src="./images/img5.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
+              />
+            </a>
+            <a href="https://bit.ly/3QvaV1W" className="d-none">
+              <img
+                src="https://bit.ly/3QvaV1W"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Photography"
               />
             </a>
             {/* third */}
-            <a href="./images/photograohy.jpg" className="d-none">
+            <a href="https://bit.ly/3eLbCH2" className="d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3eLbCH2"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
+              />
+            </a>
+            <a href="https://bit.ly/3RCxjYF" className="d-none">
+              <img
+                src="https://bit.ly/3RCxjYF"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Photography"
               />
             </a>
             <a href="./images/dancing.jpg" className="d-none">
               <img
                 src="./images/dancing.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
+              />
+            </a>
+            <a href="https://bit.ly/3U5qKQ3" className="d-none">
+              <img
+                src="https://bit.ly/3U5qKQ3"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Photography"
               />
             </a>
           </LightGallery>
@@ -102,32 +134,32 @@ function PhotographyGallery() {
             plugins={[lgThumbnail, lgZoom]}
           >
             {/* first */}
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3B5hu5L" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3B5hu5L"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/photograohy.jpg" className=" d-none">
+            <a href="https://bit.ly/3d45kSw" className=" d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3d45kSw"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/dancing.jpg" className=" d-none">
+            <a href="https://bit.ly/3DihP7C" className=" d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3DihP7C"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3eKfXdS" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3eKfXdS"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             {/* second */}
@@ -135,57 +167,57 @@ function PhotographyGallery() {
               <img
                 src="./images/imgw2.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             <a href="./images/pic1.jpg">
               <img
                 src="./images/pic1.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             <a href="./images/img5.jpg">
               <img
                 src="./images/img5.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/imgw2.jpg">
+            <a href="https://bit.ly/3QvaV1W">
               <img
-                src="./images/imgw2.jpg"
+                src="https://bit.ly/3QvaV1W"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             {/* third */}
-            <a href="./images/newlogo.jpg" className="d-none">
+            <a href="https://bit.ly/3eLbCH2" className="d-none">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3eLbCH2"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/photograohy.jpg" className="d-none">
+            <a href="https://bit.ly/3RCxjYF" className="d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3RCxjYF"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             <a href="./images/dancing.jpg" className="d-none">
               <img
                 src="./images/dancing.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/newlogo.jpg" className="d-none">
+            <a href="https://bit.ly/3U5qKQ3" className="d-none">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3U5qKQ3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
           </LightGallery>
@@ -198,76 +230,91 @@ function PhotographyGallery() {
             onInit={onInit}
             speed={500}
             plugins={[lgThumbnail, lgZoom]}
-          ><a href="./images/id.jpg" className=" d-none">
+          >
+            <a href="https://bit.ly/3B5hu5L" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3B5hu5L"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/photograohy.jpg" className=" d-none">
+            <a href="https://bit.ly/3d45kSw" className=" d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3d45kSw"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/dancing.jpg" className=" d-none">
+            <a href="https://bit.ly/3DihP7C" className=" d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3DihP7C"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3eKfXdS" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3eKfXdS"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             {/* second row */}
+            <a href="./images/imgw2.jpg" className="d-none">
+              <img
+                src="./images/imgw2.jpg"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Photography"
+              />
+            </a>
             <a href="./images/pic1.jpg" className=" d-none">
               <img
                 src="./images/pic1.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             <a href="./images/img5.jpg" className=" d-none">
               <img
                 src="./images/img5.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
+              />
+            </a>
+            <a href="https://bit.ly/3QvaV1W" className="d-none">
+              <img
+                src="https://bit.ly/3QvaV1W"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Photography"
               />
             </a>
             {/* thirdrow  */}
-            <a href="./images/newlogo.jpg">
+            <a href="https://bit.ly/3eLbCH2">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3eLbCH2"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/photograohy.jpg">
+            <a href="https://bit.ly/3RCxjYF">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3RCxjYF"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
             <a href="./images/dancing.jpg">
               <img
                 src="./images/dancing.jpg"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
-            <a href="./images/newlogo.jpg">
+            <a href="https://bit.ly/3U5qKQ3">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3U5qKQ3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Photography"
               />
             </a>
           </LightGallery>

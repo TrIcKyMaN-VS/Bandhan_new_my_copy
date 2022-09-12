@@ -293,11 +293,13 @@ function Orderslist(props) {
     axios
       .post(`api/adminuserlist/weddingpoints/${forms[0].userId}`, { val })
       .then((res) => {});
+      window.location.reload(); 
   }
   function voucher(val) {
     axios
       .post(`api/adminuserlist/weddingvoucher/${forms[0].userId}`, { val })
       .then((res) => {});
+      window.location.reload(); 
   }
 
   function updateEventDetails() {
@@ -364,6 +366,8 @@ function Orderslist(props) {
         if (res.status===200) {
           alert("success")
           setUpdtBtn(true)
+      window.location.reload(); 
+
         }
       })
       .catch((err) => {
@@ -387,6 +391,8 @@ function Orderslist(props) {
         if (res.status === 200) {
           alert(res.data);
           setUpdtBtnPayment(true);
+      window.location.reload(); 
+
         }
       })
       .catch((err) => {
@@ -418,6 +424,7 @@ function Orderslist(props) {
       .then((res) => {
         if (res.status === 200) {
           alert("Invoices Details Updated");
+        window.location.reload(); 
         }
       })
       .catch((err) => {

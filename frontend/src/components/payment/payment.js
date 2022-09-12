@@ -1,14 +1,40 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { authActions } from "../../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./payment.css";
 import PaymentDetail from "./paymentDetail";
 
 function Payment() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [datas, setdata] = useState([]);
   const [currentDetail, setCurrentDetail] = useState();
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
+    function doLogout() {
+      localStorage.clear("bandhanUserToken");
+      dispatch(authActions.logout());
+      navigate("/login");
+      console.log("Succesfully logged out");
+    }
+
+    if (!!localStorage.getItem("bandhanUserToken")) {
+      axios
+        .get("api/login/getLoginStatus")
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("soop...");
+          } else {
+            doLogout();
+          }
+        })
+        .catch((err) => {
+          doLogout();
+        });
+    }
     axios.get("api/payment/getPaymentLists").then((res) => {
       if (res.status === 200) {
         setdata(res.data);

@@ -31,7 +31,7 @@ function Footer() {
         {/* <a href="" class="text-white me-4">
           <i class="fab fa-twitter"></i>
         </a> */}
-        <a href="" class="text-white me-4">
+        <a href="mailto:Dhoomdhamaka0@gmail.com" class="text-white me-4">
           <i class="fab fa-google"></i>
         </a>
         <a href="https://www.instagram.com/dhoomdhamaka" class="text-white me-4">
@@ -54,13 +54,13 @@ function Footer() {
      ></a>
 
     
-     <a
+     {/* <a
        class="btn text-white btn-floating m-1"
        style={{backgroundColor:" #55acee"}}
        href="#!"
        role="button"
        ><i class="fab fa-twitter"></i
-     ></a>
+     ></a> */}
 
   
      <a

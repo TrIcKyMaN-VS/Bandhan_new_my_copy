@@ -1,13 +1,39 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { authActions } from "../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./points.css";
-import axios from 'axios'
 function Points() {
+    const dispatch = useDispatch();
+  const navigate = useNavigate();
     // const datavalue = axios.get("/api/adminuserlist")
     // const final = datavalue.data.points
     const [points, setpoints] = useState("")
     const [voucher, setvoucher] = useState("")
 
 useEffect(()=>{
+    function doLogout() {
+        localStorage.clear("bandhanUserToken");
+        dispatch(authActions.logout());
+        navigate("/login");
+        console.log("Succesfully logged out");
+      }
+  
+      if (!!localStorage.getItem("bandhanUserToken")) {
+        axios
+          .get("api/login/getLoginStatus")
+          .then((res) => {
+            if (res.status === 200) {
+              console.log("soop...");
+            } else {
+              doLogout();
+            }
+          })
+          .catch((err) => {
+            doLogout();
+          });
+      }
     axios.get("api/eventInfo/postweddingpoints").then((res) => {
         setpoints(res.data[0].points)
         setvoucher(res.data[0].voucher)

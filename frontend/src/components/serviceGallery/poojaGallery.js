@@ -25,7 +25,6 @@ function PoojaGallery() {
           OUR GALLERY
         </span>
       </p>
-      <img src="blob:https://mega.nz/0beba3c4-a0cc-46f3-adf2-d6c9016a1784" />
       <div class="row m-5">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
           <LightGallery
@@ -33,62 +32,90 @@ function PoojaGallery() {
             speed={500}
             plugins={[lgThumbnail, lgZoom]}
           >
-            <a href="blob:https://mega.nz/0beba3c4-a0cc-46f3-adf2-d6c9016a1784">
+            <a href="https://bit.ly/3L7V2xx">
               <img
-                src="blob:https://mega.nz/0beba3c4-a0cc-46f3-adf2-d6c9016a1784"
+                src="https://bit.ly/3L7V2xx"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/photograohy.jpg">
+            <a href="https://bit.ly/3Rv4ptn">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3Rv4ptn"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/dancing.jpg">
+            <a href="https://bit.ly/3BfxkuK">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3BfxkuK"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/id.jpg">
+            <a href="https://bit.ly/3d1lP1X">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3d1lP1X"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
             {/* second */}
-            <a href="./images/pic1.jpg" className="d-none">
+            <a href="https://bit.ly/3L4y9ei" className="d-none">
               <img
-                src="./images/pic1.jpg"
+                src="https://bit.ly/3L4y9ei"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/img5.jpg" className="d-none">
+            <a href="https://bit.ly/3qxryQ8" className="d-none">
               <img
-                src="./images/img5.jpg"
+                src="https://bit.ly/3qxryQ8"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
+              />
+            </a>
+            <a href="https://bit.ly/3qydYfo" className="d-none">
+              <img
+                src="https://bit.ly/3qydYfo"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Pooja"
+              />
+            </a>
+            <a href="https://bit.ly/3xi39BE" className="d-none">
+              <img
+                src="https://bit.ly/3xi39BE"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Pooja"
               />
             </a>
             {/* third */}
-            <a href="./images/photograohy.jpg" className="d-none">
+            <a href="https://bit.ly/3BACmDr" className="d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3BACmDr"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/dancing.jpg" className="d-none">
+            <a href="https://bit.ly/3LaAFQ3" className="d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3LaAFQ3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
+              />
+            </a>
+            <a href="https://bit.ly/3xgS1VO" className="d-none">
+              <img
+                src="https://bit.ly/3xgS1VO"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Pooja"
+              />
+            </a>
+            <a href="https://bit.ly/3QA8pHU" className="d-none">
+              <img
+                src="https://bit.ly/3QA8pHU"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Pooja"
               />
             </a>
           </LightGallery>
@@ -103,90 +130,90 @@ function PoojaGallery() {
             plugins={[lgThumbnail, lgZoom]}
           >
             {/* first */}
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3L7V2xx" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3L7V2xx"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/photograohy.jpg" className=" d-none">
+            <a href="https://bit.ly/3Rv4ptn" className=" d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3Rv4ptn"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/dancing.jpg" className=" d-none">
+            <a href="https://bit.ly/3BfxkuK" className=" d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3BfxkuK"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3d1lP1X" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3d1lP1X"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
             {/* second */}
-            <a href="./images/imgw2.jpg">
+            <a href="https://bit.ly/3L4y9ei">
               <img
-                src="./images/imgw2.jpg"
+                src="https://bit.ly/3L4y9ei"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/pic1.jpg">
+            <a href="https://bit.ly/3qxryQ8">
               <img
-                src="./images/pic1.jpg"
+                src="https://bit.ly/3qxryQ8"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/img5.jpg">
+            <a href="https://bit.ly/3qydYfo">
               <img
-                src="./images/img5.jpg"
+                src="https://bit.ly/3qydYfo"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/imgw2.jpg">
+            <a href="https://bit.ly/3xi39BE">
               <img
-                src="./images/imgw2.jpg"
+                src="https://bit.ly/3xi39BE"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
             {/* third */}
-            <a href="./images/newlogo.jpg" className="d-none">
+            <a href="https://bit.ly/3BACmDr" className="d-none">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3BACmDr"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/photograohy.jpg" className="d-none">
+            <a href="https://bit.ly/3LaAFQ3" className="d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3LaAFQ3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/dancing.jpg" className="d-none">
+            <a href="https://bit.ly/3xgS1VO" className="d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3xgS1VO"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/newlogo.jpg" className="d-none">
+            <a href="https://bit.ly/3QA8pHU" className="d-none">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3QA8pHU"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
           </LightGallery>
@@ -199,76 +226,90 @@ function PoojaGallery() {
             onInit={onInit}
             speed={500}
             plugins={[lgThumbnail, lgZoom]}
-          ><a href="./images/id.jpg" className=" d-none">
+          ><a href="https://bit.ly/3L7V2xx" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3L7V2xx"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/photograohy.jpg" className=" d-none">
+            <a href="https://bit.ly/3Rv4ptn" className=" d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3Rv4ptn"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/dancing.jpg" className=" d-none">
+            <a href="https://bit.ly/3BfxkuK" className=" d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3BfxkuK"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3d1lP1X" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3d1lP1X"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
             {/* second row */}
-            <a href="./images/pic1.jpg" className=" d-none">
+            <a href="https://bit.ly/3L4y9ei" className=" d-none">
               <img
-                src="./images/pic1.jpg"
+                src="https://bit.ly/3L4y9ei"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/img5.jpg" className=" d-none">
+            <a href="https://bit.ly/3qxryQ8" className=" d-none">
               <img
-                src="./images/img5.jpg"
+                src="https://bit.ly/3qxryQ8"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
+              />
+            </a>
+            <a href="https://bit.ly/3qydYfo" className=" d-none">
+              <img
+                src="https://bit.ly/3qydYfo"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Pooja"
+              />
+            </a>
+            <a href="https://bit.ly/3xi39BE" className=" d-none">
+              <img
+                src="https://bit.ly/3xi39BE"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Pooja"
               />
             </a>
             {/* thirdrow  */}
-            <a href="./images/newlogo.jpg">
+            <a href="https://bit.ly/3BACmDr">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3BACmDr"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/photograohy.jpg">
+            <a href="https://bit.ly/3LaAFQ3">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3LaAFQ3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/dancing.jpg">
+            <a href="https://bit.ly/3xgS1VO">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3xgS1VO"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
-            <a href="./images/newlogo.jpg">
+            <a href="https://bit.ly/3QA8pHU">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3QA8pHU"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Pooja"
               />
             </a>
           </LightGallery>

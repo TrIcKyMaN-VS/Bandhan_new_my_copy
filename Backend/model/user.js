@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
     isadmin:{
       type:String
     },
+
     phone: {
       type: Number,
       required: true,
@@ -73,7 +74,7 @@ userSchema.methods.generateAuthToken = function () {
     { _id: this._id, username: this.username, email: this.email },
     jwtPrivateKey,
     {
-      expiresIn: "2d",
+      expiresIn: "24h",
     }
   );
   return token;

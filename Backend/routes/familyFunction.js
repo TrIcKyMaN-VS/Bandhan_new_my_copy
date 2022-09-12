@@ -471,7 +471,7 @@ newPaymentfullDhoom.save().then(() => {
     eventName,
     userId,
     orderId,
-    date,
+    date:data.fromDate,
     shows: 0,
     decoration: 0,
     catering: 0,

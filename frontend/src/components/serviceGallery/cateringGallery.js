@@ -16,6 +16,7 @@ function CateringGallery() {
   };
 
   return (
+    
     <div className="App p-5 m-5">
       {/* <!-- Gallery --> */}
       <p className=" text-center pb-5" style={{ fontSize:"32px" ,fontWeight:"bolder" }}>
@@ -32,62 +33,90 @@ function CateringGallery() {
             speed={500}
             plugins={[lgThumbnail, lgZoom]}
           >
-            <a href="https://drive.google.com/file/d/1wkuxivbvZwrVdMjOWtKjhGbxkyQ1SE-K/view?usp=sharing">
+            <a href="https://bit.ly/3xkn17h">
               <img
-                src="https://drive.google.com/file/d/1wkuxivbvZwrVdMjOWtKjhGbxkyQ1SE-K/view?usp=sharing"
+                src="https://bit.ly/3xkn17h"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/photograohy.jpg">
+            <a href="https://bit.ly/3BaYov1">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3BaYov1"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/dancing.jpg">
+            <a href="https://bit.ly/3QvM4v3">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3QvM4v3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/id.jpg">
+            <a href="https://bit.ly/3B8rnzA">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3B8rnzA"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
             {/* second */}
-            <a href="./images/pic1.jpg" className="d-none">
+            <a href="https://bit.ly/3U6j7bR" className="d-none">
               <img
-                src="./images/pic1.jpg"
+                src="https://bit.ly/3U6j7bR"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/img5.jpg" className="d-none">
+            <a href="https://bit.ly/3eF1j7y" className="d-none">
               <img
-                src="./images/img5.jpg"
+                src="https://bit.ly/3eF1j7y"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
+              />
+            </a>
+            <a href="https://bit.ly/3Uffjp5" className="d-none">
+              <img
+                src="https://bit.ly/3Uffjp5"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Catering"
+              />
+            </a>
+            <a href="https://bit.ly/3eIICzW" className="d-none">
+              <img
+                src="https://bit.ly/3eIICzW"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Catering"
               />
             </a>
             {/* third */}
-            <a href="./images/photograohy.jpg" className="d-none">
+            <a href="https://bit.ly/3RXotEE" className="d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3RXotEE"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/dancing.jpg" className="d-none">
+            <a href="https://bit.ly/3RZ1bOO" className="d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3RZ1bOO"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
+              />
+            </a>
+            <a href="https://bit.ly/3U6CDVY" className="d-none">
+              <img
+                src="https://bit.ly/3U6CDVY"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Catering"
+              />
+            </a>
+            <a href="https://bit.ly/3DiLQV8" className="d-none">
+              <img
+                src="https://bit.ly/3DiLQV8"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Catering"
               />
             </a>
           </LightGallery>
@@ -102,90 +131,90 @@ function CateringGallery() {
             plugins={[lgThumbnail, lgZoom]}
           >
             {/* first */}
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3xkn17h" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3xkn17h"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/photograohy.jpg" className=" d-none">
+            <a href="https://bit.ly/3BaYov1" className=" d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3BaYov1"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/dancing.jpg" className=" d-none">
+            <a href="https://bit.ly/3QvM4v3" className=" d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3QvM4v3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3B8rnzA" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3B8rnzA"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
             {/* second */}
-            <a href="./images/imgw2.jpg">
+            <a href="https://bit.ly/3U6j7bR">
               <img
-                src="./images/imgw2.jpg"
+                src="https://bit.ly/3U6j7bR"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/pic1.jpg">
+            <a href="https://bit.ly/3eF1j7y">
               <img
-                src="./images/pic1.jpg"
+                src="https://bit.ly/3eF1j7y"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/img5.jpg">
+            <a href="https://bit.ly/3Uffjp5">
               <img
-                src="./images/img5.jpg"
+                src="https://bit.ly/3Uffjp5"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/imgw2.jpg">
+            <a href="https://bit.ly/3eIICzW">
               <img
-                src="./images/imgw2.jpg"
+                src="https://bit.ly/3eIICzW"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
             {/* third */}
-            <a href="./images/newlogo.jpg" className="d-none">
+            <a href="https://bit.ly/3RXotEE" className="d-none">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3RXotEE"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/photograohy.jpg" className="d-none">
+            <a href="https://bit.ly/3RZ1bOO" className="d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3RZ1bOO"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/dancing.jpg" className="d-none">
+            <a href="https://bit.ly/3U6CDVY" className="d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3U6CDVY"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/newlogo.jpg" className="d-none">
+            <a href="https://bit.ly/3DiLQV8" className="d-none">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3DiLQV8"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
           </LightGallery>
@@ -198,76 +227,90 @@ function CateringGallery() {
             onInit={onInit}
             speed={500}
             plugins={[lgThumbnail, lgZoom]}
-          ><a href="./images/id.jpg" className=" d-none">
+          ><a href="https://bit.ly/3xkn17h" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3xkn17h"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/photograohy.jpg" className=" d-none">
+            <a href="https://bit.ly/3BaYov1" className=" d-none">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3BaYov1"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/dancing.jpg" className=" d-none">
+            <a href="https://bit.ly/3QvM4v3" className=" d-none">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3QvM4v3"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/id.jpg" className=" d-none">
+            <a href="https://bit.ly/3B8rnzA" className=" d-none">
               <img
-                src="./images/id.jpg"
+                src="https://bit.ly/3B8rnzA"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
             {/* second row */}
-            <a href="./images/pic1.jpg" className=" d-none">
+            <a href="https://bit.ly/3U6j7bR" className=" d-none">
               <img
-                src="./images/pic1.jpg"
+                src="https://bit.ly/3U6j7bR"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/img5.jpg" className=" d-none">
+            <a href="https://bit.ly/3eF1j7y" className=" d-none">
               <img
-                src="./images/img5.jpg"
+                src="https://bit.ly/3eF1j7y"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
+              />
+            </a>
+            <a href="https://bit.ly/3Uffjp5" className=" d-none">
+              <img
+                src="https://bit.ly/3Uffjp5"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Catering"
+              />
+            </a>
+            <a href="https://bit.ly/3eIICzW" className=" d-none">
+              <img
+                src="https://bit.ly/3eIICzW"
+                class="w-100 shadow-4-strong rounded mb-4"
+                alt="Catering"
               />
             </a>
             {/* thirdrow  */}
-            <a href="./images/newlogo.jpg">
+            <a href="https://bit.ly/3RXotEE">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3RXotEE"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/photograohy.jpg">
+            <a href="https://bit.ly/3U6CDVY">
               <img
-                src="./images/photograohy.jpg"
+                src="https://bit.ly/3U6CDVY"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/dancing.jpg">
+            <a href="https://bit.ly/3RZ1bOO">
               <img
-                src="./images/dancing.jpg"
+                src="https://bit.ly/3RZ1bOO"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
-            <a href="./images/newlogo.jpg">
+            <a href="https://bit.ly/3DiLQV8">
               <img
-                src="./images/newlogo.jpg"
+                src="https://bit.ly/3DiLQV8"
                 class="w-100 shadow-4-strong rounded mb-4"
-                alt="Boat on Calm Water"
+                alt="Catering"
               />
             </a>
           </LightGallery>

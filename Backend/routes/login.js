@@ -7,7 +7,7 @@ const Joi = require('joi')
 const _ = require('lodash')
 const { User} = require('../model/user')
 const logout = require('../controllers/user-controller')
-
+const auth = require("../middleware/auth")
 router.get("/", (req,res) => {
   const tok = req.cookies.Token
   console.log("myToken : " + tok);
@@ -36,11 +36,16 @@ router.post("/", async (req, res) => {
   
   res
     // .cookie("Token", token, {expires: new Date(Date.now() + 10000), httpOnly: true })//86400000
-    .cookie("bandhanUserToken", token, {expires: new Date(Date.now() + 19800000 + 120000 ) , httpOnly: true, sameSite:'none', secure: true })
+    .cookie("bandhanUserToken", token, {maxAge:108000000 , httpOnly: true, sameSite:'none', secure: true })
     .status(200).json({ message: " Logged In SuccessFully", jsonToken : token})
      
 });
+//get login status
 
+router.get("/getLoginStatus",auth,(req,res)=>{
+  console.log("status call received");
+  res.status(200).send("ok")
+})
 //for logout
 
 router.get("/user", logout, (req,res)=>{
