@@ -13,6 +13,7 @@ function auth(req, res, next) {
     const decoded = jwt.verify(token, jwtPrivateKey);
     req.user = decoded;
     req.id = decoded._id;
+    req.userName = decoded.username;
     next();
   } catch (ex) {
     res.clearCookie("bandhanUserToken");

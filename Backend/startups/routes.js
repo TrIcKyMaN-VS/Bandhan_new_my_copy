@@ -25,6 +25,10 @@ const vendoradminlist = require("../routes/vendoradminlist");
 const auth = require("../middleware/auth");
 const adminauth = require("../routes/adminauth")
 const PaymentRoute = require("../routes/paymentRoute")
+const Invoices = require("../routes/invoices")
+
+
+
 module.exports = function (app) {
   app.use("/api/register", register);
   app.use("/api/login", login);
@@ -47,8 +51,9 @@ module.exports = function (app) {
   app.use("/api/eventInfo",auth,eventsinfos )
   app.use("/api/isadmincheck",auth, adminauth)
   app.use("/api/adminuserlist",auth, adminuserlist)
-
   app.use("/api/emergencyform",emergencyform)
   app.use("/api/vendoradminlist",vendoradminlist)
   app.use("/api/payment", PaymentRoute)
+  app.use("/api/invoice",Invoices)
+
 };

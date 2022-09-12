@@ -13,7 +13,7 @@ const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
 const {CorporateEventForm, CorporateInfo} = require("../model/corporateEvent")
 const { PaymentfullDhoom } = require("../model/paymentfullmodel");
-
+const { InvoiceDhoom } = require("../model/invoicemodel");
 
 
 
@@ -400,9 +400,31 @@ const newPaymentfullDhoom = PaymentfullDhoom({
     pending_signature: null,
   },
 });
-newPaymentfullDhoom
-  .save()
-  .then(() => console.log("successfully payment saved"));
+newPaymentfullDhoom.save().then(() => {
+  console.log("successfully payment saved");
+
+  const newInvoiceDhoom = InvoiceDhoom({
+    userName: req.userName,
+    eventName,
+    userId,
+    orderId,
+    date,
+    shows: 0,
+    decoration: 0,
+    catering: 0,
+    invitaion: 0,
+    photography: 0,
+    venue: 0,
+    hosting: 0,
+    addtional: 0,
+    emergency: 0,
+    premium: 0,
+  });
+
+  newInvoiceDhoom
+    .save()
+    .then(() => console.log("successfully invoice saved"));
+});
 
 
   newCorporateInfo.save().then(()=>console.log("success infowed saved"))

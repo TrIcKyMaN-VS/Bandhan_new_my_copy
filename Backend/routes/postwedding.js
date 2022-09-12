@@ -12,7 +12,7 @@ const { EventForm } = require("../model/eventModel");
 const auth = require("../middleware/auth");
 const { EventName } = require("../model/eventName");
 const { PaymentfullDhoom } = require("../model/paymentfullmodel");
-
+const { InvoiceDhoom } = require("../model/invoicemodel");
 const {
   PostWeddingForm,
   PostWeddinngInfo,
@@ -242,9 +242,28 @@ const newPaymentfullDhoom = PaymentfullDhoom({
     pending_signature: null,
   },
 });
-newPaymentfullDhoom
-  .save()
-  .then(() => console.log("successfully payment saved"));
+newPaymentfullDhoom.save().then(() => {
+  console.log("successfully payment saved");
+
+  const newInvoiceDhoom = InvoiceDhoom({
+    userName: req.userName,
+    eventName,
+    userId,
+    orderId,
+    date,
+    catering: 0,
+    muhDikhai: 0,
+    subharambh: 0,
+    honeymoon: 0,
+    addtional: 0,
+    emergency: 0,
+    premium: 0,
+  });
+
+  newInvoiceDhoom
+    .save()
+    .then(() => console.log("successfully invoice saved"));
+});
 
   newPostWeddingInfo.save().then(() => console.log("saved..."));
 

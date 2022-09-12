@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PaymentDetail from "../payment/paymentDetail";
-
+import AdminInvoice from "./adminInvoice";
 function Orderslist(props) {
   const forms = props.formdata;
   const [datapoints, setdatapoints] = useState("");
@@ -43,7 +43,8 @@ function Orderslist(props) {
   
     const [showPaymentStatus, setShowPaymentStatus] = useState(false);
     const [updtBtnPayment, setUpdtBtnPayment] = useState(true);
-
+    const [showInvocStatus, setInvocStatus] = useState(false);
+    const [invocDetails, setInvocDetails] = useState(null);
   useEffect(() => {
     axios
       .get(`api/postwedding/paymentDetails/${forms[0].orderId}`)
@@ -56,6 +57,11 @@ function Orderslist(props) {
           setConfirmationCharge(res.data[0].confirmationCharge);
           setPendingCharge(res.data[0].pendingCharge);
         }
+      });
+      axios.get(`api/invoice/getDetails/${forms[0].orderId}`).then((res) => {
+        setInvocDetails(res.data[0]);
+        
+        setInvocStatus(true)
       });
     axios
       .get(`api/adminuserlist/postweddingpointsvoucher/${forms[0].userId}`)
@@ -229,7 +235,29 @@ function Orderslist(props) {
         console.log(err);
       });
   }
+  function updateInvoiceDetails(invoiceDet) {
+    const sendUpdInvoice = {
+      orderId: invoiceDet.orderId,
+      muhDikhai: invoiceDet.muhDikhai,
+      subharambh: invoiceDet.subharambh,
+      honeymoon: invoiceDet.honeymoon,
+      addtional: invoiceDet.addtional,
+      premium: invoiceDet.premium,
+      emergency: invoiceDet.emergency,
+    };
 
+    // console.log(sendUpdInvoice.addtional);
+    axios
+      .post("api/invoice/postwed/updateDetails", { sendUpdInvoice })
+      .then((res) => {
+        if (res.status === 200) {
+          alert("Invoices Details Updated");
+        }
+      })
+      .catch((err) => {
+        alert("Not Updated , Something Went Wrong", err);
+      });
+  }
   return (
     <div className="row my-12">
       <h3 className="fs-4 mb-3">Details</h3>
@@ -967,6 +995,10 @@ Delete
 
         {showPaymentStatus && (
           <PaymentDetail data={paymentDetails} admin={true} />
+        )}
+        <hr className="my-5" />
+        {!!showInvocStatus && (
+          <AdminInvoice ordId={forms[0].orderId} details={invocDetails} updateInvoiceDetails={updateInvoiceDetails} />
         )}
       </div>
     </div>

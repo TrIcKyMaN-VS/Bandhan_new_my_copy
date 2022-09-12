@@ -12,6 +12,7 @@ const { EventForm } = require("../model/eventModel");
 const { EventName } = require("../model/eventName");
 const { BabyShowerForm ,BabyShowerInfo} = require("../model/babyshowermodel");
 const { PaymentfullDhoom } = require("../model/paymentfullmodel");
+const { InvoiceDhoom } = require("../model/invoicemodel");
 
 router.post("/", auth, async (req, res) => {
   const eventName = "BabyShower Event";
@@ -443,9 +444,61 @@ const newPaymentfullDhoom = PaymentfullDhoom({
     pending_signature: null,
   },
 });
-newPaymentfullDhoom
-  .save()
-  .then(() => console.log("successfully payment saved"));
+newPaymentfullDhoom.save().then(() => {
+  console.log("successfully payment saved");
+
+  const newInvoiceDhoom = InvoiceDhoom({
+    userName: req.userName,
+    eventName,
+    orderId,
+    userId,
+    date,
+    shows: 0,
+    decoration: 0,
+    catering: 0,
+    invitaion: 0,
+    beauty: 0,
+    photography: 0,
+    mehandi: 0,
+    hosting: 0,
+    panditJi: 0,
+    venue: 0,
+    addtional: 0,
+    emergency: 0,
+    premium: 0,
+  });
+
+  newInvoiceDhoom
+    .save()
+    .then(() => console.log("successfully invoice saved"));
+});newPaymentfullDhoom.save().then(() => {
+  console.log("successfully payment saved");
+
+  const newInvoiceDhoom = InvoiceDhoom({
+    userName: req.userName,
+    eventName,
+    orderId,
+    userId,
+    date,
+    shows: 0,
+    decoration: 0,
+    catering: 0,
+    invitaion: 0,
+    beauty: 0,
+    photography: 0,
+    mehandi: 0,
+    hosting: 0,
+    panditJi: 0,
+    venue: 0,
+    addtional: 0,
+    emergency: 0,
+    premium: 0,
+  });
+
+  newInvoiceDhoom
+    .save()
+    .then(() => console.log("successfully invoice saved"));
+});
 
 
 

@@ -26,6 +26,18 @@ router.get("/getPaymentLists", auth, (req, res) => {
   });
 });
 
+router.get("/getByOrderId/:orderIdIn", (req,res)=>{
+  console.log(req.params.orderIdIn);
+  PaymentfullDhoom.find({ orderId: req.params.orderIdIn }, (err, doc) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      console.log(doc);
+      res.status(200).send(doc);
+    }
+  });
+})
+
 router.get("/get-razorpay-key", (req, res) => {
   res.send({ key: process.env.RAZORPAY_KEY_ID });
 });
