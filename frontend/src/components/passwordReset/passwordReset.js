@@ -26,7 +26,7 @@ function PasswordReset() {
   }
 
   return (
-    <div class="container">
+    <div class="container" style={{minHeight: "100vh"}}>
       <div class="row justify-content-center mt-4 mb-5 pt-4 pb-4">
         <div class="col-md-4 col-md-offset-4">
           <div class="panel panel-default">

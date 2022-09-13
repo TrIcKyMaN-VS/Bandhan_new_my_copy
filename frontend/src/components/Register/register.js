@@ -47,26 +47,12 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const [errorReg, setErrorReg] = useState(null);
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
-  function handleReq(e) {
-    e.preventDefault();
-
-    //   axios
-    //     .get("api/login")
-    //     .then((res) => {
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-  }
-
   function handleSubmit2(data) {
-    // let { username, password, email } = state;
-
     axios
       .post("api/register", { data })
       .then((res) => {
@@ -77,7 +63,16 @@ export default function Register() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err.response);
+        if (err.response.status === 400) {
+          if (err.response.data === "User already registered...") {
+            setErrorReg("Email Id is already in use");
+          } else {
+            setErrorReg(err.response.data);
+          }
+        } else {
+          setErrorReg(err.response.data);
+        }
       });
   }
 
@@ -102,6 +97,14 @@ export default function Register() {
                       handleSubmit2(data);
                     })}
                   >
+                    {errorReg != null && (
+                      <div
+                        class="alert alert-danger mb-5 fw-bold text-center"
+                        role="alert"
+                      >
+                        {errorReg}
+                      </div>
+                    )}
                     <div class="form-outline border-bottom  mb-4">
                       <input
                         {...register("username")}
@@ -233,7 +236,7 @@ export default function Register() {
 
                     <p class="text-center text-muted mt-5 mb-0">
                       Have already an account ?{" "}
-                      <Link class="fw-bold text-body" to={"./login"}>
+                      <Link class="fw-bold text-body" to={"/login"}>
                         <u>Login here</u>
                       </Link>
                     </p>

@@ -488,7 +488,7 @@ WeddingForm.find({userId:req.id}).then((already)=>{
    }
    else{
   newWeddingForm.save().then(() => {
-    res.status(200).send("Wedding form saved successfully...!");
+    res.status(200).send("saved");
         
 //payment Setting
 

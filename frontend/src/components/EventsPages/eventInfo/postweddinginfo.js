@@ -15,8 +15,9 @@ export function Postweddinginfo(props) {
 console.log("vanthutu",props.postwedding);
 return(
       props.postwedding &&
-        <>
-        <div className="container">
+        < >
+        <div style={{minHeight: "100vh"}}>
+        <div className="container" >
        <table class="table">
     <tbody>
     {/* <tr>
@@ -291,6 +292,7 @@ return(
               )}
           </div>
         </div>
+      </div>
       </div>
       </>
       

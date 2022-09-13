@@ -330,9 +330,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3" >
             <div className="card bg-black shadow-5-strong rounded-4">
-              <div className="card-body">
+              <div className="card-body" style={{minHeight:"31vh"}}>
                 <div className=" text-center">
                   <div
                     className="btn btn-floating btn-lg btn-success fs-6 text-center logoBtn"

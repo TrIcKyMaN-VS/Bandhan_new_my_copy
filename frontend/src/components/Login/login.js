@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authActions } from "../../store";
@@ -13,6 +13,8 @@ const schema = yup.object().shape({
 });
 
 export default function Login() {
+  const [errorLogin, setErrorLogin] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -36,8 +38,17 @@ export default function Login() {
       })
 
       .catch((err) => {
-        console.log(err);
-        navigate("/login");
+        if (err.response.status === 400) {
+          if (err.response.data) {
+            setErrorLogin("Invalid Email or Password");
+          }else{
+            setErrorLogin(err.response.data)
+          }
+        }else{
+          setErrorLogin(err.response.data)
+        }
+        // navigate("/login");
+        // if(err.sta)
       });
   }
 
@@ -65,6 +76,9 @@ export default function Login() {
                         handleSubmit2(data);
                       })}
                     >
+                      {errorLogin != null && <div class="alert alert-danger mb-5 fw-bold text-center" role="alert">
+                        {errorLogin}
+                      </div>}
                       <div class="form-outline border-bottom mb-4">
                         <input
                           {...register("email")}
@@ -117,13 +131,13 @@ export default function Login() {
 
                       <p class="text-center text-muted mt-5 mb-0">
                         Not have an account ?
-                        <Link class="fw-bold text-body" to={"./register"}>
+                        <Link class="fw-bold text-body" to={"/register"}>
                           <u> Register here</u>
                         </Link>
                       </p>
                       <p class="text-center text-muted mt-2 mb-0">
                         Forgot Password ?
-                        <Link class="fw-bold text-body" to={"./passwordReset"}>
+                        <Link class="fw-bold text-body" to={"/passwordReset"}>
                           <u> Reset here</u>
                         </Link>
                       </p>

@@ -16,7 +16,8 @@ console.log("vanthutu",props.corporate);
 return(
       props.corporate &&
         <>
-        <div className="container">
+        <div style={{minHeight: "100vh"}}>
+        <div className="container" >
        <table class="table">
     <tbody>
     
@@ -424,6 +425,7 @@ return(
               )}
           </div>
         </div>
+      </div>
       </div>
       </>
       

@@ -73,7 +73,9 @@ function Todo() {
       style={{
         backgroundImage:
           "-webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%)",
+          minHeight: "100vh"
       }}
+      
     >
       <div
         className="row justify-content-center"

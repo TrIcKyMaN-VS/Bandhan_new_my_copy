@@ -71,11 +71,11 @@ useEffect(()=>{
  
 },[])
   return (
-    <div class="container mt-5">
+    <div class="container mt-5" >
     <div class="row d-flex ">
         <div class="col-md-6">
-            <div class="card">
-        <img src="https://www.icicibank.com/content/dam/icicibank/india/managed-assets/images/blog/big/how-to-earn-and-redeem-credit-card-points.jpg" className="card-img" />
+            <div class="card" style={{minHeight:"60vh"}}>
+        <img src="https://logos.flamingtext.com/Word-Logos/point-design-fluffy-name.png" className="card-img" />
 
                 {/* <div class="text-right p-2">  </div> */}
                 <div class="text-center"> <small class="text-uppercase flat">Points you earned for your next order </small> </div>
@@ -94,7 +94,7 @@ useEffect(()=>{
         </div>
         <div class="col-md-6">
             <div class="card">
-        <img src="https://www.teclasap.com.br/wp-content/uploads/2020/04/voucher_Fotor.jpg" className="card-img" />
+        <img src="https://bouncycastlenetwork-res.cloudinary.com/image/upload/f_auto,q_auto,c_limit,w_900/c29ac4fe0677bdc612cb46e9358e64a0" className="card-img" />
 
                 {/* <div class="text-right p-2">  </div> */}
                 <div class="text-center"> <small class="text-uppercase flat">Vouchers you earned for your next order </small> </div>

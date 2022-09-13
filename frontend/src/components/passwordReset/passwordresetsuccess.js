@@ -2,7 +2,7 @@ import React from "react";
 
 function Passwordresetsuccess() {
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center" style={{minHeight: "100vh"}}>
       <div className="col-md-6">
         <div className="card shadow-4-strong">
           <img

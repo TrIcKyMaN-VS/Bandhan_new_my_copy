@@ -2,7 +2,7 @@ import React from 'react'
 
 function Termsandcondtions() {
   return (
-    <div class="card text-center container">
+    <div class="card text-center container" style={{height: "100vh"}}>
   <div class="card-header">
   
   </div>

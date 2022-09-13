@@ -16,7 +16,8 @@ console.log("vanthutu",props.wedding);
 return(
       props.wedding &&
         <>
-        <div className="container">
+        <div style={{minHeight: "100vh"}}>
+        <div className="container" >
        <table class="table">
     <tbody>
     <tr>
@@ -768,6 +769,7 @@ return(
 
           </div>
         </div>
+      </div>
       </div>
       </>
       

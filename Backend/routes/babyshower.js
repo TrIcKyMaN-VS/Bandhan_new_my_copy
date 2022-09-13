@@ -471,8 +471,7 @@ newPaymentfullDhoom.save().then(() => {
   newInvoiceDhoom
     .save()
     .then(() => console.log("successfully invoice saved"));
-});newPaymentfullDhoom.save().then(() => {
-  console.log("successfully payment saved");
+});
 
   const newInvoiceDhoom = InvoiceDhoom({
     userName: req.userName,
@@ -498,7 +497,7 @@ newPaymentfullDhoom.save().then(() => {
   newInvoiceDhoom
     .save()
     .then(() => console.log("successfully invoice saved"));
-});
+
 
 
 

@@ -17,6 +17,7 @@ console.log("vanthutu",props.babyshower);
 return(
       props.babyshower &&
         <>
+        <div style={{minHeight: "100vh"}} >
         <div className="container">
        <table class="table">
     <tbody>
@@ -540,6 +541,7 @@ return(
 
           </div>
         </div>
+      </div>
       </div>
       </>
       

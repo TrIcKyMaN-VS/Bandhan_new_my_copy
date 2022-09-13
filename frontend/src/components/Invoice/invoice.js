@@ -50,7 +50,7 @@ function Invoice() {
    }
 
   return (
-    <div className="mb-10 mt-5">
+    <div className="mb-10 " style={{minHeight: "100vh"}} >
       <div className="row justify-content-center mx-5">
         {InvoiceDatas.map((item, i) => {
           return (

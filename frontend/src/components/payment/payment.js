@@ -61,7 +61,7 @@ function Payment() {
   }
 
   return (
-    <div className="mb-10 mt-5">
+    <div className="mb-10 mt-5" style={{minHeight: "80vh"}}>
       <div className="row justify-content-center mx-5">
         {datas.map((item, i) => {
           return (

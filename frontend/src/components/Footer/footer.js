@@ -25,7 +25,7 @@ function Footer() {
 
       {/* <!-- Right --> */}
       <div>
-        <a href="" class="text-white me-4">
+        <a href="https://www.facebook.com/profile.php?id=100085522517564" class="text-white me-4">
           <i class="fab fa-facebook-f"></i>
         </a>
         {/* <a href="" class="text-white me-4">
@@ -48,7 +48,7 @@ function Footer() {
      <a
        class="btn text-white btn-floating m-1"
        style={{backgroundColor:" #3b5998"}}
-       href="#!"
+       href="https://www.facebook.com/profile.php?id=100085522517564"
        role="button"
        ><i class="fab fa-facebook-f"></i
      ></a>
