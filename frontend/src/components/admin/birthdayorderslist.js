@@ -427,7 +427,7 @@ Delete
               </div>
               
            )}
-      
+           <h1 className="fw-bolder mb-3">Event Status</h1>
       <table className="table bg-white rounded shadow-sm  table-hover">
       <thead>
             <tr>
@@ -1048,6 +1048,7 @@ Delete
 
 
       <hr class="my-5"/>
+      <h1 className="fw-bolder mb-3">Event Details</h1>
       <table className="table bg-white rounded shadow-sm  table-hover">
         <thead>
           <tr>
@@ -1191,6 +1192,8 @@ Delete
         </tr>        
         </tbody>
       </table>
+      <hr className='my-5' />
+      <h1 className="fw-bolder mb-3">Payment Details</h1>
       <table className="table bg-white rounded shadow-sm text-center">
           <thead>
             <tr>

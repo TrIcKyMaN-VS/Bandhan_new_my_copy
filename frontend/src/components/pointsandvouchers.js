@@ -75,15 +75,15 @@ useEffect(()=>{
     <div class="row d-flex ">
         <div class="col-md-6">
             <div class="card" style={{minHeight:"60vh"}}>
-        <img src="https://logos.flamingtext.com/Word-Logos/point-design-fluffy-name.png" className="card-img" />
+        <img src="https://bit.ly/3eBYDYg" className="card-img" />
 
                 {/* <div class="text-right p-2">  </div> */}
-                <div class="text-center"> <small class="text-uppercase flat">Points you earned for your next order </small> </div>
+                <div class="text-center mt-4"> <small class="text-uppercase flat fw-bold text-success ">Points you earned for your next order </small> </div>
         <hr class="my-5" />
 
                 <div class="d-flex justify-content-center px-2">
                     <div class="d-flex flex-row">
-                        <h1 class="mt-0 off">{points}</h1> <sup class="mt-2 text-primary star">*</sup>
+                        <h1 class="mt-0 off fw-bold text-black">{points}</h1> <sup class="mt-2 text-primary star">*</sup>
                     </div>
                 </div>
                 <div class="line">
@@ -94,15 +94,15 @@ useEffect(()=>{
         </div>
         <div class="col-md-6">
             <div class="card">
-        <img src="https://bouncycastlenetwork-res.cloudinary.com/image/upload/f_auto,q_auto,c_limit,w_900/c29ac4fe0677bdc612cb46e9358e64a0" className="card-img" />
+        <img src="https://media.istockphoto.com/photos/girl-holds-tickets-boarding-passes-for-a-flight-picture-id1363169212?b=1&k=20&m=1363169212&s=170667a&w=0&h=V4zz5xXMbOAmqazvFnpQj4HqSx9YRh_apaI2dEgsTI4=" className="card-img" />
 
                 {/* <div class="text-right p-2">  </div> */}
-                <div class="text-center"> <small class="text-uppercase flat">Vouchers you earned for your next order </small> </div>
+                <div class="text-center mt-4 "> <small class="text-uppercase flat fw-bold text-success">Vouchers you earned for your next order </small> </div>
         <hr class="my-5" />
 
                 <div class="d-flex justify-content-center px-2">
                     <div class="d-flex flex-row">
-                        <h1 class="mt-0 off">{voucher}</h1> <sup class="mt-2 text-primary star">*</sup>
+                        <h1 class="mt-0 off fw-bold text-black">{voucher}</h1> <sup class="mt-2 text-primary star">*</sup>
                     </div>
                 </div>
                 <div class="line">

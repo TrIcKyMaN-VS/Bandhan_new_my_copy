@@ -36,6 +36,10 @@ import DecorationGallery from "./components/serviceGallery/decorationGallery";
 import BeautyGallery from "./components/serviceGallery/beautyGallery";
 import CateringGallery from "./components/serviceGallery/cateringGallery";
 import Passwordresetsuccess from "./components/passwordReset/passwordresetsuccess";
+import ScrollToTop from "./scrollToTop";
+
+
+
 function App() {
   const dispatch = useDispatch();
   if (localStorage.bandhanUserToken) {
@@ -103,8 +107,13 @@ function App() {
         <Route path="/newPassword/:resetTok" element={<NewPassword />}></Route>
         <Route path="/becomevendor" element={<Becomevendor />}></Route>
         <Route path="/termsandcondtions" element={<Termsandcondtions/>}></Route>
-        
+        <Route path="/photographygallery" element={<PhotographyGallery /> }></Route>
+        <Route path="/beautygallery" element={<BeautyGallery />}></Route>
+        <Route path="/decorationgallery" element={<DecorationGallery />}></Route>
+        <Route path="/cateringgallery" element={<CateringGallery />}></Route>
+        <Route path="/poojagallery" element={<PoojaGallery />}></Route>
         <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/termsandconditions" element={<Termsandcondtions/>}></Route>
         {/* <Route path="admindashboard" element={<Admindashboard />}></Route> */}
         <Route path="/poojagallery" element={<PoojaGallery />}></Route>
         <Route path="/passwordresetsuccess" element={<Passwordresetsuccess />}></Route>
@@ -115,6 +124,7 @@ function App() {
 
   return (
     <Router>
+    <ScrollToTop/>
       <div className="App">
         <ToastContainer />
         <Navbar />

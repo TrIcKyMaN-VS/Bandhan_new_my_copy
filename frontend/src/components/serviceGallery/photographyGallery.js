@@ -72,9 +72,9 @@ function PhotographyGallery() {
                 alt="Photography"
               />
             </a>
-            <a href="./images/pic1.jpg" className="d-none">
+            <a href="./images/cake.JPG" className="d-none">
               <img
-                src="./images/pic1.jpg"
+                src="./images/cake.JPG"
                 class="w-100 shadow-4-strong rounded mb-4"
                 alt="Photography"
               />
@@ -170,9 +170,9 @@ function PhotographyGallery() {
                 alt="Photography"
               />
             </a>
-            <a href="./images/pic1.jpg">
+            <a href="./images/cake.JPG">
               <img
-                src="./images/pic1.jpg"
+                src="./images/cake.JPG"
                 class="w-100 shadow-4-strong rounded mb-4"
                 alt="Photography"
               />
@@ -267,9 +267,9 @@ function PhotographyGallery() {
                 alt="Photography"
               />
             </a>
-            <a href="./images/pic1.jpg" className=" d-none">
+            <a href="./images/cake.JPG" className=" d-none">
               <img
-                src="./images/pic1.jpg"
+                src="./images/cake.JPG"
                 class="w-100 shadow-4-strong rounded mb-4"
                 alt="Photography"
               />

@@ -191,7 +191,7 @@ export default function Becomevendor() {
               </div> */}
               <div>
               {/* <span className="fs-2">Note</span> */}
-              <p className="text-danger fw-bold" > <span className="fs-5 text-dark">Note : </span> Send images to dhoomdhamaka0@gmail.com</p>
+              <p className="text-danger fw-bold" > <span className="fs-5 text-dark">Note : </span> Send images to <a href="mailto:Dhoomdhamaka0@gmail.com"> dhoomdhamaka0@gmail.com</a></p>
               </div>
 
               <div class="p-t-20">
